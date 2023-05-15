@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row text-white" style="background-color: green; padding: 1rem">
             <div class="col-1 d-flex d-sm-none align-items-center justify-content-center">
-                <span @click="showDrawer">X</span>
+                <span @click="showDrawer"><font-awesome-icon :icon="['fas', 'align-justify']" /></span>
             </div>
 
             <div class="col-10 col-sm-9 d-flex align-items-center justify-content-center justify-content-sm-start">
@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-1 d-flex d-sm-none align-items-center justify-content-center">
-                <span @click="showDrawerUser">Xdf</span>
+                <span @click="showDrawerUser"><font-awesome-icon :icon="['fas', 'user']" /></span>
             </div>
         </div>
     </div>
