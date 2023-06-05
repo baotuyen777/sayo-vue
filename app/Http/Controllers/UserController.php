@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -13,13 +15,16 @@ class UserController extends Controller
         return User::findOrFail($id);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $s = $request->input('s');
+        $pageSize = $request->input('page_size') ?? 5;
 //        return User::get();
         $user = User::join('departments', 'users.departments_id', '=', 'departments.id')
             ->join('users_status', 'users.status_id', '=', 'users_status.id')
             ->select('users.*', 'departments.name as departments_name', 'users_status.name as users_status_name ')
-            ->paginate();
+            ->where('users.name', 'like', "%{$s}%")
+            ->paginate($pageSize);
         return response()->json($user);
     }
 
@@ -77,7 +82,19 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+//        $request->merge([
+//            'password' => Hash::make($request['password'])
+//        ]);
+        if ($request->input('change_password')) {
+            $request->merge([
+                'password' => Hash::make($request['password']),
+                'change_password_at' => Carbon::now()
+            ]);
+        }
+
         User::find($id)->update($request->all());
+        $res = User::find($id);
+        return response()->json(['status' => true, 'result' => $res]);
     }
 
 }

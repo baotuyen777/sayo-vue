@@ -11,12 +11,12 @@ const admin = [
             {
                 path: "users/create",
                 name: 'admin-users-create',
-                component: () => import('../pages/admin/users/create.vue')
+                component: () => import('../pages/admin/users/detail.vue')
             },
             {
                 path: "users/:id/edit",
                 name: 'admin-users-edit',
-                component: () => import('../pages/admin/users/edit.vue')
+                component: () => import('../pages/admin/users/detail.vue')
             },
             {
                 path: "roles",

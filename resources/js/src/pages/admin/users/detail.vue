@@ -1,6 +1,14 @@
 <template>
     <form @submit.prevent="updateUsers()">
         <a-card title="Tạo mới tài khoản" style="width: 100%">
+            <div class="row">
+                <div class="col-12 ">
+                    <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
+                        <router-link :to="{name:'admin-users'}">Hủy</router-link>
+                    </a-button>
+                    <a-button type="primary" html-type="submit">Lưu</a-button>
+                </div>
+            </div>
             <div class="row mb-3"></div>
             <div class="row">
                 <div class="col-12 col-sm-4">
@@ -20,10 +28,7 @@
                                 <span>Chọn ảnh</span>
                             </a-button>
                         </div>
-
                     </div>
-
-
                 </div>
                 <div class="col-12 col-sm-8">
                     <div class="row">
@@ -112,7 +117,7 @@
                             <a-checkbox v-model:checked="change_password">Đổi mật khẩu</a-checkbox>
                         </div>
                     </div>
-                    <div class="row mb-3" v-if="change_password==true">
+                    <div class="row mb-3" v-if="change_password">
                         <div class="col-12 col-sm-3 text-start text-sm-end">
                             <label>
                                 <span class="text-danger me-1">*</span>
@@ -138,7 +143,7 @@
                         </div>
                     </div>
 
-                    <div class="row mb-3">
+                    <div class="row mb-3" v-if="login_at">
                         <div class="col-12 col-sm-3 text-start text-sm-end">
                             <label>
                                 <span class="text-danger me-1">*</span>
@@ -151,7 +156,7 @@
                            </span>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-3" v-if="change_password_at">
                         <div class="col-12 col-sm-3 text-start text-sm-end">
                             <label>
                                 <span class="text-danger me-1">*</span>
@@ -167,15 +172,6 @@
 
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-12 d-grid mx-auto d-sm-flex justify-content-sm-end">
-                    <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
-                        <router-link :to="{name:'admin-users'}">Hủy</router-link>
-                    </a-button>
-                    <a-button type="primary" html-type="submit">Lưu</a-button>
-                </div>
-            </div>
         </a-card>
     </form>
 </template>
@@ -185,6 +181,7 @@ import {defineComponent, ref, reactive, toRefs} from "vue";
 import {useMenu} from "@/src/store/use-menu.js";
 import {useRouter, useRoute} from "vue-router";
 import {message} from "ant-design-vue";
+import dayjs from "dayjs";
 
 export default defineComponent({
     setup() {
@@ -202,7 +199,7 @@ export default defineComponent({
             password_confirmation: "",
             departments_id: 1,
             status_id: 1,
-            change_password: false,
+            change_password: !route.params.id,
             login_at: '',
             change_password_at: '',
         })
@@ -212,11 +209,15 @@ export default defineComponent({
 
         const getUsersEdit = () => {
             console.log(route.params.id);
-            axios.get(`http://localhost:8000/api/users/${route.params.id}/edit`)
+            const endpoint = route.params.id ? `http://localhost:8000/api/users/${route.params.id}/edit` : `http://localhost:8000/api/users/create`
+            axios.get(endpoint)
                 .then((res) => {
-                    Object.keys(users).forEach(field => {
-                        users[field] = res.data.result[field]
-                    })
+                    if (res.data.result) {
+                        Object.keys(users).forEach(field => {
+                            users[field] = res.data.result[field]
+                        })
+                        users['change_password_at'] = dayjs(users['change_password_at']).format('DD-MM-YYYY HH:MM:s')
+                    }
 
                     users_status.value = res.data.users_status;
                     departments.value = res.data.departments

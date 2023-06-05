@@ -17,6 +17,8 @@ import {
     message,
     Card,
     Table,
+    Pagination,
+    Skeleton
 } from "ant-design-vue";
 
 import App from './App.vue'
@@ -50,6 +52,8 @@ app.use(List)
 app.use(Menu)
 app.use(Card)
 app.use(Table)
+app.use(Pagination)
+app.use(Skeleton)
 
 app.mount('#app');
 
