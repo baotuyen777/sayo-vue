@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import {useMenu} from "@/src/store/use-menu.js";
+import {useMenu} from "../../../store/use-menu.js";
 import {defineComponent} from "vue";
-import HeaderList from "@/src/components/HeaderList.vue";
-import ListView from "@/src/components/ListView.vue";
+import HeaderList from "../../../components/list/HeaderList.vue";
+import ListView from "../../../components/list/ListView.vue";
 
 export default defineComponent({
     components: {ListView, HeaderList},

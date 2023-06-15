@@ -1,36 +1,7 @@
 <template>
     <form @submit.prevent="updateUsers()">
         <a-card title="Tạo mới tài khoản" style="width: 100%">
-            <div class="row">
-                <div class="col-12 ">
-                    <a-button class="me-0 me-sm-2 mb-3 mb-sm-0">
-                        <router-link :to="{name:'admin-users'}">Hủy</router-link>
-                    </a-button>
-                    <a-button type="primary" html-type="submit">Lưu</a-button>
-                </div>
-            </div>
-            <div class="row mb-3"></div>
-            <div class="row">
-                <div class="col-12 col-sm-4">
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-center mb-3">
-                            <a-avatar shape="square" :size="200">
-                                <template #icon>
-                                    <!--                    <UserOutlined />-->
-                                    <img src="../../../assets/user.jpg"/>
-                                </template>
-                            </a-avatar>
-                        </div>
 
-                        <div class="col-12 d-flex justify-content-center me-2">
-                            <a-button type="primary">
-                                <font-awesome-icon :icon="['fas', 'plus']"/>
-                                <span>Chọn ảnh</span>
-                            </a-button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-8">
                     <div class="row">
                         <div class="col-12 col-sm-3 text-start text-sm-end">
                             <label>
@@ -167,9 +138,6 @@
                            </span>
                         </div>
                     </div>
-
-                </div>
-            </div>
         </a-card>
     </form>
 </template>

@@ -20,7 +20,7 @@
                     </template>
 
                     <template v-if="column.key === 'action'">
-                        <router-link :to="{name:'admin-users-edit', params:{id:record.id}}">
+                        <router-link :to="{name:'admin-'+module+'-edit', params:{id:record.id}}">
                             <a-button type="primary">
                                 <font-awesome-icon :icon="['fas', 'pen-to-square']"/>
                             </a-button>
@@ -35,7 +35,7 @@
 
 <script>
 import {defineComponent, ref} from "vue";
-import HeaderList from "@/src/components/HeaderList.vue";
+import HeaderList from "./HeaderList.vue";
 
 export default defineComponent({
     props: ['module', 'title', 'columns'],
@@ -78,7 +78,7 @@ export default defineComponent({
         // }
 
         getList();
-        return {objs, getList, onChange, isLoading,currentPage}
+        return {objs, getList, onChange, isLoading, currentPage}
     }
 })
 </script>

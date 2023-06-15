@@ -1,35 +1,37 @@
+const renderModuleRouter = (module) => {
+    return [
+        {
+            path: module,
+            name: `admin-${module}`,
+            component: () => import(`../pages/admin/${module}/index.vue`)
+        },
+        {
+            path: `${module}/create`,
+            name: `admin-${module}-create`,
+            component: () => import(`../pages/admin/${module}/detail.vue`)
+        },
+        {
+            path: `${module}/:id/edit`,
+            name: `admin-${module}-edit`,
+            component: () => import(`../pages/admin/${module}/detail.vue`)
+        },
+
+    ];
+}
+
 const admin = [
     {
         path: '/admin',
         component: () => import("../layouts/admin.vue"),
         children: [
-            {
-                path: "users",
-                name: 'admin-users',
-                component: () => import('../pages/admin/users/index.vue')
-            },
-            {
-                path: "users/create",
-                name: 'admin-users-create',
-                component: () => import('../pages/admin/users/detail.vue')
-            },
-            {
-                path: "users/:id/edit",
-                name: 'admin-users-edit',
-                component: () => import('../pages/admin/users/detail.vue')
-            },
-            {
-                path: "roles",
-                name: 'admin-roles',
-                component: () => import('../pages/admin/roles/index.vue')
-            },
-            {
-                path: "settings",
-                name: 'admin-settings',
-                component: () => import('../pages/admin/settings/index.vue')
-            },
+            ...renderModuleRouter('users'),
+            ...renderModuleRouter('settings'),
+            ...renderModuleRouter('roles'),
+
         ]
     }
-]
+];
+
+
 
 export default admin;

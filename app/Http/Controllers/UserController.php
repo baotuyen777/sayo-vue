@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
     public function show($id)
@@ -28,7 +28,7 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
 //        $validate = $request->validate([
 //            'status_id' => 'required',
@@ -52,6 +52,7 @@ class UserController extends Controller
         $request->merge([
             'password' => Hash::make($request['password'])
         ]);
+
         $user = User::create($request->all());
         return $user;
     }
@@ -80,7 +81,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
 //        $request->merge([
 //            'password' => Hash::make($request['password'])
