@@ -1,3 +1,17 @@
-body{
-    background: pink;
+body {
+    background: rgba(255, 192, 203, 0.34) !important;
+}
+
+.form-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .form-control {
+        flex: auto;
+    }
+
+    label {
+        width: 120px;
+    }
 }

@@ -11,26 +11,6 @@
                 </div>
                 <Select label="Tình trạng" :options="options" v-model="status" :error_mes="errors.status"/>
             </div>
-
-<!--            <div class="row">-->
-<!--                <div class="col-12 col-sm-3 text-start text-sm-end">-->
-<!--                    <label>-->
-<!--                        <span class="text-danger me-1">*</span>-->
-<!--                        <span :class="{'text-danger':errors?.status}">Tình trạng</span>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="col-12 col-sm-5">-->
-<!--                    <a-select-->
-<!--                        show-search-->
-<!--                        placeholder="Tình trạng"-->
-<!--                        :options="options"-->
-<!--                        :filter-option="filterOption"-->
-<!--                        v-model:value="status"-->
-<!--                        :class="{'select-danger': errors?.status}"-->
-<!--                    ></a-select>-->
-<!--                </div>-->
-<!--            </div>-->
-
         </a-card>
     </form>
 </template>

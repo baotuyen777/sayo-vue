@@ -1,11 +1,11 @@
 <template>
-    <div class="mb-3 d-flex align-items-center gap-2">
+    <div class="form-item">
         <label>
             <span class="text-danger me-1">*</span>
             <span :class="{'text-danger': error_mes}">{{ label }}</span>
         </label>
 
-        <div>
+        <div class="form-control">
             <a-input
                 :placeholder="placeholder || label"
                 :value="modelValue"

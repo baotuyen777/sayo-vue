@@ -27,6 +27,7 @@ import {UserOutlined, TagOutlined, SettingOutlined} from '@ant-design/icons-vue'
 import {defineComponent} from 'vue';
 import {storeToRefs} from "pinia";
 import {useMenu} from "@/src/store/use-menu.js";
+import admin from "../../router/admin"
 
 export default defineComponent({
     components: {
@@ -34,6 +35,7 @@ export default defineComponent({
     },
     setup() {
         const store = useMenu();
+        console.log(admin);
         return {...storeToRefs(store)}
     },
 });
