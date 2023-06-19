@@ -2,29 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\Settings;
-use App\Models\User;
+use App\Models\Users;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-    {
-        $s = $request->input('s');
-        $pageSize = $request->input('page_size') ?? 5;
-        $selectStatus = DB::raw('if(status = 1, "Hoạt động", "Tạm dừng") as status_label');
-
-        $objs = Settings::where('name', 'like', "%{$s}%")
-            ->select('settings.*', $selectStatus)
-            ->where('code', 'like', "%{$s}%")
-            ->paginate($pageSize);
-
-        return response()->json($objs);
-    }
+//    public function index(Request $request)
+//    {
+//       return parent::index($request);
+//    }
 
     /**
      * Show the form for creating a new resource.
@@ -47,23 +41,30 @@ class SettingsController extends Controller
      */
     public function show(string $id)
     {
-        return SettingsModel::findOrFail($id);
+        return Settings::findOrFail($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $obj = Settings::findOrFail($id);
+
+        return response()->json([
+            'result' => $obj,
+            'status' => true
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        Settings::find($id)->update($request->all());
+        $res = Settings::find($id);
+        return response()->json(['status' => true, 'result' => $res]);
     }
 
     /**

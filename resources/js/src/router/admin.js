@@ -21,8 +21,12 @@ const renderModuleRouter = (module) => {
 
 const admin = [
     {
+        path: '/',
+        component: () => import("../components/layouts/admin.vue"),
+    },
+    {
         path: '/admin',
-        component: () => import("../layouts/admin.vue"),
+        component: () => import("../components/layouts/admin.vue"),
         children: [
             ...renderModuleRouter('users'),
             ...renderModuleRouter('settings'),

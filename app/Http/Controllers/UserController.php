@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Users;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function show($id)
     {
-        return User::findOrFail($id);
+        return Users::findOrFail($id);
     }
 
     public function index(Request $request)
@@ -20,7 +20,7 @@ class UserController extends Controller
         $s = $request->input('s');
         $pageSize = $request->input('page_size') ?? 5;
 //        return User::get();
-        $user = User::join('departments', 'users.departments_id', '=', 'departments.id')
+        $user = Users::join('departments', 'users.departments_id', '=', 'departments.id')
             ->join('users_status', 'users.status_id', '=', 'users_status.id')
             ->select('users.*', 'departments.name as departments_name', 'users_status.name as users_status_name ')
             ->where('users.name', 'like', "%{$s}%")
@@ -30,30 +30,11 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-//        $validate = $request->validate([
-//            'status_id' => 'required',
-//            'username' => 'required|unique:users,username',
-//            'name' => 'required',
-//            'email' => 'required|email',
-//            'department_id' => 'required',
-//            'password' => 'required|confirmed',
-//        ], [
-//            'status.required' => 'Vui lòng nhập tình trạng',
-//            'username.required' => 'Nhập tên đăng nhập',
-//            'username.unique' => 'Tên đăng nhập đã tồn tại',
-//            'name.required' => 'Vui lòng nhập họ tên',
-//            'email.required' => 'Vui lòng nhập email',
-//            'email.email' => 'Email không đúng định dạng',
-//            'department_id.required' => 'Vui lòng nhập phòng ban',
-//            'password.required' => 'Vui lòng nhập mật khẩu',
-//            'password.confirmed' => 'Mật khẩu nhập lại không khớp',
-//        ]);
-
         $request->merge([
             'password' => Hash::make($request['password'])
         ]);
 
-        $user = User::create($request->all());
+        $user = Users::create($request->all());
         return $user;
     }
 
@@ -70,7 +51,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = Users::findOrFail($id);
         $userStatus = \DB::table('users_status')->select('id as value', 'name as label')->get();
         $department = \DB::table('departments')->select('id as value', 'name as label')->get();
 
@@ -93,8 +74,8 @@ class UserController extends Controller
             ]);
         }
 
-        User::find($id)->update($request->all());
-        $res = User::find($id);
+        Users::find($id)->update($request->all());
+        $res = Users::find($id);
         return response()->json(['status' => true, 'result' => $res]);
     }
 

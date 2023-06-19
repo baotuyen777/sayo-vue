@@ -4,6 +4,10 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\RolesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,3 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::put('/users/{id}', [UserController::class, 'update']);
 Route::resource('users', UserController::class);
 Route::resource('settings',SettingsController::class);
+Route::resource('categories',CategoriesController::class);
+Route::resource('posts',PostsController::class);
+Route::resource('products',ProductsController::class);
+Route::resource('roles',RolesController::class);

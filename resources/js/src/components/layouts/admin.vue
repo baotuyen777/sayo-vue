@@ -1,5 +1,4 @@
 <template>
-    day la layout admin
     <TheHeader/>
     <div class="container-fluid mt-3">
         <div class="row">
@@ -21,8 +20,8 @@
 
 </template>
 <script>
-import TheHeader from "../components/list/TheHeader.vue";
-import TheMenu from "../components/list/TheMenu.vue";
+import TheHeader from "../list/TheHeader.vue";
+import TheMenu from "../list/TheMenu.vue";
 
 export default {
     components: {
