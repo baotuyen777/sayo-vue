@@ -1,15 +1,21 @@
 <template>
-    <form @submit.prevent="updateUsers()">
+    <form @submit.prevent="handleUpdate()">
         <a-card title="Tạo mới tài khoản" style="width: 100%">
             <HeaderForm :module="module"/>
             <div class="row">
                 <div class="mb-3 mt-3 col-md-6">
-                    <Input label="Tên" :error_mes="errors.name" v-model="name"/>
+                    <Input label="Tên" :error_mes="errors?.name" v-model="name"/>
                 </div>
                 <div class="mb-3 mt-3 col-md-6">
-                    <Input label="Mã" :error_mes="errors.code" v-model="code"/>
+                    <Input label="Mã" :error_mes="errors?.code" v-model="code"/>
                 </div>
-                <Select label="Tình trạng" :options="options" v-model="status" :error_mes="errors.status"/>
+                <div class="mb-3 mt-3 col-md-6">
+                    <Input label="Giá trị" :error_mes="errors?.value" v-model="value"/>
+                </div>
+                <div class="mb-3 mt-3 col-md-6">
+                    <Select label="Tình trạng" :options="options" v-model="status" :error_mes="errors?.status"/>
+                </div>
+
             </div>
         </a-card>
     </form>
@@ -20,7 +26,6 @@ import {defineComponent, ref, reactive, toRefs} from "vue";
 import {useMenu} from "@/src/store/use-menu.js";
 import {useRouter, useRoute} from "vue-router";
 import {message} from "ant-design-vue";
-import dayjs from "dayjs";
 import Input from "../../../components/form/Input.vue";
 import HeaderForm from "../../../components/form/HeaderForm.vue";
 import Select from "../../../components/form/Select.vue";
@@ -36,6 +41,7 @@ export default defineComponent({
         const obj = reactive({
             name: "",
             code: "",
+            value: "",
             status: 1,
         })
 
@@ -52,7 +58,6 @@ export default defineComponent({
                         obj[field] = res.data.result[field]
                     })
                 }
-                console.log(res)
             } catch (err) {
                 console.log(err)
             }
@@ -62,19 +67,20 @@ export default defineComponent({
             return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
         }
 
-        const updateUsers = async () => {
+        const handleUpdate = async () => {
             try {
                 if (route.params.id) {
                     const res = await axios.put(`http://localhost:8000/api/${module}/${route.params.id}`, obj);
                 } else {
                     const res = await axios.post(`http://localhost:8000/api/${module}`, obj);
-                }
 
+                }
+                // console.log(res,888)
                 await router.push({name: `admin-${module}`})
                 message.success('Thành công')
             } catch (err) {
                 console.log(err)
-                // errors.value = err.response.data.errors;
+                errors.value = err.response.data.errors;
             }
         }
 
@@ -89,14 +95,9 @@ export default defineComponent({
             ...toRefs(obj),
             errors,
             filterOption,
-            updateUsers,
+            handleUpdate,
             module
         }
     }
 })
 </script>
-<style>
-.select-danger, .input-danger {
-    border: 1px solid red;
-}
-</style>

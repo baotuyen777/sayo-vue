@@ -1,6 +1,7 @@
 const renderModuleRouter = (module) => {
     return [
         {
+            label: module,
             path: module,
             name: `admin-${module}`,
             component: () => import(`../pages/admin/${module}/index.vue`)
@@ -19,23 +20,25 @@ const renderModuleRouter = (module) => {
     ];
 }
 
-const admin = [
+export const adminRoutes = {
+    path: '/admin',
+    component: () => import("../components/layouts/admin.vue"),
+    children: [
+        ...renderModuleRouter('users'),
+        ...renderModuleRouter('settings'),
+        ...renderModuleRouter('roles'),
+        ...renderModuleRouter('categories'),
+
+    ]
+};
+
+const routes = [
     {
         path: '/',
         component: () => import("../components/layouts/admin.vue"),
     },
-    {
-        path: '/admin',
-        component: () => import("../components/layouts/admin.vue"),
-        children: [
-            ...renderModuleRouter('users'),
-            ...renderModuleRouter('settings'),
-            ...renderModuleRouter('roles'),
-
-        ]
-    }
+    adminRoutes
 ];
 
 
-
-export default admin;
+export default routes;

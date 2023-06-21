@@ -4,21 +4,14 @@
         v-model:selectedKeys="selectedKeys"
         mode="inline"
     >
-        <a-menu-item key="admin-users">
-            <router-link :to="{name:'admin-users'}">
-                <span><UserOutlined class="me-1"/> Tài khoản </span>
-            </router-link>
-        </a-menu-item>
-        <a-menu-item key="admin-roles">
-            <router-link :to="{name:'admin-roles'}">
-                <span><TagOutlined class="me-1"/> Vai trò </span>
-            </router-link>
-        </a-menu-item>
-        <a-menu-item key="admin-settings">
-            <router-link :to="{name:'admin-settings'}">
-                <span><SettingOutlined class="me-1"/> Cài đặt</span>
-            </router-link>
-        </a-menu-item>
+        <template v-for="item in adminRoutes.children">
+            <a-menu-item v-if="item?.label" :key="item.name">
+                <router-link :to="{name:item.name}">
+                    <span><UserOutlined class="me-1"/>  {{ item.label }} </span>
+                </router-link>
+            </a-menu-item>
+        </template>
+
     </a-menu>
 </template>
 
@@ -27,7 +20,7 @@ import {UserOutlined, TagOutlined, SettingOutlined} from '@ant-design/icons-vue'
 import {defineComponent} from 'vue';
 import {storeToRefs} from "pinia";
 import {useMenu} from "@/src/store/use-menu.js";
-import admin from "../../router/admin"
+import admin, {adminRoutes} from "../../router/admin"
 
 export default defineComponent({
     components: {
@@ -35,8 +28,8 @@ export default defineComponent({
     },
     setup() {
         const store = useMenu();
-        console.log(admin);
-        return {...storeToRefs(store)}
+        console.log(adminRoutes.children);
+        return {...storeToRefs(store), admin, adminRoutes}
     },
 });
 </script>

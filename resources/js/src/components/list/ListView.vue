@@ -1,6 +1,6 @@
 <template>
     <a-card :title="title" style="width: 100%">
-        <HeaderList module="users" @getList="getList" :objs="objs"/>
+        <HeaderList :module="module" @getList="getList" :objs="objs"/>
         <div class="">
             <a-skeleton v-if="isLoading"/>
             <a-table :columns="columns"

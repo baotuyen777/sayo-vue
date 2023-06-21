@@ -4,7 +4,6 @@
         <div class="row">
             <div class="col-sm-3">
                 <a-list bordered style="width:100%">
-
                     <template #header>
                         <div>Bảng điều khiển</div>
                     </template>

@@ -14,4 +14,7 @@ body {
     label {
         width: 120px;
     }
+    .select-danger, .input-danger {
+        border: 1px solid red;
+    }
 }

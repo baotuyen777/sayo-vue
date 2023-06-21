@@ -265,8 +265,4 @@ export default defineComponent({
     }
 })
 </script>
-<style>
-.select-danger, .input-danger {
-    border: 1px solid red;
-}
-</style>
+
