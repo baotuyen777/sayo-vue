@@ -6,7 +6,7 @@
 import {useMenu} from "../../../store/use-menu.js";
 import ListView from "../../../components/list/ListView.vue";
 
-const module = 'roles';
+const module = 'categories';
 useMenu().onSelectedKeys([`admin-${module}`]);
 
 const columns = [

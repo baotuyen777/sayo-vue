@@ -13,7 +13,7 @@
                     <Input label="Giá trị" :error_mes="errors?.value" v-model="value"/>
                 </div>
                 <div class="mb-3 mt-3 col-md-6">
-                    <Select label="Tình trạng" :options="options" v-model="status" :error_mes="errors?.status"/>
+                    <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
                 </div>
 
             </div>
@@ -29,14 +29,15 @@ import {message} from "ant-design-vue";
 import Input from "../../../components/form/Input.vue";
 import HeaderForm from "../../../components/form/HeaderForm.vue";
 import Select from "../../../components/form/Select.vue";
+import {API_URL, getEndpoint} from "../../../configs/";
 
 export default defineComponent({
     components: {Select, HeaderForm, Input},
     setup() {
-        useMenu().onSelectedKeys(['admin-settings']);
+        const module = 'settings';
+        useMenu().onSelectedKeys([`admin-${module}`]);
         const router = useRouter()
         const route = useRoute()
-        const module = 'settings';
 
         const obj = reactive({
             name: "",
@@ -47,10 +48,9 @@ export default defineComponent({
 
         const errors = ref({})
 
-
         const getDetail = async () => {
-            const endpoint = route.params.id ? `http://localhost:8000/api/${module}/${route.params.id}/edit` : `http://localhost:8000/api/users/create`
-
+            // const endpoint = route.params.id ? `${API_URL}${module}/${route.params.id}/edit` : `http://localhost:8000/api/${module}/create`
+            const endpoint = getEndpoint(module, null, route.params.id);
             try {
                 const res = await axios.get(endpoint);
                 if (res.data.result) {
@@ -63,10 +63,6 @@ export default defineComponent({
             }
         }
 
-        const filterOption = (input, option) => {
-            return option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-        }
-
         const handleUpdate = async () => {
             try {
                 if (route.params.id) {
@@ -75,7 +71,6 @@ export default defineComponent({
                     const res = await axios.post(`http://localhost:8000/api/${module}`, obj);
 
                 }
-                // console.log(res,888)
                 await router.push({name: `admin-${module}`})
                 message.success('Thành công')
             } catch (err) {
@@ -85,16 +80,10 @@ export default defineComponent({
         }
 
         getDetail();
-        const options = [
-            {value: 1, label: "Hoạt động"},
-            {value: 2, label: "Tạm dừng"},
-        ];
 
         return {
-            options,
             ...toRefs(obj),
             errors,
-            filterOption,
             handleUpdate,
             module
         }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,12 +19,27 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
         $this->call([
-           DepartmentSeeder::class,
-           UserStatusSeeder::class,
-           UserSeeder::class,
-           SettingsSeeder::class,
+            DepartmentSeeder::class,
+            UserStatusSeeder::class,
+            UserSeeder::class,
+            SettingsSeeder::class,
         ]);
+
+        for ($i = 1; $i < 10; $i++) {
+            $row = [
+                'name' => 'cat',
+                'code' => 'code ' . $i,
+            ];
+            DB::table('categories')->insert($row);
+            DB::table('products')->insert([
+                'name' => 'product ' . $i,
+                'code' => 'code ' . $i,
+                'content' => 'value ' . $i,
+                'category_id' => 1,
+                'user_id' => 1,
+            ]);
+
+        }
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <a-card :title="title" style="width: 100%">
         <HeaderList :module="module" @getList="getList" :objs="objs"/>
-        <div class="">
+        <div class="listview">
             <a-skeleton v-if="isLoading"/>
             <a-table :columns="columns"
                      :data-source="objs.data" :scroll="{x:576}"
@@ -20,11 +20,17 @@
                     </template>
 
                     <template v-if="column.key === 'action'">
-                        <router-link :to="{name:'admin-'+module+'-edit', params:{id:record.id}}">
-                            <a-button type="primary">
-                                <font-awesome-icon :icon="['fas', 'pen-to-square']"/>
+                        <div class="action-column">
+                            <router-link :to="{name:'admin-'+module+'-edit', params:{id:record.id}}">
+                                <a-button type="primary">
+                                    <font-awesome-icon :icon="['fas', 'pen-to-square']"/>
+                                </a-button>
+                            </router-link>
+                            <a-button type="primary" danger :onclick="()=>handleDelele(record.id)">
+                                <font-awesome-icon :icon="['fas', 'fa-trash']"/>
                             </a-button>
-                        </router-link>
+                        </div>
+
                     </template>
 
                 </template>
@@ -33,52 +39,40 @@
     </a-card>
 </template>
 
-<script>
-import {defineComponent, ref} from "vue";
+<script setup>
+import {ref} from "vue";
 import HeaderList from "./HeaderList.vue";
+import {API_URL} from "@/src/configs/index.js";
 
-export default defineComponent({
-    props: ['module', 'title', 'columns'],
-    components: {HeaderList},
-    setup(props) {
-        const objs = ref({});
-        const currentPage = ref(1)
-        const isLoading = ref(false);
-        const getList = (params) => {
-            // console.log(params, 111122)
-            isLoading.value = true;
-            axios.get(`http://localhost:8000/api/${props.module}`, {params})
-                .then((response) => {
-                    objs.value = response.data;
-                    currentPage.value = response.data.current_page
-                    isLoading.value = false
-                    console.log(currentPage)
-                })
-                .catch(error => {
-                        console.log(error)
-                        isLoading.value = false
-                    }
-                )
-        }
+const props = defineProps(['module', 'title', 'columns']);
+const objs = ref({});
+const currentPage = ref(1)
+const isLoading = ref(false);
 
-        const onChange = (pagination) => {
-            console.log(pagination, 111)
-            // currentPage.value = pagination.current;
-            getList({page: pagination.current})
-        }
-
-
-        // const getUsers = async () => {
-        //     try {
-        //         const response = await axios.get('http://localhost:8000/api/users');
-        //         console.log(response);
-        //     } catch (error) {
-        //         console.log(error)
-        //     }
-        // }
-
-        getList();
-        return {objs, getList, onChange, isLoading, currentPage}
+const getList = async (params) => {
+    isLoading.value = true;
+    try {
+        const res = await axios.get(`${API_URL}${props.module}`, {params})
+        objs.value = res.data;
+        currentPage.value = res.data.current_page
+        console.log(currentPage)
+    } catch (err) {
+        console.log(err)
     }
-})
+
+    isLoading.value = false
+}
+
+const handleDelele = async (id) => {
+    const res = await axios.delete(`${API_URL}${props.module}/${id}`);
+    console.log(res);
+    await getList()
+}
+
+const onChange = (pagination) => {
+    getList({page: pagination.current})
+}
+
+getList();
+
 </script>

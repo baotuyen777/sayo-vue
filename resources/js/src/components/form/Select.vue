@@ -22,7 +22,20 @@
 
 <script setup>
 
-const props = defineProps(['modelValue', 'placeholder', 'error_mes', 'label', 'options']);
+
+const props = defineProps({
+    options: {
+        default: [
+            {value: 1, label: "Hoạt động"},
+            {value: 2, label: "Tạm dừng"},
+        ]
+    },
+    modelValue: {},
+    placeholder: {},
+    error_mes: {},
+    label: {},
+
+});
 
 defineEmits(['update:modelValue']);
 

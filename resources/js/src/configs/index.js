@@ -28,8 +28,6 @@ export const adminRoutes = {
         ...renderModuleRouter('settings'),
         ...renderModuleRouter('roles'),
         ...renderModuleRouter('categories'),
-        ...renderModuleRouter('products'),
-
     ]
 };
 
@@ -41,5 +39,10 @@ const routes = [
     adminRoutes
 ];
 
-
+export const API_URL = 'http://localhost:8000/api/';
+export const getEndpoint = (module, action = '', params = '') => {
+    const paramUrl = params ? `/${params}` : '';
+    const actionUrl = action ? action : (!params ? 'create': '')
+    return `${API_URL}${module}${paramUrl}/${actionUrl}`;
+}
 export default routes;

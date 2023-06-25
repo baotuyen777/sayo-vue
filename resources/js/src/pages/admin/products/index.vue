@@ -6,7 +6,7 @@
 import {useMenu} from "../../../store/use-menu.js";
 import ListView from "../../../components/list/ListView.vue";
 
-const module = 'roles';
+const module = 'products';
 useMenu().onSelectedKeys([`admin-${module}`]);
 
 const columns = [
@@ -14,6 +14,7 @@ const columns = [
     {title: "Tên", dataIndex: 'name', key: 'name'},
     {title: "code", dataIndex: 'code', key: 'code'},
     {title: "avatar", dataIndex: 'avatar', key: 'avatar'},
+    {title: "category_id", dataIndex: 'category_id', key: 'category_id'},
     {title: "Trạng thái", dataIndex: 'status_label', key: 'status'},
     {title: "Hành động", key: 'action', fixed: 'right'},
 ];

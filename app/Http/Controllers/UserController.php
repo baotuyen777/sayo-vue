@@ -28,7 +28,7 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
         $request->merge([
             'password' => Hash::make($request['password'])
@@ -62,7 +62,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
 //        $request->merge([
 //            'password' => Hash::make($request['password'])

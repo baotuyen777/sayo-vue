@@ -9,7 +9,6 @@ class BaseServices
         $rules = [
             'name' => 'required',
             'code' => 'required',
-            'value' => 'required',
         ];
         $rules = array_merge($rules, $customize);
 

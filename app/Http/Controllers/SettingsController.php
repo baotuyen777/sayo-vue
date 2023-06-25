@@ -14,12 +14,11 @@ use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
-    public $baseServices;
-    public $module = 'settings';
 
     public function __construct(BaseServices $baseServices)
     {
         $this->baseServices = $baseServices;
+        $this->module = 'settings';
     }
     /**
      * Display a listing of the resource.
@@ -34,22 +33,11 @@ class SettingsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->baseServices->validate($request, $this->module, ['code' => 'required|unique:settings']);
+        $this->baseServices->validate($request, $this->module, ['code' => 'required|unique:settings', 'value' => 'required']);
         $obj = Settings::create($request->all());
         return $obj;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         return Settings::findOrFail($id);
@@ -79,12 +67,6 @@ class SettingsController extends Controller
         return response()->json(['status' => true, 'result' => $res]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+
 
 }

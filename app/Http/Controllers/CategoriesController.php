@@ -2,65 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
+use App\Services\BaseServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
+    public function __construct(BaseServices $baseServices)
     {
-        return parent::index($request);
+        $this->baseServices = $baseServices;
+        $this->module = 'categories';
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $this->baseServices->validate($request, $this->module, ['code' => 'required|unique:categories']);
+        $obj = DB::table($this->module)->insert($request->all());
+        return $obj;
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $obj = DB::table($this->module)->find($id);
+
+        return response()->json([
+            'result' => $obj,
+            'status' => true
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $this->baseServices->validate($request, $this->module);
+        DB::table($this->module)->where('id', $id)->update($request->all());
+
+        $res = DB::table($this->module)->find($id);
+        return response()->json(['status' => true, 'result' => $res]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

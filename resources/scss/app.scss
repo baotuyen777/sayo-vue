@@ -18,3 +18,10 @@ body {
         border: 1px solid red;
     }
 }
+
+.listview {
+    .action-column{
+        display: flex;
+        gap: 10px;
+    }
+}
