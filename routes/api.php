@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\OrdersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,3 +37,4 @@ Route::resource('categories',CategoriesController::class);
 Route::resource('posts',PostsController::class);
 Route::resource('products',ProductsController::class);
 Route::resource('roles',RolesController::class);
+Route::resource('orders',OrdersController::class);

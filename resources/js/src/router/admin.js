@@ -29,6 +29,7 @@ export const adminRoutes = {
         ...renderModuleRouter('roles'),
         ...renderModuleRouter('categories'),
         ...renderModuleRouter('products'),
+        ...renderModuleRouter('orders'),
 
     ]
 };
