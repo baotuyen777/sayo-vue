@@ -23,20 +23,18 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             UserStatusSeeder::class,
             UserSeeder::class,
+            CategoriesSeeder::class,
             SettingsSeeder::class,
+            PostsSeeder::class,
+
         ]);
 
         for ($i = 1; $i < 10; $i++) {
-            $row = [
-                'name' => 'cat',
-                'code' => 'code ' . $i,
-            ];
-            DB::table('categories')->insert($row);
             DB::table('products')->insert([
                 'name' => 'product ' . $i,
                 'code' => 'code ' . $i,
                 'content' => 'value ' . $i,
-                'category_id' => 1,
+                'category_id' => rand(1, 5),
                 'user_id' => 1,
             ]);
             DB::table('orders')->insert([

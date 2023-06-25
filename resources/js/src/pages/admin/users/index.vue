@@ -17,7 +17,7 @@ export default defineComponent({
             {title: "Tên", dataIndex: 'name', key: 'name'},
             {title: "Tài khoản", dataIndex: 'username', key: 'username'},
             {title: "Phòng ban", dataIndex: 'departments_name', key: 'departments_name', responsive: ['sm']},
-            {title: "Vai trò", dataIndex: 'roles_name', key: 'roles_name'},
+            {title: "Vai trò", dataIndex: 'role_label', key: 'role_label'},
             {title: "Email", dataIndex: 'email', key: 'email'},
             {title: "Trạng thái", dataIndex: 'status_id', key: 'status_id'},
             {title: "Hành động", key: 'action', fixed: 'right'},

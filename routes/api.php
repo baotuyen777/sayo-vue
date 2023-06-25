@@ -9,6 +9,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\MediasController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,3 +39,4 @@ Route::resource('posts',PostsController::class);
 Route::resource('products',ProductsController::class);
 Route::resource('roles',RolesController::class);
 Route::resource('orders',OrdersController::class);
+Route::resource('orders',MediasController::class);

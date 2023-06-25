@@ -18,7 +18,9 @@ import {
     Card,
     Table,
     Pagination,
-    Skeleton
+    Skeleton,
+    Upload,
+    Modal,
 } from "ant-design-vue";
 
 import App from './App.vue'
@@ -54,6 +56,8 @@ app.use(Card)
 app.use(Table)
 app.use(Pagination)
 app.use(Skeleton)
+app.use(Upload)
+app.use(Modal)
 
 app.mount('#app');
 

@@ -26,10 +26,11 @@ export const adminRoutes = {
     children: [
         ...renderModuleRouter('users'),
         ...renderModuleRouter('settings'),
-        ...renderModuleRouter('roles'),
         ...renderModuleRouter('categories'),
         ...renderModuleRouter('products'),
         ...renderModuleRouter('orders'),
+        ...renderModuleRouter('posts'),
+        ...renderModuleRouter('medias'),
 
     ]
 };

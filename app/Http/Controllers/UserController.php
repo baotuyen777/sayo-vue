@@ -6,6 +6,7 @@ use App\Models\Users;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRequest;
 class UserController extends Controller
@@ -20,9 +21,10 @@ class UserController extends Controller
         $s = $request->input('s');
         $pageSize = $request->input('page_size') ?? 5;
 //        return User::get();
+        $rolesLabel = DB::raw('if(role < 3, "Staff", "Khách") as role_label');
         $user = Users::join('departments', 'users.departments_id', '=', 'departments.id')
             ->join('users_status', 'users.status_id', '=', 'users_status.id')
-            ->select('users.*', 'departments.name as departments_name', 'users_status.name as users_status_name ')
+            ->select('users.*', 'departments.name as departments_name', 'users_status.name as users_status_name', $rolesLabel)
             ->where('users.name', 'like', "%{$s}%")
             ->paginate($pageSize);
         return response()->json($user);
@@ -40,8 +42,8 @@ class UserController extends Controller
 
     public function create()
     {
-        $userStatus = \DB::table('users_status')->select('id as value', 'name as label')->get();
-        $department = \DB::table('departments')->select('id as value', 'name as label')->get();
+        $userStatus = DB::table('users_status')->select('id as value', 'name as label')->get();
+        $department = DB::table('departments')->select('id as value', 'name as label')->get();
 
         return response()->json([
             'users_status' => $userStatus,
@@ -52,8 +54,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = Users::findOrFail($id);
-        $userStatus = \DB::table('users_status')->select('id as value', 'name as label')->get();
-        $department = \DB::table('departments')->select('id as value', 'name as label')->get();
+        $userStatus = DB::table('users_status')->select('id as value', 'name as label')->get();
+        $department = DB::table('departments')->select('id as value', 'name as label')->get();
 
         return response()->json([
             'users_status' => $userStatus,
