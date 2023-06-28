@@ -39,4 +39,4 @@ Route::resource('posts',PostsController::class);
 Route::resource('products',ProductsController::class);
 Route::resource('roles',RolesController::class);
 Route::resource('orders',OrdersController::class);
-Route::resource('orders',MediasController::class);
+Route::resource('medias',MediasController::class);

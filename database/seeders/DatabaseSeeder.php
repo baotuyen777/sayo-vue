@@ -13,12 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
         $this->call([
             DepartmentSeeder::class,
             UserStatusSeeder::class,
@@ -37,10 +31,15 @@ class DatabaseSeeder extends Seeder
                 'category_id' => rand(1, 5),
                 'user_id' => 1,
             ]);
+
             DB::table('orders')->insert([
                 'user_id' => 1,
             ]);
-
         }
+
+        DB::table('medias')->insert([
+            'name' => 1,
+            'url' => 2,
+        ]);
     }
 }

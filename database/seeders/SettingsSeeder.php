@@ -16,13 +16,13 @@ class SettingsSeeder extends Seeder
     public function run(): void
     {
         DB::table('settings')->insert([
-            'name' => 'abc',
-            'code' => 'code1',
+            'name' => 'setting1',
+            'code' => 'setting',
             'value' => 'value1',
         ]);
         DB::table('settings')->insert([
-            'name' => 'abc2',
-            'code' => 'code2',
+            'name' => 'setting2',
+            'code' => 'setting2',
             'value' => 'value2',
         ]);
 

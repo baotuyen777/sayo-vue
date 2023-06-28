@@ -14,9 +14,13 @@
                         <span>{{ index + 1 }}</span>
                     </template>
 
-                    <template v-if="column.key === 'status_id'">
+                    <template v-if="column.key === 'status'">
                         <span v-if="record.status_id===1" class="text-primary">Hoạt động</span>
-                        <span v-if="record.status_id!=1" class="text-primary">Tạm khóa</span>
+                        <span v-if="record.status_id!=1" class="text-danger">Tạm khóa</span>
+                    </template>
+
+                    <template v-if="column.key === 'media'">
+                        <a-image :width="100" :src="MEDIA_URL+record.url"/>
                     </template>
 
                     <template v-if="column.key === 'action'">
@@ -42,7 +46,7 @@
 <script setup>
 import {ref} from "vue";
 import HeaderList from "./HeaderList.vue";
-import {API_URL} from "@/src/configs/index.js";
+import {API_URL, MEDIA_URL} from "@/src/configs/index.js";
 
 const props = defineProps(['module', 'title', 'columns']);
 const objs = ref({});

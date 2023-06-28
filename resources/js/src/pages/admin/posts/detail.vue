@@ -24,11 +24,11 @@
 import {ref, reactive, toRefs} from "vue";
 import {useMenu} from "@/src/store/use-menu.js";
 import {useRouter, useRoute} from "vue-router";
+import {getEndpoint} from "../../../configs";
 import {message} from "ant-design-vue";
-import Input from "../../../components/form/Input.vue";
 import HeaderForm from "../../../components/form/HeaderForm.vue";
+import Input from "../../../components/form/Input.vue";
 import Select from "../../../components/form/Select.vue";
-import {getEndpoint} from "../../../configs/index.js";
 import Upload from "../../../components/form/Upload.vue";
 
 const module = 'posts';
@@ -54,8 +54,8 @@ const getDetail = async () => {
             Object.keys(obj).forEach(field => {
                 obj[field] = res.data.result[field]
             })
-
-            console.log(res);
+        }else{
+            console.log(res)
         }
     } catch (err) {
         console.log(err)

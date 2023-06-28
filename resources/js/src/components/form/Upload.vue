@@ -2,9 +2,11 @@
     <div class="clearfix">
         <a-upload
             v-model:file-list="fileList"
-            :action="API_URL+'media'"
+            :action="API_URL+'medias'"
             list-type="picture-card"
             @preview="handlePreview"
+            :onChange="handleOnchange"
+
         >
             <div v-if="fileList.length < 8">
                 <plus-outlined/>
@@ -20,7 +22,8 @@
 <script setup>
 import {PlusOutlined} from '@ant-design/icons-vue';
 import {ref} from 'vue';
-import {API_URL} from "@/src/configs/index.js";
+import {API_URL} from "../../configs";
+const props = defineProps(['files'])
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -41,7 +44,7 @@ const fileList = ref([{
     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
 }
 ]);
-
+console.log(fileList,2222)
 const handleCancel = () => {
     previewVisible.value = false;
     previewTitle.value = '';
@@ -55,5 +58,17 @@ const handlePreview = async file => {
     previewVisible.value = true;
     previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
 };
+
+const handleOnchange= (res)=>{
+    const { status, response } = res.file;
+    if (status === 'done') {
+        console.log( res.fileList);
+    } else if (status === 'error') {
+        // Handle upload error
+        console.log('Upload error:', res.file.error);
+    }
+
+}
+
 
 </script>

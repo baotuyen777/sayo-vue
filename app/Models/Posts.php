@@ -9,7 +9,7 @@ class Posts extends Model
 {
     use HasFactory;
 //    protected $table ='posts';
-    protected $appends = array('category_name');
+    protected $appends = ['category_name'];
     public function category()
     {
         return $this->belongsTo(Categories::class);
@@ -18,6 +18,11 @@ class Posts extends Model
     public function getCategoryNameAttribute()
     {
         return $this->category->name;
+    }
+
+    public function avatar()
+    {
+        return $this->belongsTo(Medias::class);
     }
 
 }

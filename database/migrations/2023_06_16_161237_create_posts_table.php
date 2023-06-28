@@ -15,14 +15,15 @@ return new class extends Migration {
             $table->string('name');
             $table->string('code')->unique();
             $table->text('content')->nullable();
-            $table->string('avatar')->nullable();
-            $table->string('gallery')->nullable();
-            $table->string('video')->nullable();
             $table->integer('status')->default(1);
+
+            $table->unsignedBigInteger('avatar_id')->nullable();
+            $table->unsignedBigInteger('video_id')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('avatar_id')->references('id')->on('medias')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -33,6 +34,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
+
         Schema::dropIfExists('posts');
     }
 };

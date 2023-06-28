@@ -21,6 +21,7 @@ import {
     Skeleton,
     Upload,
     Modal,
+    Image,
 } from "ant-design-vue";
 
 import App from './App.vue'
@@ -58,6 +59,7 @@ app.use(Pagination)
 app.use(Skeleton)
 app.use(Upload)
 app.use(Modal)
+app.use(Image)
 
 app.mount('#app');
 

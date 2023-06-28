@@ -6,9 +6,7 @@
                 <div class="mb-3 mt-3 col-md-6">
                     <Input label="Tên" :error_mes="errors?.name" v-model="name"/>
                 </div>
-                <div class="mb-3 mt-3 col-md-6">
-                    <Input label="Mã" :error_mes="errors?.code" v-model="code"/>
-                </div>
+
                 <div class="mb-3 mt-3 col-md-6">
                     <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
                 </div>
@@ -25,10 +23,10 @@ import {ref, reactive, toRefs} from "vue";
 import {useMenu} from "@/src/store/use-menu.js";
 import {useRouter, useRoute} from "vue-router";
 import {message} from "ant-design-vue";
-import Input from "../../../components/form/Input.vue";
 import HeaderForm from "../../../components/form/HeaderForm.vue";
-import Select from "../../../components/form/Select.vue";
 import {getEndpoint} from "../../../configs/index.js";
+import Input from "../../../components/form/Input.vue";
+import Select from "../../../components/form/Select.vue";
 import Upload from "../../../components/form/Upload.vue";
 
 const module = 'medias';
@@ -41,7 +39,7 @@ const endpointUpdate = getEndpoint(module, null, route.params.id);
 
 const obj = reactive({
     name: "",
-    code: "",
+    url: "",
     status: 1,
 })
 
