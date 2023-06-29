@@ -24,15 +24,8 @@ import {PlusOutlined} from '@ant-design/icons-vue';
 import {ref} from 'vue';
 import {API_URL} from "../../configs";
 const props = defineProps(['files'])
+const emit = defineEmits(['update:modelValue']);
 
-function getBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
-}
 
 const previewVisible = ref(false);
 const previewImage = ref('');
@@ -44,7 +37,16 @@ const fileList = ref([{
     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
 }
 ]);
-console.log(fileList,2222)
+
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
+
 const handleCancel = () => {
     previewVisible.value = false;
     previewTitle.value = '';
@@ -54,6 +56,7 @@ const handlePreview = async file => {
     if (!file.url && !file.preview) {
         file.preview = await getBase64(file.originFileObj);
     }
+
     previewImage.value = file.url || file.preview;
     previewVisible.value = true;
     previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
@@ -63,6 +66,7 @@ const handleOnchange= (res)=>{
     const { status, response } = res.file;
     if (status === 'done') {
         console.log( res.fileList);
+        emit('update:modelValue', res.fileList)
     } else if (status === 'error') {
         // Handle upload error
         console.log('Upload error:', res.file.error);

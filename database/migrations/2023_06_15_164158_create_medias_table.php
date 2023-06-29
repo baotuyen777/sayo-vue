@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('url');
-            $table->string('ext')->nullable();
+            $table->string('type')->nullable();
             $table->string('description')->nullable();
+            $table->integer('size')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });
