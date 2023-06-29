@@ -13,7 +13,7 @@
                     <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
                 </div>
                 <div class="col-md-6">
-                    <Upload/>
+                    <Upload @upload-success="handleUploadSuccess" :files="files"/>
                 </div>
             </div>
         </a-card>
@@ -43,9 +43,25 @@ const obj = reactive({
     name: "",
     code: "",
     status: 1,
+    files:[{
+        uid: '-1',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    }
+    ]
 })
 
 const errors = ref({})
+
+const handleUploadSuccess = (files) =>{
+    console.log(files,33322)
+    const newFiles = files.map((file)=>{
+        return file.response.result
+    })
+    obj.files = newFiles;
+    console.log(newFiles);
+}
 
 const getDetail = async () => {
     try {
@@ -63,6 +79,7 @@ const getDetail = async () => {
 }
 
 const handleUpdate = async () => {
+    console.log(obj,888); return;
     try {
         if (route.params.id) {
             const res = await axios.put(endpointUpdate, obj);
@@ -78,6 +95,6 @@ const handleUpdate = async () => {
 }
 
 getDetail();
-const {name, code, value, status} = {...toRefs(obj)};
+const {name, code, value, status, files} = {...toRefs(obj)};
 
 </script>

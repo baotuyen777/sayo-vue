@@ -11,7 +11,7 @@
                     <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
                 </div>
                 <div class="col-md-6">
-                    <Upload/>
+                    <Upload @handle-success="handleUploadSuccess"/>
                 </div>
             </div>
         </a-card>
@@ -73,6 +73,10 @@ const handleUpdate = async () => {
         console.log(err)
         errors.value = err.response.data.errors;
     }
+}
+
+const handleUploadSuccess = (res) =>{
+    console.log(res,33333)
 }
 
 getDetail();

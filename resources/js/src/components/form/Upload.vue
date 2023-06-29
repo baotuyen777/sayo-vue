@@ -23,20 +23,15 @@
 import {PlusOutlined} from '@ant-design/icons-vue';
 import {ref} from 'vue';
 import {API_URL} from "../../configs";
+
 const props = defineProps(['files'])
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits([]);
 
 
 const previewVisible = ref(false);
 const previewImage = ref('');
 const previewTitle = ref('');
-const fileList = ref([{
-    uid: '-1',
-    name: 'image.png',
-    status: 'done',
-    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-}
-]);
+const fileList = ref(props.files || []);
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -62,11 +57,12 @@ const handlePreview = async file => {
     previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
 };
 
-const handleOnchange= (res)=>{
-    const { status, response } = res.file;
+const handleOnchange = (res) => {
+    const {status, response} = res.file;
     if (status === 'done') {
-        console.log( res.fileList);
-        emit('update:modelValue', res.fileList)
+        console.log(res.fileList);
+        // emit('update:modelValue', res.fileList)
+        emit('upload-success', res.fileList)
     } else if (status === 'error') {
         // Handle upload error
         console.log('Upload error:', res.file.error);
