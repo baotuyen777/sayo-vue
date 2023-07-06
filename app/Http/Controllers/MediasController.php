@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medias;
+use App\Models\Posts;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,6 +27,16 @@ class MediasController extends Controller
         $media->url = $storePath;
         $media->save();
 
-        return response()->json(['status'=>true, 'result'=> $media]);
+        return response()->json(['status' => true, 'result' => $media]);
     }
+
+//    public function posts()
+//    {
+//        return $this->belongsToMany()
+//    }
+
+//    public function posts(): MorphToMany
+//    {
+//        return $this->morphedByMany(Posts::class,'medias1');
+//    }
 }

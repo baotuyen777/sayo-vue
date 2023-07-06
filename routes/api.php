@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\MediasController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,10 +34,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::get('/users/{id}/edit', [UserController::class, 'edit']);
 //Route::put('/users/{id}', [UserController::class, 'update']);
 Route::resource('users', UserController::class);
-Route::resource('settings',SettingsController::class);
-Route::resource('categories',CategoriesController::class);
-Route::resource('posts',PostsController::class);
-Route::resource('products',ProductsController::class);
-Route::resource('roles',RolesController::class);
-Route::resource('orders',OrdersController::class);
-Route::resource('medias',MediasController::class);
+Route::resource('settings', SettingsController::class);
+Route::resource('categories', CategoriesController::class);
+Route::resource('posts', PostsController::class);
+Route::resource('products', ProductsController::class);
+Route::resource('roles', RolesController::class);
+Route::resource('orders', OrdersController::class);
+Route::resource('medias', MediasController::class);
+
+Route::post('posts/add-media/{id}', [PostsController::class, 'addMedia']);

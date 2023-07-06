@@ -22,7 +22,7 @@
 
 <script setup>
 import {ref, reactive, toRefs} from "vue";
-import {useMenu} from "@/src/store/use-menu.js";
+import {useMenu} from "../../../store/use-menu.js";
 import {useRouter, useRoute} from "vue-router";
 import {getEndpoint} from "../../../configs";
 import {message} from "ant-design-vue";
@@ -43,7 +43,7 @@ const obj = reactive({
     name: "",
     code: "",
     status: 1,
-    files:[{
+    gallery: [{
         uid: '-1',
         name: 'image.png',
         status: 'done',
@@ -54,13 +54,13 @@ const obj = reactive({
 
 const errors = ref({})
 
-const handleUploadSuccess = (files) =>{
-    console.log(files,33322)
-    const newFiles = files.map((file)=>{
-        return file.response.result
+const handleUploadSuccess = (files) => {
+    console.log(files, 33322)
+    const newFiles = files.map((file) => {
+        return file?.response?.result
     })
     obj.files = newFiles;
-    console.log(newFiles);
+    console.log(newFiles, 8888);
 }
 
 const getDetail = async () => {
@@ -70,7 +70,7 @@ const getDetail = async () => {
             Object.keys(obj).forEach(field => {
                 obj[field] = res.data.result[field]
             })
-        }else{
+        } else {
             console.log(res)
         }
     } catch (err) {
@@ -79,15 +79,16 @@ const getDetail = async () => {
 }
 
 const handleUpdate = async () => {
-    console.log(obj,888); return;
     try {
+        let res;
         if (route.params.id) {
-            const res = await axios.put(endpointUpdate, obj);
+            res = await axios.put(endpointUpdate, obj);
         } else {
-            const res = await axios.post(endpointUpdate, obj);
+            res = await axios.post(endpointUpdate, obj);
         }
         await router.push({name: `admin-${module}`})
         message.success('Thành công')
+        console.log(res, 222);
     } catch (err) {
         console.log(err)
         errors.value = err.response.data.errors;

@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Medias extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
+//    public function posts()
+//    {
+//        return $this->hasMany(Posts::class);
+//    }
 
     public function posts()
     {
-        return $this->hasMany(Posts::class);
+        return $this->belongsToMany(Posts::class);
     }
+
 }

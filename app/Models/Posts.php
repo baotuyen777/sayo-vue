@@ -10,6 +10,7 @@ class Posts extends Model
     use HasFactory;
 //    protected $table ='posts';
     protected $appends = ['category_name'];
+    protected $primaryKey = 'id';
     public function category()
     {
         return $this->belongsTo(Categories::class);
@@ -23,6 +24,11 @@ class Posts extends Model
     public function avatar()
     {
         return $this->belongsTo(Medias::class);
+    }
+
+    public function gallery()
+    {
+        return $this->belongsToMany(Medias::class,'posts_gallery');
     }
 
 }

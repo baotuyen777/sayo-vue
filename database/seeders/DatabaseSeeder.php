@@ -37,9 +37,16 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        DB::table('medias')->insert([
-            'name' => 1,
-            'url' => 2,
+        DB::table('medias')->insert(['name' => 1, 'url' => 1]);
+        DB::table('medias')->insert(['name' => 2, 'url' => 2]);
+
+        DB::table('posts_gallery')->insert([
+            'posts_id' => 1,
+            'medias_id' => 1,
+        ]);
+        DB::table('posts_gallery')->insert([
+            'posts_id' => 1,
+            'medias_id' => 2,
         ]);
     }
 }
