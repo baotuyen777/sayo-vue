@@ -40,6 +40,7 @@ class PostsController extends Controller
     }
     public function store(Request $request)
     {
+        dd(11);
         $this->baseServices->validate($request, $this->module);
         $obj = DB::table($this->module)->insert($request->all());
         return $obj;
@@ -53,5 +54,21 @@ $posts =Posts::find(1);
 //      $posts->medias()->sync([]);
 
         return 'Success';
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->baseServices->validate($request, $this->module);
+        $posts = Posts::find(1);
+        $galleryIds = array_values(array_map(function ($media){
+            return $media['id'];
+        }, $request->input('gallery')));
+        $posts->gallery()->sync($galleryIds);
+        dd($galleryIds);
+        $request->except('gallery');
+        DB::table($this->module)->where('id', $id)->update($request->all());
+
+        $res = DB::table($this->module)->find($id);
+        return response()->json(['status' => true, 'result' => $res]);
     }
 }

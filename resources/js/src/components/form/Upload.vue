@@ -8,7 +8,7 @@
             :onChange="handleOnchange"
 
         >
-            <div v-if="fileList.length < 8">
+            <div>
                 <plus-outlined/>
                 <div style="margin-top: 8px">Upload</div>
             </div>
@@ -24,7 +24,7 @@ import {PlusOutlined} from '@ant-design/icons-vue';
 import {ref} from 'vue';
 import {API_URL} from "../../configs";
 
-const props = defineProps(['files'])
+const props = defineProps(['files','modelValue'])
 const emit = defineEmits([]);
 
 
@@ -32,8 +32,7 @@ const previewVisible = ref(false);
 const previewImage = ref('');
 const previewTitle = ref('');
 const fileList = ref(props.files || []);
-console.log(props.files ,5555)
-
+// console.log(fileList ,5555)
 function getBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();

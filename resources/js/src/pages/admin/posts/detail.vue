@@ -13,7 +13,26 @@
                     <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
                 </div>
                 <div class="col-md-6">
-                    <Upload @upload-success="handleUploadSuccess"  v-model:files="gallery"/>
+                    <!--                    <Upload @upload-success="handleUploadSuccess"  v-model:files="gallery"/>-->
+                    <!--                    <Upload @upload-success="handleUploadSuccess"  v-model="gallery"/>-->
+                    <div class="clearfix">
+                        <a-upload
+                            v-model:file-list="gallery"
+                            :action="API_URL+'medias'"
+                            list-type="picture-card"
+                            @preview="handlePreview"
+                            :onChange="handleUploadSuccess"
+
+                        >
+                            <div>
+                                <plus-outlined/>
+                                <div style="margin-top: 8px">Upload</div>
+                            </div>
+                        </a-upload>
+                        <a-modal :visible="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
+                            <img alt="example" style="width: 100%" :src="previewImage"/>
+                        </a-modal>
+                    </div>
                 </div>
             </div>
         </a-card>
@@ -24,12 +43,14 @@
 import {ref, reactive, toRefs} from "vue";
 import {useMenu} from "../../../store/use-menu.js";
 import {useRouter, useRoute} from "vue-router";
-import {getEndpoint} from "../../../configs";
+import {getEndpoint, MEDIA_URL} from "../../../configs";
 import {message} from "ant-design-vue";
 import HeaderForm from "../../../components/form/HeaderForm.vue";
 import Input from "../../../components/form/Input.vue";
 import Select from "../../../components/form/Select.vue";
 import Upload from "../../../components/form/Upload.vue";
+import {API_URL} from "../../../configs";
+
 
 const module = 'posts';
 useMenu().onSelectedKeys([`admin-${module}`]);
@@ -39,28 +60,24 @@ const route = useRoute()
 const endpointDetail = getEndpoint(module, 'edit', route.params.id);
 const endpointUpdate = getEndpoint(module, null, route.params.id);
 
-const obj = reactive({
+const state = reactive({
     name: "",
     code: "",
     status: 1,
-    gallery: [
-        //     {
-        //     uid: '-1',
-        //     name: 'image.png',
-        //     status: 'done',
-        //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        // }
-    ]
+    gallery: [],
+    previewImage: '',
+    previewVisible: false,
+    previewTitle: '',
 })
 
 const errors = ref({})
 
 const handleUploadSuccess = (files) => {
     console.log(files, 33322)
-    const newFiles = files.map((file) => {
+    const newFiles = files.fileList.map((file) => {
         return file?.response?.result
     })
-    obj.files = newFiles;
+    state.files = newFiles;
     console.log(newFiles, 8888);
 }
 
@@ -68,16 +85,16 @@ const getDetail = async () => {
     try {
         const res = await axios.get(endpointDetail);
         if (res.data.result) {
-            Object.keys(obj).forEach(field => {
-                obj[field] = res.data.result[field]
+            Object.keys(state).forEach(field => {
+                state[field] = res.data.result[field]
             })
-            // const gallery = res.data.result.gallery.map(media => ({
-            //     ...media,
-            //     uid: '-1',
-            //     status: 'done'
-            // }));
-            // obj.gallery =gallery;
-            console.log(obj, 333)
+            const gallery = res.data.result.gallery.map(media => ({
+                ...media,
+                id: media.response?.result?.id || media.id,
+                url: `${MEDIA_URL}storage/uploads/${media.url}`
+            }));
+            // state.gallery = gallery;
+            console.log(state, 333)
         } else {
             console.log(res)
         }
@@ -89,9 +106,9 @@ const handleUpdate = async () => {
     try {
         let res;
         if (route.params.id) {
-            res = await axios.put(endpointUpdate, obj);
+            res = await axios.put(endpointUpdate, state);
         } else {
-            res = await axios.post(endpointUpdate, obj);
+            res = await axios.post(endpointUpdate, state);
         }
         await router.push({name: `admin-${module}`})
         message.success('Thành công')
@@ -103,6 +120,29 @@ const handleUpdate = async () => {
 }
 
 getDetail();
-const {name, code, value, status, gallery} = {...toRefs(obj)};
+const {name, code, value, status, gallery, previewImage, previewVisible, previewTitle} = {...toRefs(state)};
+
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
+
+const handleCancel = () => {
+    state.previewVisible = false;
+};
+
+const handlePreview = async file => {
+    if (!file.url && !file.preview) {
+        file.preview = await getBase64(file.originFileObj);
+    }
+
+    state.previewImage = file.url || file.preview;
+    state.previewVisible = true;
+    state.previewTitle = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
+};
 
 </script>
