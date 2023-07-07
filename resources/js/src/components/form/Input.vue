@@ -22,7 +22,6 @@
 <script setup>
 
 const props = defineProps(['modelValue', 'placeholder', 'error_mes', 'label']);
-
 defineEmits(['update:modelValue'])
 
 </script>

@@ -32,6 +32,7 @@ const previewVisible = ref(false);
 const previewImage = ref('');
 const previewTitle = ref('');
 const fileList = ref(props.files || []);
+console.log(props.files ,5555)
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {

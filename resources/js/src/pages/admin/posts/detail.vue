@@ -13,7 +13,7 @@
                     <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
                 </div>
                 <div class="col-md-6">
-                    <Upload @upload-success="handleUploadSuccess" :files="files"/>
+                    <Upload @upload-success="handleUploadSuccess"  v-model:files="gallery"/>
                 </div>
             </div>
         </a-card>
@@ -43,12 +43,13 @@ const obj = reactive({
     name: "",
     code: "",
     status: 1,
-    gallery: [{
-        uid: '-1',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    }
+    gallery: [
+        //     {
+        //     uid: '-1',
+        //     name: 'image.png',
+        //     status: 'done',
+        //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        // }
     ]
 })
 
@@ -70,6 +71,13 @@ const getDetail = async () => {
             Object.keys(obj).forEach(field => {
                 obj[field] = res.data.result[field]
             })
+            // const gallery = res.data.result.gallery.map(media => ({
+            //     ...media,
+            //     uid: '-1',
+            //     status: 'done'
+            // }));
+            // obj.gallery =gallery;
+            console.log(obj, 333)
         } else {
             console.log(res)
         }
@@ -77,7 +85,6 @@ const getDetail = async () => {
         console.log(err)
     }
 }
-
 const handleUpdate = async () => {
     try {
         let res;
@@ -96,6 +103,6 @@ const handleUpdate = async () => {
 }
 
 getDetail();
-const {name, code, value, status, files} = {...toRefs(obj)};
+const {name, code, value, status, gallery} = {...toRefs(obj)};
 
 </script>

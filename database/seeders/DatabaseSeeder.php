@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        DB::table('medias')->insert(['name' => 1, 'url' => 1]);
+        DB::table('medias')->insert(['name' => 1, 'url' => 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png']);
         DB::table('medias')->insert(['name' => 2, 'url' => 2]);
 
         DB::table('posts_gallery')->insert([
