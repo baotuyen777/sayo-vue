@@ -43,15 +43,15 @@
 import {ref, reactive, toRefs} from "vue";
 import {useMenu} from "../../../store/use-menu.js";
 import {useRouter, useRoute} from "vue-router";
-import {getEndpoint, MEDIA_URL} from "../../../configs";
+import {getEndpoint} from "../../../configs";
 import {message} from "ant-design-vue";
 import HeaderForm from "../../../components/form/HeaderForm.vue";
 import Input from "../../../components/form/Input.vue";
 import Select from "../../../components/form/Select.vue";
 import Upload from "../../../components/form/Upload.vue";
-import {API_URL} from "../../../configs";
+// import {API_URL} from "../../../configs";
 
-
+const API_URL = window.configValues.API_URL
 const module = 'posts';
 useMenu().onSelectedKeys([`admin-${module}`]);
 const router = useRouter()
@@ -75,7 +75,7 @@ const errors = ref({})
 const handleUploadSuccess = (files) => {
     console.log(files, 33322)
     const newFiles = files.fileList.map((file) => {
-        return file?.response?.result
+        return file?.response?.result || file
     })
     state.files = newFiles;
     console.log(newFiles, 8888);
@@ -91,7 +91,7 @@ const getDetail = async () => {
             const gallery = res.data.result.gallery.map(media => ({
                 ...media,
                 id: media.response?.result?.id || media.id,
-                url: `${MEDIA_URL}storage/uploads/${media.url}`
+                url: `${window.configValues.MEDIA_URL}storage/uploads/${media.url}`
             }));
             // state.gallery = gallery;
             console.log(state, 333)

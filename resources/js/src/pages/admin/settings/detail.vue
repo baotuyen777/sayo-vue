@@ -29,7 +29,7 @@ import {message} from "ant-design-vue";
 import Input from "../../../components/form/Input.vue";
 import HeaderForm from "../../../components/form/HeaderForm.vue";
 import Select from "../../../components/form/Select.vue";
-import {API_URL, getEndpoint} from "../../../configs/";
+import {getEndpoint} from "../../../configs/";
 
 export default defineComponent({
     components: {Select, HeaderForm, Input},

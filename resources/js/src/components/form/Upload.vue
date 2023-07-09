@@ -2,7 +2,7 @@
     <div class="clearfix">
         <a-upload
             v-model:file-list="fileList"
-            :action="API_URL+'medias'"
+            :action="window.configValues.API_URL+'medias'"
             list-type="picture-card"
             @preview="handlePreview"
             :onChange="handleOnchange"
@@ -22,7 +22,6 @@
 <script setup>
 import {PlusOutlined} from '@ant-design/icons-vue';
 import {ref} from 'vue';
-import {API_URL} from "../../configs";
 
 const props = defineProps(['files','modelValue'])
 const emit = defineEmits([]);

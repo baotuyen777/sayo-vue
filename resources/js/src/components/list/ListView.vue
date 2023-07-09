@@ -46,7 +46,6 @@
 <script setup>
 import {ref} from "vue";
 import HeaderList from "./HeaderList.vue";
-import {API_URL, MEDIA_URL} from "@/src/configs/index.js";
 
 const props = defineProps(['module', 'title', 'columns']);
 const objs = ref({});
@@ -56,7 +55,7 @@ const isLoading = ref(false);
 const getList = async (params) => {
     isLoading.value = true;
     try {
-        const res = await axios.get(`${API_URL}${props.module}`, {params})
+        const res = await axios.get(`${window.configValues.API_URL}${props.module}`, {params})
         objs.value = res.data;
         currentPage.value = res.data.current_page
         console.log(currentPage)
@@ -68,7 +67,7 @@ const getList = async (params) => {
 }
 
 const handleDelele = async (id) => {
-    const res = await axios.delete(`${API_URL}${props.module}/${id}`);
+    const res = await axios.delete(`${window.configValues.API_URL}${props.module}/${id}`);
     console.log(res);
     await getList()
 }

@@ -38,12 +38,12 @@ const routes = [
     },
     adminRoutes
 ];
-const BASE_URL='http://localhost:8000/'
-export const API_URL = BASE_URL+'api/';
-export const MEDIA_URL =BASE_URL+'storage/'
+// const BASE_URL='http://localhost:8000/'
+// export const API_URL = BASE_URL+'api/';
+// export const MEDIA_URL = BASE_URL+'storage/'
 export const getEndpoint = (module, action = '', params = '') => {
     const paramUrl = params ? `/${params}` : '';
     const actionUrl = action ? action : (!params ? 'create': '')
-    return `${API_URL}${module}${paramUrl}/${actionUrl}`;
+    return `${window.configValues.API_URL}${module}${paramUrl}/${actionUrl}`;
 }
 export default routes;
