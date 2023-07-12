@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Posts extends Model
 {
     use HasFactory;
+
 //    protected $table ='posts';
     protected $appends = ['category_name'];
     protected $primaryKey = 'id';
+
     public function category()
     {
         return $this->belongsTo(Categories::class);
@@ -28,7 +30,9 @@ class Posts extends Model
 
     public function gallery()
     {
-        return $this->belongsToMany(Medias::class,'posts_gallery');
+        return $this->belongsToMany(Medias::class, 'posts_gallery')
+            ->select(['medias.*'])
+            ->selectRaw('CONCAT("' .  env('MEDIA_URL') . '", medias.url) as url');
     }
 
 }

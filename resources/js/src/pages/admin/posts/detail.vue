@@ -73,12 +73,10 @@ const state = reactive({
 const errors = ref({})
 
 const handleUploadSuccess = (files) => {
-    console.log(files, 33322)
-    const newFiles = files.fileList.map((file) => {
-        return file?.response?.result || file
+    const mediaIds = files.fileList.map((file) => {
+        return file?.response?.result?.id || file?.id
     })
-    state.files = newFiles;
-    console.log(newFiles, 8888);
+    state.media_ids = mediaIds;
 }
 
 const getDetail = async () => {
@@ -88,13 +86,12 @@ const getDetail = async () => {
             Object.keys(state).forEach(field => {
                 state[field] = res.data.result[field]
             })
-            const gallery = res.data.result.gallery.map(media => ({
-                ...media,
-                id: media.response?.result?.id || media.id,
-                url: `${window.configValues.MEDIA_URL}storage/uploads/${media.url}`
-            }));
+            // const gallery = res.data.result.gallery.map(media => ({
+            //     ...media,
+            //     // id: media.response?.result?.id || media.id,
+            //     url: `${window.configValues.MEDIA_URL}${media.url}`
+            // }));
             // state.gallery = gallery;
-            console.log(state, 333)
         } else {
             console.log(res)
         }
