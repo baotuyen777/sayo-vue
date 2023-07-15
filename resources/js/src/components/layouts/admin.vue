@@ -5,7 +5,7 @@
             <div class="col-sm-3">
                 <a-list bordered style="width:100%">
                     <template #header>
-                        <div>Bảng điều khiển</div>
+                        Bảng điều khiển
                     </template>
                     <TheMenu/>
                 </a-list>
@@ -19,8 +19,8 @@
 
 </template>
 <script>
-import TheHeader from "../list/TheHeader.vue";
-import TheMenu from "../list/TheMenu.vue";
+import TheHeader from "./TheHeader.vue";
+import TheMenu from "./TheMenu.vue";
 
 export default {
     components: {

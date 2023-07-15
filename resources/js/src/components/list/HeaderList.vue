@@ -3,12 +3,12 @@
         <div class="col-4 d-flex  gap-2">
             <a-button type="primary" class="mr-10">
                 <router-link :to="{name:`admin-${module}-create`}">
-                    <font-awesome-icon :icon="['fas', 'plus']"/>
+                    <i class="fa-solid fa-plus"></i>
                 </router-link>
             </a-button>
             <a-button type="primary">
                 <router-link :to="{name:`admin-${module}-create`}">
-                    <font-awesome-icon :icon="['fas', 'file-excel']"/>
+                    <i class="fa-solid fa-file-excel"></i>
                 </router-link>
             </a-button>
 
@@ -18,14 +18,12 @@
             <!--                </router-link>-->
             <!--            </a-button>-->
             <a-button type="primary" @click="handleSearch">
-                <!--                <router-link :to="{name:'admin-users-create'}">-->
-                <font-awesome-icon :icon="['fas', 'rotate']"/>
-                <!--                </router-link>-->
+                <i class="fa-solid fa-rotate"></i>
             </a-button>
         </div>
 
         <div class="col-8 d-flex justify-content-end">
-            <span class="d-inline-block mt-1 me-3">Tổng: {{objs.to}}/{{objs.total}}</span>
+            <span class="d-inline-block mt-1 me-3">Tổng: {{ objs.to }}/{{ objs.total }}</span>
             <a-input-search
                 placeholder="input search text"
                 style="width: 200px"
@@ -36,20 +34,17 @@
     </div>
 </template>
 
-<script>
-import {defineComponent, ref} from "vue";
+<script setup>
 
-export default defineComponent({
-    props: ['module', 'getList', 'objs'],
-    setup(props) {
-        console.log(props)
+import {ref} from "vue";
 
-        return {}
-    },
-    methods: {
-        handleSearch(searchValue) {
-            this.$emit('getList', {s: this.value});
-        }
-    }
-})
+const props = defineProps(['module', 'getList', 'objs']);
+const emit = defineEmits([]);
+const value = ref('')
+console.log(props)
+
+const handleSearch = () => {
+    emit('getList', {s: value.value});
+}
+
 </script>

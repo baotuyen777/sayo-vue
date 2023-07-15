@@ -5,7 +5,7 @@
             <a-skeleton v-if="isLoading"/>
             <a-table :columns="columns"
                      :data-source="objs.data" :scroll="{x:576}"
-                     :pagination="{current:currentPage,total:6,pageSize:5}"
+                     :pagination="pagination"
                      @change="onChange"
                      v-if="!isLoading"
             >
@@ -16,7 +16,7 @@
 
                     <template v-if="column.key === 'status'">
                         <span v-if="record.status_id===1" class="text-primary">Hoạt động</span>
-                        <span v-if="record.status_id!=1" class="text-danger">Tạm khóa</span>
+                        <span v-if="record.status_id!==1" class="text-danger">Tạm khóa</span>
                     </template>
 
                     <template v-if="column.key === 'media'">
@@ -27,11 +27,11 @@
                         <div class="action-column">
                             <router-link :to="{name:'admin-'+module+'-edit', params:{id:record.id}}">
                                 <a-button type="primary">
-                                    <font-awesome-icon :icon="['fas', 'pen-to-square']"/>
+                                    <i class="fa-solid fa-pen-to-square"></i>
                                 </a-button>
                             </router-link>
                             <a-button type="primary" danger :onclick="()=>handleDelele(record.id)">
-                                <font-awesome-icon :icon="['fas', 'fa-trash']"/>
+                                <i class="fa-solid fa-trash"></i>
                             </a-button>
                         </div>
 
@@ -44,21 +44,25 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 import HeaderList from "./HeaderList.vue";
 
 const props = defineProps(['module', 'title', 'columns']);
+
 const objs = ref({});
-const currentPage = ref(1)
 const isLoading = ref(false);
+const MEDIA_URL = window.configValues.MEDIA_URL
+const pagination = reactive({current: 1, total: 0, pageSize: 5})
 
 const getList = async (params) => {
     isLoading.value = true;
     try {
         const res = await axios.get(`${window.configValues.API_URL}${props.module}`, {params})
         objs.value = res.data;
-        currentPage.value = res.data.current_page
-        console.log(currentPage)
+
+        pagination.current = res.data.current_page
+        pagination.total = res.data.total
+        pagination.pageSize = res.data.per_page
     } catch (err) {
         console.log(err)
     }
@@ -73,7 +77,8 @@ const handleDelele = async (id) => {
 }
 
 const onChange = (pagination) => {
-    getList({page: pagination.current})
+    console.log(pagination, 33);
+    getList(pagination)
 }
 
 getList();

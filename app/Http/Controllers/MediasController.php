@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class MediasController extends Controller
+class MediasController extends CommonController
 {
     protected string $module = 'medias';
 

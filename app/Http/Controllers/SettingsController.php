@@ -12,12 +12,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class SettingsController extends Controller
+class SettingsController extends CommonController
 {
 
     public function __construct(BaseServices $baseServices)
     {
-        $this->baseServices = $baseServices;
+        parent::__construct($baseServices);
+//        $this->baseServices = $baseServices;
         $this->module = 'settings';
     }
     /**

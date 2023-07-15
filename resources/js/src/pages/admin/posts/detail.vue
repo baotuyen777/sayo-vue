@@ -13,27 +13,12 @@
                     <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
                 </div>
                 <div class="col-md-6">
-                    <!--                    <Upload @upload-success="handleUploadSuccess"  v-model:files="gallery"/>-->
-                    <!--                    <Upload @upload-success="handleUploadSuccess"  v-model="gallery"/>-->
-                    <div class="clearfix">
-                        <a-upload
-                            v-model:file-list="gallery"
-                            :action="API_URL+'medias'"
-                            list-type="picture-card"
-                            @preview="handlePreview"
-                            :onChange="handleUploadSuccess"
-
-                        >
-                            <div>
-                                <plus-outlined/>
-                                <div style="margin-top: 8px">Upload</div>
-                            </div>
-                        </a-upload>
-                        <a-modal :visible="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
-                            <img alt="example" style="width: 100%" :src="previewImage"/>
-                        </a-modal>
-                    </div>
+                    <Upload v-model="avatar" :show-upload-list="true"/>
                 </div>
+                <div class="col-md-6">
+                    <Upload v-model="gallery" :show-upload-list="true"/>
+                </div>
+
             </div>
         </a-card>
     </form>
@@ -49,9 +34,7 @@ import HeaderForm from "../../../components/form/HeaderForm.vue";
 import Input from "../../../components/form/Input.vue";
 import Select from "../../../components/form/Select.vue";
 import Upload from "../../../components/form/Upload.vue";
-// import {API_URL} from "../../../configs";
 
-const API_URL = window.configValues.API_URL
 const module = 'posts';
 useMenu().onSelectedKeys([`admin-${module}`]);
 const router = useRouter()
@@ -64,34 +47,29 @@ const state = reactive({
     name: "",
     code: "",
     status: 1,
-    gallery: [],
     previewImage: '',
     previewVisible: false,
     previewTitle: '',
+    gallery: [],
+    media_ids: [],
+    avatar: [],
+    avatar_id: [],
 })
 
 const errors = ref({})
 
-const handleUploadSuccess = (files) => {
-    const mediaIds = files.fileList.map((file) => {
-        return file?.response?.result?.id || file?.id
-    })
-    state.media_ids = mediaIds;
-}
-
 const getDetail = async () => {
     try {
         const res = await axios.get(endpointDetail);
-        if (res.data.result) {
+        const result = res.data.result
+        if (result) {
             Object.keys(state).forEach(field => {
                 state[field] = res.data.result[field]
             })
-            // const gallery = res.data.result.gallery.map(media => ({
-            //     ...media,
-            //     // id: media.response?.result?.id || media.id,
-            //     url: `${window.configValues.MEDIA_URL}${media.url}`
-            // }));
-            // state.gallery = gallery;
+
+            state.avatar = result.avatar ? [result.avatar] : []
+            state.gallery = result.gallery
+            console.log(state,444)
         } else {
             console.log(res)
         }
@@ -99,17 +77,31 @@ const getDetail = async () => {
         console.log(err)
     }
 }
+
 const handleUpdate = async () => {
     try {
-        let res;
-        if (route.params.id) {
-            res = await axios.put(endpointUpdate, state);
-        } else {
-            res = await axios.post(endpointUpdate, state);
+        const formData = {...state}
+        if (state.gallery) {
+            formData.media_ids = state.gallery.map((file) => {
+                return file?.response?.result?.id || file?.id
+            })
+
+            delete formData.gallery;
         }
-        await router.push({name: `admin-${module}`})
+
+        if (state.avatar) {
+            const avatar = state.avatar[state.avatar.length - 1]
+            formData.avatar_id = avatar?.response?.result?.id || avatar?.id
+
+            delete formData.avatar;
+        }
+        if (route.params.id) {
+            await axios.put(endpointUpdate, formData);
+        } else {
+            await axios.post(endpointUpdate, formData);
+        }
+        // await router.push({name: `admin-${module}`})
         message.success('Thành công')
-        console.log(res, 222);
     } catch (err) {
         console.log(err)
         errors.value = err.response.data.errors;
@@ -117,29 +109,7 @@ const handleUpdate = async () => {
 }
 
 getDetail();
-const {name, code, value, status, gallery, previewImage, previewVisible, previewTitle} = {...toRefs(state)};
 
-function getBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
-}
-
-const handleCancel = () => {
-    state.previewVisible = false;
-};
-
-const handlePreview = async file => {
-    if (!file.url && !file.preview) {
-        file.preview = await getBase64(file.originFileObj);
-    }
-
-    state.previewImage = file.url || file.preview;
-    state.previewVisible = true;
-    state.previewTitle = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
-};
+const {name, code, value, status, gallery, avatar} = {...toRefs(state)};
 
 </script>

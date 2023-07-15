@@ -1,12 +1,12 @@
 <template>
     <div class="clearfix">
         <a-upload
-            v-model:file-list="fileList"
-            :action="window.configValues.API_URL+'medias'"
+            :action="UploadUrl"
             list-type="picture-card"
             @preview="handlePreview"
-            :onChange="handleOnchange"
-
+            :file-list="modelValue"
+            @change="handleChange"
+            :show-upload-list="showUploadList"
         >
             <div>
                 <plus-outlined/>
@@ -23,15 +23,17 @@
 import {PlusOutlined} from '@ant-design/icons-vue';
 import {ref} from 'vue';
 
-const props = defineProps(['files','modelValue'])
+const props = defineProps(['modelValue', 'showUploadList'])
+
 const emit = defineEmits([]);
+
+const UploadUrl = window.configValues.API_URL + 'medias';
 
 
 const previewVisible = ref(false);
 const previewImage = ref('');
 const previewTitle = ref('');
-const fileList = ref(props.files || []);
-// console.log(fileList ,5555)
+
 function getBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -56,18 +58,11 @@ const handlePreview = async file => {
     previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
 };
 
-const handleOnchange = (res) => {
-    const {status, response} = res.file;
-    if (status === 'done') {
-        console.log(res.fileList);
-        // emit('update:modelValue', res.fileList)
-        emit('upload-success', res.fileList)
-    } else if (status === 'error') {
-        // Handle upload error
-        console.log('Upload error:', res.file.error);
-    }
-
+const handleChange = (res) => {
+    console.log(res.file.status, 33323)
+    // if (res.file.status === 'done') {
+        emit("update:modelValue", res.fileList)
+    // }
 }
-
 
 </script>
