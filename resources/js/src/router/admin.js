@@ -31,6 +31,7 @@ export const adminRoutes = {
         ...renderModuleRouter('orders'),
         ...renderModuleRouter('posts'),
         ...renderModuleRouter('medias'),
+        ...renderModuleRouter('pdws'),
 
     ]
 };

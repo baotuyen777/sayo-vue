@@ -1,21 +1,30 @@
 <template>
-    <div class="clearfix">
-        <a-upload
-            :action="UploadUrl"
-            list-type="picture-card"
-            @preview="handlePreview"
-            :file-list="modelValue"
-            @change="handleChange"
-            :show-upload-list="showUploadList"
-        >
-            <div>
-                <plus-outlined/>
-                <div style="margin-top: 8px">Upload</div>
+    <div :class="classWrapper || 'mb-3 mt-3 col-md-6'">
+        <div class="form-item">
+            <label>
+                <span class="text-danger me-1">*</span>
+                <span :class="{'text-danger': error_mes}">{{ label }}</span>
+            </label>
+
+            <div class="form-control">
+                <a-upload
+                    :action="UploadUrl"
+                    list-type="picture-card"
+                    @preview="handlePreview"
+                    :file-list="modelValue"
+                    @change="handleChange"
+                    :show-upload-list="showUploadList"
+                >
+                    <div>
+                        <plus-outlined/>
+                        <div style="margin-top: 8px">Upload</div>
+                    </div>
+                </a-upload>
+                <a-modal :visible="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
+                    <img alt="example" style="width: 100%" :src="previewImage"/>
+                </a-modal>
             </div>
-        </a-upload>
-        <a-modal :visible="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
-            <img alt="example" style="width: 100%" :src="previewImage"/>
-        </a-modal>
+        </div>
     </div>
 </template>
 
@@ -23,12 +32,11 @@
 import {PlusOutlined} from '@ant-design/icons-vue';
 import {ref} from 'vue';
 
-const props = defineProps(['modelValue', 'showUploadList'])
-
+const props = defineProps(['modelValue', 'showUploadList', 'label', 'error_mes', 'classWrapper'])
+console.log(props.label, 333)
 const emit = defineEmits([]);
 
 const UploadUrl = window.configValues.API_URL + 'medias';
-
 
 const previewVisible = ref(false);
 const previewImage = ref('');
@@ -59,10 +67,7 @@ const handlePreview = async file => {
 };
 
 const handleChange = (res) => {
-    console.log(res.file.status, 33323)
-    // if (res.file.status === 'done') {
-        emit("update:modelValue", res.fileList)
-    // }
+    emit("update:modelValue", res.fileList)
 }
 
 </script>

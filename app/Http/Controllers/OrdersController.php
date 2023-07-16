@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class OrdersController extends Controller
+class OrdersController extends CommonController
 {
     protected string $module = 'orders';
     public function index(Request $request)

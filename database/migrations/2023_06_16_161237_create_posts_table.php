@@ -16,14 +16,22 @@ return new class extends Migration {
             $table->string('code')->unique();
             $table->text('content')->nullable();
             $table->integer('status')->default(1);
+            $table->integer('price')->default(0);
+            $table->string('address')->default(0);
+
+            $table->unsignedBigInteger('ward_id')->nullable();
+            $table->foreign('ward_id')->references('id')->on('pdws')->onDelete('cascade');
 
             $table->unsignedBigInteger('avatar_id')->nullable();
+            $table->foreign('avatar_id')->references('id')->on('medias')->onDelete('cascade');
+
             $table->unsignedBigInteger('video_id')->nullable();
+
             $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('avatar_id')->references('id')->on('medias')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -7,26 +7,23 @@
             </label>
 
             <div class="form-control">
-                <a-input
+                <a-textarea
                     :placeholder="placeholder || label"
                     :value="modelValue"
                     @input="$emit('update:modelValue', $event.target.value)"
                     :class="{'input-danger':error_mes}"
                     allow-clear
-                    type="type|| 'text'"
                 />
 
                 <small v-if="error_mes" class="text-danger">{{ error_mes[0] }}</small>
             </div>
         </div>
     </div>
-
 </template>
 
 <script setup>
 
-const props = defineProps(['modelValue', 'placeholder', 'error_mes', 'label', 'type', 'classWrapper']);
-
+const props = defineProps(['modelValue', 'placeholder', 'error_mes', 'label', 'classWrapper']);
 defineEmits(['update:modelValue'])
 
 </script>

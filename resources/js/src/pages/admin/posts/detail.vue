@@ -1,23 +1,20 @@
 <template>
     <form @submit.prevent="handleUpdate()">
         <a-card title="Tạo mới tài khoản" style="width: 100%">
-            <HeaderForm :module="module"/>
+            <HeaderForm :module="module" @handleReload="getDetail"/>
             <div class="row">
-                <div class="mb-3 mt-3 col-md-6">
-                    <Input label="Tên" :error_mes="errors?.name" v-model="name"/>
-                </div>
-                <div class="mb-3 mt-3 col-md-6">
-                    <Input label="Mã" :error_mes="errors?.code" v-model="code"/>
-                </div>
-                <div class="mb-3 mt-3 col-md-6">
-                    <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
-                </div>
-                <div class="col-md-6">
-                    <Upload v-model="avatar" :show-upload-list="true"/>
-                </div>
-                <div class="col-md-6">
-                    <Upload v-model="gallery" :show-upload-list="true"/>
-                </div>
+                <Input label="Tiêu đề" :error_mes="errors?.name" v-model="name"/>
+                <Input label="Mã" :error_mes="errors?.code" v-model="code"/>
+                <Input label="Giá bán" :error_mes="errors?.price" v-model="price"/>
+                <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
+                <Select label="Danh mục" v-model="category_id" :error_mes="errors?.categories"
+                        :options="categories"/>
+                <Input label="Tỉnh/Thành phố" v-model="province_id" :error_mes="errors?.province_id"
+                       :options="provinces"/>
+                <Input label="Địa chỉ" v-model="address" :error_mes="errors?.address"/>
+                <TextArea label="Mô tả chi tiết" v-model="category_id" :error_mes="errors?.category_id"/>
+                <Upload label="Avatar" v-model="avatar" :show-upload-list="true" :error_mes="errors?.avatar"/>
+                <Upload label="Bộ sưu tập" v-model="gallery"/>
 
             </div>
         </a-card>
@@ -34,6 +31,7 @@ import HeaderForm from "../../../components/form/HeaderForm.vue";
 import Input from "../../../components/form/Input.vue";
 import Select from "../../../components/form/Select.vue";
 import Upload from "../../../components/form/Upload.vue";
+import TextArea from "../../../components/form/TextArea.vue";
 
 const module = 'posts';
 useMenu().onSelectedKeys([`admin-${module}`]);
@@ -43,22 +41,33 @@ const route = useRoute()
 const endpointDetail = getEndpoint(module, 'edit', route.params.id);
 const endpointUpdate = getEndpoint(module, null, route.params.id);
 
+const isLoading = ref(false);
+
 const state = reactive({
     name: "",
     code: "",
     status: 1,
-    previewImage: '',
-    previewVisible: false,
-    previewTitle: '',
+    price: 0,
+    category_id: null,
     gallery: [],
     media_ids: [],
     avatar: [],
     avatar_id: [],
+    province_id: null,
+    district_id: null,
+    ward_id: null,
+    address: '',
 })
+const expand = reactive({
+    categories: [],
+    provinces: []
+})
+
 
 const errors = ref({})
 
 const getDetail = async () => {
+    isLoading.value = true;
     try {
         const res = await axios.get(endpointDetail);
         const result = res.data.result
@@ -69,13 +78,16 @@ const getDetail = async () => {
 
             state.avatar = result.avatar ? [result.avatar] : []
             state.gallery = result.gallery
-            console.log(state,444)
+
+            expand.categories = res.data.expand.categories;
         } else {
             console.log(res)
         }
     } catch (err) {
         console.log(err)
     }
+
+    isLoading.value = false;
 }
 
 const handleUpdate = async () => {
@@ -100,6 +112,7 @@ const handleUpdate = async () => {
         } else {
             await axios.post(endpointUpdate, formData);
         }
+
         // await router.push({name: `admin-${module}`})
         message.success('Thành công')
     } catch (err) {
@@ -110,6 +123,20 @@ const handleUpdate = async () => {
 
 getDetail();
 
-const {name, code, value, status, gallery, avatar} = {...toRefs(state)};
+const {
+    name,
+    code,
+    value,
+    status,
+    gallery,
+    avatar,
+    category_id,
+    price,
+    province_id,
+    district_id,
+    ward_id,
+    address
+} = {...toRefs(state)};
+const {categories, provinces} = {...toRefs(expand)}
 
 </script>

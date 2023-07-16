@@ -6,13 +6,14 @@ use App\Services\BaseServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CategoriesController extends Controller
+class CategoriesController extends CommonController
 {
-    public function __construct(BaseServices $baseServices)
-    {
-        $this->baseServices = $baseServices;
-        $this->module = 'categories';
-    }
+    protected string $module = 'categories';
+//    public function __construct(BaseServices $baseServices)
+//    {
+//        parent::__construct($baseServices);
+//        $this->module = 'categories';
+//    }
 
     public function store(Request $request)
     {

@@ -4,21 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RolesController extends Controller
+class RolesController extends CommonController
 {
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
+    protected string $module='roles';
 
 }

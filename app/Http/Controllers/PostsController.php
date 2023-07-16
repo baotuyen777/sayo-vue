@@ -32,6 +32,8 @@ class PostsController extends Controller
 
     public function edit($id)
     {
+        $categories = DB::table('categories')->select('id as value', 'name as label')->get();
+
         $obj = Posts::with('gallery')
             ->with('avatar')
             ->with('category')
@@ -39,6 +41,9 @@ class PostsController extends Controller
 
         return response()->json([
             'result' => $obj,
+            'expand' => [
+                'categories' => $categories,
+            ],
             'status' => true
         ]);
     }

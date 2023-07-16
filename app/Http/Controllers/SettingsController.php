@@ -14,13 +14,12 @@ use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends CommonController
 {
-
-    public function __construct(BaseServices $baseServices)
-    {
-        parent::__construct($baseServices);
-//        $this->baseServices = $baseServices;
-        $this->module = 'settings';
-    }
+    protected string $module = 'pdws';
+//    public function __construct(BaseServices $baseServices)
+//    {
+//        parent::__construct($baseServices);
+//        $this->module = 'settings';
+//    }
     /**
      * Display a listing of the resource.
      */
@@ -67,7 +66,6 @@ class SettingsController extends CommonController
         $res = Settings::find($id);
         return response()->json(['status' => true, 'result' => $res]);
     }
-
 
 
 }
