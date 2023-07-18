@@ -22,6 +22,12 @@ return new class extends Migration {
             $table->unsignedBigInteger('ward_id')->nullable();
             $table->foreign('ward_id')->references('id')->on('pdws')->onDelete('cascade');
 
+            $table->unsignedBigInteger('district_id')->nullable();
+            $table->foreign('district_id')->references('id')->on('pdws')->onDelete('cascade');
+
+            $table->unsignedBigInteger('province_id')->nullable();
+            $table->foreign('province_id')->references('id')->on('pdws')->onDelete('cascade');
+
             $table->unsignedBigInteger('avatar_id')->nullable();
             $table->foreign('avatar_id')->references('id')->on('medias')->onDelete('cascade');
 
@@ -42,7 +48,14 @@ return new class extends Migration {
      */
     public function down(): void
     {
-
+        Schema::table('posts', function (Blueprint $table) {
+             $table->dropForeign(['ward_id']);
+             $table->dropForeign(['district_id']);
+             $table->dropForeign(['province_id']);
+             $table->dropForeign(['avatar_id']);
+             $table->dropForeign(['category_id']);
+             $table->dropForeign(['user_id']);
+        });
         Schema::dropIfExists('posts');
     }
 };

@@ -23,9 +23,11 @@ class PostsSeeder extends Seeder
                 'category_id' => 1,
 //                'avatar_id' => 1,
                 'user_id' => 1,
+                'ward_id' => 5,
+                'district_id' => 2,
+                'province_id' => 1,
             ]);
         }
-
 
 
     }

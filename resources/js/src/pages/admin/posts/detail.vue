@@ -4,17 +4,20 @@
             <HeaderForm :module="module" @handleReload="getDetail"/>
             <div class="row">
                 <Input label="Tiêu đề" :error_mes="errors?.name" v-model="name"/>
-                <Input label="Mã" :error_mes="errors?.code" v-model="code"/>
                 <Input label="Giá bán" :error_mes="errors?.price" v-model="price"/>
                 <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
                 <Select label="Danh mục" v-model="category_id" :error_mes="errors?.categories"
                         :options="categories"/>
-                <Input label="Tỉnh/Thành phố" v-model="province_id" :error_mes="errors?.province_id"
+                <Select label="Tỉnh/Thành phố" v-model="province_id" :error_mes="errors?.province_id"
                        :options="provinces"/>
+                <Select label="Quận/Huyện" v-model="district_id" :error_mes="errors?.district_id"
+                        :options="districts"/>
+                <Select label="Phường/Xã" v-model="ward_id" :error_mes="errors?.pdws_id"
+                        :options="wards"/>
                 <Input label="Địa chỉ" v-model="address" :error_mes="errors?.address"/>
                 <TextArea label="Mô tả chi tiết" v-model="category_id" :error_mes="errors?.category_id"/>
-                <Upload label="Avatar" v-model="avatar" :show-upload-list="true" :error_mes="errors?.avatar"/>
-                <Upload label="Bộ sưu tập" v-model="gallery"/>
+                <Upload label="Avatar" v-model="avatar" :show-upload-list="true" :error_mes="errors?.avatar_id"/>
+                <Upload label="Bộ sưu tập" v-model="gallery"  :error_mes="errors?.media_ids"/>
 
             </div>
         </a-card>
@@ -60,9 +63,10 @@ const state = reactive({
 })
 const expand = reactive({
     categories: [],
-    provinces: []
+    provinces: [],
+    districts: [],
+    wards: [],
 })
-
 
 const errors = ref({})
 
@@ -79,7 +83,10 @@ const getDetail = async () => {
             state.avatar = result.avatar ? [result.avatar] : []
             state.gallery = result.gallery
 
-            expand.categories = res.data.expand.categories;
+            Object.keys(res.data.expand).forEach(field=>{
+                expand[field] = res.data.expand[field]
+            })
+            console.log(state,22222)
         } else {
             console.log(res)
         }
@@ -89,6 +96,8 @@ const getDetail = async () => {
 
     isLoading.value = false;
 }
+
+getDetail();
 
 const handleUpdate = async () => {
     try {
@@ -116,12 +125,10 @@ const handleUpdate = async () => {
         // await router.push({name: `admin-${module}`})
         message.success('Thành công')
     } catch (err) {
-        console.log(err)
+        console.log(err.response.data.errors,1111)
         errors.value = err.response.data.errors;
     }
 }
-
-getDetail();
 
 const {
     name,
@@ -137,6 +144,6 @@ const {
     ward_id,
     address
 } = {...toRefs(state)};
-const {categories, provinces} = {...toRefs(expand)}
+const {categories, provinces, districts, wards} = {...toRefs(expand)}
 
 </script>

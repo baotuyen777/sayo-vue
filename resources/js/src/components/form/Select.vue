@@ -9,7 +9,7 @@
             <div class="form-control">
                 <a-select
                     show-search
-                    placeholder="Tình trạng"
+                    :placeholder="placeholder || label"
                     :options="options"
                     :filter-option="filterOption"
                     :value="modelValue"
@@ -37,7 +37,6 @@ const props = defineProps({
     label: {},
 
 });
-
 defineEmits(['update:modelValue']);
 
 const filterOption = (input, option) => {

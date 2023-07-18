@@ -14,14 +14,16 @@ class PdwsSeeder extends Seeder
     public function run(): void
     {
         $rows = [
-            ['id' => 1, 'name' => 'Hà Nội', 'code' => 'hn'],
-            ['id' => 2, 'name' => 'Thanh Xuân', 'code' => 'hn-tx', 'parent_id' => 1],
-            ['id' => 3, 'name' => 'Đống Đa', 'code' => 'hn-dd', 'parent_id' => 1],
-            ['id' => 4, 'name' => 'TP. Hồ Chí Minh', 'code' => 'hcm'],
-            ['name' => 'Thanh Xuân Bắc', 'code' => 'hn-tx-txb', 'parent_id' => 2],
-            ['name' => 'Thanh Xuân Nam', 'code' => 'hn-tx-txn', 'parent_id' => 2],
-            ['name' => 'Trung Văn', 'code' => 'hn-tx-tv', 'parent_id' => 2],
-            ['name' => 'Nhân Chính', 'code' => 'hn-tx-nc', 'parent_id' => 2],
+            ['id' => 1, 'name' => 'Hà Nội', 'code' => 'hn', 'level' => 1],
+            ['id' => 2, 'name' => 'Thanh Xuân', 'code' => 'hn-tx', 'parent_id' => 1, 'level' => 2],
+
+            ['id' => 3, 'name' => 'Đống Đa', 'code' => 'hn-dd', 'parent_id' => 1, 'level' => 2],
+            ['id' => 4, 'name' => 'TP. Hồ Chí Minh', 'code' => 'hcm', 'level' => 1],
+
+            ['name' => 'Thanh Xuân Bắc', 'code' => 'hn-tx-txb', 'parent_id' => 2, 'level' => 3],
+            ['name' => 'Thanh Xuân Nam', 'code' => 'hn-tx-txn', 'parent_id' => 2, 'level' => 3],
+            ['name' => 'Trung Văn', 'code' => 'hn-tx-tv', 'parent_id' => 2, 'level' => 3],
+            ['name' => 'Nhân Chính', 'code' => 'hn-tx-nc', 'parent_id' => 2, 'level' => 3],
         ];
         foreach ($rows as $row) {
 //            array_merge($row, ['content' => '', 'parent_id' => 0, 'user_id' => 1]);

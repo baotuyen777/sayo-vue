@@ -33,16 +33,23 @@ class PostsController extends Controller
     public function edit($id)
     {
         $categories = DB::table('categories')->select('id as value', 'name as label')->get();
+        $provinces = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 1)->get();
+        $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
+        $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
 
         $obj = Posts::with('gallery')
             ->with('avatar')
             ->with('category')
+            ->with('pdws')
             ->find($id);
 
         return response()->json([
             'result' => $obj,
             'expand' => [
                 'categories' => $categories,
+                'provinces' => $provinces,
+                'districts' => $districts,
+                'wards' => $wards,
             ],
             'status' => true
         ]);

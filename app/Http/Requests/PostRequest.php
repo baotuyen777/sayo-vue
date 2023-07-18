@@ -23,9 +23,12 @@ class PostRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'code' => 'required',
+            'content' => 'required',
             'avatar_id' => 'required',
-            'media_ids' => 'required'
+            'media_ids' => 'required',
+            'category_id' => 'required',
+            'address' => 'required',
+
         ];
     }
 

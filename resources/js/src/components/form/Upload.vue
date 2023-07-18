@@ -23,6 +23,7 @@
                 <a-modal :visible="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
                     <img alt="example" style="width: 100%" :src="previewImage"/>
                 </a-modal>
+                <small v-if="error_mes" class="text-danger">{{ error_mes[0] }}</small>
             </div>
         </div>
     </div>
