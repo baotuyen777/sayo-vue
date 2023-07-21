@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function show($id)
     {
-        return Users::findOrFail($id);
+        return User::findOrFail($id);
     }
 
     public function index(Request $request)
@@ -22,7 +22,7 @@ class UserController extends Controller
         $pageSize = $request->input('page_size') ?? 5;
 //        return User::get();
         $rolesLabel = DB::raw('if(role < 3, "Staff", "Khách") as role_label');
-        $user = Users::join('departments', 'users.departments_id', '=', 'departments.id')
+        $user = User::join('departments', 'users.departments_id', '=', 'departments.id')
             ->join('users_status', 'users.status_id', '=', 'users_status.id')
             ->select('users.*', 'departments.name as departments_name', 'users_status.name as users_status_name', $rolesLabel)
             ->where('users.name', 'like', "%{$s}%")
@@ -36,7 +36,7 @@ class UserController extends Controller
             'password' => Hash::make($request['password'])
         ]);
 
-        $user = Users::create($request->all());
+        $user = User::create($request->all());
         return $user;
     }
 
@@ -53,7 +53,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = Users::findOrFail($id);
+        $user = User::findOrFail($id);
         $userStatus = DB::table('users_status')->select('id as value', 'name as label')->get();
         $department = DB::table('departments')->select('id as value', 'name as label')->get();
 
@@ -76,8 +76,8 @@ class UserController extends Controller
             ]);
         }
 
-        Users::find($id)->update($request->all());
-        $res = Users::find($id);
+        User::find($id)->update($request->all());
+        $res = User::find($id);
         return response()->json(['status' => true, 'result' => $res]);
     }
 

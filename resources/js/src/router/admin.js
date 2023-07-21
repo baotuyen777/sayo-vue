@@ -33,6 +33,13 @@ export const adminRoutes = {
         ...renderModuleRouter('medias'),
         ...renderModuleRouter('pdws'),
 
+        {
+            label: 'login',
+            path: 'login',
+            name: `admin-user-login`,
+            component: () => import(`../pages/admin/users/login.vue`)
+        },
+
     ]
 };
 

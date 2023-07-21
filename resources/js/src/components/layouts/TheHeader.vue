@@ -11,7 +11,27 @@
             </div>
 
             <div class="col-sm-3 d-none d-sm-flex align-items-center justify-content-sm-end">
-                <span>Admin</span>
+                <a-dropdown :trigger="['click']">
+                    <a class="ant-dropdown-link" @click.prevent>
+                        Admin
+                        <DownOutlined/>
+                    </a>
+                    <template #overlay>
+                        <a-menu>
+                            <a-menu-item key="0">
+                                <a href="http://www.alipay.com/">Thông tin cá nhân</a>
+                            </a-menu-item>
+                            <a-menu-item key="1">
+                                <a href="#" :onclick="logout">logout</a>
+                            </a-menu-item>
+                            <a-menu-divider/>
+                            <a-menu-item key="3">3rd menu item</a-menu-item>
+                        </a-menu>
+                    </template>
+                </a-dropdown>
+                <a class="ant-dropdown-link" :onClick="gotoLogin">
+                    Login
+                </a>
             </div>
 
             <div class="col-1 d-flex d-sm-none align-items-center justify-content-center">
@@ -39,35 +59,39 @@
     </a-drawer>
 </template>
 
-<script lang="ts">
+<script setup>
 import TheMenu from "./TheMenu.vue";
-import {defineComponent, ref} from 'vue';
+import {ref} from 'vue';
+import {message} from "ant-design-vue";
+import {useRouter} from "vue-router";
 
-export default defineComponent({
-    components: {TheMenu},
-    setup() {
-        const visible = ref(false);
-        const visible_user = ref(false);
+const router = useRouter()
+const visible = ref(false);
+const visible_user = ref(false);
 
-        const afterVisibleChange = (bool: boolean) => {
-            console.log('visible', bool);
-        };
+const showDrawer = () => {
+    visible.value = true;
+};
 
-        const showDrawer = () => {
-            visible.value = true;
-        };
+const showDrawerUser = () => {
+    visible_user.value = true;
+};
 
-        const showDrawerUser = () => {
-            visible_user.value = true;
-        };
+const logout = async () => {
 
-        return {
-            visible,
-            visible_user,
-            afterVisibleChange,
-            showDrawer,
-            showDrawerUser
-        };
-    },
-});
+    const endpointUpdate = window.configValues.API_URL + 'logout';
+    const res = await axios.get(endpointUpdate);
+
+    if (res.data.status_code === 200) {
+        localStorage.removeItem('access_token');
+        await router.push({name: `admin-user-login`})
+        message.success('Đăng xuất thành công')
+    }
+
+}
+
+const gotoLogin= () =>{
+    router.push({name: `admin-user-login`})
+}
+
 </script>

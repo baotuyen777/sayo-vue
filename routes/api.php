@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,21 +28,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::get('/users/create', [UserController::class, 'create']);
-//Route::get('/users/{id}', [UserController::class, 'show']);
-//
-//Route::get('/users', [UserController::class, 'index']);
-//Route::post('/users', [UserController::class, 'store']);
-//Route::get('/users/{id}/edit', [UserController::class, 'edit']);
-//Route::put('/users/{id}', [UserController::class, 'update']);
-Route::resource('users', UserController::class);
-Route::resource('settings', SettingsController::class);
-Route::resource('categories', CategoriesController::class);
-Route::resource('posts', PostsController::class);
-Route::resource('products', ProductsController::class);
-Route::resource('roles', RolesController::class);
-Route::resource('orders', OrdersController::class);
-Route::resource('medias', MediasController::class);
-Route::resource('pdws', PdwsController::class);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::post('posts/add-media/{id}', [PostsController::class, 'addMedia']);
+Route::middleware(['auth:sanctum'])->group(function () {
+//    Route::get('/users1', [UserController::class, 'index']);
+    Route::get('/logout',[AuthController::class, 'logout']);
+    Route::get('/users/create', [UserController::class, 'create']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
+
+    Route::get('/users', [UserController::class, 'index']);
+    Route::post('/users', [UserController::class, 'store']);
+    Route::get('/users/{id}/edit', [UserController::class, 'edit']);
+    Route::put('/users/{id}', [UserController::class, 'update']);
+    Route::resource('users', UserController::class);
+
+    Route::resource('settings', SettingsController::class);
+    Route::resource('categories', CategoriesController::class);
+    Route::resource('posts', PostsController::class);
+    Route::resource('products', ProductsController::class);
+    Route::resource('roles', RolesController::class);
+    Route::resource('orders', OrdersController::class);
+    Route::resource('medias', MediasController::class);
+    Route::resource('pdws', PdwsController::class);
+
+    Route::post('posts/add-media/{id}', [PostsController::class, 'addMedia']);
+});

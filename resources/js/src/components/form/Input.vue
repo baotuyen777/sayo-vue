@@ -14,7 +14,18 @@
                     :class="{'input-danger':error_mes}"
                     allow-clear
                     type="type|| 'text'"
-                />
+                    :status="status"
+                    v-if="type!=='password'"
+                >
+                    <template #prefix v-if="icon">
+                        <i :class="'fa-solid fa-'+icon"></i>
+                    </template>
+                </a-input>
+                <a-input-password v-model="password" v-if="type==='password'">
+                    <template #prefix>
+                        <i class="fa-solid fa-lock"></i>
+                    </template>
+                </a-input-password>
 
                 <small v-if="error_mes" class="text-danger">{{ error_mes[0] }}</small>
             </div>
@@ -25,7 +36,7 @@
 
 <script setup>
 
-const props = defineProps(['modelValue', 'placeholder', 'error_mes', 'label', 'type', 'classWrapper']);
+const props = defineProps(['modelValue', 'placeholder', 'error_mes', 'label', 'type', 'classWrapper', 'icon', 'status']);
 
 defineEmits(['update:modelValue'])
 

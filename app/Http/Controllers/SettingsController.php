@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SettingRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\Settings;
-use App\Models\Users;
+use App\Models\User;
 use App\Services\BaseServices;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

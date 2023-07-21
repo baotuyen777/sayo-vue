@@ -57,7 +57,7 @@ const pagination = reactive({current: 1, total: 0, pageSize: 5})
 const getList = async (params) => {
     isLoading.value = true;
     try {
-        const res = await axios.get(`${window.configValues.API_URL}${props.module}`, {params})
+        const res = await axios.get(`${window.configValues.API_URL}${props.module}`, {params}, )
         objs.value = res.data;
 
         pagination.current = res.data.current_page

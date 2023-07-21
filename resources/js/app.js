@@ -4,6 +4,12 @@ import {createPinia} from "pinia";
 import router from "./src/router/index.js";
 import axios from "axios";
 
+// axios.defaults.baseURL = 'http://localhost:1010/'
+const access_token = localStorage.getItem('access_token')
+if(access_token){
+    axios.defaults.headers.common = {'Authorization': `bearer ${access_token}`}
+}
+
 window.axios = axios;
 import {
     Checkbox,
@@ -22,6 +28,9 @@ import {
     Upload,
     Modal,
     Image,
+    Form,
+    FormItem,
+    Dropdown
 } from "ant-design-vue";
 
 import App from './App.vue'
@@ -52,6 +61,9 @@ app.use(Skeleton)
 app.use(Upload)
 app.use(Modal)
 app.use(Image)
+app.use(Form)
+app.use(FormItem)
+app.use(Dropdown)
 
 app.mount('#app');
 
