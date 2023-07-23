@@ -3,12 +3,15 @@ import {createApp} from 'vue'
 import {createPinia} from "pinia";
 import router from "./src/router/index.js";
 import axios from "axios";
-
 // axios.defaults.baseURL = 'http://localhost:1010/'
-const access_token = localStorage.getItem('access_token')
-if(access_token){
-    axios.defaults.headers.common = {'Authorization': `bearer ${access_token}`}
-}
+// const access_token = localStorage.getItem('access_token')
+// const currentUser = JSON.parse(localStorage.getItem('user'));
+// window.isLogin = false;
+// if (access_token) {
+//     axios.defaults.headers.common = {'Authorization': `bearer ${access_token}`}
+//     window.currentUser = currentUser;
+//     window.isLogin = true;
+// }
 
 window.axios = axios;
 import {
@@ -40,6 +43,8 @@ import './src/static/fontawesome/css/all.css';
 import 'ant-design-vue/dist/antd.css'
 import 'bootstrap/dist/css/bootstrap-grid.css'
 import 'bootstrap/dist/css/bootstrap-utilities.css'
+import {useAuth} from "./src/store/use-auth.js";
+
 
 const app = createApp(App)
 
@@ -68,3 +73,4 @@ app.use(Dropdown)
 app.mount('#app');
 
 app.config.globalProperties.$message = message
+useAuth().onCheckLogin();

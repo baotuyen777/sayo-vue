@@ -15,17 +15,11 @@
     </a-menu>
 </template>
 
-<script >
-import {defineComponent} from 'vue';
+<script setup>
+
 import {storeToRefs} from "pinia";
 import {useMenu} from "../../store/use-menu.js";
-import admin, {adminRoutes} from "../../router/admin.js"
+import {adminRoutes} from "../../router/admin.js"
 
-export default defineComponent({
-    setup() {
-        const store = useMenu();
-        console.log(adminRoutes.children);
-        return {...storeToRefs(store), admin, adminRoutes}
-    },
-});
+const {openKeys, selectedKeys} = storeToRefs(useMenu())
 </script>

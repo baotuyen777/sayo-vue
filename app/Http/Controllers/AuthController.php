@@ -48,18 +48,11 @@ class AuthController extends Controller
 
     function logout()
     {
+        Auth::guard('web')->logout();
         auth()->user()->tokens()->delete();
         return response()->json([
             'status_code' => 200,
             'message' => 'Đăng xuất thành công',
         ], 200);
     }
-//    // Revoke all tokens...
-//$user->tokens()->delete();
-//
-//// Revoke the user's current token...
-//$request->user()->currentAccessToken()->delete();
-//
-//// Revoke a specific token...
-//$user->tokens()->where('id', $id)->delete();
 }

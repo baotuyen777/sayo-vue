@@ -41,7 +41,6 @@ import {ref} from "vue";
 const props = defineProps(['module', 'objs']);
 const emit = defineEmits([]);
 const value = ref('')
-console.log(props)
 
 const handleSearch = () => {
     emit('getList', {s: value.value});

@@ -1,0 +1,29 @@
+body {
+    background: rgba(255, 192, 203, 0.34) !important;
+}
+
+.form-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .form-control {
+        flex: auto;
+    }
+
+    label {
+        width: 120px;
+    }
+    .select-danger, .input-danger {
+        border: 1px solid red;
+    }
+}
+
+.listview {
+    .action-column{
+        display: flex;
+        gap: 10px;
+    }
+}
+
+

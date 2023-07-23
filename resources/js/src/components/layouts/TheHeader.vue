@@ -12,9 +12,9 @@
 
             <div class="col-sm-3 d-none d-sm-flex align-items-center justify-content-sm-end">
                 <a-dropdown :trigger="['click']">
-                    <a class="ant-dropdown-link" @click.prevent>
-                        Admin
-                        <DownOutlined/>
+                    <a class="ant-dropdown-link" @click.prevent v-if="currentUser?.name">
+                        {{ currentUser.name }}
+                        <i class="fa-solid fa-user"/>
                     </a>
                     <template #overlay>
                         <a-menu>
@@ -24,12 +24,11 @@
                             <a-menu-item key="1">
                                 <a href="#" :onclick="logout">logout</a>
                             </a-menu-item>
-                            <a-menu-divider/>
-                            <a-menu-item key="3">3rd menu item</a-menu-item>
+
                         </a-menu>
                     </template>
                 </a-dropdown>
-                <a class="ant-dropdown-link" :onClick="gotoLogin">
+                <a class="ant-dropdown-link" :onClick="gotoLogin" v-if="!currentUser?.name">
                     Login
                 </a>
             </div>
@@ -64,10 +63,13 @@ import TheMenu from "./TheMenu.vue";
 import {ref} from 'vue';
 import {message} from "ant-design-vue";
 import {useRouter} from "vue-router";
+import {useAuth} from "../../store/use-auth";
 
 const router = useRouter()
 const visible = ref(false);
 const visible_user = ref(false);
+
+const currentUser = JSON.parse(localStorage.getItem('user'));
 
 const showDrawer = () => {
     visible.value = true;
@@ -77,20 +79,23 @@ const showDrawerUser = () => {
     visible_user.value = true;
 };
 
-const logout = async () => {
+const logout =  () => {
 
     const endpointUpdate = window.configValues.API_URL + 'logout';
-    const res = await axios.get(endpointUpdate);
+    const res = axios.get(endpointUpdate);
 
-    if (res.data.status_code === 200) {
-        localStorage.removeItem('access_token');
-        await router.push({name: `admin-user-login`})
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user');
+    useAuth().onCheckLogin();
+     router.push({name: `admin-user-login`})
+
+    if (res?.data?.status_code === 200) {
         message.success('Đăng xuất thành công')
     }
 
 }
 
-const gotoLogin= () =>{
+const gotoLogin = () => {
     router.push({name: `admin-user-login`})
 }
 

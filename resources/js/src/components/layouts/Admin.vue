@@ -1,7 +1,7 @@
 <template>
     <TheHeader/>
     <div class="container-fluid mt-3">
-        <div class="row">
+        <div class="row" v-if="isLogin">
             <div class="col-sm-3">
                 <a-list bordered style="width:100%">
                     <template #header>
@@ -15,17 +15,27 @@
                 <router-view></router-view>
             </div>
         </div>
+        <div v-if="!isLogin">
+            <router-view></router-view>
+        </div>
     </div>
 
 </template>
-<script>
+<script setup>
 import TheHeader from "./TheHeader.vue";
 import TheMenu from "./TheMenu.vue";
+import {useRouter} from "vue-router";
+import {storeToRefs} from "pinia";
+import {useAuth} from "../../store/use-auth.js";
 
-export default {
-    components: {
-        TheHeader,
-        TheMenu
-    }
+const isLogin = storeToRefs(useAuth()).isLogin.value
+// const {auth} = storeToRefs(useAuth())
+// console.log(auth,9999)
+
+const router = useRouter()
+const currentPage = router.currentRoute.value.path;
+
+if (!isLogin && currentPage != '/admin/login') {
+    router.push('/admin/login')
 }
 </script>

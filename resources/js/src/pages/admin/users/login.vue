@@ -1,8 +1,8 @@
 <template>
-    <form @submit.prevent="handleSubmit()">
+    <form @submit.prevent="handleSubmit()" class="login-page">
         <a-card title="Login">
-            <Input label="Email" v-model="email" icon="user" status="error"/>
-            <Input label="Mật khẩu" v-model="password" type="password" icon="lock"/>
+            <Input label="Email" v-model="email" icon="user" status="error" class-wrapper="mb-3 mt-3 col-md-12"/>
+            <Input label="Mật khẩu" v-model="password" type="password" icon="lock" class-wrapper="mb-3 mt-3 col-md-12"/>
             <a-form-item>
                 <a-form-item name="remember" no-style>
                     <a-checkbox v-model:checked="remember">Remember me</a-checkbox>
@@ -24,10 +24,13 @@
 import {reactive, computed, toRefs} from 'vue';
 import Input from "../../../components/form/Input.vue";
 import {message} from "ant-design-vue";
-import {getEndpoint} from "../../../configs";
+import {useRouter} from "vue-router";
+import {useAuth} from "../../../store/use-auth.js";
+
+const router = useRouter()
 
 const state = reactive({
-    email: 'admin',
+    email: 'admin@gmail.com',
     password: '123456',
     remember: true,
 });
@@ -39,6 +42,8 @@ const handleSubmit = async () => {
         if (res.data.status_code === 200) {
             localStorage.setItem('access_token', res.data.access_token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
+            useAuth().onCheckLogin({isLogin: true});
+            await router.push('users')
             message.success('Thành công')
         }
 
@@ -49,7 +54,6 @@ const handleSubmit = async () => {
 }
 
 const disabled = computed(() => {
-    console.log(state, 33232)
     return !(state?.email && state.password);
 });
 
