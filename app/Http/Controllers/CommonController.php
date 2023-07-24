@@ -31,6 +31,21 @@ class CommonController extends Controller
         return response()->json($objs);
     }
 
+    /**
+     * show detail
+     */
+    public function show(string $id)
+    {
+        $obj = DB::table($this->module)->find($id);
+        return response()->json([
+            'result' => $obj,
+            'status' => true
+        ]);
+    }
+
+    /**
+     * add new
+     */
     public function store(Request $request)
     {
         $this->baseServices->validate($request, $this->module);
@@ -38,16 +53,18 @@ class CommonController extends Controller
         return $obj;
     }
 
-    public function edit($id)
-    {
-        $obj = DB::table($this->module)->find($id);
-
-        return response()->json([
-            'result' => $obj,
-            'status' => true
-        ]);
-    }
-
+//    public function edit($id)
+//    {
+//        $obj = DB::table($this->module)->find($id);
+//
+//        return response()->json([
+//            'result' => $obj,
+//            'status' => true
+//        ]);
+//    }
+    /**
+     * update 1
+     */
     public function update(Request $request, $id)
     {
         $this->baseServices->validate($request, $this->module);

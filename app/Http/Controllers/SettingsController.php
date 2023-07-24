@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends CommonController
 {
-    protected string $module = 'pdws';
+    protected string $module = 'settings';
 //    public function __construct(BaseServices $baseServices)
 //    {
 //        parent::__construct($baseServices);
@@ -38,10 +38,7 @@ class SettingsController extends CommonController
         return $obj;
     }
 
-    public function show(string $id)
-    {
-        return Settings::findOrFail($id);
-    }
+
 
     /**
      * Show the form for editing the specified resource.

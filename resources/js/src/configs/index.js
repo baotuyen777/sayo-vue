@@ -22,7 +22,7 @@ const renderModuleRouter = (module) => {
 
 export const adminRoutes = {
     path: '/admin',
-    component: () => import("layouts/Admin.vue"),
+    component: () => import("../components/layouts/Admin.vue"),
     children: [
         ...renderModuleRouter('users'),
         ...renderModuleRouter('settings'),
@@ -34,7 +34,7 @@ export const adminRoutes = {
 const routes = [
     {
         path: '/',
-        component: () => import("layouts/Admin.vue"),
+        component: () => import("../components/layouts/Admin.vue"),
     },
     adminRoutes
 ];
@@ -44,6 +44,7 @@ const routes = [
 export const getEndpoint = (module, action = '', params = '') => {
     const paramUrl = params ? `/${params}` : '';
     const actionUrl = action ? action : (!params ? 'create': '')
-    return `${window.configValues.API_URL}${module}${paramUrl}/${actionUrl}`;
+    // return `${window.configValues.API_URL}${module}${paramUrl}/${actionUrl}`;
+    return `${window.configValues.API_URL}${module}${paramUrl}`;
 }
 export default routes;

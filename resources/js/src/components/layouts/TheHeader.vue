@@ -19,7 +19,7 @@
                     <template #overlay>
                         <a-menu>
                             <a-menu-item key="0">
-                                <a href="http://www.alipay.com/">Thông tin cá nhân</a>
+                                <a href="/admin/profile">Thông tin cá nhân</a>
                             </a-menu-item>
                             <a-menu-item key="1">
                                 <a href="#" :onclick="logout">logout</a>
@@ -61,9 +61,8 @@
 <script setup>
 import TheMenu from "./TheMenu.vue";
 import {ref} from 'vue';
-import {message} from "ant-design-vue";
 import {useRouter} from "vue-router";
-import {useAuth} from "../../store/use-auth";
+import {logout} from "../../utils";
 
 const router = useRouter()
 const visible = ref(false);
@@ -78,22 +77,6 @@ const showDrawer = () => {
 const showDrawerUser = () => {
     visible_user.value = true;
 };
-
-const logout =  () => {
-
-    const endpointUpdate = window.configValues.API_URL + 'logout';
-    const res = axios.get(endpointUpdate);
-
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('user');
-    useAuth().onCheckLogin();
-     router.push({name: `admin-user-login`})
-
-    if (res?.data?.status_code === 200) {
-        message.success('Đăng xuất thành công')
-    }
-
-}
 
 const gotoLogin = () => {
     router.push({name: `admin-user-login`})

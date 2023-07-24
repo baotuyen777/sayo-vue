@@ -43,7 +43,8 @@ const handleSubmit = async () => {
             localStorage.setItem('access_token', res.data.access_token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             useAuth().onCheckLogin({isLogin: true});
-            await router.push('users')
+            // await router.push('users')
+            window.location.href='/admin/users'
             message.success('Thành công')
         }
 

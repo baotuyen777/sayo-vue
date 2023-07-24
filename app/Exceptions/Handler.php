@@ -30,9 +30,9 @@ class Handler extends ExceptionHandler
             if ($request->is('api/*')) {
                 return response()->json(
                     [
-                        'code' => 404,
+                        'code' => 401,
                         'message' => 'Lỗi đăng nhập'
-                    ], 500
+                    ], 401
                 );
             }
         });

@@ -15,8 +15,7 @@
                     </template>
 
                     <template v-if="column.key === 'status'">
-                        <span v-if="record.status_id===1" class="text-primary">Hoạt động</span>
-                        <span v-if="record.status_id!==1" class="text-danger">Tạm khóa</span>
+                        <span  :class="record?.status ? 'text-success' :'text-warning' ">{{record?.status_label}}</span>
                     </template>
 
                     <template v-if="column.key === 'media'">
@@ -46,6 +45,7 @@
 <script setup>
 import {reactive, ref} from "vue";
 import HeaderList from "./HeaderList.vue";
+import {hanldeErrorApi} from "../../utils";
 
 const props = defineProps(['module', 'title', 'columns']);
 
@@ -64,7 +64,7 @@ const getList = async (params) => {
         pagination.total = res.data.total
         pagination.pageSize = res.data.per_page
     } catch (err) {
-        console.log(err)
+        hanldeErrorApi(err)
     }
 
     isLoading.value = false
