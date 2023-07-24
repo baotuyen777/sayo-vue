@@ -5,4 +5,7 @@
 - **Start frontend** ```npm run dev```
 - **Migrate** ```php artisan migrate:refresh --seed```
 - **Generate key** ```php artisan key:generate```
-- **Generate storage link** ```php artisan storage:link```
+
+- **Generate swagger** ``php artisan l5-swagger:generate``` http://localhost:8000/api/documentation#/Register
+- 
+
