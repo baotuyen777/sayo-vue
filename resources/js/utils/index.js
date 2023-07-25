@@ -2,7 +2,8 @@ import {message} from "ant-design-vue";
 
 export const hanldeErrorApi = (res) => {
     if (res.response.status === 401){
-        window.location.href  = '/admin/login';
+        logout()
+        // window.location.href  = '/admin/login';
         return;
     }
 

@@ -1,7 +1,7 @@
 import './bootstrap';
 import {createApp} from 'vue'
 import {createPinia} from "pinia";
-import router from "./src/router/index.js";
+import router from "./router/index.js";
 import axios from "axios";
 // axios.defaults.baseURL = 'http://localhost:1010/'
 // const access_token = localStorage.getItem('access_token')
@@ -38,12 +38,12 @@ import {
 
 import App from './App.vue'
 
-import './src/static/fontawesome/css/all.css';
+import './static/fontawesome/css/all.css';
 
 import 'ant-design-vue/dist/antd.css'
 import 'bootstrap/dist/css/bootstrap-grid.css'
 import 'bootstrap/dist/css/bootstrap-utilities.css'
-import {useAuth} from "./src/store/use-auth.js";
+import {useAuth} from "./store/use-auth.js";
 
 
 const app = createApp(App)

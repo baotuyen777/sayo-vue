@@ -37,12 +37,13 @@ export const adminRoutes = {
             label: 'login',
             path: 'login',
             name: `admin-user-login`,
-            component: () => import(`../pages/admin/users/login.vue`)
-        },{
+            component: () => import('../pages/admin/users/login.vue')
+        },
+        {
             label: 'profile',
             path: 'profile',
             name: `admin-user-profile`,
-            component: () => import(`../pages/admin/users/profilevue`)
+            component: () => import('../pages/admin/users/profile.vue')
         },
 
     ]

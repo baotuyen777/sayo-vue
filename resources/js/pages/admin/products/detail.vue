@@ -20,7 +20,7 @@
 
 <script setup>
 import {ref, reactive, toRefs} from "vue";
-import {useMenu} from "@/src/store/use-menu.js";
+import {useMenu} from "@/store/use-menu.js";
 import {useRouter, useRoute} from "vue-router";
 import {message} from "ant-design-vue";
 import Input from "../../../components/form/Input.vue";
@@ -28,7 +28,7 @@ import HeaderForm from "../../../components/form/HeaderForm.vue";
 import Select from "../../../components/form/Select.vue";
 import {getEndpoint} from "../../../configs/index.js";
 
-const module = 'orders';
+const module = 'products';
 useMenu().onSelectedKeys([`admin-${module}`]);
 const router = useRouter()
 const route = useRoute()

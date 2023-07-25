@@ -7,7 +7,7 @@ use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProductsController extends Controller
+class ProductsController extends CommonController
 {
 
     protected string $module = 'products';

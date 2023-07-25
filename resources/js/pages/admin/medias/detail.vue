@@ -20,7 +20,7 @@
 
 <script setup>
 import {ref, reactive, toRefs} from "vue";
-import {useMenu} from "@/src/store/use-menu.js";
+import {useMenu} from "@/store/use-menu.js";
 import {useRouter, useRoute} from "vue-router";
 import {message} from "ant-design-vue";
 import HeaderForm from "../../../components/form/HeaderForm.vue";
