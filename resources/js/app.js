@@ -1,17 +1,15 @@
 import './bootstrap';
 import {createApp} from 'vue'
 import {createPinia} from "pinia";
-import router from "./src/router/index.js";
+// import router from "resources/js/src/router/index.js";
 import axios from "axios";
-// axios.defaults.baseURL = 'http://localhost:1010/'
-// const access_token = localStorage.getItem('access_token')
-// const currentUser = JSON.parse(localStorage.getItem('user'));
-// window.isLogin = false;
-// if (access_token) {
-//     axios.defaults.headers.common = {'Authorization': `bearer ${access_token}`}
-//     window.currentUser = currentUser;
-//     window.isLogin = true;
-// }
+
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
+
+import router from './router';
+
 
 window.axios = axios;
 import {
@@ -38,12 +36,12 @@ import {
 
 import App from './App.vue'
 
-import './src/static/fontawesome/css/all.css';
+import './static/fontawesome/css/all.css';
 
 import 'ant-design-vue/dist/antd.css'
 import 'bootstrap/dist/css/bootstrap-grid.css'
 import 'bootstrap/dist/css/bootstrap-utilities.css'
-import {useAuth} from "./src/store/use-auth.js";
+import {useAuth} from "./store/use-auth.js";
 
 
 const app = createApp(App)
@@ -70,6 +68,7 @@ app.use(Form)
 app.use(FormItem)
 app.use(Dropdown)
 
+app.use(ElementPlus)
 app.mount('#app');
 
 app.config.globalProperties.$message = message
