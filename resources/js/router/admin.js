@@ -22,7 +22,8 @@ const renderModuleRouter = (module) => {
 
 export const adminRoutes = {
     path: '/admin',
-    component: () => import("../components/layouts/Admin.vue"),
+    // component: () => import("../components/layouts/Admin.vue"),
+    component: () => import("../layout/index.vue"),
     children: [
         ...renderModuleRouter('users'),
         ...renderModuleRouter('settings'),
@@ -45,6 +46,12 @@ export const adminRoutes = {
             name: `admin-user-profile`,
             component: () => import('../pages/admin/users/profile.vue')
         },
+        {
+            label: 'demo',
+            path: 'demo',
+            name: `admin-demo`,
+            component: () => import('../pages/admin/demo/form.vue')
+        },
 
     ]
 };
@@ -54,7 +61,13 @@ const routes = [
         path: '/',
         component: () => import("../components/layouts/Admin.vue"),
     },
-    adminRoutes
+    adminRoutes,
+    {
+        label: 'login',
+        path: '/login',
+        name: `login`,
+        component: () => import('../pages/login/index.vue')
+    },
 ];
 
 

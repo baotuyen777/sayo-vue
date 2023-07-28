@@ -3,6 +3,9 @@ import {createApp} from 'vue'
 import {createPinia} from "pinia";
 import router from "./router/index.js";
 import axios from "axios";
+
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 // axios.defaults.baseURL = 'http://localhost:1010/'
 // const access_token = localStorage.getItem('access_token')
 // const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -48,6 +51,7 @@ import {useAuth} from "./store/use-auth.js";
 
 const app = createApp(App)
 
+app.use(ElementPlus)
 // app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(createPinia())
 app.use(router);
