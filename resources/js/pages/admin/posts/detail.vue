@@ -125,7 +125,7 @@ const handleUpdate = async () => {
         // await router.push({name: `admin-${module}`})
         message.success('Thành công')
     } catch (err) {
-        console.log(err.response.data.errors,1111)
+        console.log(err,11112)
         errors.value = err.response.data.errors;
     }
 }

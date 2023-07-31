@@ -3,12 +3,15 @@
     <div class="container-fluid mt-3">
         <div class="row" v-if="isLogin">
             <div class="col-sm-3">
-                <a-list bordered style="width:100%">
-                    <template #header>
-                        Bảng điều khiển
-                    </template>
+                <a-card title=" Bảng điều khiển">
                     <TheMenu/>
-                </a-list>
+                </a-card>
+<!--                <a-list bordered style="width:100%">-->
+<!--                    <template #header>-->
+<!--                        Bảng điều khiển-->
+<!--                    </template>-->
+<!--                    <TheMenu/>-->
+<!--                </a-list>-->
             </div>
 
             <div class="col-12 col-md-9">
@@ -21,6 +24,7 @@
     </div>
 
 </template>
+
 <script setup>
 import TheHeader from "./TheHeader.vue";
 import TheMenu from "./TheMenu.vue";

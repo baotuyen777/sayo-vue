@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\BaseServices;
+use App\Services\BaseService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;

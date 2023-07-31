@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class BaseServices
+class BaseService
 {
     public function validate($request, $module, $customize = [])
     {

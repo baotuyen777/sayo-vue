@@ -6,6 +6,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\Medias;
 use App\Models\Posts;
 use App\Models\Products;
+use App\Services\BaseService;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\DB;
 class PostsController extends Controller
 {
     protected string $module = 'posts';
+    private BaseService $baseService;
+
+    public function __construct(BaseService $baseService)
+    {
+        $this->baseService = $baseService;
+//        parent::__construct();
+    }
 
     public function index(Request $request)
     {
@@ -64,6 +72,7 @@ class PostsController extends Controller
 
     public function update(PostRequest $request, $id)
     {
+//        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
         $posts = Posts::find($id);
 
         $galleryIds = $request->input('media_ids');
@@ -78,4 +87,6 @@ class PostsController extends Controller
 
         return response()->json(['status' => true, 'result' => $res]);
     }
+
+
 }

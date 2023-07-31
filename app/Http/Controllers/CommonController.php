@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\BaseServices;
+use App\Services\BaseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CommonController extends Controller
 {
-    protected $baseServices;
+    protected $baseService;
     protected string $module = 'settings';
 
-    public function __construct(BaseServices $baseServices)
+    public function __construct(BaseService $baseService)
     {
-        $this->baseServices = $baseServices;
+        $this->baseService = $baseService;
     }
 
     public function index(Request $request)

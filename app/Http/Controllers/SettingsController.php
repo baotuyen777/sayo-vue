@@ -6,7 +6,7 @@ use App\Http\Requests\SettingRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\Settings;
 use App\Models\User;
-use App\Services\BaseServices;
+use App\Services\BaseService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

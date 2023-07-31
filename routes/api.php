@@ -44,12 +44,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::resource('settings', SettingsController::class);
     Route::resource('categories', CategoriesController::class);
-    Route::resource('posts', PostsController::class);
+
     Route::resource('products', ProductsController::class);
     Route::resource('roles', RolesController::class);
     Route::resource('orders', OrdersController::class);
     Route::resource('medias', MediasController::class);
     Route::resource('pdws', PdwsController::class);
-
+    Route::resource('posts', PostsController::class);
     Route::post('posts/add-media/{id}', [PostsController::class, 'addMedia']);
 });
+
+
