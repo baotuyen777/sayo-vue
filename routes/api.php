@@ -33,13 +33,13 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::middleware(['auth:sanctum'])->group(function () {
 //    Route::get('/users1', [UserController::class, 'index']);
     Route::get('/logout',[AuthController::class, 'logout']);
-    Route::get('/users/create', [UserController::class, 'create']);
-    Route::get('/users/{id}', [UserController::class, 'show']);
+//    Route::get('/users/create', [UserController::class, 'create']);
+//    Route::get('/users/{id}', [UserController::class, 'show']);
 
-    Route::get('/users', [UserController::class, 'index']);
-    Route::post('/users', [UserController::class, 'store']);
-    Route::get('/users/{id}/edit', [UserController::class, 'edit']);
-    Route::put('/users/{id}', [UserController::class, 'update']);
+//    Route::get('/users', [UserController::class, 'index']);
+//    Route::post('/users', [UserController::class, 'store']);
+//    Route::get('/users/{id}/edit', [UserController::class, 'edit']);
+//    Route::put('/users/{id}', [UserController::class, 'update']);
     Route::resource('users', UserController::class);
 
     Route::resource('settings', SettingsController::class);

@@ -65,7 +65,7 @@ class PostsController extends Controller
 
     public function store(PostRequest $request)
     {
-//        $this->baseServices->validate($request, $this->module);
+//        $this->baseService->validate($request, $this->module);
         $obj = DB::table($this->module)->insert($request->all());
         return $obj;
     }

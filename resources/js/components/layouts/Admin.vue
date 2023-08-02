@@ -36,10 +36,10 @@ const isLogin = storeToRefs(useAuth()).isLogin.value
 // const {auth} = storeToRefs(useAuth())
 // console.log(auth,9999)
 
-const router = useRouter()
-const currentPage = router.currentRoute.value.path;
+// const router = useRouter()
+// const currentPage = router.currentRoute.value.path;
 
-if (!isLogin && currentPage != '/admin/login') {
-    router.push('/admin/login')
-}
+// if (!isLogin && currentPage != '/admin/login') {
+//     router.push('/admin/login')
+// }
 </script>

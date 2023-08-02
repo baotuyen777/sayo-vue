@@ -72,7 +72,7 @@ class SettingsController extends CommonController
      */
     public function store(Request $request)
     {
-        $this->baseServices->validate($request, $this->module, ['code' => 'required|unique:settings', 'value' => 'required']);
+        $this->baseService->validate($request, $this->module, ['code' => 'required|unique:settings', 'value' => 'required']);
         $obj = Settings::create($request->all());
         return $obj;
     }
@@ -97,7 +97,7 @@ class SettingsController extends CommonController
      */
     public function update(Request $request, $id)
     {
-        $this->baseServices->validate($request, $this->module);
+        $this->baseService->validate($request, $this->module);
         Settings::find($id)->update($request->all());
         $res = Settings::find($id);
         return response()->json(['status' => true, 'result' => $res]);

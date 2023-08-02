@@ -9,7 +9,7 @@ import axios from "axios";
 // window.isLogin = false;
 // if (access_token) {
 //     axios.defaults.headers.common = {'Authorization': `bearer ${access_token}`}
-//     window.currentUser = currentUser;
+//     // window.currentUser = currentUser;
 //     window.isLogin = true;
 // }
 

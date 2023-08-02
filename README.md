@@ -7,5 +7,7 @@
 - **Generate key** ```php artisan key:generate```
 
 - **Generate swagger** ``php artisan l5-swagger:generate``` http://localhost:8000/api/documentation#/Register
-- 
+- php artisan config:cache
+>> php artisan config:clear
+
 

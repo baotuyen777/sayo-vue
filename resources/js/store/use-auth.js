@@ -13,7 +13,7 @@ export const useAuth = defineStore('auth', {
             const access_token = localStorage.getItem('access_token')
             const currentUser = JSON.parse(localStorage.getItem('user'));
             if (access_token) {
-                axios.defaults.headers.common = {'Authorization': `bearer ${access_token}`}
+                // axios.defaults.headers.common = {'Authorization': `bearer ${access_token}`}
                 window.currentUser = currentUser;
                 this.isLogin = true;
             } else {

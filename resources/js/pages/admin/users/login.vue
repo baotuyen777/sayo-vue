@@ -50,7 +50,7 @@ const handleSubmit = async () => {
 
     } catch (err) {
         console.log(err.response.data.errors, 1111)
-        errors.value = err.response.data.errors;
+        // errors.value = err.response.data.errors;
     }
 }
 

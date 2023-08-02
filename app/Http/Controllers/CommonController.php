@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class CommonController extends Controller
 {
-    protected $baseService;
+    protected BaseService $baseService;
     protected string $module = 'settings';
 
     public function __construct(BaseService $baseService)
@@ -48,7 +48,7 @@ class CommonController extends Controller
      */
     public function store(Request $request)
     {
-        $this->baseServices->validate($request, $this->module);
+        $this->baseService->validate($request, $this->module);
         $obj = DB::table($this->module)->insert($request->all());
         return $obj;
     }
@@ -67,7 +67,7 @@ class CommonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->baseServices->validate($request, $this->module);
+        $this->baseService->validate($request, $this->module);
         DB::table($this->module)->where('id', $id)->update($request->all());
 
         $res = DB::table($this->module)->find($id);
