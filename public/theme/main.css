@@ -1,18 +1,31 @@
 body{
     margin: 0;
+    background: #ccc;
 }
+
 .container{
     max-width: 1200px;
     margin: 0 auto;
 }
+
+section{
+    margin-bottom: 20px;
+}
 .d-flex {
+    display: flex;
+}
+.d-flex-wrap {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
+    gap: 10px
 }
-
+.white-box{
+    background: white;
+    padding: 15px;
+}
 .gap-10 {
-    gap: 10px;
+    gap: 15px;
 }
 
 .grid-2 > div {
@@ -20,9 +33,12 @@ body{
 }
 
 .grid-3 > div {
-    width: 25%;
+    width: 24%;
 }
 
+.m-r-20{
+    margin-right: 20px;
+}
 .card--category {
     padding: 20px 0;
 }
@@ -33,4 +49,33 @@ body{
 
 .card__title {
     margin: 10px auto;
+}
+
+/*product*/
+
+.product .product__price {
+    color: #d0021b;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.33;
+    margin: 2px 4px 0 0;
+}
+
+.product .product__footer {
+    font-size: 11px;
+    display: flex;
+    gap:10px
+}
+
+.product .product__feedback{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: rgb(255, 255, 255);
+}
+
+.product .product__caption {
+    padding-bottom: 8px;
+    position: relative;
 }

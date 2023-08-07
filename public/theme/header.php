@@ -4,18 +4,15 @@
 
     <meta name="viewport" content="width=device-width">
     <meta charset="utf-8">
-        <link rel="stylesheet" href="http://localhost:8000/theme/header.css">
-<!--    <link rel="stylesheet" href="http://localhost:8000/theme/footer.css">-->
     <link rel="canonical" href="https://www.chotot.com/">
-    <title>Chợ Tốt - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt</title>
+    <title>Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt</title>
     <meta property="og:image" content="https://static.chotot.com/storage/marketplace/ct_orange_c2c_200.jpg">
-    <meta property="og:url" content="https://www.chotot.com">
+    <meta property="og:url" content="https://sayo.vn">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Chợ Tốt - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt">
+    <meta property="og:title" content="Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt">
     <meta property="og:description"
-          content="Chợ Tốt - Website mua bán rao vặt của người Việt với hàng ngàn món hời đang được rao bán mỗi ngày. Đăng tin mua bán UY TÍN, NHANH CHÓNG, AN TOÀN.">
-    <link rel="stylesheet"
-          href="https://static.chotot.com/storage/CT_WEB_UNI_HOMEPAGE/210c9b98/_next/static/css/ad8fc899edd1216f8986.css">
+          content="Sayo - Website mua bán rao vặt của người Việt với hàng ngàn món hời đang được rao bán mỗi ngày. Đăng tin mua bán UY TÍN, NHANH CHÓNG, AN TOÀN.">
+    <link rel="stylesheet" href="http://localhost:8000/theme/header.css">
     <link rel="stylesheet" href="http://localhost:8000/theme/main.css" type="text/css">
 
 </head>
@@ -23,17 +20,11 @@
 
 
 <header class="main-header">
-    <div class="aw__co22znp container">
+    <div class="d-flex container">
         <div class="aw__la2dsz4" style="--la2dsz4-0: 20%; --la2dsz4-2: unset;">
-            <div>
-                <a>
-                    <picture>
-                        <img class="aw__ldrazpr"
-                             src="https://static.chotot.com/storage/marketplace/transparent_logo.png" alt="Chợ Tốt"
-                             style="height: 35px; object-fit: contain;">
-                    </picture>
-                </a></div>
-            <div class="" >
+            <div class="m-r-20">
+                <a><img src="http://localhost:8000/theme/logo-white.png" alt="sayo-logo" style="height: 45px; "></a></div>
+            <div class="">
                 <div class="aw__i8z877t" style="--i8z877t-0: #222222;">
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"
                          class="">
@@ -73,7 +64,7 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    <input autocomplete="off" placeholder="Tìm kiếm sản phẩm trên Chợ Tốt"
+                                    <input autocomplete="off" placeholder="Tìm kiếm sản phẩm - Dịch vụ trên Sayo"
                                            id="__inputItemProps" type="text" class="aw__t16o28i7" value=""
                                            style="--t16o28i7-3: 36px; --t16o28i7-5: #fff; --t16o28i7-6: 35px;">
                                 </div>
