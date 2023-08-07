@@ -2,22 +2,23 @@
     <form @submit.prevent="handleUpdate()">
         <a-card title="Tạo mới tài khoản" style="width: 100%">
             <HeaderForm :module="module" @handleReload="getDetail"/>
-            <div class="row">
+            <a-skeleton v-if="isLoading"/>
+            <div class="row" v-if="!isLoading">
                 <Input label="Tiêu đề" :error_mes="errors?.name" v-model="name"/>
                 <Input label="Giá bán" :error_mes="errors?.price" v-model="price"/>
                 <Select label="Tình trạng" v-model="status" :error_mes="errors?.status"/>
                 <Select label="Danh mục" v-model="category_id" :error_mes="errors?.categories"
                         :options="categories"/>
                 <Select label="Tỉnh/Thành phố" v-model="province_id" :error_mes="errors?.province_id"
-                       :options="provinces"/>
+                        :options="provinces"/>
                 <Select label="Quận/Huyện" v-model="district_id" :error_mes="errors?.district_id"
                         :options="districts"/>
                 <Select label="Phường/Xã" v-model="ward_id" :error_mes="errors?.pdws_id"
                         :options="wards"/>
                 <Input label="Địa chỉ" v-model="address" :error_mes="errors?.address"/>
-                <TextArea label="Mô tả chi tiết" v-model="category_id" :error_mes="errors?.category_id"/>
+                <TextArea label="Mô tả chi tiết" v-model="content" :error_mes="errors?.content"/>
                 <Upload label="Avatar" v-model="avatar" :show-upload-list="true" :error_mes="errors?.avatar_id"/>
-                <Upload label="Bộ sưu tập" v-model="gallery"  :error_mes="errors?.media_ids"/>
+                <Upload label="Bộ sưu tập" v-model="gallery" :error_mes="errors?.media_ids"/>
 
             </div>
         </a-card>
@@ -49,6 +50,7 @@ const isLoading = ref(false);
 const state = reactive({
     name: "",
     code: "",
+    content: "",
     status: 1,
     price: 0,
     category_id: null,
@@ -83,10 +85,9 @@ const getDetail = async () => {
             state.avatar = result.avatar ? [result.avatar] : []
             state.gallery = result.gallery
 
-            Object.keys(res.data.expand).forEach(field=>{
+            Object.keys(res.data.expand).forEach(field => {
                 expand[field] = res.data.expand[field]
             })
-            console.log(state,22222)
         } else {
             console.log(res)
         }
@@ -100,6 +101,7 @@ const getDetail = async () => {
 getDetail();
 
 const handleUpdate = async () => {
+    errors.value = {}
     try {
         const formData = {...state}
         if (state.gallery) {
@@ -125,13 +127,13 @@ const handleUpdate = async () => {
         // await router.push({name: `admin-${module}`})
         message.success('Thành công')
     } catch (err) {
-        console.log(err,11112)
         errors.value = err.response.data.errors;
     }
 }
 
 const {
     name,
+    content,
     code,
     value,
     status,

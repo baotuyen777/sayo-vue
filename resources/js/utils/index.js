@@ -1,8 +1,11 @@
 import {message} from "ant-design-vue";
+import {useRouter} from "vue-router";
 
 export const hanldeErrorApi = (res) => {
+    const router = useRouter()
     if (res.response.status === 401){
         logout()
+        router.push('admin/login')
         // window.location.href  = '/admin/login';
         return;
     }

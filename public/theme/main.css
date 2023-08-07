@@ -1,0 +1,36 @@
+body{
+    margin: 0;
+}
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.gap-10 {
+    gap: 10px;
+}
+
+.grid-2 > div {
+    width: 16%;
+}
+
+.grid-3 > div {
+    width: 25%;
+}
+
+.card--category {
+    padding: 20px 0;
+}
+
+.card--category img {
+    height: 100px;
+}
+
+.card__title {
+    margin: 10px auto;
+}

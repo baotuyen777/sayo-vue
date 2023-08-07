@@ -28,6 +28,7 @@ class PostRequest extends FormRequest
             'media_ids' => 'required',
             'category_id' => 'required',
             'address' => 'required',
+            'price' => 'required|integer',
 
         ];
     }

@@ -11,6 +11,9 @@
 >> php artisan config:clear
 
 
+phpstorm
+select text ctr+j  ctr+al+shift => multi cursor
+
 
 ## Coding rules nói chung 
 ==========================
