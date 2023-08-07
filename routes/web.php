@@ -12,5 +12,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::view("/","home");
 
-Route::view("/{any}","app")->where("any",".*");
+Route::view("/admin/{any}","app")->where("any",".*");
+
