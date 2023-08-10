@@ -8,7 +8,9 @@
 
 - **Generate swagger** ``php artisan l5-swagger:generate``` http://localhost:8000/api/documentation#/Register
 - php artisan config:cache
->> php artisan config:clear
+> php artisan config:clear
+
+> compile sass: setting->tool->file watcher -> create scss-> include folder
 
 
 phpstorm

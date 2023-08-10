@@ -4,7 +4,7 @@
 
     <meta name="viewport" content="width=device-width">
     <meta charset="utf-8">
-    <link rel="canonical" href="https://www.chotot.com/">
+    <link rel="canonical" href="<?php echo env('APP_URL') ?>">
     <title>Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt</title>
     <meta property="og:image" content="https://static.chotot.com/storage/marketplace/ct_orange_c2c_200.jpg">
     <meta property="og:url" content="https://sayo.vn">
@@ -12,8 +12,7 @@
     <meta property="og:title" content="Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt">
     <meta property="og:description"
           content="Sayo - Website mua bán rao vặt của người Việt với hàng ngàn món hời đang được rao bán mỗi ngày. Đăng tin mua bán UY TÍN, NHANH CHÓNG, AN TOÀN.">
-    <link rel="stylesheet" href="http://localhost:8000/theme/header.css">
-    <link rel="stylesheet" href="http://localhost:8000/theme/main.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo env('APP_URL') ?>/css/main.css" type="text/css">
 
 </head>
 <body class="custom_class">
@@ -23,7 +22,7 @@
     <div class="d-flex container">
         <div class="aw__la2dsz4" style="--la2dsz4-0: 20%; --la2dsz4-2: unset;">
             <div class="m-r-20">
-                <a><img src="http://localhost:8000/theme/logo-white.png" alt="sayo-logo" style="height: 45px; "></a></div>
+                <a><img src="<?php echo env('APP_URL') ?>/img/logo-white.png" alt="sayo-logo" style="height: 45px; "></a></div>
             <div class="">
                 <div class="aw__i8z877t" style="--i8z877t-0: #222222;">
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +38,8 @@
                             </clipPath>
                         </defs>
                     </svg>
-                    <span class="aw__i1utyhlb"><span class="aw__c19wws31 show-desktop aw__szp9uz0" color="#8C8C8C"
-                                                     style="--szp9uz0-1: inherit; --szp9uz0-9: #8C8C8C;">Danh mục</span><svg
+                    <span class="aw__i1utyhlb"><span class="aw__c19wws31 show-desktop aw__szp9uz0"
+                                                   >Danh mục</span><svg
                             width="1rem" height="1rem" viewBox="0 0 16 16" fill="none"
                             xmlns="http://www.w3.org/2000/svg" class="aw__dtt35j3"><path
                                 d="M4.67154 5.99959C4.9323 5.74067 5.35336 5.74141 5.6132 6.00125L8.19653 8.58458L10.7863 6.00048C11.0461 5.74125 11.4668 5.74148 11.7263 6.00099C11.986 6.26071 11.986 6.68179 11.7263 6.94151L8.90364 9.76414C8.51312 10.1547 7.87995 10.1547 7.48943 9.76414L4.66987 6.94459C4.40872 6.68344 4.40947 6.25981 4.67154 5.99959Z"
@@ -94,3 +93,5 @@
                 ĐĂNG TIN</a></div>
     </div>
 </header>
+
+

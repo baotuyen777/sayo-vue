@@ -1,8 +1,11 @@
 /.phpunit.cache
 /node_modules
+
 /public/build
 /public/hot
 /public/storage
+/public/css/main.*
+
 /storage/*.key
 /vendor
 .env
@@ -18,3 +21,4 @@ yarn-error.log
 /.idea
 /.vscode
 */api-docs
+.user.ini
