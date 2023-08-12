@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\DB;
 
-class CategoriesSeeder extends Seeder
+class
+CategoriesSeeder extends Seeder
 {
     /**
      * Run the database seeds.

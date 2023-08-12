@@ -1,0 +1,25 @@
+.card {
+    &--product {
+        .avatar {
+            width: 100%;
+            height: 170px;
+            background-size: cover !important;
+        }
+    }
+}
+
+
+.card--category {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.card--category img {
+    height: 100px;
+    width: 100px;
+    border-radius: 20%;
+}
+
+.card__title {
+    margin: 10px auto;
+}

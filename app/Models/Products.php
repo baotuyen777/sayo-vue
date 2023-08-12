@@ -12,7 +12,7 @@ class Products extends Model
     protected $appends = array('category_name');
     public function category()
     {
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function getCategoryNameAttribute()

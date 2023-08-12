@@ -82,7 +82,6 @@ class PostsController extends Controller
 
         $request->except('gallery');
         $params = $request->except(['media_ids', 'gallery']);
-
         $res = Posts::where('id', $id)->update($params);
 
         return response()->json(['status' => true, 'result' => $res]);

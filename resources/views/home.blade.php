@@ -6,20 +6,20 @@
             <h2>Khám phá danh mục</h2>
             <div class="">
                 <div class="d-flex-wrap grid-2">
-                    <?php for ($i = 0;
-                               $i < 12;
-                               $i++): ?>
-                    <div><a>
-                            <div class="card--category">
-                                <img alt="Bất động sản"
-                                     src="https://lighthouse.chotot.com/_next/image?url=https%3A%2F%2Fstatic.chotot.com%2Fstorage%2Fchapy-pro%2Fnewcats%2Fv8%2F1000.png&amp;w=256&amp;q=95"
-                                >
-                                <div class="card__title">Bất động sản</div>
-                            </div>
 
-                        </a>
-                    </div>
-                    <?php endfor; ?>
+                    @foreach($categories as $category)
+                        <div>
+                            <a href="#">
+                                <div class="card--category">
+                                    <img alt="{{$category['name']}}"
+                                         src="{{$category['avatar']['url'] ?? asset('img/icon/sayo-bds.webp')}}"
+                                    >
+                                    <div class="card__title">{{$category['name']}}</div>
+                                </div>
+
+                            </a>
+                        </div>
+                    @endforeach
 
                 </div>
             </div>
@@ -30,12 +30,10 @@
         <div class="container white-box">
             <h2>Tin đăng dành cho bạn</h2>
 
-            <div class="d-flex-wrap grid-3">
-                <?php for ($i = 0;
-                           $i < 10;
-                           $i++): ?>
-                @include('component.product')
-                <?php endfor; ?>
+            <div class="d-flex-wrap grid-5">
+                @foreach($posts as $post)
+                    @include('component.product',['obj'=> $post])
+                @endforeach
             </div>
 
 

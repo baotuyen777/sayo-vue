@@ -21,6 +21,9 @@
                     <template v-if="column.key === 'media'">
                         <a-image :width="100" :src="MEDIA_URL+record.url"/>
                     </template>
+                    <template v-if="column.key === 'avatar'">
+                        <a-image :width="100" :src="record?.avatar?.url"/>
+                    </template>
 
                     <template v-if="column.key === 'action'">
                         <div class="action-column">

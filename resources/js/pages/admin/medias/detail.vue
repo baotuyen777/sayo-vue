@@ -37,7 +37,7 @@ const route = useRoute()
 const endpointDetail = getEndpoint(module, 'edit', route.params.id);
 const endpointUpdate = getEndpoint(module, null, route.params.id);
 
-const obj = reactive({
+const state = reactive({
     name: "",
     url: "",
     status: 1,

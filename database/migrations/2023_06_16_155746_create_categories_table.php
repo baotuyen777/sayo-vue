@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
-            $table->string('avatar')->nullable();
             $table->integer('parent_id')->default(0);
             $table->integer('status')->default(1);
+
+            $table->unsignedBigInteger('avatar_id')->nullable();
+            $table->foreign('avatar_id')->references('id')->on('medias')->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }

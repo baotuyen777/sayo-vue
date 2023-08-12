@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::view("/","home");
+Route::resource('/', \App\Http\Controllers\Fe\HomeController::class);
 
 Route::view("/admin/{any}","app")->where("any",".*");
 

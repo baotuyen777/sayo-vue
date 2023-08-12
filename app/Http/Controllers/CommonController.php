@@ -55,10 +55,10 @@ class CommonController extends Controller
 
 //    public function edit($id)
 //    {
-//        $obj = DB::table($this->module)->find($id);
+//        $state = DB::table($this->module)->find($id);
 //
 //        return response()->json([
-//            'result' => $obj,
+//            'result' => $state,
 //            'status' => true
 //        ]);
 //    }

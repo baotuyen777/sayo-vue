@@ -39,7 +39,7 @@ export default defineComponent({
         const router = useRouter()
         const route = useRoute()
 
-        const obj = reactive({
+        const state = reactive({
             name: "",
             code: "",
             value: "",
