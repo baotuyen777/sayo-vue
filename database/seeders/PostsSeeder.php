@@ -29,7 +29,7 @@ class PostsSeeder extends Seeder
                 'ward_id' => 5,
                 'district_id' => 2,
                 'province_id' => 1,
-                'price' => rand(50000000,2400000000)
+                'price' => rand(50000,2400000000)
             ]);
         }
 

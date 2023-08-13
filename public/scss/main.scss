@@ -1,5 +1,6 @@
 @import "header";
 @import "card";
+@import "menu";
 
 body {
     margin: 0;
@@ -35,9 +36,15 @@ a {
     list-style: none;
 
 }
+.cursor-pointer{
+    cursor: pointer;
+}
 
 .white-box {
     background: white;
+}
+.no-wrap{
+    white-space: nowrap;
 }
 
 .p-10 {
@@ -98,3 +105,26 @@ a {
     margin: 0px auto;
 }
 
+.btn {
+    background-color: $background-color_1;
+    border: none;
+    //box-sizing: border-box;
+    border-radius: 4px;
+    cursor: pointer;
+    //outline: 0;
+    //z-index: 1;
+    width: 48px;
+    //float: right;
+    height: 28px;
+    color: $color_1;
+    font-size: 1.25rem;
+    margin-left: 4px;
+    //box-shadow: none;
+    //line-height: 28px;
+    vertical-align: middle;
+    svg {
+        pointer-events: none;
+        width: 16px;
+        height: 16px;
+    }
+}
