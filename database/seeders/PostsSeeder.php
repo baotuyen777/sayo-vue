@@ -16,7 +16,7 @@ class PostsSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create();
-        $prices = [135000,4560000000, 740000,180000000];
+
         for ($i = 1; $i < 10; $i++) {
 
             DB::table('posts')->insert([
@@ -29,7 +29,7 @@ class PostsSeeder extends Seeder
                 'ward_id' => 5,
                 'district_id' => 2,
                 'province_id' => 1,
-                'price' => $prices[array_rand($prices)]
+                'price' => rand(50000000,2400000000)
             ]);
         }
 

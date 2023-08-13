@@ -30,6 +30,10 @@
         padding: 10px;
     }
 
+    &__footer{
+        margin: 5px 0;
+    }
+
     &__price {
         color: #d0021b;
         display: inline-block;
@@ -64,17 +68,7 @@
     border-radius: 20%;
 }
 
-/*product*/
 
-.post {
-
-}
-
-.product .product__footer {
-    font-size: 11px;
-    display: flex;
-    gap: 10px
-}
 
 .product .product__feedback {
     position: absolute;

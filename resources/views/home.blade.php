@@ -28,13 +28,11 @@
         <div class="container">
             <div class="card">
                 <h2>Tin đăng dành cho bạn</h2>
-                {{--                <div class="card__body">--}}
                 <div class="d-flex-wrap grid-6">
                     @foreach($posts as $post)
-                        @include('component.product',['obj'=> $post])
+                        @include('component.post',['obj'=> $post])
                     @endforeach
                 </div>
-                {{--                </div>--}}
             </div>
             <div class="p-10">
                 <a class="view-more">Xem thêm <i id="arrowIcon" class="fa fa-angle-down"></i></a>
