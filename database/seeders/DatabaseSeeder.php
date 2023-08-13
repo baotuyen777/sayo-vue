@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('medias')->insert(['name' => 1, 'url' => 'uploads/2023-08-12/3f115d4b4d8285dcdc93.jpg']);
+        DB::table('medias')->insert(['name' => 2, 'url' => 'uploads/2023-08-12/33.jpg']);
+
         $this->call([
             PdwsSeeder::class,
             DepartmentSeeder::class,
@@ -39,8 +42,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        DB::table('medias')->insert(['name' => 1, 'url' => 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png']);
-        DB::table('medias')->insert(['name' => 2, 'url' => 2]);
+
 
         DB::table('posts_gallery')->insert([
             'posts_id' => 1,

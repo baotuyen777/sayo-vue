@@ -12,6 +12,8 @@
 
 > compile sass: setting->tool->file watcher -> create scss-> include folder
 
+> composer dump-autoload
+
 
 phpstorm
 select text ctr+j  ctr+al+shift => multi cursor

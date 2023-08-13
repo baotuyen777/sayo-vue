@@ -20,7 +20,7 @@
 
 <header class="main-header">
     <div class="d-flex container">
-        <div class="aw__la2dsz4" style="--la2dsz4-0: 20%; --la2dsz4-2: unset;">
+        <div class="aw__la2dsz4">
             <div class="m-r-20">
                 <a><img src="<?php echo env('APP_URL') ?>/img/logo-white.png" alt="sayo-logo" style="height: 45px; "></a></div>
             <div class="">

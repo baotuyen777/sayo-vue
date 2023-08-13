@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->string('name');
             $table->string('code')->unique();
             $table->text('content')->nullable();
-            $table->integer('status')->default(1);
-            $table->integer('price')->default(0);
+            $table->tinyInteger('status')->default(1);
+            $table->bigInteger('price')->default(0);
             $table->string('address')->default(0);
 
             $table->unsignedBigInteger('ward_id')->nullable();
