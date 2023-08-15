@@ -25,4 +25,6 @@ class Category extends Model
             ->select(['medias.*'])
             ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", medias.url) as url ');
     }
+
+
 }

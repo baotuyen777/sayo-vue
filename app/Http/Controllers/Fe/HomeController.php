@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -16,4 +17,40 @@ class HomeController extends Controller
 
         return view('home', ['categories' => $categories, 'posts' => $posts]);
     }
+
+    public function archive(Request $request, $catSlug)
+    {
+        $s = $request->input('s');
+        $currentPage = $request->input('current') ?? 1;
+        $pageSize = $request->input('page_size') ?? 20;
+
+        $category = Category::where('code', $catSlug)->first();
+        $posts = Posts::select('*')
+            ->where('name', 'like', "%{$s}%")
+            ->whereHas('category', function ($query) use ($catSlug) {
+                $query->where('code', $catSlug);
+            })
+            ->with('avatar')
+            ->with('gallery')
+            ->paginate($pageSize, ['*'], 'page', $currentPage);
+
+        return view('pages/archive', ['posts' => $posts, 'category' => $category]);
+    }
+
+    public function postDetail($postId)
+    {
+//        $s = $request->input('s');
+//        $currentPage = $request->input('current') ?? 1;
+//        $pageSize = $request->input('page_size') ?? 20;
+//
+//        $category = Category::where('code', $catSlug)->first();
+        $post = Posts::select('*')
+            ->with('avatar')
+            ->with('gallery')
+            ->with('category')
+            ->first();
+
+        return view('pages/post2', ['obj' => $post]);
+    }
+
 }

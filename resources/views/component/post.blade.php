@@ -1,10 +1,10 @@
 <div class="card card--product">
-    <a target="_blank" href="">
+    <a target="_blank" href="{{getProductUrl($obj)}}">
         <div class="avatar"
              style="background: url({{$obj['avatar']['url'] ?? asset('img/sayo-default-vertical.webp')}})"></div>
     </a>
     <div class="product__caption">
-        <a target="_blank" href="#" class="card__title">{{$obj['name']}}</a>
+        <a  href="#" class="card__title">{{$obj['name']}}</a>
         {{--        <div class="product__feedback">--}}
         {{--            <div>--}}
         {{--                <button type="button" aria-haspopup="true" aria-expanded="false">--}}

@@ -8,7 +8,7 @@
                 <div class="d-flex-wrap grid-2">
                     @foreach($categories as $category)
                         <div>
-                            <a href="#">
+                            <a href="{{getCatUrl($category['code'])}}">
                                 <div class="card--category">
                                     <img alt="{{$category['name']}}"
                                          src="{{$category['avatar']['url'] ?? asset('img/icon/sayo-bds.webp')}}"
@@ -46,7 +46,9 @@
             <div class="card">
                 <h2>Các từ khóa phổ biến</h2>
                 <ul>
-                    <li><a href="#">Samsung Note 10</a></li>
+                    <li><a href="#">Thanh lý quạt cũ</a></li>
+                    <li><a href="#">Thanh lý đèn led</a></li>
+                    <li><a href="#">Thanh lý nồi cơm điện</a></li>
                 </ul>
             </div>
 

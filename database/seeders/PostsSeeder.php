@@ -21,7 +21,7 @@ class PostsSeeder extends Seeder
 
             DB::table('posts')->insert([
                 'name' => $faker->name. $faker->name.$faker->name.$faker->name.$faker->name.'__' . $i,
-                'code' => 'code ' . $i,
+                'code' => time() .'_'. $i,
                 'content' => 'value ' . $i,
                 'category_id' => 1,
                 'avatar_id' => rand(1,2),

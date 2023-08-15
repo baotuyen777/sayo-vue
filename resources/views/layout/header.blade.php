@@ -21,7 +21,7 @@
     <div class="d-flex container">
         <div class="aw__la2dsz4">
             <div class="m-r-20">
-                <a><img src="<?php echo env('APP_URL') ?>/img/logo-white.png" alt="sayo-logo"
+                <a href="{{env('APP_URL')}}"><img src="<?php echo env('APP_URL') ?>/img/logo-white.png" alt="sayo-logo"
                         style="height: 45px; "></a></div>
             <div class="">
                 <div class="aw__i8z877t" style="--i8z877t-0: #222222;">

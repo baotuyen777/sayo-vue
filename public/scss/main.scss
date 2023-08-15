@@ -1,6 +1,7 @@
 @import "header";
 @import "card";
 @import "menu";
+@import "profile";
 
 body {
     margin: 0;
@@ -75,6 +76,13 @@ a {
     flex: 0 0 calc(16.667% - 20px);
     padding: 10px;
 }
+.col-md-4 {
+    width: 33.33333333%;
+}
+.col-md-8 {
+    width: 66.33333333%;
+}
+
 
 .m-r-20 {
     margin-right: 20px;

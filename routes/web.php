@@ -15,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 Route::view("/","home");
 Route::resource('/', \App\Http\Controllers\Fe\HomeController::class);
 
+Route::get('/cat/{slug}', [\App\Http\Controllers\Fe\HomeController::class, 'archive']);
+Route::get('/cat/{slug}', [\App\Http\Controllers\Fe\HomeController::class, 'archive']);
+Route::get('/mua-ban-{catSlug}/{postId}.htm', [\App\Http\Controllers\Fe\HomeController::class, 'postDetail']);
+
 Route::view("/admin/{any}","app")->where("any",".*");
 
