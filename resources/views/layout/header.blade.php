@@ -22,7 +22,7 @@
         <div class="aw__la2dsz4">
             <div class="m-r-20">
                 <a href="{{env('APP_URL')}}"><img src="<?php echo env('APP_URL') ?>/img/logo-white.png" alt="sayo-logo"
-                        style="height: 45px; "></a></div>
+                                                  style="height: 45px; "></a></div>
             <div class="">
                 <div class="aw__i8z877t" style="--i8z877t-0: #222222;">
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -48,30 +48,16 @@
                 </div>
             </div>
         </div>
-        <div class="aw__c8p27ky">
-            <div class="aw__s1wdsl35">
-                <div>
-                    <div class="aw__slq94yq" style="--slq94yq-4: #fff;">
-                        <div id="autoComplete">
-                            <div class="aw__d1g2y39b">
-                                <div class="aw__s7k33ul">
-                                    <div class="btn-search">
-                                        <button class="btn">
-                                            <svg xmlns="http://www.w3.org/2000/svg" data-type="monochrome"
-                                                 viewBox="0 0 16 16" width="1em" height="1em" fill="none">
-                                                <path fill="currentColor"
-                                                      d="M6.4 0a6.369 6.369 0 00-4.525 1.873A6.425 6.425 0 00.502 3.906v.002A6.383 6.383 0 000 6.398a6.372 6.372 0 001.875 4.524 6.385 6.385 0 008.428.537l-.006.006 4.295 4.293a.827.827 0 001.166-1.166l-4.295-4.295a6.368 6.368 0 00-.537-8.424A6.372 6.372 0 006.4 0zm0 1.615a4.75 4.75 0 013.383 1.4c.44.44.785.95 1.028 1.522h-.002c.249.59.377 1.214.377 1.861 0 .648-.128 1.27-.377 1.862h.002a4.783 4.783 0 01-2.55 2.545c-.59.25-1.213.377-1.86.377a4.761 4.761 0 01-1.864-.377A4.749 4.749 0 013.016 9.78c-.44-.44-.783-.95-1.024-1.521a4.735 4.735 0 01-.377-1.862c0-.647.127-1.272.377-1.863a4.75 4.75 0 011.024-1.52 4.754 4.754 0 013.384-1.4z"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <input autocomplete="off" placeholder="Tìm kiếm sản phẩm - Dịch vụ trên Sayo"
-                                           id="__inputItemProps" type="text" class="aw__t16o28i7" value=""
-                                           style="--t16o28i7-3: 36px; --t16o28i7-5: #fff; --t16o28i7-6: 35px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="search-form-wrapper">
+            <div class="search-form">
+                <input autocomplete="off" placeholder="Tìm kiếm sản phẩm - Dịch vụ trên Sayo" class="aw__t16o28i7">
+                <button class="btn btn--primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" data-type="monochrome"
+                         viewBox="0 0 16 16" width="1em" height="1em" fill="none">
+                        <path fill="currentColor"
+                              d="M6.4 0a6.369 6.369 0 00-4.525 1.873A6.425 6.425 0 00.502 3.906v.002A6.383 6.383 0 000 6.398a6.372 6.372 0 001.875 4.524 6.385 6.385 0 008.428.537l-.006.006 4.295 4.293a.827.827 0 001.166-1.166l-4.295-4.295a6.368 6.368 0 00-.537-8.424A6.372 6.372 0 006.4 0zm0 1.615a4.75 4.75 0 013.383 1.4c.44.44.785.95 1.028 1.522h-.002c.249.59.377 1.214.377 1.861 0 .648-.128 1.27-.377 1.862h.002a4.783 4.783 0 01-2.55 2.545c-.59.25-1.213.377-1.86.377a4.761 4.761 0 01-1.864-.377A4.749 4.749 0 013.016 9.78c-.44-.44-.783-.95-1.024-1.521a4.735 4.735 0 01-.377-1.862c0-.647.127-1.272.377-1.863a4.75 4.75 0 011.024-1.52 4.754 4.754 0 013.384-1.4z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
         <div class="aw__r1fkdta0">
@@ -100,7 +86,8 @@
 
 
 <div class="main-menu" style="position: absolute; top: 0px; left: 0px; right: 0px;">
-    <span class="show exit aw__mxjwfwa" style="--mxjwfwa-1: 150ms; position: fixed; top: 93.9972px; left: 177.969px; will-change: top, left, width, height;"><a
+    <span class="show exit aw__mxjwfwa"
+          style="--mxjwfwa-1: 150ms; position: fixed; top: 93.9972px; left: 177.969px; will-change: top, left, width, height;"><a
             href="https://www.nhatot.com/?_gl=1*l0k0pb*_ga*ODg2MTIwOTAwLjE2ODc2OTU4MTA.*_ga_XQVN5K27XX*MTY5MTkyMjY5MS44LjEuMTY5MTkyNjE3MC4yMS4wLjA.&amp;_ga=2.135694833.1724001166.1691825144-886120900.1687695810"
             class="menuItem">
             <span class="aw__ngv58n8"><span class="aw__lza0u1"><img

@@ -50,7 +50,7 @@ class HomeController extends Controller
             ->with('category')
             ->first();
 
-        return view('pages/post2', ['obj' => $post]);
+        return view('pages/post', ['obj' => $post]);
     }
 
 }

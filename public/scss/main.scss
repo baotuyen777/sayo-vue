@@ -1,7 +1,7 @@
 @import "header";
 @import "card";
 @import "menu";
-@import "profile";
+@import "post-detail";
 
 body {
     margin: 0;
@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 980px;
     margin: 0 auto;
 }
 
@@ -37,14 +37,16 @@ a {
     list-style: none;
 
 }
-.cursor-pointer{
+
+.cursor-pointer {
     cursor: pointer;
 }
 
 .white-box {
     background: white;
 }
-.no-wrap{
+
+.no-wrap {
     white-space: nowrap;
 }
 
@@ -72,13 +74,16 @@ a {
     flex: 0 0 calc(20% - 20px);
     padding: 10px;
 }
+
 .grid-6 > div {
     flex: 0 0 calc(16.667% - 20px);
     padding: 10px;
 }
+
 .col-md-4 {
     width: 33.33333333%;
 }
+
 .col-md-8 {
     width: 66.33333333%;
 }
@@ -114,25 +119,21 @@ a {
 }
 
 .btn {
-    background-color: $background-color_1;
     border: none;
-    //box-sizing: border-box;
     border-radius: 4px;
     cursor: pointer;
-    //outline: 0;
-    //z-index: 1;
-    width: 48px;
-    //float: right;
-    height: 28px;
-    color: $color_1;
-    font-size: 1.25rem;
-    margin-left: 4px;
-    //box-shadow: none;
-    //line-height: 28px;
-    vertical-align: middle;
+    padding: 4px 8px;
+    outline: none;
+
     svg {
-        pointer-events: none;
+        //pointer-events: none;
         width: 16px;
         height: 16px;
     }
+
+    &--primary {
+        background: $background-color_1;
+        color: $white;
+    }
+
 }
