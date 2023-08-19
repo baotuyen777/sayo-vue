@@ -1,6 +1,12 @@
 <div>
-    <div></div>
-    <div class="" style="position: fixed; top: 140px; width: 318.068px;">
+    <div>
+
+    </div>
+    <div class="" style="position: fixed; top: 80px; width: 318.068px;">
+        <div class="NextAds_buttonWraper__oSIaL">
+            <button class="NextAds_preAds__FsxYM" type="button">Về danh sách</button>
+            <button class="NextAds_nextAds__pn7aA" type="button">Tin Tiếp</button>
+        </div>
         <div class="d-lg-block d-none">
             <div class="SellerProfile_profileWrapper__ubLwW " itemprop="seller" itemscope=""
                  itemtype="http://schema.org/Person"><a
@@ -74,10 +80,11 @@
                     alt="chat"><span class="text-success"><span>Chat</span></span></a></div>
         <div class="d-lg-block d-none">
             <div>
-                <div class="SafeTips_SafeTipsWrapper___i5Fm"><img alt="safe tips"
-                                                                  class="pull-left" width="100"
-                                                                  height="auto"
-                                                                  src="https://st.chotot.com/storage/images/tips/4_other_cate.png">
+                <div class="SafeTips_SafeTipsWrapper___i5Fm">
+                    <img alt="safe tips"
+                         class="pull-left" width="100"
+                         height="auto"
+                         src="{{ env('APP_URL') }}/img/mua-ban.png">
                     <div class="SafeTips_TipText__mMXwX"><p style="font-size: 13px;">Hẹn gặp ở
                             nơi công cộng và quen thuộc khi giao dịch.</p><a
                             href="https://trogiup.chotot.com/mua-hang-tai-chotot-vn/meo-mua-hang-tim-viec/meo-mua-hang-an-toan/?utm_source=chotot&amp;utm_medium=ad_view&amp;utm_campaign=safety_tip_adview"

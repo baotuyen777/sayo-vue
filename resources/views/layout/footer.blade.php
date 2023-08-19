@@ -8,8 +8,7 @@
                     <li><a>Quy chế hoạt động sàn</a></li>
                     <li><a>Chính sách bảo mật</a></li>
                     <li><a>Giải quyết tranh chấp</a></li>
-                    <li><a href="https://careers.sayo.vn"
-                        >Tuyển dụng</a></li>
+                    <li><a href="https://careers.sayo.vn">Tuyển dụng</a></li>
 
                 </ul>
             </div>
@@ -18,7 +17,3 @@
     </section>
 
 </footer>
-</div>
-
-</body>
-</html>

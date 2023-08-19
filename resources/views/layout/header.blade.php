@@ -12,7 +12,7 @@
     <meta property="og:title" content="Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt">
     <meta property="og:description"
           content="Sayo - Website mua bán rao vặt của người Việt với hàng ngàn món hời đang được rao bán mỗi ngày. Đăng tin mua bán UY TÍN, NHANH CHÓNG, AN TOÀN.">
-    <link rel="stylesheet" href="<?php echo env('APP_URL') ?>/css/main.css" type="text/css">
+    <link rel="stylesheet" href="{{env('APP_URL')}}/css/main.css" type="text/css">
 
 </head>
 <body>
@@ -21,7 +21,7 @@
     <div class="d-flex container">
         <div class="aw__la2dsz4">
             <div class="m-r-20">
-                <a href="{{env('APP_URL')}}"><img src="<?php echo env('APP_URL') ?>/img/logo-white.png" alt="sayo-logo"
+                <a href="{{env('APP_URL')}}"><img src="{{ env('APP_URL') }}/img/logo-white.png" alt="sayo-logo"
                                                   style="height: 45px; "></a></div>
             <div class="">
                 <div class="aw__i8z877t" style="--i8z877t-0: #222222;">

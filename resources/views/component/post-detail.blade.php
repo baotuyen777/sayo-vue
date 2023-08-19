@@ -41,16 +41,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 col-xs-12">
-                <div class="NextAds_buttonWraper__oSIaL">
-                    <button class="NextAds_preAds__FsxYM" type="button">Về danh sách</button>
-                    <button class="NextAds_nextAds__pn7aA" type="button">Tin Tiếp</button>
-                </div>
-            </div>
+{{--            <div class="col-sm-4 col-xs-12">--}}
+{{--                <div class="NextAds_buttonWraper__oSIaL">--}}
+{{--                    <button class="NextAds_preAds__FsxYM" type="button">Về danh sách</button>--}}
+{{--                    <button class="NextAds_nextAds__pn7aA" type="button">Tin Tiếp</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
-        <div style="margin: 10px 0px;">
-            <div></div>
-        </div>
+
         <div class="col-md-8">
             <div class="AdImage_adImageWrapper__HkN6D"
                  style="background-image:url(https://static.chotot.com/storage/logo/svg/chotot-logo-text.svg);background-position:center center;background-repeat:no-repeat;background-color:#eee;background-size:50% auto">
