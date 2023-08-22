@@ -48,8 +48,9 @@ class HomeController extends Controller
             ->with('avatar')
             ->with('gallery')
             ->with('category')
+            ->with('author')
             ->first();
-
+//dd($post);
         return view('pages/post', ['obj' => $post]);
     }
 

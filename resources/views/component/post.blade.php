@@ -27,9 +27,10 @@
         <div><span class="card__price">{{moneyFormat($obj['price'])}}</span></div>
     </div>
     <div class="card__footer text-small text-gray">
-        <img height="16"
-             src="https://static.chotot.com/storage/chotot-icons/svg/user.svg"
-             alt="{{$obj['author']['name'] ?? 'sayo'}}">
+{{--        <img height="16"--}}
+{{--             src="https://static.chotot.com/storage/chotot-icons/svg/user.svg"--}}
+{{--             alt="{{$obj['author']['name'] ?? 'sayo'}}">   --}}
+        <img height="16" src="https://static.chotot.com/storage/chotot-icons/svg/user.svg">
         <span>Hà Nội- hôm qua</span>
     </div>
 </div>

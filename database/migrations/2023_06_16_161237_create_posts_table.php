@@ -19,6 +19,8 @@ return new class extends Migration {
             $table->bigInteger('price')->default(0);
             $table->string('address')->default(0);
 
+            $table->json('attr')->nullable();
+
             $table->unsignedBigInteger('ward_id')->nullable();
             $table->foreign('ward_id')->references('id')->on('pdws')->onDelete('cascade');
 
@@ -36,8 +38,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -54,7 +56,7 @@ return new class extends Migration {
              $table->dropForeign(['province_id']);
              $table->dropForeign(['avatar_id']);
              $table->dropForeign(['category_id']);
-             $table->dropForeign(['user_id']);
+             $table->dropForeign(['author_id']);
         });
         Schema::dropIfExists('posts');
     }

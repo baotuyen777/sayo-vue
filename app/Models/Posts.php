@@ -41,6 +41,10 @@ class Posts extends Model
             ->select(['medias.*'])
             ->selectRaw('CONCAT("' .  env('MEDIA_URL') . '", medias.url) as url');
     }
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 
 
 }

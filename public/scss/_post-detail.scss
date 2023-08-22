@@ -458,39 +458,39 @@ button {
 }
 
 
-.slick-list, .slick-slider, .slick-track {
+.slick-slider, .slick-track {
     position: relative;
     display: block
 }
 
-.slick-loading .slick-slide, .slick-loading .slick-track {
-    visibility: hidden
-}
+//.slick-loading .slick-slide, .slick-loading .slick-track {
+//    visibility: hidden
+//}
 
-.slick-slider {
-    box-sizing: border-box;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none;
-    -khtml-user-select: none;
-    touch-action: pan-y;
-    -webkit-tap-highlight-color: transparent
-}
+//.slick-slider {
+//    box-sizing: border-box;
+//    -webkit-user-select: none;
+//    -moz-user-select: none;
+//    user-select: none;
+//    -webkit-touch-callout: none;
+//    -khtml-user-select: none;
+//    touch-action: pan-y;
+//    -webkit-tap-highlight-color: transparent
+//}
 
-.slick-list {
-    overflow: hidden;
-    padding: 0;
-    margin: 0 -6px
-}
+//.slick-list {
+//    overflow: hidden;
+//    padding: 0;
+//    margin: 0 -6px
+//}
 
-.slick-list:focus {
-    outline: 0
-}
+//.slick-list:focus {
+//    outline: 0
+//}
 
-.slick-slider .slick-list, .slick-slider .slick-track {
-    transform: translateZ(0)
-}
+//.slick-slider .slick-list, .slick-slider .slick-track {
+//    transform: translateZ(0)
+//}
 
 .slick-track {
     top: 0;
@@ -507,12 +507,12 @@ button {
 }
 
 .slick-slide {
-    display: none;
+    //display: none;
     float: left;
-    height: 100%;
-    padding: 0 6px;
-    box-sizing: border-box;
-    min-height: 1px
+    //height: 100%;
+    //padding: 0 6px;
+    //box-sizing: border-box;
+    //min-height: 1px
 }
 
 [dir=rtl] .slick-slide {
@@ -622,87 +622,6 @@ button {
 
 .slick-dots .slick-active button {
     background-color: #fff
-}
-
-.slick-slider.slick-initialized {
-    margin-bottom: -5px !important
-}
-
-/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.com | MIT license *//*! PhotoSwipe Default UI CSS by Dmitry Semenov | photoswipe.com | MIT license */
-@keyframes clockwise {
-    0% {
-        transform: rotate(0)
-    }
-    to {
-        transform: rotate(1turn)
-    }
-}
-
-@keyframes donut-rotate {
-    0% {
-        transform: rotate(0)
-    }
-    50% {
-        transform: rotate(-140deg)
-    }
-    to {
-        transform: rotate(0)
-    }
-}
-
-@keyframes amCheckboxIn {
-    0% {
-        opacity: 0;
-        transform-origin: 50% 50%;
-        transform: scale(0) rotate(45deg)
-    }
-    to {
-        opacity: 1;
-        transform-origin: 50% 50%;
-        transform: scale(1) rotate(45deg)
-    }
-}
-
-@keyframes amCheckboxOut {
-    0% {
-        opacity: 1
-    }
-    to {
-        opacity: 0
-    }
-}
-
-@keyframes rcSliderTooltipZoomDownIn {
-    0% {
-        opacity: 0;
-        transform-origin: 50% 100%;
-        transform: scale(0)
-    }
-    to {
-        transform-origin: 50% 100%;
-        transform: scale(1)
-    }
-}
-
-@keyframes rcSliderTooltipZoomDownOut {
-    0% {
-        transform-origin: 50% 100%;
-        transform: scale(1)
-    }
-    to {
-        opacity: 0;
-        transform-origin: 50% 100%;
-        transform: scale(0)
-    }
-}
-
-* {
-    box-sizing: border-box
-}
-
-body {
-    background-color: #f4f4f4;
-    -webkit-overflow-scrolling: touch
 }
 
 @font-face {
@@ -1097,10 +1016,11 @@ $color_2: #000;
     background-repeat: no-repeat;
     background-color: #d0a707;
     background-size: 50% auto;
-    background-image:url("https://sayo.vn/img/logo-white.png");
+    background-image: url("https://sayo.vn/img/logo-white.png");
+    height: 495px;
 
-    .item{
-
+    .item {
+        width: 620px;
     }
 }
 
@@ -1139,11 +1059,11 @@ $color_2: #000;
     vertical-align: middle
 }
 
-.post-slider .AdImage_sliderWrapper___jIpt {
-    width: 100%;
-    position: relative;
-    outline: 0
-}
+//.post-slider .AdImage_sliderWrapper___jIpt {
+//    width: 100%;
+//    position: relative;
+//    outline: 0
+//}
 
 .post-slider .AdImage_sliderWrapper___jIpt:after {
     padding-top: 75%;
