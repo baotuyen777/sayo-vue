@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 function moneyFormat($number): string
 {
     if ($number < 1000000) {
@@ -33,5 +35,39 @@ function getCatUrl($code): string
 
 function getProductUrl($post): string
 {
-    return env('APP_URL') . "/mua-ban-{$post['category']['code']}/" . $post["code"].'.htm';
+    return env('APP_URL') . "/mua-ban-{$post['category']['code']}/" . $post["code"] . '.htm';
+}
+
+function getPageUrl($code): string
+{
+    return env('APP_URL') . "/page/{$code}" . '.htm';
+}
+
+function showHumanTime($actionTime)
+{
+    $actionTime = Carbon::parse($actionTime);
+    $currentDateTime = Carbon::now();
+
+    $timeDifference = $currentDateTime->diff($actionTime);
+    $days = $timeDifference->d;
+    $hours = $timeDifference->h;
+    $minutes = $timeDifference->i;
+
+    $timeString = '';
+
+    if ($days > 0) {
+        $timeString .= $days . ' NGày' . ($days > 1 ? 's' : '') . ' ';
+    }
+
+    if ($hours > 0) {
+        $timeString .= $hours . ' Giờ' . ($hours > 1 ? 's' : '') . ' ';
+    }
+
+    if ($minutes > 0) {
+        $timeString .= $minutes . ' Phút' . ($minutes > 1 ? 's' : '') . ' ';
+    }
+
+    $timeString .= ' trước';
+
+    return $timeString;
 }

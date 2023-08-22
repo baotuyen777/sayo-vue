@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -31,6 +32,7 @@ class PostsSeeder extends Seeder
                 'province_id' => 1,
                 'price' => rand(50000, 2400000000),
                 'attr' => json_encode(['material' => 'Gỗ']),
+                'created_at'=> Carbon::now(),
             ]);
         }
 

@@ -4,22 +4,7 @@
     <main>
         <div class="container">
             <div class="ct-detail adview">
-                <ol class="breadcrumb">
-                    <li><a href="https://www.chotot.com">Sayo</a></li>
-                    <li>
-                        <a href="https://www.chotot.com/mua-ban-ban-ghe"><span
-                            >Bàn ghế</span></a></li>
-                    <li>
-                        <a href="https://www.chotot.com/mua-ban-ban-ghe-ha-noi"><span
-                            >Bàn ghế Hà Nội</span></a></li>
-                    <li>
-                        <a href="https://www.chotot.com/mua-ban-ban-ghe-quan-nam-tu-liem-ha-noi"><span
-                            >Bàn ghế Quận Nam Từ Liêm</span></a>
-                    </li>
-                    <li class="BreadCrumb_breadcrumbItem__M8Q4i" itemprop="itemListElement">
-                        <span>ghế xoay mới 95%</span>
-                    </li>
-                </ol>
+               @include('component.breadcrumb')
 
                 <div class="row base">
                     <div class="col-md-8">
@@ -31,7 +16,7 @@
                                     {{moneyFormat($obj['price'])}}
                                 </div>
                                 <button type="button" class="SaveAd_saveAdViewDetail__UGkS5"><p
-                                        style="margin: 0px;">Lưu tin </p><img height="20" width="20"
+                                        style="margin: 0">Lưu tin </p><img height="20" width="20"
                                                                               src="https://static.chotot.com/storage/icons/saveAd/save-ad.svg"
                                                                               alt="like" loading="lazy"></button>
                             </div>

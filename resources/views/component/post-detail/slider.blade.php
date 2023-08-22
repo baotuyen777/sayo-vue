@@ -47,6 +47,6 @@
         </ul>
     </div>
     <div class="AdImage_imageCaption__aUFNp">
-        <span class="AdImage_imageCaptionText__ScM56">Tin cá nhân đăng 23 giờ trước</span>
+        <span class="AdImage_imageCaptionText__ScM56">Tin cá nhân đăng {{showHumanTime($obj['created_at'])}}</span>
     </div>
 </div>

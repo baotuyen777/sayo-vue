@@ -39,11 +39,6 @@ class HomeController extends Controller
 
     public function postDetail($postId)
     {
-//        $s = $request->input('s');
-//        $currentPage = $request->input('current') ?? 1;
-//        $pageSize = $request->input('page_size') ?? 20;
-//
-//        $category = Category::where('code', $catSlug)->first();
         $post = Posts::select('*')
             ->with('avatar')
             ->with('gallery')
@@ -52,6 +47,13 @@ class HomeController extends Controller
             ->first();
 //dd($post);
         return view('pages/post', ['obj' => $post]);
+    }
+
+    public function page($code)
+    {
+        $obj = Posts::where('code', $code)->first();
+//dd($post);
+        return view('pages/page', ['obj' => $obj]);
     }
 
 }

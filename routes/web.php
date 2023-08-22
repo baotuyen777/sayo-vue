@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Fe\HomeController;
 
-/*
+    /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -13,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::view("/","home");
-Route::resource('/', \App\Http\Controllers\Fe\HomeController::class);
+Route::resource('/', HomeController::class);
 
-Route::get('/cat/{slug}', [\App\Http\Controllers\Fe\HomeController::class, 'archive']);
-Route::get('/cat/{slug}', [\App\Http\Controllers\Fe\HomeController::class, 'archive']);
-Route::get('/mua-ban-{catSlug}/{postId}.htm', [\App\Http\Controllers\Fe\HomeController::class, 'postDetail']);
+Route::get('/cat/{slug}', [HomeController::class, 'archive']);
+
+Route::get('/mua-ban-{catSlug}/{postId}.htm', [HomeController::class, 'postDetail']);
+Route::get('/page/{slug}.htm', [HomeController::class, 'page']);
 
 Route::view("/admin/{any}","app")->where("any",".*");
 
