@@ -2,7 +2,7 @@
     <section class="container">
         <div class="d-flex grid-3">
 
-            <div class="aw__i1ce1r9u"><p>Về SAYO</p>
+            <div class=""><p>Về SAYO</p>
                 <ul>
                     <li><a href="{{getPageUrl('gioi-thieu')}}">Giới thiệu</a></li>
                     <li><a>Quy chế hoạt động sàn</a></li>

@@ -240,18 +240,11 @@ $border-color_4: currentColor;
 }
 
 .aw__r1fkdta0 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
+
     display: flex;
     gap: 16px;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
+
     justify-content: center;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     >span {
         z-index: 101;
@@ -296,5 +289,11 @@ $border-color_4: currentColor;
             height: 24px;
             margin-right: 5px;
         }
+    }
+}
+
+@media (max-width: 991px) {
+    .aw__r1fkdta0, .search-form-wrapper, .aw__i8z877t{
+        display: none;
     }
 }

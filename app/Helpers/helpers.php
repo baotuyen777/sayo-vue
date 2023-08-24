@@ -56,15 +56,15 @@ function showHumanTime($actionTime)
     $timeString = '';
 
     if ($days > 0) {
-        $timeString .= $days . ' NGày' . ($days > 1 ? 's' : '') . ' ';
+        $timeString .= $days . ' Ngày ';
     }
 
     if ($hours > 0) {
-        $timeString .= $hours . ' Giờ' . ($hours > 1 ? 's' : '') . ' ';
+        $timeString .= $hours . ' Giờ ';
     }
 
     if ($minutes > 0) {
-        $timeString .= $minutes . ' Phút' . ($minutes > 1 ? 's' : '') . ' ';
+        $timeString .= $minutes . ' Phút ';
     }
 
     $timeString .= ' trước';

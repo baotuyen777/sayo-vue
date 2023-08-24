@@ -137,3 +137,41 @@ a {
     }
 
 }
+
+@media (max-width: 991px){
+    .grid-2 > div {
+        width: 30%;
+    }
+
+    .grid-3 > div {
+        width: 50%;
+    }
+    //
+    //.grid-5 > div {
+    //    flex: 0 0 calc(20% - 20px);
+    //    padding: 10px;
+    //}
+    //
+    .grid-6 > div {
+        flex: 0 0 calc(30% - 20px);
+    }
+}
+
+@media (max-width: 540px){
+    .grid-2 > div {
+        width: 30%;
+    }
+
+    //.grid-3 > div {
+    //    width: 50%;
+    //}
+    //
+    //.grid-5 > div {
+    //    flex: 0 0 calc(20% - 20px);
+    //    padding: 10px;
+    //}
+    //
+    .grid-6 > div {
+        flex: 0 0 calc(50% - 20px);
+    }
+}

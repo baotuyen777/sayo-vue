@@ -11,7 +11,7 @@
                             <a href="{{getCatUrl($category['code'])}}">
                                 <div class="card--category">
                                     <img alt="{{$category['name']}}"
-                                         src="{{$category['avatar']['url'] ?? asset('img/icon/sayo-bds.webp')}}"
+                                         src="{{$category['avatar']['url'] ?? asset('img/icon/sayo-'.$category['code'].'.webp') ??  asset('img/icon/sayo-bds.webp')}}"
                                     >
                                     <div class="card__title">{{$category['name']}}</div>
                                 </div>

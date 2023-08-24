@@ -1,5 +1,5 @@
 <div class="card card--product">
-    <a target="_blank" href="{{getProductUrl($obj)}}">
+    <a  href="{{getProductUrl($obj)}}">
         <div class="avatar"
              style="background: url({{$obj['avatar']['url'] ?? asset('img/sayo-default-vertical.webp')}})"></div>
     </a>

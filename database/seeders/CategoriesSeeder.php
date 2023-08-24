@@ -21,6 +21,13 @@ CategoriesSeeder extends Seeder
             ['name' => 'Đồ điện tử', 'code' => 'do-dien-tu'],
             ['name' => 'Đồ gia dụng', 'code' => 'do-gia-dung'],
             ['name' => 'Dịch vụ', 'code' => 'dich-vu'],
+            ['name' => 'Mẹ và bé', 'code' => 'me-va-be'],
+            ['name' => 'Thú cưng', 'code' => 'thu-cung'],
+            ['name' => 'Đồ ăn', 'code' => 'do-an'],
+            ['name' => 'Điện lạnh', 'code' => 'dien-lanh'],
+            ['name' => 'Thời trang', 'code' => 'thoi-trang'],
+            ['name' => 'Văn phòng', 'code' => 'van-phong'],
+            ['name' => 'Cho tặng miễn phí', 'code' => 'cho-tang-mien-phi'],
             ['name' => 'Khác', 'code' => 'khac'],
         ];
         foreach ($rows as $row) {
