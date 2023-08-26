@@ -13,6 +13,7 @@
 @yield('content')
 @include('layout.footer')
 <script src='https://icybernet.vn/wp-includes/js/jquery/jquery.min.js?ver=3.6.1' id='jquery-core-js'></script>
+<script src='{{ env('APP_URL')}}/js/toastr.min.js' ></script>
 <script src='{{ env('APP_URL')}}/js/main.js' ></script>
 </body>
 </html>

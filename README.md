@@ -13,6 +13,7 @@
 > compile sass: setting->tool->file watcher -> create scss-> include folder
 
 > composer dump-autoload
+> php artisan db:wipe -> xóa db nếu ko thể chạy migrate:refresh
 
 
 phpstorm

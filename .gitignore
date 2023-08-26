@@ -22,3 +22,4 @@ yarn-error.log
 /.vscode
 */api-docs
 .user.ini
+*.log

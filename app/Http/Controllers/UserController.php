@@ -22,9 +22,11 @@ class UserController extends Controller
         $pageSize = $request->input('page_size') ?? 5;
 //        return User::get();
         $rolesLabel = DB::raw('if(role < 3, "Staff", "Khách") as role_label');
+        $selectStatus = DB::raw('if(status = 1, "Hoạt động", "Tạm dừng") as status_label');
+
         $user = User::join('departments', 'users.departments_id', '=', 'departments.id')
-            ->join('users_status', 'users.status_id', '=', 'users_status.id')
-            ->select('users.*', 'departments.name as departments_name', 'users_status.name as users_status_name', $rolesLabel)
+
+            ->select('users.*', 'departments.name as departments_name', 'users_status.name as users_status_name', $rolesLabel,$selectStatus)
             ->where('users.name', 'like', "%{$s}%")
             ->paginate($pageSize);
         return response()->json($user);

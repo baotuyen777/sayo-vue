@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PdwsSeeder::class,
             DepartmentSeeder::class,
-            UserStatusSeeder::class,
             UserSeeder::class,
             CategoriesSeeder::class,
             SettingsSeeder::class,
@@ -41,7 +40,6 @@ class DatabaseSeeder extends Seeder
                 'user_id' => 1,
             ]);
         }
-
 
 
         DB::table('posts_gallery')->insert([
