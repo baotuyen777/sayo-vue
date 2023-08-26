@@ -43,3 +43,8 @@ jQuery(document).ready(function ($) {
     });
 
 });
+
+jQuery('.account-menu').click(function (){
+    console.log(111);
+    jQuery(this).find('.menu').toggle('show')
+});

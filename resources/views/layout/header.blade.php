@@ -21,32 +21,33 @@
     <div class="d-flex container">
         <div class="aw__la2dsz4">
             <div class="m-r-20">
-                <a href="{{env('APP_URL')}}"><img src="{{ env('APP_URL') }}/img/logo-white.png" alt="sayo-logo"
-                                                  style="height: 45px; "></a></div>
-            <div class="">
-                <div class="aw__i8z877t" style="--i8z877t-0: #222222;">
-                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"
-                         class="">
-                        <g clip-path="url(#clip0_5847_24383)">
-                            <path
-                                d="M4 18.5H20C20.55 18.5 21 18.05 21 17.5C21 16.95 20.55 16.5 20 16.5H4C3.45 16.5 3 16.95 3 17.5C3 18.05 3.45 18.5 4 18.5ZM4 13.5H20C20.55 13.5 21 13.05 21 12.5C21 11.95 20.55 11.5 20 11.5H4C3.45 11.5 3 11.95 3 12.5C3 13.05 3.45 13.5 4 13.5ZM3 7.5C3 8.05 3.45 8.5 4 8.5H20C20.55 8.5 21 8.05 21 7.5C21 6.95 20.55 6.5 20 6.5H4C3.45 6.5 3 6.95 3 7.5Z"
-                                fill="#222222"></path>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_5847_24383">
-                                <rect width="24" height="24" fill="white" transform="translate(0 0.5)"></rect>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                    <span class="d-flex cursor-pointer">
-                        <span class="no-wrap">Danh mục</span>
-                        <svg
-                            width="1rem" height="1rem" viewBox="0 0 16 16" fill="none"
-                            xmlns="http://www.w3.org/2000/svg" class="aw__dtt35j3"><path
-                                d="M4.67154 5.99959C4.9323 5.74067 5.35336 5.74141 5.6132 6.00125L8.19653 8.58458L10.7863 6.00048C11.0461 5.74125 11.4668 5.74148 11.7263 6.00099C11.986 6.26071 11.986 6.68179 11.7263 6.94151L8.90364 9.76414C8.51312 10.1547 7.87995 10.1547 7.48943 9.76414L4.66987 6.94459C4.40872 6.68344 4.40947 6.25981 4.67154 5.99959Z"
-                                fill="currentColor"></path></svg></span>
-                </div>
-            </div>
+                <a href="{{env('APP_URL')}}">
+                    <img src="{{ env('APP_URL') }}/img/logo-white.png" alt="sayo-logo"
+                         style="height: 45px; "></a></div>
+            {{--            <div class="">--}}
+            {{--                <div class="aw__i8z877t" >--}}
+            {{--                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"--}}
+            {{--                         class="">--}}
+            {{--                        <g clip-path="url(#clip0_5847_24383)">--}}
+            {{--                            <path--}}
+            {{--                                d="M4 18.5H20C20.55 18.5 21 18.05 21 17.5C21 16.95 20.55 16.5 20 16.5H4C3.45 16.5 3 16.95 3 17.5C3 18.05 3.45 18.5 4 18.5ZM4 13.5H20C20.55 13.5 21 13.05 21 12.5C21 11.95 20.55 11.5 20 11.5H4C3.45 11.5 3 11.95 3 12.5C3 13.05 3.45 13.5 4 13.5ZM3 7.5C3 8.05 3.45 8.5 4 8.5H20C20.55 8.5 21 8.05 21 7.5C21 6.95 20.55 6.5 20 6.5H4C3.45 6.5 3 6.95 3 7.5Z"--}}
+            {{--                                fill="#222222"></path>--}}
+            {{--                        </g>--}}
+            {{--                        <defs>--}}
+            {{--                            <clipPath id="clip0_5847_24383">--}}
+            {{--                                <rect width="24" height="24" fill="white" transform="translate(0 0.5)"></rect>--}}
+            {{--                            </clipPath>--}}
+            {{--                        </defs>--}}
+            {{--                    </svg>--}}
+            {{--                    <span class="d-flex cursor-pointer">--}}
+            {{--                        <span class="no-wrap">Danh mục</span>--}}
+            {{--                        <svg--}}
+            {{--                            width="1rem" height="1rem" viewBox="0 0 16 16" fill="none"--}}
+            {{--                            xmlns="http://www.w3.org/2000/svg" class="aw__dtt35j3"><path--}}
+            {{--                                d="M4.67154 5.99959C4.9323 5.74067 5.35336 5.74141 5.6132 6.00125L8.19653 8.58458L10.7863 6.00048C11.0461 5.74125 11.4668 5.74148 11.7263 6.00099C11.986 6.26071 11.986 6.68179 11.7263 6.94151L8.90364 9.76414C8.51312 10.1547 7.87995 10.1547 7.48943 9.76414L4.66987 6.94459C4.40872 6.68344 4.40947 6.25981 4.67154 5.99959Z"--}}
+            {{--                                fill="currentColor"></path></svg></span>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
         </div>
         <div class="search-form-wrapper">
             <div class="search-form">
@@ -61,26 +62,12 @@
             </div>
         </div>
         <div class="aw__r1fkdta0">
-            <div class="aw__rjogxfr aw__nygw70q">
-                <div class="aw__n1kniwks">
-                    <div class="aw__wghp0cg">
-                        <div class="aw__neg216p">
-                            <div class="aw__mpdl6d2">
-                                <span class="avatar">
-                                    <img
-                                        class="aw__is4v2dl aw__i1408gg0 aw__uevk1au"
-                                        src="https://cdn.chotot.com/uac2/1047384" alt="Sayo">
-                                    <span
-                                        class="no-wrap">Ẩn danh</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('layout.account-menu')
             <a class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk"
                href="#" rel="nofollow">
-                ĐĂNG TIN</a></div>
+                ĐĂNG TIN</a>
+        </div>
+
     </div>
 </header>
 

@@ -132,10 +132,7 @@ $border-color_4: currentColor;
     height: 100%;
     font-weight: 400;
 }
-.aw__wghp0cg {
-    position: relative;
-    height: 100%;
-}
+
 
 .aw__s7k33ul {
     border: none;
@@ -267,6 +264,114 @@ $border-color_4: currentColor;
         display: flex;
     }
 }
+
+//account
+.account-menu {
+    position: relative;
+    cursor: pointer;
+    .menu {
+        position: absolute;
+        width: 300px;
+        top: 50px;
+        border: 1px solid rgba(0,0,0,0.15);
+        box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        border-top: none;
+        width: 290px;
+
+        left: 0px;
+        background: #FFFFFF;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 4px 0px;
+        display: none;
+        .show{
+            display: block;
+        }
+    }
+}
+
+.aw__ntc1674 {
+    position: relative;
+    padding: 12px;
+    width: 100%;
+    height: var(--ntc1674-2);
+}
+.aw__n1kniwks a {
+    font-size: 0.875rem;
+}
+.aw__d15qd39x {
+    display: block;
+    height: var(--d15qd39x-0);
+    background-color: var(--d15qd39x-1);
+    padding: var(--d15qd39x-2);
+    margin: var(--d15qd39x-3);
+}
+.aw__d15qd39x span {
+    color: #777777;
+    line-height: 18px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    display: block;
+}
+.aw__iys36jq {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    line-height: 24px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    color: #222222;
+    font-size: 1rem;
+    padding: 8px 12px;
+    .aw__r1uq3g0v {
+        float: left;
+        color: #222222;
+        line-height: 24px;
+        margin-left: 12px;
+        font-size: 14px;
+    }
+}
+
+.aw__ntc1674 {
+    position: relative;
+    padding: 12px;
+    width: 100%;
+    height: var(--ntc1674-2);
+    .aw__nrouw61 {
+        display: block;
+        background-image: url(https://static.chotot.com/storage/marketplace/common/png/default_user.png);
+        background-size: 100% 100%;
+        border-radius: 100%;
+        height: var(--nrouw61-3);
+        width: var(--nrouw61-3);
+        float: left;
+        position: relative;
+    }
+    .aw__n171wcvy {
+        float: left;
+        margin-left: var(--n171wcvy-0);
+        margin-top: var(--n171wcvy-1);
+        width: calc(100% - 100px);
+        line-height: 20px;
+        color: #222222 !important;
+        font-size: 1rem;
+        font-weight: 700;
+        -webkit-text-decoration: none;
+        text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+
 @media (min-width: 768px) {
     .aw__n40viec {
         color: $color_6 !important;
