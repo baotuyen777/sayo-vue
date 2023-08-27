@@ -3,25 +3,19 @@
     <div id="__next">
         <progress hidden=""></progress>
         <div class=" w1eil6in">
-            <div class="b4hnkwj" >
+            <div class="b4hnkwj">
                 <h1 class=" b13ldopu">
                     {{Route::is('login') ? 'Đăng Nhập' : 'Đăng ký tài khoản'}}
                 </h1>
+
                 <form method="post" class="mocked-styled-13 fei2bp7">
-                    <div class=" i14mr5f8">
-                        <input class="ire0wc i3z0z0s" type="text" inputmode="text" name="name" value="">
-                        <label for="">Họ và tên</label>
-                    </div>
+                    @if(Route::is('register'))
+                        @include('component.form.input',['name'=> 'name', 'label' => 'Họ và tên'])
+                        @include('component.form.input',['name'=> 'email', 'label' => 'Email', 'inputmode' =>'email', 'type' =>'email'])
+                    @endif
 
-                    <div class=" i14mr5f8">
-                        <input class="ire0wc i3z0z0s" type="tel" inputMode="numeric" name="phone"/>
-                        <label for="">Số điện thoại</label>
-                    </div>
-
-                    <div class=" i14mr5f8">
-                        <input class="ire0wc i3z0z0s" type="password" name="password"/>
-                        <label for="">Mật khẩu</label>
-                    </div>
+                    @include('component.form.input',['name'=> 'phone', 'label' => 'Số điện thoại', 'inputmode' =>'numeric', 'type' =>'tel'])
+                    @include('component.form.input',['name'=> 'password', 'label' => 'Mật khẩu',  'type' =>'password'])
 
                     <a class="forgot-password-btn" href="forget-password">Quên mật khẩu?</a>
                     <button class="bns1dlc primary large w-bold i-left stretch">
@@ -29,22 +23,14 @@
                     </button>
                     @csrf
                 </form>
+
                 <div class="mocked-styled-16 a1k9ogns">
                     <hr/>
                     <span>Hoặc đăng nhập bằng</span>
                     <hr/>
                 </div>
                 <div class="">
-                    {{-- <button class="mocked-styled-18 b10u9umr">--}}
-                    {{-- <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">--}}
-                    {{-- <path--}}
-                    {{-- d="M10.0005 1.66797C5.3988 1.66797 1.66797 5.32786 1.66797 9.84202C1.66797 13.9213 4.71464 17.3024 8.6988 17.918V12.2054H6.58214V9.84202H8.6988V8.0411C8.6988 5.99084 9.94297 4.86025 11.8455 4.86025C12.7571 4.86025 13.7121 5.01966 13.7121 5.01966V7.02986H12.6588C11.6255 7.02986 11.3021 7.66096 11.3021 8.3076V9.84038H13.6113L13.2421 12.2037H11.3021V17.9163C15.2863 17.304 18.333 13.9221 18.333 9.84202C18.333 5.32786 14.6021 1.66797 10.0005 1.66797Z"--}}
-                    {{-- fill="#2561CF">
-                                        </path>--}}
-                    {{-- </svg>--}}
-                    {{-- Facebook--}}
-                    {{-- </button>--}}
+
                     <div class="mocked-styled-15 g15384yj">
                         <button class="mocked-styled-18 b10u9umr">
                             <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
@@ -66,23 +52,10 @@
                         </button>
                         <div id="google-login-btn"></div>
                     </div>
-                    {{-- <button class="mocked-styled-18 b10u9umr">--}}
-                    {{-- <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">--}}
-                    {{-- <path--}}
-                    {{-- d="M14.1386 4.09766C12.5636 4.09766 11.898 4.84922 10.8011 4.84922C9.67652 4.84922 8.81871 4.10312 7.45386 4.10312C6.11793 4.10312 4.69332 4.91875 3.78863 6.3082C2.51832 8.26758 2.73394 11.9578 4.79136 15.1016C5.5273 16.227 6.51011 17.4891 7.79918 17.5027H7.82261C8.94293 17.5027 9.27574 16.7691 10.8175 16.7605H10.841C12.3597 16.7605 12.6644 17.4984 13.78 17.4984H13.8035C15.0925 17.4848 16.1281 16.0863 16.864 14.9652C17.3937 14.159 17.5906 13.7543 17.9968 12.8422C15.0207 11.7125 14.5425 7.49336 17.4859 5.87578C16.5875 4.75078 15.325 4.09922 14.1347 4.09922L14.1386 4.09766Z"--}}
-                    {{-- fill="#222222">
-                                        </path>--}}
-                    {{-- <path--}}
-                    {{-- d="M13.7921 0C12.8546 0.0636719 11.7609 0.660547 11.1203 1.43984C10.539 2.14609 10.0609 3.19375 10.2484 4.20977H10.3234C11.3218 4.20977 12.3437 3.60859 12.9406 2.83828C13.5156 2.10508 13.9515 1.06602 13.7921 0Z"--}}
-                    {{-- fill="#222222">
-                                        </path>--}}
-                    {{-- </svg>--}}
-                    {{-- Apple ID--}}
-                    {{-- </button>--}}
                 </div>
                 @if(Route::is('login'))
-                    <p class="mocked-styled-33 rnv45ui">Chưa có tài khoản? <a href="register">Đăng ký tài khoản mới</a></p>
+                    <p class="mocked-styled-33 rnv45ui">Chưa có tài khoản? <a href="register">Đăng ký tài khoản mới</a>
+                    </p>
                 @else
                     <p class="mocked-styled-33 rnv45ui">Đã có tài khoản? <a href="login">Đăng nhập ngay</a></p>
                 @endif

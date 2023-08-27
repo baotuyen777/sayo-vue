@@ -1,0 +1,15 @@
+.notify{
+    background: green;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 15px 25px 15px 10px;
+    border-radius: 4px;
+    button {
+        background: transparent;
+        position: absolute;
+        top: 1px;
+        right: 3px;
+        padding: 2px;
+    }
+}

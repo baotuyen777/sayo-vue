@@ -10,6 +10,11 @@ class Posts extends Model
     use HasFactory;
 
 //    protected $table ='posts';
+    public static $states = [
+        1 => 'Mới',
+        2 => 'Đã sử dụng(chưa sửa chữa)',
+        3 => 'Đã sử dụng(đã sửa chữa)',
+    ];
     protected $appends = ['category_name'];
     protected $primaryKey = 'id';
 
@@ -27,7 +32,7 @@ class Posts extends Model
     {
         return $this->belongsTo(Medias::class)
             ->select(['medias.*'])
-            ->selectRaw('CONCAT("' .  env('MEDIA_URL') . '", medias.url) as url');
+            ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", medias.url) as url');
     }
 
     public function pdws()
@@ -39,8 +44,9 @@ class Posts extends Model
     {
         return $this->belongsToMany(Medias::class, 'posts_gallery')
             ->select(['medias.*'])
-            ->selectRaw('CONCAT("' .  env('MEDIA_URL') . '", medias.url) as url');
+            ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", medias.url) as url');
     }
+
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');

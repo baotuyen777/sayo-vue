@@ -4,7 +4,7 @@
     <main>
         <div class="container">
             <div class="ct-detail adview">
-               @include('component.breadcrumb')
+                @include('component.breadcrumb')
 
                 <div class="row base">
                     <div class="col-md-8">
@@ -15,10 +15,10 @@
                                 <div class="AdDecription_adPrice__MQzGw" itemprop="price">
                                     {{moneyFormat($obj['price'])}}
                                 </div>
-                                <button type="button" class="SaveAd_saveAdViewDetail__UGkS5"><p
-                                        style="margin: 0">Lưu tin </p><img height="20" width="20"
-                                                                              src="https://static.chotot.com/storage/icons/saveAd/save-ad.svg"
-                                                                              alt="like" loading="lazy"></button>
+                                <button type="button" class="SaveAd_saveAdViewDetail__UGkS5"><p>Lưu tin </p>
+                                    <img height="20" width="20"
+                                         src="https://static.chotot.com/storage/icons/saveAd/save-ad.svg"
+                                         alt="like" loading="lazy"></button>
                             </div>
 
                             <p class="AdDecription_adBody__qp2KG" itemprop="description">{{$obj['content']}}</p>

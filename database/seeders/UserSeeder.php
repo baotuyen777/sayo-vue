@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
             'departments_id' => 1,
             'status' => 1,
             'role' => 1,
+            'created_at'=> Carbon::now(),
         ]);
 
         DB::table('users')->insert([
@@ -41,6 +43,7 @@ class UserSeeder extends Seeder
             'departments_id' => 1,
             'status' => 1,
             'role' => 2,
+            'created_at'=> Carbon::now(),
         ]);
 
         DB::table('users')->insert([
@@ -52,6 +55,7 @@ class UserSeeder extends Seeder
             'departments_id' => 1,
             'status' => 1,
             'role' => 3,
+            'created_at'=> Carbon::now(),
         ]);
     }
 }

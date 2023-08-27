@@ -649,9 +649,9 @@ a, a:hover {
     border-radius: 50%
 }
 
-.d-flex {
-    display: flex !important
-}
+//.d-flex {
+//    display: flex !important
+//}
 
 .d-block {
     display: block !important
@@ -843,16 +843,16 @@ button {
     text-transform: none
 }
 
-[type=button], [type=reset], [type=submit], button {
-    -webkit-appearance: button;
-    border-width: 0;
-    padding-left: 8px;
-    padding-right: 8px
-}
+//[type=button], [type=reset], [type=submit], button {
+//    -webkit-appearance: button;
+//    border-width: 0;
+//    padding-left: 8px;
+//    padding-right: 8px
+//}
 
-[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
-    cursor: pointer
-}
+//[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+//    cursor: pointer
+//}
 
 [list]::-webkit-calendar-picker-indicator {
     display: none

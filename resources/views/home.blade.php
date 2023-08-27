@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="card">
                     <h2>Khám phá danh mục</h2>
-                    <div class="d-flex-wrap grid-2">
+                    <div class="d-flex-wrap grid-6">
                         @foreach($categories as $category)
                             <div>
                                 <a href="{{getCatUrl($category['code'])}}">

@@ -16,10 +16,10 @@
         <div class="aw__ntc1674" style="--ntc1674-2: 72px;">
             <span class="aw__nrouw61" style="--nrouw61-3: 48px;"></span>
             @guest
-                <a href="{{env('APP_URL')}}/login"><span class="aw__n171wcvy">Đăng nhập / Đăng ký</span></a>
+                <a href="{{ route('login') }}"><span class="aw__n171wcvy">Đăng nhập / Đăng ký</span></a>
             @endguest
             @auth
-                <a href="{{env('APP_URL')}}/login"><span class="aw__n171wcvy">{{ Auth::user()->name }}</span></a>
+                <a href="{{ route('profile') }}"><span class="aw__n171wcvy">{{ Auth::user()->name }}</span></a>
             @endauth
         </div>
 

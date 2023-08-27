@@ -252,16 +252,16 @@ button, select {
     text-transform: none
 }
 
-[type=button], [type=reset], [type=submit], button {
-    -webkit-appearance: button;
-    border-width: 0;
-    padding-left: 8px;
-    padding-right: 8px
-}
+//[type=button], [type=reset], [type=submit], button {
+//    -webkit-appearance: button;
+//    border-width: 0;
+//    padding-left: 8px;
+//    padding-right: 8px
+//}
 
-[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
-    cursor: pointer
-}
+//[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+//    cursor: pointer
+//}
 
 select {
     word-wrap: normal
@@ -397,7 +397,7 @@ main {
     gap: 5px;
     justify-content: center;
     font-size: 10px;
-    margin-bottom: 100px;
+    //margin-bottom: 100px;
     margin-top: 12px;
     flex-wrap: wrap
 }
@@ -763,7 +763,7 @@ main {
     font-weight: 700
 }
 
-.i3z0z0s:focus + label {
+.ire0wc:focus + label {
     transform: scale(.7143) translateY(-10px);
     font-weight: 700
 }
@@ -781,7 +781,7 @@ main {
     text-align: left
 }
 
-.i14mr5f8 {
+.form-control {
     width: 100%;
     height: 48px;
     position: relative;
@@ -791,24 +791,24 @@ main {
     margin-bottom: 20px;
 }
 
-.i14mr5f8:focus-within {
+.form-control:focus-within {
     border-color: #f80
 }
 
-.i14mr5f8.error {
+.form-control.error {
     border-color: #e5193b
 }
 
-.i14mr5f8.error + p {
+.form-control.error  p {
     color: #e5193b
 }
 
-.i14mr5f8.disabled {
+.form-control.disabled {
     border-color: #f4f4f4;
     background-color: #f4f4f4
 }
 
-.i14mr5f8 > label {
+.form-control > label {
     position: absolute;
     top: 13px;
     left: 12px;
@@ -820,7 +820,7 @@ main {
     font-size: .875rem
 }
 
-.i14mr5f8 > button {
+.form-control > button {
     background: transparent;
     outline: none;
     border: none;
@@ -833,22 +833,22 @@ main {
     padding: 8px
 }
 
-.i14mr5f8 > .password {
+.form-control > .password {
     top: -1px
 }
 
-.i14mr5f8 svg {
+.form-control svg {
     font-size: .75rem
 }
 
-.i14mr5f8 > svg {
+.form-control > svg {
     height: 48px;
     top: -1px;
     right: 12px;
     pointer-events: none
 }
 
-.i14mr5f8 > svg, .t1aa5opi {
+.form-control > svg, .t1aa5opi {
     position: absolute;
     color: #8c8c8c
 }

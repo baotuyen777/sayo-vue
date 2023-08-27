@@ -3,8 +3,8 @@ jQuery(document).ready(function ($) {
     // if (screenWidth < 768) {
     //     $('.slider ul li').css({width: screenWidth, height: 200});
     // }
-    const slide =$('.post-slider .slick-track')
-    const item =$('.post-slider .item')
+    const slide = $('.post-slider .slick-track')
+    const item = $('.post-slider .item')
     var slideCount = item.length;
     var slideWidth = 620;
 
@@ -44,10 +44,13 @@ jQuery(document).ready(function ($) {
 
 });
 
-jQuery('.account-menu').click(function (){
-    console.log(111);
+jQuery('.account-menu').click(function () {
     jQuery(this).find('.menu').toggle('show')
 });
+// jQuery('body').click(() => {
+//     jQuery('.account-menu').find('.menu').hide()
+// })
+
 
 function callAjaxForm(e, form, success) {
     e.preventDefault();
@@ -67,6 +70,7 @@ function callAjaxForm(e, form, success) {
         success
     });
 }
+
 jQuery('.form_ajax').submit(function (e) {
     var form = $(this);
 
@@ -83,3 +87,20 @@ jQuery('.form_ajax').submit(function (e) {
 
     });
 });
+
+if (jQuery('.ire0wc').val()) {
+    jQuery('.ire0wc').addClass('hasValue')
+} else {
+    jQuery('.ire0wc').removeClass('hasValue')
+}
+jQuery('.ire0wc').change(function () {
+    if (jQuery(this).val()) {
+        jQuery(this).addClass('hasValue')
+    } else {
+        jQuery(this).removeClass('hasValue')
+    }
+})
+
+jQuery('.notify').find('button').click(() => {
+    jQuery('.notify').remove();
+})

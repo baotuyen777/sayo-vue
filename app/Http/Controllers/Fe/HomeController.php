@@ -45,15 +45,23 @@ class HomeController extends Controller
             ->with('category')
             ->with('author')
             ->first();
-//dd($post);
         return view('pages/post', ['obj' => $post]);
     }
 
     public function page($code)
     {
         $obj = Posts::where('code', $code)->first();
-//dd($post);
         return view('pages/page', ['obj' => $obj]);
     }
 
+    public function publicPost()
+    {
+        $categories = Category::with('avatar')->get();
+        $address = [
+            ['id' => 1, 'name' => 'Phường Thanh Xuân Bắc, Quận Thanh Xuân, Hà Nội'],
+            ['id' => 2, 'name' => 'Phường Thanh Xuân Trung, Quận Thanh Xuân, Hà Nội'],
+        ];
+
+        return view('pages/public-post', ['categories' => $categories, 'postStates' => Posts::$states, 'address' => $address]);
+    }
 }
