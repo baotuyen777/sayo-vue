@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Fe\HomeController;
 use \App\Http\Controllers\Fe\AuthController;
+use \App\Http\Controllers\Fe\PostController;
 
     /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,8 @@ Route::get('/cat/{slug}', [HomeController::class, 'archive']);
 
 Route::get('/mua-ban-{catSlug}/{postId}.htm', [HomeController::class, 'postDetail']);
 Route::get('/page/{slug}.htm', [HomeController::class, 'page']);
-Route::get('/dang-tin', [HomeController::class, 'publicPost'])->name('publicPost');
+Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
+Route::post('/dang-tin', [PostController::class, 'store'])->name('publicPost');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'doLogin'])->name('doLogin ');

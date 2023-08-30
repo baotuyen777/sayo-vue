@@ -5,12 +5,12 @@
         <div class="card">
             <h2>Đăng tin mới</h2>
             <div class="card__body ">
-                <form>
+                <form method="post">
                     <section class="">
                         <h3 class="">Thông tin bắt buộc</h3>
                         <div class="">
                             @include('component.form.select',['name'=> 'category_id', 'label' => 'Danh mục','options' => $categories])
-                            @include('component.form.input',['name'=> 'content', 'label' => 'Tiêu đề'])
+                            @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
                             @include('component.form.textarea',['name'=> 'content', 'label' => 'Mô tả chi tiết'])
                             @include('component.form.checkbox',['name'=> 'is_free', 'label' => 'Tôi muốn cho tặng miễn phí'])
 
@@ -24,22 +24,28 @@
                     <div class="">
                         <h3>Địa chỉ</h3>
                         @include('component.form.select',['name'=> 'category_id', 'label' => 'Địa chỉ','options' => $address])
+                        <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
                         @include('component.form.input',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)','options' => $address])
                     </div>
 
                     <section>
                         <h3 class="">Thông tin thêm</h3>
-                        <div class="d-flex-wrap grid-2">
-                            @include('component.form.radio',['name'=> 'guarantee', 'label' => 'Bảo hành', 'options' =>[1=>'Còn bảo hành',2=>'Hết bảo hành']])
-                            @include('component.form.select',['name'=> 'category_id', 'label' => 'Tình trạng','options' => $postStates])
+                        <div class="d-flex-wrap grid-2 gap-10">
+{{--                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])--}}
+                            @include('component.form.select',['name'=> 'attr["state"]', 'label' => 'Tình trạng', 'options' => $postStates])
+                            @include('component.form.select',['name'=> 'attr["brand"]', 'label' => 'Hãng/ Thương hiệu', 'options' => $brands])
+                            @include('component.form.select',['name'=> 'attr["color"]', 'label' => 'Màu sắc', 'options' => $colors])
+                            @include('component.form.select',['name'=> 'attr["storage"]', 'label' => 'Dung lượng', 'options' => $storages])
+                            @include('component.form.select',['name'=> 'attr["guarantee"]', 'label' => 'Bảo Hành', 'options' => $postStates])
+                            @include('component.form.select',['name'=> 'attr["made_in"]', 'label' => 'Xuất xứ', 'options' => $madeIns])
                         </div>
                     </section>
 
                     <div class="d-flex justify-content-center">
-                        <button class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk"
-                                type="button">ĐĂNG TIN
+                        <button class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk">ĐĂNG TIN
                         </button>
                     </div>
+                    @csrf
                 </form>
             </div>
         </div>

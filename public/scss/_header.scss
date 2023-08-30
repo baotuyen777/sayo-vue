@@ -100,7 +100,8 @@ $border-color_4: currentColor;
 .main-header {
     line-height: 1.5;
     //height: 56px;
-    background-color: $background-color_5;
+    //background-color: $background-color_5;
+    background: linear-gradient(-180deg,#f53d2d,#f63);
     position: sticky;
     top: 0;
     font-size: .875rem;

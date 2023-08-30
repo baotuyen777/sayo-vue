@@ -24,10 +24,10 @@ class PostRequest extends FormRequest
         return [
             'name' => 'required',
             'content' => 'required',
-            'avatar_id' => 'required',
-            'media_ids' => 'required',
+//            'avatar_id' => 'required',
+//            'media_ids' => 'required',
             'category_id' => 'required',
-            'address' => 'required',
+//            'address' => 'required',
             'price' => 'required|integer',
 
         ];

@@ -1,13 +1,14 @@
 <div class="withSpan snf9jyk">
-
+@php $defaultValue = $obj[$name] ?? 1; @endphp
     <div class="c14gw4h s6gb1av">
         <label class="required s1jyec19">{{$label}}</label>
         <div class="chip-wrapper">
             @foreach($options as $key =>$optionLabel)
-                <button type="button" class="active c14jmev1 s131j4vo" font-size="sm">
-                   {{$optionLabel}}
+                <button type="button" class="{{$defaultValue==$key ? 'active' : ''}} c14jmev1 s131j4vo" font-size="sm">
+                    {{$optionLabel}}
                 </button>
             @endforeach
+            <input type="hidden" name="{{$name}}" value="{{$defaultValue}}">
 
         </div>
 

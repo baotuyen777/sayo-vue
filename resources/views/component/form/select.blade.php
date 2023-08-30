@@ -1,5 +1,5 @@
 <div class="form-control   @error($name) error @enderror">
-    <select class="select ihj19gg isDropdown hasValue required">
+    <select class="select ihj19gg isDropdown hasValue required" name="{{$name}}">
         <option value=""></option>
 
         @foreach($options as $k => $option)
