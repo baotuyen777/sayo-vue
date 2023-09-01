@@ -32,5 +32,7 @@ Route::post('/register', [AuthController::class, 'store']);
 Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
 Route::get('/logout', [AuthController::class, 'logout']);
 
+Route::get('/post/me',[PostController::class, 'me'])->name('myPost');
+
 Route::view("/admin/{any}","app")->where("any",".*");
 

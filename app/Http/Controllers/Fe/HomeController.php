@@ -25,6 +25,7 @@ class HomeController extends Controller
         $pageSize = $request->input('page_size') ?? 20;
 
         $category = Category::where('code', $catSlug)->first();
+
         $posts = Posts::select('*')
             ->where('name', 'like', "%{$s}%")
             ->whereHas('category', function ($query) use ($catSlug) {

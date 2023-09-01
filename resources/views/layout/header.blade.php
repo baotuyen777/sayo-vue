@@ -1,22 +1,3 @@
-<html lang="vi">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-
-    <meta name="viewport" content="width=device-width">
-    <meta charset="utf-8">
-    <link rel="canonical" href="<?php echo env('APP_URL') ?>">
-    <title>Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt</title>
-    <meta property="og:image" content="https://sayo.vn/img/sayo-default-vertical.webp">
-    <meta property="og:url" content="https://sayo.vn">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt">
-    <meta property="og:description"
-          content="Sayo - Website mua bán rao vặt của người Việt với hàng ngàn món hời đang được rao bán mỗi ngày. Đăng tin mua bán UY TÍN, NHANH CHÓNG, AN TOÀN.">
-    <link rel="stylesheet" href="{{env('APP_URL')}}/css/main.css" type="text/css">
-
-</head>
-<body>
-
 <header class="main-header">
     <div class="d-flex container">
         <div class="aw__la2dsz4">

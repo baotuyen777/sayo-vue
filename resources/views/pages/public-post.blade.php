@@ -41,6 +41,13 @@
                         </div>
                     </section>
 
+                    <section>
+                        <div class="input-field">
+                            <label class="active">Hình ảnh sản phẩm</label>
+                            <div class="input-images-2" style="padding-top: .5rem;padding-bottom: .5rem;"></div>
+                        </div>
+                    </section>
+
                     <div class="d-flex justify-content-center">
                         <button class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk">ĐĂNG TIN
                         </button>
@@ -51,4 +58,86 @@
         </div>
 
     </main>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://www.jqueryscript.net/demo/drag-drop-image-uploader/dist/image-uploader.min.js"></script>
+    <script>
+        let preloaded = [
+            {id: 1, src: 'https://picsum.photos/500/500?random=1'},
+            {id: 2, src: 'https://picsum.photos/500/500?random=2'},
+            {id: 3, src: 'https://picsum.photos/500/500?random=3'},
+            {id: 4, src: 'https://picsum.photos/500/500?random=4'},
+            {id: 5, src: 'https://picsum.photos/500/500?random=5'},
+            {id: 6, src: 'https://picsum.photos/500/500?random=6'},
+        ];
+
+        jQuery('.input-images-2').imageUploader({
+            preloaded: preloaded,
+            imagesInputName: 'photos',
+            preloadedInputName: 'old'
+        });
+
+        jQuery('form').on('submit', function (event) {
+
+            // Stop propagation
+            event.preventDefault();
+            event.stopPropagation();
+
+            // Get some vars
+            let $form = jQuery(this),
+                $modal = jQuery('.modal');
+
+            // Set name and description
+            $modal.find('#display-name span').text($form.find('input[id^="name"]').val());
+            $modal.find('#display-description span').text($form.find('input[id^="description"]').val());
+
+            // Get the input file
+            let $inputImages = $form.find('input[name^="images"]');
+            if (!$inputImages.length) {
+                $inputImages = $form.find('input[name^="photos"]')
+            }
+
+            // Get the new files names
+            let $fileNames = jQuery('<ul>');
+            for (let file of $inputImages.prop('files')) {
+                jQuery('<li>', {text: file.name}).appendTo($fileNames);
+            }
+
+            // Set the new files names
+            $modal.find('#display-new-images').html($fileNames.html());
+
+            // Get the preloaded inputs
+            let $inputPreloaded = $form.find('input[name^="old"]');
+            if ($inputPreloaded.length) {
+
+                // Get the ids
+                let $preloadedIds = jQuery('<ul>');
+                for (let iP of $inputPreloaded) {
+                    jQuery('<li>', {text: '#' + iP.value}).appendTo($preloadedIds);
+                }
+
+                // Show the preloadede info and set the list of ids
+                $modal.find('#display-preloaded-images').show().html($preloadedIds.html());
+
+            } else {
+
+                // Hide the preloaded info
+                $modal.find('#display-preloaded-images').hide();
+
+            }
+
+            // Show the modal
+            $modal.css('visibility', 'visible');
+        });
+
+        // Input and label handler
+        jQuery('input').on('focus', function () {
+            jQuery(this).parent().find('label').addClass('active')
+        }).on('blur', function () {
+            if (jQuery(this).val() == '') {
+                jQuery(this).parent().find('label').removeClass('active');
+            }
+        });
+
+    </script>
 @endsection

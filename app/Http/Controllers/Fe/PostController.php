@@ -83,4 +83,9 @@ class PostController extends Controller
     {
 
     }
+
+    public function me()
+    {
+        return view('pages/post/me');
+    }
 }

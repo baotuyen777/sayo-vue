@@ -10,7 +10,7 @@
 
                 <form method="post" class="mocked-styled-13 fei2bp7">
                     @if(Route::is('register'))
-                        @include('component.form.input',['name'=> 'name', 'label' => 'Họ và tên'])
+                        @include('component.form.input',['name'=> 'phone', 'label' => 'Họ và tên1'])
                         @include('component.form.input',['name'=> 'email', 'label' => 'Email', 'inputmode' =>'email', 'type' =>'email'])
                     @endif
 
