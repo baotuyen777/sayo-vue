@@ -8,10 +8,11 @@
 
                     <div class="col-md-12">
                         <div class="row">
-                            <h1 class="_2zdqGOJc4f6iUkBg6thtv1 page-title" id="pageTitle"><p class="tw-mb-1">Quản lý tin
-                                    đăng</p>
-                                <div class="_2zdqGOJc4f6iUkBg6thtv1 _2qzumClAWY5VnmGbExqzLS"><a
-                                        href="https://www.chotot.com/escrow/my-orders/identity/seller"
+                            <h1 class="_2zdqGOJc4f6iUkBg6thtv1 page-title" id="pageTitle">
+                                <p class="tw-mb-1">Quản lý tin đăng</p>
+                                <div class="_2zdqGOJc4f6iUkBg6thtv1 _2qzumClAWY5VnmGbExqzLS">
+                                    <a
+                                        href="#"
                                         class="nYBRGIw98Ez3fjTDA2-TW tw-mr-1" target="_blank">Đơn bán</a></div>
                             </h1>
                         </div>
