@@ -37,6 +37,10 @@ function getProductUrl($post): string
 {
     return env('APP_URL') . "/mua-ban-{$post['category']['code']}/" . $post["code"] . '.htm';
 }
+function editProductUrl($post): string
+{
+    return env('APP_URL') . "/post/edit/" . $post["code"] . '.htm';
+}
 
 function getPageUrl($code): string
 {

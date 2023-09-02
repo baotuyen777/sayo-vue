@@ -68,7 +68,7 @@ class PostController extends Controller
         $attrs = $postModel->getProductAtt();
 //        dd($attrs);
 //        return view('pages/public-post', ['categories' => $categories, 'postStates' => Posts::$states, 'address' => $address]);
-        return view('pages/public-post', $attrs);
+        return view('pages/post/public-post', $attrs);
     }
 
     public function edit($id)
@@ -90,4 +90,5 @@ class PostController extends Controller
     {
         return view('pages/post/me');
     }
+
 }

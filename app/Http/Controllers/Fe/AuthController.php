@@ -25,7 +25,7 @@ class AuthController extends Controller
         if ($res['status_code'] == 200) {
             return redirect()->route('home');
         }
-        return redirect()->route('login')->with('notify', 'Sai tài khoản hoặc mật khẩu')->with('notify_type','error');
+        return redirect()->route('login')->with('notify', 'Sai tài khoản hoặc mật khẩu')->with('notify_type', 'error');
 
 
 //        return view('pages/login');
@@ -41,10 +41,7 @@ class AuthController extends Controller
         return view('pages/login');
     }
 
-    public function profile()
-    {
-        return view('pages/user/profile');
-    }
+
 
     public function store(Request $request)
     {

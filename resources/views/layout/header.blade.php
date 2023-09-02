@@ -26,7 +26,7 @@
     <div class="d-flex container">
         <div class="aw__la2dsz4">
             <div class="logo">
-                <a href="{{env('APP_URL')}}">
+                <a href="{{ route('home')}}">
                     <img src="{{ env('APP_URL') }}/img/logo-white.png" alt="sayo-logo"></a></div>
             <div class="top-menu">
                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"

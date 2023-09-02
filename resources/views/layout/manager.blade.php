@@ -1,7 +1,7 @@
 @include('layout.header')
-<div class="container">
+<div class="container two-column">
     <div class="sidebar">
-        @include('component.manager.sidebar')
+        @include('layout.sidebar')
     </div>
     <div class="main">
         @yield('content')

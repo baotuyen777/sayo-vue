@@ -55,14 +55,14 @@ class HomeController extends Controller
         return view('pages/page', ['obj' => $obj]);
     }
 
-    public function publicPost()
-    {
-        $categories = Category::with('avatar')->get();
-        $address = [
-            ['id' => 1, 'name' => 'Phường Thanh Xuân Bắc, Quận Thanh Xuân, Hà Nội'],
-            ['id' => 2, 'name' => 'Phường Thanh Xuân Trung, Quận Thanh Xuân, Hà Nội'],
-        ];
-
-        return view('pages/public-post', ['categories' => $categories, 'postStates' => Posts::$states, 'address' => $address]);
-    }
+//    public function publicPost()
+//    {
+//        $categories = Category::with('avatar')->get();
+//        $address = [
+//            ['id' => 1, 'name' => 'Phường Thanh Xuân Bắc, Quận Thanh Xuân, Hà Nội'],
+//            ['id' => 2, 'name' => 'Phường Thanh Xuân Trung, Quận Thanh Xuân, Hà Nội'],
+//        ];
+//
+//        return view('pages/public-post', ['categories' => $categories, 'postStates' => Posts::$states, 'address' => $address]);
+//    }
 }

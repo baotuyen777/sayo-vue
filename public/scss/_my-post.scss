@@ -357,11 +357,6 @@ body {
     height: 100%
 }
 
-.ctad .ctadBody .ctadInfo .upperBlock .ctadWrapper .layoutBlock .columnAdInfo {
-    float: left;
-    width: 40%;
-    position: relative
-}
 
 @media (max-width: 768px) {
     .ctad .ctadBody .ctadInfo .upperBlock .ctadWrapper .layoutBlock .columnAdInfo {
@@ -370,7 +365,7 @@ body {
 }
 
 .ctad .ctadBody .ctadInfo .upperBlock .ctadWrapper .layoutBlock .columnAdInfo .ctadPrice {
-    position: absolute;
+    //position: absolute;
     bottom: 65%
 }
 
@@ -911,11 +906,7 @@ body {
     height: 100%
 }
 
-.ctad .ctadBody .ctadInfo .upperBlock .ctadWrapper .layoutBlock .columnAdInfo {
-    float: left;
-    width: 40%;
-    position: relative
-}
+
 
 @media (max-width: 768px) {
     .ctad .ctadBody .ctadInfo .upperBlock .ctadWrapper .layoutBlock .columnAdInfo {
@@ -923,10 +914,6 @@ body {
     }
 }
 
-.ctad .ctadBody .ctadInfo .upperBlock .ctadWrapper .layoutBlock .columnAdInfo .ctadPrice {
-    position: absolute;
-    bottom: 65%
-}
 
 @media (max-width: 768px) {
     .ctad .ctadBody .ctadInfo .upperBlock .ctadWrapper .layoutBlock .columnAdInfo .ctadPrice {
@@ -1327,4 +1314,8 @@ body {
     gap: 8px;
     cursor: pointer;
     position: relative
+}
+
+.post-horizontal{
+    margin: 10px;
 }

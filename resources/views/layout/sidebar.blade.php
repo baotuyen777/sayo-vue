@@ -1,6 +1,6 @@
 <aside class="">
 
-    <div class="">
+    <section >
         <div class="backdrop">
             <img src="{{asset('img/banner/9555d3ff737c0f48c390ff5426c382f8-2840158350697184195.png')}}">
         </div>
@@ -9,15 +9,13 @@
             <div class="avatar">
                 <img alt="Avatar" src="https://cdn.chotot.com/uac2/1047384">
             </div>
-            <div>
                 <h1>{{ Auth::user()->name }} <small>Chưa có đánh giá</small></h1>
                 <p class="d-flex gap-10">
                     <a href="#">Người theo dõi: <b>1</b></a>
                     <a href="#">Đang theo dõi: <b>0</b></a>
                 </p>
 
-                <button class="btn btn--primary">Chỉnh sửa thông tin</button>
-            </div>
+                <button class="btn btn--primary full">Chỉnh sửa thông tin</button>
 
             <div class="label-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
@@ -66,18 +64,18 @@
                         </clipPath>
                     </defs>
                 </svg>
-                Địa chỉ:Số 60 ngách 141 ngõ Thịnh Quang- Đống Đa HN
+                Địa chỉ: Số 60 ngách 141 ngõ Thịnh Quang- Đống Đa HN
             </div>
         </div>
 
-    </div>
+    </section>
 
 
-    <section class="white-box padding-10">
+    <section class="white-box p-10 box-radius">
         <h4>Hồ sơ xin việc</h4>
         <p>Bạn chưa tạo hồ sơ xin việc nào!</p>
         <div class="mocked-styled-38 b1btdmev">
-            <button>Tạo hồ sơ xin việc
+            <button class="btn">Tạo hồ sơ xin việc
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
                     <path
                         d="M9.292 17.288a1 1 0 01.003-1.413L13.17 12 9.294 8.115a.998.998 0 011.411-1.41l4.588 4.588a1 1 0 010 1.414L10.71 17.29a1 1 0 01-1.418-.002z"></path>

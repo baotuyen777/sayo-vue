@@ -5,6 +5,7 @@
 /public/hot
 /public/storage
 /public/css/main.*
+*.css.map
 
 /storage/*.key
 /vendor
