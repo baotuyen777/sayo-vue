@@ -14,20 +14,28 @@ class MediasController extends CommonController
 
     public function store(Request $request)
     {
-        $image = $request->file('file');
-
-        $imageName = $image->getClientOriginalName();
         $currentDate = date('Y-m-d');
-        $folderPath = 'uploads/' . $currentDate;
+        $folderPath = 'public/uploads/' . $currentDate;
 
-//        $image->move(public_path($folderPath), $imageName);
-        $storePath = $image->storeAs($folderPath, $imageName, 'public');
-        $media = new Medias();
-        $media->name = $imageName;
-        $media->url = $storePath;
-        $media->save();
+        if ($request->hasfile('files')) {
+            $res = [];
+            $files = $request->file('files');
 
-        return response()->json(['status' => true, 'result' => $media]);
+            foreach ($files as $file) {
+                $name = $file->getClientOriginalName();
+                $storePath = $file->storeAs($folderPath, $name);
+                $params = [
+                    'name' => $name,
+                    'url' => str_replace('public/', '', $storePath)
+                ];
+                $file = Medias::create($params);
+                $file->url_full = asset('storage/' . $file->url);
+                $res[] = $file;
+            }
+        }
+        $ids = array_column($res, 'id');
+
+        return response()->json(['status' => $status ?? false, 'result' => $res, 'ids' => $ids]);
     }
 
 //    public function posts()

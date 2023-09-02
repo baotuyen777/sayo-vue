@@ -14,6 +14,9 @@
 
 > composer dump-autoload
 > php artisan db:wipe -> xóa db nếu ko thể chạy migrate:refresh
+> php artisan storage:link
+
+> file watcher: npm install -g sass
 
 
 phpstorm

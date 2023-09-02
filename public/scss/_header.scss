@@ -112,18 +112,15 @@ $border-color_4: currentColor;
     padding: 10px;
 }
 
-.aw__i8z877t {
-    color: $color_4 !important;
-    -webkit-text-decoration: none;
+.top-menu {
     text-decoration: none;
-
     display: flex;
-
     justify-content: center;
 
     align-items: center;
     position: relative;
     height: 100%;
+    margin: 15px;
     &:hover {
         opacity: 70%;
     }
@@ -225,7 +222,7 @@ $border-color_4: currentColor;
 }
 .aw__la2dsz4 {
 
-    padding-right: var(--la2dsz4-2);
+
     text-align: center;
 
     display: flex;
@@ -379,7 +376,14 @@ $border-color_4: currentColor;
 }
 
 @media (max-width: 991px) {
-    .aw__r1fkdta0, .search-form-wrapper, .aw__i8z877t{
+    .aw__r1fkdta0, .search-form-wrapper, .top-menu{
         display: none;
+    }
+}
+
+
+.logo{
+    img{
+        height: 45px;
     }
 }

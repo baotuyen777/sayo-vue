@@ -1,34 +1,55 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+    <link rel="canonical" href="<?php echo env('APP_URL') ?>">
+    <title>Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt</title>
+    <meta property="og:image" content="https://sayo.vn/img/sayo-default-vertical.webp">
+    <meta property="og:url" content="https://sayo.vn">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt">
+    <meta property="og:description"
+          content="Sayo - Website mua bán rao vặt của người Việt với hàng ngàn món hời đang được rao bán mỗi ngày. Đăng tin mua bán UY TÍN, NHANH CHÓNG, AN TOÀN.">
+    <link rel="stylesheet" href="{{env('APP_URL')}}/css/main.css" type="text/css">
+    {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
+    {{--    <script src='https://icybernet.vn/wp-includes/js/jquery/jquery.min.js?ver=3.6.1' id='jquery-core-js'></script>--}}
+    <script src="{{env('PRODUCTION')?'https://code.jquery.com': env('APP_URL').'/js'}}/jquery-1.12.4.min.js"
+            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
 <header class="main-header">
     <div class="d-flex container">
         <div class="aw__la2dsz4">
-            <div class="m-r-20">
+            <div class="logo">
                 <a href="{{env('APP_URL')}}">
-                    <img src="{{ env('APP_URL') }}/img/logo-white.png" alt="sayo-logo"
-                         style="height: 45px; "></a></div>
-            {{--            <div class="">--}}
-            {{--                <div class="aw__i8z877t" >--}}
-            {{--                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"--}}
-            {{--                         class="">--}}
-            {{--                        <g clip-path="url(#clip0_5847_24383)">--}}
-            {{--                            <path--}}
-            {{--                                d="M4 18.5H20C20.55 18.5 21 18.05 21 17.5C21 16.95 20.55 16.5 20 16.5H4C3.45 16.5 3 16.95 3 17.5C3 18.05 3.45 18.5 4 18.5ZM4 13.5H20C20.55 13.5 21 13.05 21 12.5C21 11.95 20.55 11.5 20 11.5H4C3.45 11.5 3 11.95 3 12.5C3 13.05 3.45 13.5 4 13.5ZM3 7.5C3 8.05 3.45 8.5 4 8.5H20C20.55 8.5 21 8.05 21 7.5C21 6.95 20.55 6.5 20 6.5H4C3.45 6.5 3 6.95 3 7.5Z"--}}
-            {{--                                fill="#222222"></path>--}}
-            {{--                        </g>--}}
-            {{--                        <defs>--}}
-            {{--                            <clipPath id="clip0_5847_24383">--}}
-            {{--                                <rect width="24" height="24" fill="white" transform="translate(0 0.5)"></rect>--}}
-            {{--                            </clipPath>--}}
-            {{--                        </defs>--}}
-            {{--                    </svg>--}}
-            {{--                    <span class="d-flex cursor-pointer">--}}
-            {{--                        <span class="no-wrap">Danh mục</span>--}}
-            {{--                        <svg--}}
-            {{--                            width="1rem" height="1rem" viewBox="0 0 16 16" fill="none"--}}
-            {{--                            xmlns="http://www.w3.org/2000/svg" class="aw__dtt35j3"><path--}}
-            {{--                                d="M4.67154 5.99959C4.9323 5.74067 5.35336 5.74141 5.6132 6.00125L8.19653 8.58458L10.7863 6.00048C11.0461 5.74125 11.4668 5.74148 11.7263 6.00099C11.986 6.26071 11.986 6.68179 11.7263 6.94151L8.90364 9.76414C8.51312 10.1547 7.87995 10.1547 7.48943 9.76414L4.66987 6.94459C4.40872 6.68344 4.40947 6.25981 4.67154 5.99959Z"--}}
-            {{--                                fill="currentColor"></path></svg></span>--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
+                    <img src="{{ env('APP_URL') }}/img/logo-white.png" alt="sayo-logo"></a></div>
+            <div class="top-menu">
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"
+                     class="">
+                    <g clip-path="url(#clip0_5847_24383)">
+                        <path
+                            d="M4 18.5H20C20.55 18.5 21 18.05 21 17.5C21 16.95 20.55 16.5 20 16.5H4C3.45 16.5 3 16.95 3 17.5C3 18.05 3.45 18.5 4 18.5ZM4 13.5H20C20.55 13.5 21 13.05 21 12.5C21 11.95 20.55 11.5 20 11.5H4C3.45 11.5 3 11.95 3 12.5C3 13.05 3.45 13.5 4 13.5ZM3 7.5C3 8.05 3.45 8.5 4 8.5H20C20.55 8.5 21 8.05 21 7.5C21 6.95 20.55 6.5 20 6.5H4C3.45 6.5 3 6.95 3 7.5Z"
+                            fill="#222222"></path>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_5847_24383">
+                            <rect width="24" height="24" fill="white" transform="translate(0 0.5)"></rect>
+                        </clipPath>
+                    </defs>
+                </svg>
+                <span class="d-flex cursor-pointer">
+                                    <span class="no-wrap">Danh mục</span>
+                                    <svg
+                                        width="1rem" height="1rem" viewBox="0 0 16 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" class="aw__dtt35j3"><path
+                                            d="M4.67154 5.99959C4.9323 5.74067 5.35336 5.74141 5.6132 6.00125L8.19653 8.58458L10.7863 6.00048C11.0461 5.74125 11.4668 5.74148 11.7263 6.00099C11.986 6.26071 11.986 6.68179 11.7263 6.94151L8.90364 9.76414C8.51312 10.1547 7.87995 10.1547 7.48943 9.76414L4.66987 6.94459C4.40872 6.68344 4.40947 6.25981 4.67154 5.99959Z"
+                                            fill="currentColor"></path></svg></span>
+            </div>
         </div>
         <div class="search-form-wrapper">
             <div class="search-form">

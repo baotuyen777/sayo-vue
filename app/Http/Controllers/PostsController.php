@@ -76,11 +76,12 @@ class PostsController extends Controller
         $posts = Posts::find($id);
 
         $galleryIds = $request->input('media_ids');
+
         if ($galleryIds) {
             $posts->gallery()->sync($galleryIds);
         }
 
-        $request->except('gallery');
+//        $request->except('gallery');
         $params = $request->except(['media_ids', 'gallery']);
         $res = Posts::where('id', $id)->update($params);
 

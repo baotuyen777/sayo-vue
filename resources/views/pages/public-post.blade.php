@@ -5,7 +5,7 @@
         <div class="card">
             <h2>Đăng tin mới</h2>
             <div class="card__body ">
-                <form method="post">
+                <form method="post" class="form-ajax" enctype="multipart/form-data">
                     <section class="">
                         <h3 class="">Thông tin bắt buộc</h3>
                         <div class="">
@@ -31,7 +31,7 @@
                     <section>
                         <h3 class="">Thông tin thêm</h3>
                         <div class="d-flex-wrap grid-2 gap-10">
-{{--                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])--}}
+                            {{--                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])--}}
                             @include('component.form.select',['name'=> 'attr["state"]', 'label' => 'Tình trạng', 'options' => $postStates])
                             @include('component.form.select',['name'=> 'attr["brand"]', 'label' => 'Hãng/ Thương hiệu', 'options' => $brands])
                             @include('component.form.select',['name'=> 'attr["color"]', 'label' => 'Màu sắc', 'options' => $colors])
@@ -44,8 +44,18 @@
                     <section>
                         <div class="input-field">
                             <label class="active">Hình ảnh sản phẩm</label>
-                            <div class="input-images-2" style="padding-top: .5rem;padding-bottom: .5rem;"></div>
+                            <div class="input-images-2"></div>
                         </div>
+                    </section>
+
+                    <section>
+                        <input type="file" name="files[]" id="files" accept="image/*" multiple/>
+                        <button class="btn btn-primary btn_addfile" type="button">
+                            <i class="fa fa-picture-o" aria-hidden="true"></i> Thêm ảnh
+                        </button>
+                        <br> <br>
+                        <div class="post_thumb"></div>
+                        <div id="preview"></div>
                     </section>
 
                     <div class="d-flex justify-content-center">
@@ -58,85 +68,69 @@
         </div>
 
     </main>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://www.jqueryscript.net/demo/drag-drop-image-uploader/dist/image-uploader.min.js"></script>
-    <script>
-        let preloaded = [
-            {id: 1, src: 'https://picsum.photos/500/500?random=1'},
-            {id: 2, src: 'https://picsum.photos/500/500?random=2'},
-            {id: 3, src: 'https://picsum.photos/500/500?random=3'},
-            {id: 4, src: 'https://picsum.photos/500/500?random=4'},
-            {id: 5, src: 'https://picsum.photos/500/500?random=5'},
-            {id: 6, src: 'https://picsum.photos/500/500?random=6'},
-        ];
 
-        jQuery('.input-images-2').imageUploader({
-            preloaded: preloaded,
-            imagesInputName: 'photos',
-            preloadedInputName: 'old'
+    <script>
+        var state = {};
+        $(document).ready(function () {
+            $('#files').change(function () {
+
+                var form_data = new FormData();
+
+                // Read selected files
+                var totalfiles = document.getElementById('files').files.length;
+                for (var index = 0; index < totalfiles; index++) {
+                    form_data.append("files[]", document.getElementById('files').files[index]);
+                }
+
+                $.ajax({
+                    url: '/api/medias',
+                    type: 'post',
+                    data: form_data,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        state.media_ids = response.ids
+                        for (let index = 0; index < response.result.length; index++) {
+                            var src = response.result[index].url_full;
+
+                            // Add img element in <div id='preview'>
+                            $('#preview').append(`<img src="${src}">`);
+                        }
+
+                    }
+                });
+
+            });
+
         });
 
-        jQuery('form').on('submit', function (event) {
+        jQuery('.btn_addfile').click(function (e) {
+            e.preventDefault();
+            $('#files').click();
+        });
+
+
+        jQuery('.form-ajax').on('submit', function (event) {
 
             // Stop propagation
             event.preventDefault();
             event.stopPropagation();
 
-            // Get some vars
-            let $form = jQuery(this),
-                $modal = jQuery('.modal');
+            let data = new FormData(this);
+            state.media_ids.forEach((item) => data.append("media_ids[]", item))
 
-            // Set name and description
-            $modal.find('#display-name span').text($form.find('input[id^="name"]').val());
-            $modal.find('#display-description span').text($form.find('input[id^="description"]').val());
-
-            // Get the input file
-            let $inputImages = $form.find('input[name^="images"]');
-            if (!$inputImages.length) {
-                $inputImages = $form.find('input[name^="photos"]')
-            }
-
-            // Get the new files names
-            let $fileNames = jQuery('<ul>');
-            for (let file of $inputImages.prop('files')) {
-                jQuery('<li>', {text: file.name}).appendTo($fileNames);
-            }
-
-            // Set the new files names
-            $modal.find('#display-new-images').html($fileNames.html());
-
-            // Get the preloaded inputs
-            let $inputPreloaded = $form.find('input[name^="old"]');
-            if ($inputPreloaded.length) {
-
-                // Get the ids
-                let $preloadedIds = jQuery('<ul>');
-                for (let iP of $inputPreloaded) {
-                    jQuery('<li>', {text: '#' + iP.value}).appendTo($preloadedIds);
+            $.ajax({
+                url: jQuery('.form-ajax').attr('action'),
+                data,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    console.log(data);
                 }
+            });
 
-                // Show the preloadede info and set the list of ids
-                $modal.find('#display-preloaded-images').show().html($preloadedIds.html());
-
-            } else {
-
-                // Hide the preloaded info
-                $modal.find('#display-preloaded-images').hide();
-
-            }
-
-            // Show the modal
-            $modal.css('visibility', 'visible');
-        });
-
-        // Input and label handler
-        jQuery('input').on('focus', function () {
-            jQuery(this).parent().find('label').addClass('active')
-        }).on('blur', function () {
-            if (jQuery(this).val() == '') {
-                jQuery(this).parent().find('label').removeClass('active');
-            }
         });
 
     </script>

@@ -21,8 +21,13 @@ class AuthController extends Controller
 
     public function doLogin(Request $request)
     {
-        $this->authService->login($request);
-        return redirect()->route('home');
+        $res = $this->authService->login($request);
+        if ($res['status_code'] == 200) {
+            return redirect()->route('home');
+        }
+        return redirect()->route('login')->with('notify', 'Sai tài khoản hoặc mật khẩu')->with('notify_type','error');
+
+
 //        return view('pages/login');
     }
 
@@ -38,7 +43,7 @@ class AuthController extends Controller
 
     public function profile()
     {
-        return view('pages/login');
+        return view('pages/user/profile');
     }
 
     public function store(Request $request)
@@ -61,7 +66,7 @@ class AuthController extends Controller
 
         ]);
 
-        return redirect()->route('login')->with('success', 'Tạo tài khoản thành công');
+        return redirect()->route('login')->with('notify', 'Tạo tài khoản thành công');
     }
 
     public function logout()

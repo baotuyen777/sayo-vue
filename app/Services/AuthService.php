@@ -13,10 +13,14 @@ class AuthService
         try {
             $credentials = request(['phone', 'password']);
             if (!Auth::attempt($credentials)) {
-                return response()->json([
+                return [
                     'status_code' => 500,
                     'message' => 'Unauthorized'
-                ]);
+                ];
+//                return response()->json([
+//                    'status_code' => 500,
+//                    'message' => 'Unauthorized'
+//                ]);
             }
 
             $user = User::where('phone', $request->phone)->first();
@@ -27,13 +31,25 @@ class AuthService
 
             $tokenResult = $user->createToken('authToken')->plainTextToken;
 
-            return response()->json([
+            return [
                 'status_code' => 200,
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user
-            ]);
+            ];
+//            return response()->json([
+//                'status_code' => 200,
+//                'access_token' => $tokenResult,
+//                'token_type' => 'Bearer',
+//                'user' => $user
+//            ]);
         } catch (\Exception $error) {
+
+            return [
+                'status_code' => 500,
+                'message' => 'Error in Login',
+                'error' => $error,
+            ];
             return response()->json([
                 'status_code' => 500,
                 'message' => 'Error in Login',

@@ -49,15 +49,17 @@ class PostController extends Controller
 
         $params['code'] = $userid . '-' . time();
         $params['author_id'] = $userid;
-        $params['attr'] = str_replace('\"', '', json_encode($params['attr']));
+        $params['attr'] = str_replace(['\"','%22'], '', json_encode($params['attr']));
 
         $obj = Posts::create($params);
-//        dd($obj);
-//        Posts::
         if ($obj) {
-            return redirect()->route('home');
+            $galleryIds = $request->input('media_ids');
+            if ($galleryIds) {
+                $obj->gallery()->sync($galleryIds);
+            }
         }
-        return $obj;
+
+        return ['status' => true, 'result' => $obj];
     }
 
     public function create()

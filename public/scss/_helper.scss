@@ -5,12 +5,19 @@
     bottom: 0;
     padding: 15px 25px 15px 10px;
     border-radius: 4px;
+    color: white;
+    &.error{
+        background: #d22b2b;
+    }
+
     button {
         background: transparent;
         position: absolute;
         top: 1px;
         right: 3px;
         padding: 2px;
+        border: none;
+        cursor: pointer;
     }
 }
 

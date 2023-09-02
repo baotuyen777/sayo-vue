@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Medias extends Model
 {
     use HasFactory;
+
     protected $primaryKey = 'id';
+    protected $fillable = ['name', 'url'];
 //    public function posts()
 //    {
 //        return $this->hasMany(Posts::class);
