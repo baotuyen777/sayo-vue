@@ -13,34 +13,24 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    public function show($id)
+    function __construct(private Posts $postModel)
     {
-        $categories = DB::table('categories')->select('id as value', 'name as label')->get();
-        $provinces = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 1)->get();
-        $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
-        $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
+        $this->postModel = $postModel;
+    }
 
+    public function show($code)
+    {
         $post = Posts::with('gallery')
             ->with('avatar')
+            ->with('gallery')
             ->with('category')
             ->with('pdws')
-            ->find($id);
-
-//        return response()->json([
-//            'result' => $obj,
-//            'expand' => [
-//                'categories' => $categories,
-//                'provinces' => $provinces,
-//                'districts' => $districts,
-//                'wards' => $wards,
-//            ],
-//            'status' => true
-//        ]);
-
-        $postModel = new Posts();
-        $attrs = $postModel->getAttOptions();
-        $attrs['post'] = $post;
-        return view('pages/post/public-post', $attrs);
+            ->where('code', $code)
+            ->first();
+//dd($post);
+        $attrs = $this->postModel->getAttOptions();
+        $attrs['obj'] = $post;
+        return view('pages/post/detail', $attrs);
     }
 
     public function store(PostRequest $request)
@@ -71,7 +61,7 @@ class PostController extends Controller
     {
         $postModel = new Posts();
         $attrs = $postModel->getAttOptions();
-        return view('pages/post/public-post', $attrs);
+        return view('pages/post/detail', $attrs);
     }
 
     public function edit($id)
@@ -79,9 +69,22 @@ class PostController extends Controller
 
     }
 
-    public function update($id)
+    public function update(PostRequest $request, $code)
     {
+//        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
+        $post = Posts::where('code', $code)->first();
+        $galleryIds = $request->input('media_ids');
 
+        if ($galleryIds) {
+            $post->gallery()->sync($galleryIds);
+        }
+
+//        $request->except('gallery');
+//        $params = $request->except(['media_ids', 'gallery']);
+//        $params =
+        $res = $post->update($request->all());
+
+        return response()->json(['status' => true, 'result' => $res]);
     }
 
     public function destroy($id)

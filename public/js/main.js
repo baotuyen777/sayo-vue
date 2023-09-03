@@ -125,7 +125,7 @@ jQuery('.form-ajax').on('submit', function (event) {
     const isPut = $(this).data('id');
     let data = isPut ? $(this).serialize() : new FormData(this);
 
-    // state.media_ids.forEach((item) => data.append("media_ids[]", item))
+    state.media_ids.forEach((item) => data.append("media_ids[]", item))
     $.ajax({
         url: jQuery('.form-ajax').attr('action'),
         data,

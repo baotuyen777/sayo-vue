@@ -33,8 +33,9 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/post/me',[PostController::class, 'me'])->name('myPost');
 Route::get('/post/edit/{slug}.htm',[PostController::class, 'show'])->name('postEdit');
+Route::post('/post/edit/{slug}.htm',[PostController::class, 'update'])->name('postUpdate');
 Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
-Route::post('/dang-tin', [PostController::class, 'store'])->name('publicPost');
+Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 
 Route::resource('user',UserController::class);
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
