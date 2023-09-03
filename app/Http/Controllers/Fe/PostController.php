@@ -20,15 +20,16 @@ class PostController extends Controller
 
     public function show($code)
     {
-        $post = Posts::with('gallery')
+        $post = Posts::with('files')
             ->with('avatar')
-            ->with('gallery')
+            ->with('files')
             ->with('category')
             ->with('pdws')
             ->where('code', $code)
             ->first();
-//dd($post);
         $attrs = $this->postModel->getAttOptions();
+
+        $post['media_ids'] = $post['files']->pluck('id');
         $attrs['obj'] = $post;
         return view('pages/post/detail', $attrs);
     }
@@ -48,9 +49,9 @@ class PostController extends Controller
 
         $obj = Posts::create($params);
         if ($obj) {
-            $galleryIds = $request->input('media_ids');
-            if ($galleryIds) {
-                $obj->gallery()->sync($galleryIds);
+            $files = $request->input('media_ids');
+            if ($files) {
+                $obj->files()->sync($files);
             }
         }
 
@@ -73,14 +74,14 @@ class PostController extends Controller
     {
 //        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
         $post = Posts::where('code', $code)->first();
-        $galleryIds = $request->input('media_ids');
+        $files = $request->input('media_ids');
 
-        if ($galleryIds) {
-            $post->gallery()->sync($galleryIds);
+        if ($files) {
+            $post->files()->sync($files);
         }
 
-//        $request->except('gallery');
-//        $params = $request->except(['media_ids', 'gallery']);
+//        $request->except('files');
+//        $params = $request->except(['media_ids', 'files']);
 //        $params =
         $res = $post->update($request->all());
 

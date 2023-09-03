@@ -7,7 +7,7 @@
             <div class="card__body ">
                 <form method="post" class="form-ajax" enctype="multipart/form-data">
                     <section class="">
-                        <h3 class="">Thông tin bắt buộc</h3>
+                        <h5 class="">Thông tin bắt buộc</h5>
                         <div class="">
                             @include('component.form.select',['name'=> 'category_id', 'label' => 'Danh mục','options' => $categories])
                             @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
@@ -21,19 +21,20 @@
                             @include('component.form.input',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
                             <div class="">
                                 <h5>Hình ảnh và Video sản phẩm</h5>
+                                @include('component.form.uploadFiles')
                             </div>
                         </div>
                     </section>
 
-                    <div class="">
-                        <h3>Địa chỉ</h3>
+                    <section class="">
+                        <h5>Địa chỉ</h5>
                         {{--                        @include('component.form.select',['name'=> 'address', 'label' => 'Địa chỉ','options' => $address])--}}
                         <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
                         @include('component.form.input',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)','options' => $address])
-                    </div>
+                    </section>
 
                     <section>
-                        <h3 class="">Thông tin thêm</h3>
+                        <h5 class="">Thông tin thêm</h5>
                         <div class="d-flex-wrap grid-2 gap-10">
                             {{--                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])--}}
                             @include('component.form.select',['name'=> 'attr["state"]', 'label' => 'Tình trạng', 'options' => $postStates])
@@ -45,12 +46,11 @@
                         </div>
                     </section>
 
-                    <section>
-                        @include('component.form.uploadFiles')
-                    </section>
+
 
                     <div class="d-flex justify-content-center">
-                        <button class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk">ĐĂNG TIN
+                        <button class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk">
+                            {{isset($obj['id']) ? 'Lưu thay đổi' : 'ĐĂNG TIN' }}
                         </button>
                     </div>
                     @csrf

@@ -32,7 +32,7 @@ class HomeController extends Controller
                 $query->where('code', $catSlug);
             })
             ->with('avatar')
-            ->with('gallery')
+            ->with('files')
             ->paginate($pageSize, ['*'], 'page', $currentPage);
 
         return view('pages/archive', ['posts' => $posts, 'category' => $category]);
@@ -42,7 +42,7 @@ class HomeController extends Controller
     {
         $post = Posts::select('*')
             ->with('avatar')
-            ->with('gallery')
+            ->with('files')
             ->with('category')
             ->with('author')
             ->first();

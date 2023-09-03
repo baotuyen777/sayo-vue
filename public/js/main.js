@@ -1,4 +1,3 @@
-var state = {};
 jQuery(document).ready(function ($) {
     let screenWidth = $(window).width();
     // if (screenWidth < 768) {
@@ -111,11 +110,11 @@ jQuery('.notify').find('button').click(() => {
     jQuery('.notify').fadeOut();
 })
 
-const showNotify = (text ='Thành công') => {
+const showNotify = (text = 'Thành công') => {
     jQuery('.notify').fadeOut()
     $('.notify .content').html(text);
     $('.notify').fadeIn();
-    setTimeout(()=>jQuery('.notify').fadeOut(),2000)
+    setTimeout(() => jQuery('.notify').fadeOut(), 2000)
 }
 jQuery('.form-ajax').on('submit', function (event) {
     // Stop propagation
@@ -152,7 +151,7 @@ $(document).ready(function () {
         for (var index = 0; index < totalfiles; index++) {
             form_data.append("files[]", document.getElementById('files').files[index]);
         }
-
+        const formControl = $(this).parent();
         $.ajax({
             url: '/api/medias',
             type: 'post',
@@ -161,17 +160,15 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function (response) {
-                state.media_ids = response.ids
+                state.media_ids = state.media_ids.concat(response.ids);
                 for (let index = 0; index < response.result.length; index++) {
                     var src = response.result[index].url_full;
 
                     // Add img element in <div id='preview'>
-                    $('#preview').append(`<img src="${src}">`);
+                    formControl.find('.preview').append(`<img src="${src}">`);
                 }
-
             }
         });
-
     });
 
 });

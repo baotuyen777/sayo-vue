@@ -42,11 +42,11 @@ class DatabaseSeeder extends Seeder
         }
 
 
-        DB::table('posts_gallery')->insert([
+        DB::table('posts_files')->insert([
             'posts_id' => 1,
             'medias_id' => 1,
         ]);
-        DB::table('posts_gallery')->insert([
+        DB::table('posts_files')->insert([
             'posts_id' => 1,
             'medias_id' => 2,
         ]);

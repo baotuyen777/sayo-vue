@@ -46,9 +46,9 @@ class Posts extends Model
         return $this->belongsTo(Pdws::class, 'pdws_id');
     }
 
-    public function gallery()
+    public function files()
     {
-        return $this->belongsToMany(Medias::class, 'posts_gallery')
+        return $this->belongsToMany(Medias::class, 'posts_files')
             ->select(['medias.*'])
             ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", medias.url) as url');
     }

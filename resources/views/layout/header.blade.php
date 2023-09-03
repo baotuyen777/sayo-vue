@@ -19,6 +19,9 @@
     <script src="{{env('PRODUCTION')?'https://code.jquery.com': env('APP_URL').'/js'}}/jquery-1.12.4.min.js"
             integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
             crossorigin="anonymous"></script>
+    <script>
+        var state = {};
+    </script>
 
 </head>
 <body>

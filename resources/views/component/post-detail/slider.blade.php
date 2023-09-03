@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            @foreach($obj['gallery'] as $i => $img)
+            @foreach($obj['files'] as $i => $img)
                 <div data-index="{{$i+1}}" class="slick-slide item">
                     <div class="AdImage_sliderImage__ddiFA">
                         <div class="AdImage_sliderWrapper___jIpt">
