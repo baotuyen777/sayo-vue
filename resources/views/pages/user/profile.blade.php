@@ -1,10 +1,41 @@
 @extends('layout.manager')
 
 @section('content')
-    <div class="d-flex-wrap grid-2">
-        @foreach($posts as $post)
-            @include('component.post.post-horizontal',['post' => $post])
-        @endforeach
+    <div class="card">
+        <div class="card__body ">
+            <form method="post" class="form-ajax" enctype="multipart/form-data"
+                  action="{{route('user.update',['user'=>$obj['id']])}}" data-id={{$obj['id']}}>
 
+                <section class="">
+                    <h5 class="">Hồ sơ cá nhân</h5>
+                    <div class="">
+                        @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
+                        @include('component.form.textarea',['name'=> 'bio', 'label' => 'Giới thiệu', 'placeholder'=> 'Viết vài dòng giới thiệu về bạn'])
+
+                    </div>
+                </section>
+
+                <section>
+                    <h5>Địa chỉ</h5>
+                    {{--                    @include('component.form.select',['name'=> 'category_id', 'label' => 'Địa chỉ','options' => $address])--}}
+                    <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
+                    @include('component.form.input',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)'])
+                </section>
+                <section>
+                    <h5>Thông tin bảo mật</h5>
+                    @include('component.form.input',['name'=> 'email', 'label' => 'Email'])
+                    @include('component.form.input',['name'=> 'cccd', 'label' => 'Căn cước công dân','maxlength' =>12])
+                    @include('component.form.input',['name'=> 'birthday', 'label' => 'Ngày sinh','type'=>'date'])
+                    @include('component.form.select',['name'=> 'gender', 'label' => 'Giới tính','options'=>$genders])
+                </section>
+
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn--primary">Lưu thay đổi</button>
+                </div>
+                @method('PUT')
+                @csrf
+            </form>
+        </div>
     </div>
+
 @endsection

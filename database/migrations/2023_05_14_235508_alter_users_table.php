@@ -15,7 +15,14 @@ return new class extends Migration {
             $table->integer('status')->default(1);
             $table->integer('role')->default(3); // 1:admin, 2:staff, 3:customer
             $table->string('phone');
+            $table->text('bio')->nullable();
+            $table->string('cccd')->nullable();
+            $table->date('birthday')->nullable();
+            $table->tinyInteger('gender')->nullable();
             $table->integer('verified_level')->default(0);
+
+            $table->unsignedBigInteger('avatar_id')->nullable();
+            $table->foreign('avatar_id')->references('id')->on('medias')->onDelete('cascade');
         });
     }
 
@@ -26,7 +33,8 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign('users_departments_id_foreign');
-            $table->dropColumn('departments_id', 'status');
+            $table->dropForeign('users_avatar_id_foreign');
+//            $table->dropColumn('departments_id', 'status');
         });
     }
 };

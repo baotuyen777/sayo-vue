@@ -11,7 +11,11 @@
                         <div class="">
                             @include('component.form.select',['name'=> 'category_id', 'label' => 'Danh mục','options' => $categories])
                             @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
-                            @include('component.form.textarea',['name'=> 'content', 'label' => 'Mô tả chi tiết'])
+                            @include('component.form.textarea',['name'=> 'content', 'label' => 'Mô tả chi tiết' ,'placeholder' => '
+- Thời gian sử dụng
+- Bảo hành nếu có
+- Sửa chữa, nâng cấp, phụ kiện đi kèm
+'])
                             @include('component.form.checkbox',['name'=> 'is_free', 'label' => 'Tôi muốn cho tặng miễn phí'])
 
                             @include('component.form.input',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
@@ -111,27 +115,7 @@
         });
 
 
-        jQuery('.form-ajax').on('submit', function (event) {
 
-            // Stop propagation
-            event.preventDefault();
-            event.stopPropagation();
-
-            let data = new FormData(this);
-            state.media_ids.forEach((item) => data.append("media_ids[]", item))
-
-            $.ajax({
-                url: jQuery('.form-ajax').attr('action'),
-                data,
-                processData: false,
-                contentType: false,
-                type: 'POST',
-                success: function (data) {
-                    console.log(data);
-                }
-            });
-
-        });
 
     </script>
 @endsection

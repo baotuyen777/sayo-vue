@@ -31,6 +31,7 @@ class UserSeeder extends Seeder
             'departments_id' => 1,
             'status' => 1,
             'role' => 1,
+            'avatar_id' => 1,
             'created_at'=> Carbon::now(),
         ]);
 
@@ -43,6 +44,7 @@ class UserSeeder extends Seeder
             'departments_id' => 1,
             'status' => 1,
             'role' => 2,
+            'avatar_id' => 1,
             'created_at'=> Carbon::now(),
         ]);
 
@@ -55,6 +57,7 @@ class UserSeeder extends Seeder
             'departments_id' => 1,
             'status' => 1,
             'role' => 3,
+            'avatar_id' => 1,
             'created_at'=> Carbon::now(),
         ]);
     }

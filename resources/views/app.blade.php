@@ -9,7 +9,7 @@
     <script>
         window.configValues = {
             APP_URL: "{{ env('APP_URL') }}",
-            API_URL: "{{ env('API_URL') }}",
+            API_URL: "{{ env('API_URL') ?? 'http://localhost:8000/api/' }}",
             MEDIA_URL: "{{ env('MEDIA_URL') }}",
             // Add more configuration keys as needed
         };

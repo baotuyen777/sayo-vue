@@ -38,7 +38,7 @@ class PostController extends Controller
 //        ]);
 
         $postModel = new Posts();
-        $attrs = $postModel->getProductAtt();
+        $attrs = $postModel->getAttOptions();
         $attrs['post'] = $post;
         return view('pages/post/public-post', $attrs);
     }
@@ -70,7 +70,7 @@ class PostController extends Controller
     public function create()
     {
         $postModel = new Posts();
-        $attrs = $postModel->getProductAtt();
+        $attrs = $postModel->getAttOptions();
 //        dd($attrs);
 //        return view('pages/public-post', ['categories' => $categories, 'postStates' => Posts::$states, 'address' => $address]);
         return view('pages/post/public-post', $attrs);

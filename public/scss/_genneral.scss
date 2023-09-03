@@ -132,6 +132,7 @@ a {
     padding: 4px 8px;
     outline: none;
     display: flex;
+    justify-content: center;
 
     svg {
         //pointer-events: none;
@@ -160,7 +161,9 @@ svg {
 .full {
     width: 100%;
 }
-
+.hide{
+    display: none;
+}
 
 @media (max-width: 991px) {
     .grid-2 > div {
