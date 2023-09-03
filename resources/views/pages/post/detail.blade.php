@@ -16,7 +16,6 @@
 - Bảo hành nếu có
 - Sửa chữa, nâng cấp, phụ kiện đi kèm
 '])
-                            @include('component.form.checkbox',['name'=> 'is_free', 'label' => 'Tôi muốn cho tặng miễn phí'])
 
                             @include('component.form.input',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
                             <div>

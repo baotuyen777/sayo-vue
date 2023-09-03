@@ -35,7 +35,7 @@ class FileController extends CommonController
         }
         $ids = array_column($res, 'id');
 
-        return response()->json(['status' => $status ?? false, 'result' => $res, 'ids' => $ids]);
+        return response()->json(['status' => true, 'result' => $res, 'ids' => $ids]);
     }
 
 //    public function posts()

@@ -141,7 +141,6 @@ jQuery('.form-ajax').on('submit', function (event) {
         error: (jqXHR, textStatus, error)=>{
             const errors = JSON.parse(jqXHR.responseText).errors;
             Object.keys(errors).forEach(field => {
-                console.log(errors[field][0],3332)
                 $(`.validate-${field}` ).html(errors[field][0])
                 $(`.form-control-${field}` ).addClass('error')
             })
@@ -173,7 +172,7 @@ $(document).ready(function () {
                     state.file_ids = state.file_ids.concat(response.ids);
                     for (let index = 0; index < response.result.length; index++) {
                         var src = response.result[index].url_full;
-
+                        console.log(src,33)
                         // Add img element in <div id='preview'>
                         formControl.find('.preview').append(`<img src="${src}">`);
                     }
