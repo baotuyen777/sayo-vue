@@ -8,7 +8,7 @@
                 <form method="post" class="form-ajax" enctype="multipart/form-data">
                     <section class="">
                         <h3 class="">Thông tin bắt buộc</h3>
-                        <div class="">
+
                             @include('component.form.select',['name'=> 'category_id', 'label' => 'Danh mục','options' => $categories])
                             @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
                             @include('component.form.textarea',['name'=> 'content', 'label' => 'Mô tả chi tiết' ,'placeholder' => '
@@ -19,10 +19,10 @@
                             @include('component.form.checkbox',['name'=> 'is_free', 'label' => 'Tôi muốn cho tặng miễn phí'])
 
                             @include('component.form.input',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
-                            <div class="">
+
                                 <h5>Hình ảnh và Video sản phẩm</h5>
-                            </div>
-                        </div>
+
+
                     </section>
 
                     <div class="">
@@ -35,7 +35,7 @@
                     <section>
                         <h3 class="">Thông tin thêm</h3>
                         <div class="d-flex-wrap grid-2 gap-10">
-                            {{--                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])--}}
+                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])
                             @include('component.form.select',['name'=> 'attr["state"]', 'label' => 'Tình trạng', 'options' => $postStates])
                             @include('component.form.select',['name'=> 'attr["brand"]', 'label' => 'Hãng/ Thương hiệu', 'options' => $brands])
                             @include('component.form.select',['name'=> 'attr["color"]', 'label' => 'Màu sắc', 'options' => $colors])
@@ -63,7 +63,7 @@
                     </section>
 
                     <div class="d-flex justify-content-center">
-                        <button class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk">ĐĂNG TIN
+                        <button class=" primary r-normal medium w-bold i-left ">ĐĂNG TIN
                         </button>
                     </div>
                     @csrf

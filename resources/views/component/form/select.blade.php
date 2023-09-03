@@ -19,9 +19,9 @@
             fill="currentColor"></path>
     </svg>
 
-    <p class="helptext p131urh5"></p>
+    <p class="helptext "></p>
     @error($name)
-    <p class="mocked-styled-10 p1scu4lb">{{ $message }}</p>
+    <p class="mocked-styled-10 ">{{ $message }}</p>
     @enderror
 </div>
 
