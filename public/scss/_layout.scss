@@ -1,6 +1,6 @@
 .sidebar {
     position: relative;
-    width: 30%;
+
     margin-right: 10px;
 
     .backdrop {
@@ -42,10 +42,48 @@
 
 .two-column {
     display: flex;
-
+    .sidebar {
+        flex: 30%;
+    }
     .main {
-        //width: 70%;
+        flex: 70%;
         margin-right: 10px;
+    }
+}
+
+.breadcrumb {
+
+    padding: 15px 0;
+
+    li {
+        font-size: 12px;
+        display: inline;
+
+        > div {
+            display: inline;
+        }
+
+        > a {
+            color: $color_1;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        span {
+            strong {
+                color: $color_2;
+            }
+        }
+    }
+
+    a {
+        &:after {
+            color: $color_1;
+            content: "»";
+            padding: 0 5px;
+        }
     }
 }
 

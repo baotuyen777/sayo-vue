@@ -1,11 +1,15 @@
 @include('layout.header')
-<div class="container two-column">
-    <div class="sidebar">
-        @include('layout.sidebar')
+<div class="container ">
+    @include('component.breadcrumb')
+    <div class="two-column">
+        <div class="sidebar">
+            @include('layout.sidebar')
+        </div>
+        <div class="main">
+            @yield('content')
+        </div>
     </div>
-    <div class="main">
-        @yield('content')
-    </div>
+
 
 </div>
 

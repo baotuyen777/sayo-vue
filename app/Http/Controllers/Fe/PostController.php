@@ -20,22 +20,27 @@ class PostController extends Controller
         $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
         $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
 
-        $obj = Posts::with('gallery')
+        $post = Posts::with('gallery')
             ->with('avatar')
             ->with('category')
             ->with('pdws')
             ->find($id);
 
-        return response()->json([
-            'result' => $obj,
-            'expand' => [
-                'categories' => $categories,
-                'provinces' => $provinces,
-                'districts' => $districts,
-                'wards' => $wards,
-            ],
-            'status' => true
-        ]);
+//        return response()->json([
+//            'result' => $obj,
+//            'expand' => [
+//                'categories' => $categories,
+//                'provinces' => $provinces,
+//                'districts' => $districts,
+//                'wards' => $wards,
+//            ],
+//            'status' => true
+//        ]);
+
+        $postModel = new Posts();
+        $attrs = $postModel->getProductAtt();
+        $attrs['post'] = $post;
+        return view('pages/post/public-post', $attrs);
     }
 
     public function store(PostRequest $request)
@@ -49,7 +54,7 @@ class PostController extends Controller
 
         $params['code'] = $userid . '-' . time();
         $params['author_id'] = $userid;
-        $params['attr'] = str_replace(['\"','%22'], '', json_encode($params['attr']));
+        $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
 
         $obj = Posts::create($params);
         if ($obj) {
@@ -88,7 +93,8 @@ class PostController extends Controller
 
     public function me()
     {
-        return view('pages/post/me');
+        $posts = Posts::with('avatar')->get();
+        return view('pages/post/me', ['posts' => $posts]);
     }
 
 }

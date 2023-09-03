@@ -1,7 +1,7 @@
 <div class="post-horizontal ctad ctNewAd newDashboardAd ctadPublished ">
     <div class="ctadBody">
         <div class="ctadImage"><img
-                src="https://cdn.chotot.com/K9hTretGQ5vz67dNpF0dOcHBKfcvXrOJ_cCAaP3JtA4/preset:listing/plain/299c030faaa234ee5d2527bd96e70223-2840543429929598023.jpg"
+                src="{{($post['avatar']['url'] ?? '')}}"
                 alt=" " class="lazy">
             <div class="imageNumber">2</div>
             <i class="ctadSelectIcon ctadSelectIconNormal"></i></div>
@@ -9,14 +9,13 @@
             <div class="upperBlock upperBlockLayout upperBlockLayoutWithExpiredDate">
                 <div class="ctadWrapper">
                     <div class="ctadTitle"><a class="title"
-                                              href="{{editProductUrl($post)}}">dọn
-                            nhà bán chậu trầu bà cột to</a></div>
-                    <div class="layoutBlock layoutBlockWithExpiredDate">
+                                              href="{{editProductUrl($post)}}">{{$post['name']}}</a></div>
+                    <div class="">
                         <div class="">
                             <div class="ctadPrice ctadPriceWithExpiredDate">
-                                <span><b>200.000 đ</b></span></div>
+                                <span><b>{{moneyFormat($post['price'])}} đ</b></span></div>
                             <div class="addinBlock addinBlockWithExpiredDate">
-                                <div><span class="ctadDate listTime">Đã đăng 07:25 27/08/23</span>
+                                <div><span class="ctadDate listTime">Đã đăng {{$post['created_at']}}</span>
                                 </div>
                             </div>
                         </div>
