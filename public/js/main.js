@@ -1,3 +1,4 @@
+var state = {};
 jQuery(document).ready(function ($) {
     let screenWidth = $(window).width();
     // if (screenWidth < 768) {
@@ -99,7 +100,12 @@ jQuery('.ire0wc').change(function () {
     } else {
         jQuery(this).removeClass('hasValue')
     }
-})
+});
+
+jQuery('.btn_addfile').click(function (e) {
+    e.preventDefault();
+    $('#files').click();
+});
 
 jQuery('.notify').find('button').click(() => {
     jQuery('.notify').fadeOut();
@@ -136,3 +142,37 @@ jQuery('.form-ajax').on('submit', function (event) {
     });
 
 });
+
+$(document).ready(function () {
+    $('#files').change(function () {
+        var form_data = new FormData();
+
+        // Read selected files
+        var totalfiles = document.getElementById('files').files.length;
+        for (var index = 0; index < totalfiles; index++) {
+            form_data.append("files[]", document.getElementById('files').files[index]);
+        }
+
+        $.ajax({
+            url: '/api/medias',
+            type: 'post',
+            data: form_data,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                state.media_ids = response.ids
+                for (let index = 0; index < response.result.length; index++) {
+                    var src = response.result[index].url_full;
+
+                    // Add img element in <div id='preview'>
+                    $('#preview').append(`<img src="${src}">`);
+                }
+
+            }
+        });
+
+    });
+
+});
+

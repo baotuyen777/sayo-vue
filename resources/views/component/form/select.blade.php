@@ -6,8 +6,6 @@
             <option {{isset($obj) && $k == $obj[$name] ? 'selected' : ''}}
                     value="{{$option['id'] ?? $k}}">{{$option['name'] ?? $option}}</option>
         @endforeach
-
-
     </select>
     <label for="{{$name}}">{{$label}}</label>
     <svg data-type="monochrome"

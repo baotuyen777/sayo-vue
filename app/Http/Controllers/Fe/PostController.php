@@ -71,8 +71,6 @@ class PostController extends Controller
     {
         $postModel = new Posts();
         $attrs = $postModel->getAttOptions();
-//        dd($attrs);
-//        return view('pages/public-post', ['categories' => $categories, 'postStates' => Posts::$states, 'address' => $address]);
         return view('pages/post/public-post', $attrs);
     }
 

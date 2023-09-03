@@ -27,7 +27,7 @@
 
                     <div class="">
                         <h3>Địa chỉ</h3>
-                        @include('component.form.select',['name'=> 'category_id', 'label' => 'Địa chỉ','options' => $address])
+                        {{--                        @include('component.form.select',['name'=> 'address', 'label' => 'Địa chỉ','options' => $address])--}}
                         <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
                         @include('component.form.input',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)','options' => $address])
                     </div>
@@ -46,20 +46,7 @@
                     </section>
 
                     <section>
-                        <div class="input-field">
-                            <label class="active">Hình ảnh sản phẩm</label>
-                            <div class="input-images-2"></div>
-                        </div>
-                    </section>
-
-                    <section>
-                        <input type="file" name="files[]" id="files" accept="image/*" multiple/>
-                        <button class="btn btn-primary btn_addfile" type="button">
-                            <i class="fa fa-picture-o" aria-hidden="true"></i> Thêm ảnh
-                        </button>
-                        <br> <br>
-                        <div class="post_thumb"></div>
-                        <div id="preview"></div>
+                        @include('component.form.uploadFiles')
                     </section>
 
                     <div class="d-flex justify-content-center">
@@ -73,49 +60,4 @@
 
     </main>
 
-    <script>
-        var state = {};
-        $(document).ready(function () {
-            $('#files').change(function () {
-
-                var form_data = new FormData();
-
-                // Read selected files
-                var totalfiles = document.getElementById('files').files.length;
-                for (var index = 0; index < totalfiles; index++) {
-                    form_data.append("files[]", document.getElementById('files').files[index]);
-                }
-
-                $.ajax({
-                    url: '/api/medias',
-                    type: 'post',
-                    data: form_data,
-                    dataType: 'json',
-                    contentType: false,
-                    processData: false,
-                    success: function (response) {
-                        state.media_ids = response.ids
-                        for (let index = 0; index < response.result.length; index++) {
-                            var src = response.result[index].url_full;
-
-                            // Add img element in <div id='preview'>
-                            $('#preview').append(`<img src="${src}">`);
-                        }
-
-                    }
-                });
-
-            });
-
-        });
-
-        jQuery('.btn_addfile').click(function (e) {
-            e.preventDefault();
-            $('#files').click();
-        });
-
-
-
-
-    </script>
 @endsection
