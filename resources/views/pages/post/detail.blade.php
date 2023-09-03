@@ -6,9 +6,9 @@
             <h2>Đăng tin mới</h2>
             <div class="card__body ">
                 <form method="post" class="form-ajax" enctype="multipart/form-data">
-                    <section class="">
-                        <h5 class="">Thông tin bắt buộc</h5>
-                        <div class="">
+                    <section>
+                        <h5>Thông tin bắt buộc</h5>
+                        <div>
                             @include('component.form.select',['name'=> 'category_id', 'label' => 'Danh mục','options' => $categories])
                             @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
                             @include('component.form.textarea',['name'=> 'content', 'label' => 'Mô tả chi tiết' ,'placeholder' => '
@@ -19,14 +19,14 @@
                             @include('component.form.checkbox',['name'=> 'is_free', 'label' => 'Tôi muốn cho tặng miễn phí'])
 
                             @include('component.form.input',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
-                            <div class="">
+                            <div>
                                 <h5>Hình ảnh và Video sản phẩm</h5>
                                 @include('component.form.uploadFiles')
                             </div>
                         </div>
                     </section>
 
-                    <section class="">
+                    <section>
                         <h5>Địa chỉ</h5>
                         {{--                        @include('component.form.select',['name'=> 'address', 'label' => 'Địa chỉ','options' => $address])--}}
                         <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
@@ -34,7 +34,7 @@
                     </section>
 
                     <section>
-                        <h5 class="">Thông tin thêm</h5>
+                        <h5>Thông tin thêm</h5>
                         <div class="d-flex-wrap grid-2 gap-10">
                             {{--                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])--}}
                             @include('component.form.select',['name'=> 'attr["state"]', 'label' => 'Tình trạng', 'options' => $postStates])

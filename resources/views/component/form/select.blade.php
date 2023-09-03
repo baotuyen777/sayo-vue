@@ -19,7 +19,7 @@
 
     <p class="helptext p131urh5"></p>
     @error($name)
-    <p class="mocked-styled-10 p1scu4lb">{{ $message }}</p>
+    <p>{{ $message }}</p>
     @enderror
 </div>
 

@@ -137,6 +137,15 @@ jQuery('.form-ajax').on('submit', function (event) {
                 showNotify()
             }
             // console.log(data);
+        },
+        error: (jqXHR, textStatus, error)=>{
+            const errors = JSON.parse(jqXHR.responseText).errors;
+            Object.keys(errors).forEach(field => {
+                console.log(errors[field][0],3332)
+                $(`.validate-${field}` ).html(errors[field][0])
+                $(`.form-control-${field}` ).addClass('error')
+            })
+            console.log(errors)
         }
     });
 
@@ -160,14 +169,16 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function (response) {
-                state.file_ids = state.file_ids.concat(response.ids);
-                for (let index = 0; index < response.result.length; index++) {
-                    var src = response.result[index].url_full;
+                if (response.status) {
+                    state.file_ids = state.file_ids.concat(response.ids);
+                    for (let index = 0; index < response.result.length; index++) {
+                        var src = response.result[index].url_full;
 
-                    // Add img element in <div id='preview'>
-                    formControl.find('.preview').append(`<img src="${src}">`);
+                        // Add img element in <div id='preview'>
+                        formControl.find('.preview').append(`<img src="${src}">`);
+                    }
                 }
-            }
+            },
         });
     });
 

@@ -1,4 +1,4 @@
-<div class="form-control @error($name) error @enderror">
+<div class="form-control form-control-{{$name}} @error($name) error @enderror">
     <input class="ire0wc  " name="{{$name}}" type="{{$type ?? 'text'}}" placeholder="{{$placeholder ??''}}"
            inputmode="{{$inputmode ?? 'text'}}" value="{{ $obj[$name] ?? old($name) }}" maxlength="{{$maxleng ??'' }}">
     <label for="{{$name}}">{{$label}}</label>
@@ -14,6 +14,7 @@
         </button>
     @endif
     @error($name)
-    <p class="mocked-styled-10 p1scu4lb">{{ $message }}</p>
+    <p>{{ $message }}</p>
     @enderror
+    <p class="validate validate-{{$name}}"></p>
 </div>

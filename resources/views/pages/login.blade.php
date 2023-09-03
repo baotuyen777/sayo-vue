@@ -29,7 +29,7 @@
                     <span>Hoặc đăng nhập bằng</span>
                     <hr/>
                 </div>
-                <div class="">
+                <div>
 
                     <div class="mocked-styled-15 g15384yj">
                         <button class="mocked-styled-18 b10u9umr">

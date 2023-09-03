@@ -22,7 +22,7 @@
         {{--            </div>--}}
         {{--        </div>--}}
 {{--        <div class="card__extra-attr text-gray">--}}
-{{--            <div class="">20 m² - 2 PN</div>--}}
+{{--            <div>20 m² - 2 PN</div>--}}
 {{--        </div>--}}
         <div><span class="card__price">{{moneyFormat($obj['price'])}}</span></div>
     </div>

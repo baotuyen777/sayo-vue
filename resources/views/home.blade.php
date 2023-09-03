@@ -2,7 +2,7 @@
 
 @section('content')
     <main>
-        <section class="">
+        <section>
             <div class="container">
                 <div class="card">
                     <h2>Khám phá danh mục</h2>

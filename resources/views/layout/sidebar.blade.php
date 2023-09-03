@@ -1,4 +1,4 @@
-<aside class="">
+<aside>
 
     <section >
         <div class="backdrop">

@@ -41,7 +41,7 @@
             <li class="slick-active">
                 <button>1</button>
             </li>
-            <li class="">
+            <li>
                 <button>2</button>
             </li>
         </ul>

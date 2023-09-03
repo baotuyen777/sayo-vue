@@ -9,7 +9,7 @@
     {{--    <section class="container">--}}
     {{--        <div class="d-flex grid-3">--}}
 
-    {{--            <div class=""><p>Về SAYO</p>--}}
+    {{--            <div><p>Về SAYO</p>--}}
     {{--                <ul>--}}
     {{--                    <li><a href="{{getPageUrl('gioi-thieu')}}">Giới thiệu</a></li>--}}
     {{--                    <li><a>Quy chế hoạt động sàn</a></li>--}}
