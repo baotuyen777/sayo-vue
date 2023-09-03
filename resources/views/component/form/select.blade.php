@@ -3,7 +3,7 @@
         <option value=""></option>
 
         @foreach($options as $k => $option)
-            <option {{$k == $obj[$name] ? 'selected' : ''}}
+            <option {{isset($obj) && $k == $obj[$name] ? 'selected' : ''}}
                     value="{{$option['id'] ?? $k}}">{{$option['name'] ?? $option}}</option>
         @endforeach
 
