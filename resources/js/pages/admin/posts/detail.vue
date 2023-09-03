@@ -18,7 +18,7 @@
                 <Input label="Địa chỉ" v-model="address" :error_mes="errors?.address"/>
                 <TextArea label="Mô tả chi tiết" v-model="content" :error_mes="errors?.content"/>
                 <Upload label="Avatar" v-model="avatar" :show-upload-list="true" :error_mes="errors?.avatar_id"/>
-                <Upload label="Bộ sưu tập" v-model="files" :error_mes="errors?.media_ids"/>
+                <Upload label="Bộ sưu tập" v-model="files" :error_mes="errors?.file_ids"/>
 
             </div>
         </a-card>
@@ -55,7 +55,7 @@ const state = reactive({
     price: 0,
     category_id: null,
     files: [],
-    media_ids: [],
+    file_ids: [],
     avatar: [],
     avatar_id: [],
     province_id: null,
@@ -105,7 +105,7 @@ const handleUpdate = async () => {
     try {
         const formData = {...state}
         if (state.files) {
-            formData.media_ids = state.files.map((file) => {
+            formData.file_ids = state.files.map((file) => {
                 return file?.response?.result?.id || file?.id
             })
 

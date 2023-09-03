@@ -25,7 +25,7 @@ class PostRequest extends FormRequest
             'name' => 'required',
             'content' => 'required',
 //            'avatar_id' => 'required',
-//            'media_ids' => 'required',
+//            'file_ids' => 'required',
             'category_id' => 'required',
 //            'address' => 'required',
             'price' => 'required|integer',

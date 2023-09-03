@@ -15,5 +15,5 @@
 
 </div>
 <script>
-    state.media_ids ={{$obj['media_ids']}}
+    state.file_ids ={{$obj['file_ids'] ?? '[]'}}
 </script>

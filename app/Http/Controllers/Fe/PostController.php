@@ -20,16 +20,15 @@ class PostController extends Controller
 
     public function show($code)
     {
-        $post = Posts::with('files')
+        $post = Posts::with('category')
             ->with('avatar')
             ->with('files')
-            ->with('category')
             ->with('pdws')
             ->where('code', $code)
             ->first();
         $attrs = $this->postModel->getAttOptions();
 
-        $post['media_ids'] = $post['files']->pluck('id');
+        $post['file_ids'] = $post['files']->pluck('id');
         $attrs['obj'] = $post;
         return view('pages/post/detail', $attrs);
     }
@@ -49,7 +48,7 @@ class PostController extends Controller
 
         $obj = Posts::create($params);
         if ($obj) {
-            $files = $request->input('media_ids');
+            $files = $request->input('file_ids');
             if ($files) {
                 $obj->files()->sync($files);
             }
@@ -74,14 +73,14 @@ class PostController extends Controller
     {
 //        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
         $post = Posts::where('code', $code)->first();
-        $files = $request->input('media_ids');
+        $files = $request->input('file_ids');
 
         if ($files) {
             $post->files()->sync($files);
         }
 
 //        $request->except('files');
-//        $params = $request->except(['media_ids', 'files']);
+//        $params = $request->except(['file_ids', 'files']);
 //        $params =
         $res = $post->update($request->all());
 

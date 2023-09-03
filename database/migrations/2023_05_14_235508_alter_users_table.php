@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->integer('verified_level')->default(0);
 
             $table->unsignedBigInteger('avatar_id')->nullable();
-            $table->foreign('avatar_id')->references('id')->on('medias')->onDelete('cascade');
+            $table->foreign('avatar_id')->references('id')->on('files')->onDelete('cascade');
         });
     }
 

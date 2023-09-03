@@ -69,7 +69,7 @@ class CategoriesController extends Controller
 //        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
 //        $state = Category::find($id);
 
-        $params = $request->except(['media_ids']);
+        $params = $request->except(['file_ids']);
 
         $res = Category::where('id', $id)->update($params);
 

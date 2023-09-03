@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->foreign('province_id')->references('id')->on('pdws')->onDelete('cascade');
 
             $table->unsignedBigInteger('avatar_id')->nullable();
-            $table->foreign('avatar_id')->references('id')->on('medias')->onDelete('cascade');
+            $table->foreign('avatar_id')->references('id')->on('files')->onDelete('cascade');
 
             $table->unsignedBigInteger('video_id')->nullable();
 

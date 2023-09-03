@@ -30,7 +30,7 @@ export const adminRoutes = {
         ...renderModuleRouter('products'),
         ...renderModuleRouter('orders'),
         ...renderModuleRouter('posts'),
-        ...renderModuleRouter('medias'),
+        ...renderModuleRouter('files'),
         ...renderModuleRouter('pdws'),
 
         {

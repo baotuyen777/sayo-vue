@@ -29,7 +29,7 @@ import Input from "../../../components/form/Input.vue";
 import Select from "../../../components/form/Select.vue";
 import Upload from "../../../components/form/Upload.vue";
 
-const module = 'medias';
+const module = 'files';
 useMenu().onSelectedKeys([`admin-${module}`]);
 const router = useRouter()
 const route = useRoute()

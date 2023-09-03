@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Medias;
+use App\Models\Files;
 use App\Models\Posts;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class MediasController extends CommonController
+class FileController extends CommonController
 {
-    protected string $module = 'medias';
+    protected string $module = 'files';
 
     public function store(Request $request)
     {
@@ -28,7 +28,7 @@ class MediasController extends CommonController
                     'name' => $name,
                     'url' => str_replace('public/', '', $storePath)
                 ];
-                $file = Medias::create($params);
+                $file = Files::create($params);
                 $file->url_full = asset('storage/' . $file->url);
                 $res[] = $file;
             }
@@ -45,6 +45,6 @@ class MediasController extends CommonController
 
 //    public function posts(): MorphToMany
 //    {
-//        return $this->morphedByMany(Posts::class,'medias1');
+//        return $this->morphedByMany(Posts::class,'files1');
 //    }
 }

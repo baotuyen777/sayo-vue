@@ -36,9 +36,9 @@ class Posts extends Model
     public function avatar()
     {
 
-        return $this->belongsTo(Medias::class)
-            ->select(['medias.*'])
-            ->selectRaw('CONCAT("' . asset('storage') . '/", medias.url) as url');
+        return $this->belongsTo(Files::class)
+            ->select(['files.*'])
+            ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
     }
 
     public function pdws()
@@ -48,9 +48,9 @@ class Posts extends Model
 
     public function files()
     {
-        return $this->belongsToMany(Medias::class, 'posts_files')
-            ->select(['medias.*'])
-            ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", medias.url) as url');
+        return $this->belongsToMany(Files::class, 'posts_files')
+            ->select(['files.*'])
+            ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", files.url) as url');
     }
 
     public function author()

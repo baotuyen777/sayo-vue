@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
-use App\Models\Medias;
+use App\Models\Files;
 use App\Models\Posts;
 use App\Models\Products;
 use App\Services\BaseService;
@@ -75,14 +75,14 @@ class PostsController extends Controller
 //        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
         $posts = Posts::find($id);
 
-        $files = $request->input('media_ids');
+        $files = $request->input('file_ids');
 
         if ($files) {
             $posts->files()->sync($files);
         }
 
 //        $request->except('files');
-        $params = $request->except(['media_ids', 'files']);
+        $params = $request->except(['file_ids', 'files']);
         $res = Posts::where('id', $id)->update($params);
 
         return response()->json(['status' => true, 'result' => $res]);

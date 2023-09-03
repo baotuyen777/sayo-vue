@@ -37,7 +37,7 @@ const props = defineProps(['modelValue', 'showUploadList', 'label', 'error_mes',
 console.log(props.label, 333)
 const emit = defineEmits([]);
 
-const UploadUrl = window.configValues.API_URL + 'medias';
+const UploadUrl = window.configValues.API_URL + 'files';
 
 const previewVisible = ref(false);
 const previewImage = ref('');

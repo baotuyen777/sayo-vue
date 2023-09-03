@@ -124,7 +124,7 @@ jQuery('.form-ajax').on('submit', function (event) {
     const isPut = $(this).data('id');
     let data = isPut ? $(this).serialize() : new FormData(this);
 
-    state.media_ids.forEach((item) => data.append("media_ids[]", item))
+    state.file_ids.forEach((item) => data.append("file_ids[]", item))
     $.ajax({
         url: jQuery('.form-ajax').attr('action'),
         data,
@@ -153,14 +153,14 @@ $(document).ready(function () {
         }
         const formControl = $(this).parent();
         $.ajax({
-            url: '/api/medias',
+            url: '/api/files',
             type: 'post',
             data: form_data,
             dataType: 'json',
             contentType: false,
             processData: false,
             success: function (response) {
-                state.media_ids = state.media_ids.concat(response.ids);
+                state.file_ids = state.file_ids.concat(response.ids);
                 for (let index = 0; index < response.result.length; index++) {
                     var src = response.result[index].url_full;
 
