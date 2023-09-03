@@ -35,9 +35,10 @@ class Posts extends Model
 
     public function avatar()
     {
+
         return $this->belongsTo(Medias::class)
             ->select(['medias.*'])
-            ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", medias.url) as url');
+            ->selectRaw('CONCAT("' . asset('storage') . '/", medias.url) as url');
     }
 
     public function pdws()

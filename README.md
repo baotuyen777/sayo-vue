@@ -7,7 +7,7 @@
 - **Generate key** ```php artisan key:generate```
 
 - **Generate swagger** ``php artisan l5-swagger:generate``` http://localhost:8000/api/documentation#/Register
-- php artisan config:cache
+- php artisan config:cache => xóa cache config để hàm env ko bị null
 > php artisan config:clear
 
 > compile sass: setting->tool->file watcher -> create scss-> include folder
