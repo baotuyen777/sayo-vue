@@ -9,7 +9,7 @@
             <div class="avatar">
                 <img alt="Avatar" src="https://cdn.chotot.com/uac2/1047384">
             </div>
-                <h1>{{ Auth::user()->name }} <small>Chưa có đánh giá</small></h1>
+                <h1>{{ Auth::user()->name ?? 'Chưa đăng nhập' }} <small>Chưa có đánh giá</small></h1>
                 <p class="d-flex gap-10">
                     <a href="#">Người theo dõi: <b>1</b></a>
                     <a href="#">Đang theo dõi: <b>0</b></a>
@@ -47,7 +47,7 @@
                           d="M12 3.873a8.2 8.2 0 100 16.4 8.2 8.2 0 000-16.4zm-9.8 8.2c0-5.412 4.388-9.8 9.8-9.8 5.413 0 9.8 4.388 9.8 9.8 0 5.413-4.387 9.8-9.8 9.8-5.412 0-9.8-4.387-9.8-9.8z"
                           clip-rule="evenodd"></path>
                 </svg>
-                Đã xác thực
+                {{Auth::user()->verified_level> 0 ?"Đã xác thực" : 'Chưa xác thực'}}
 
             </div>
             <div class="label-icon">

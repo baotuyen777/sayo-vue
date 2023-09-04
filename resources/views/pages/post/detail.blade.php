@@ -6,18 +6,22 @@
             <h2>Đăng tin mới</h2>
             <div class="card__body ">
                 <form method="post" class="form-ajax" enctype="multipart/form-data">
+
                     <section>
                         <h5>Thông tin bắt buộc</h5>
                         <div>
                             @include('component.form.select',['name'=> 'category_id', 'label' => 'Danh mục','options' => $categories])
-                            @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
+                            <div class="d-flex-wrap grid-2 gap-10">
+                                @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
+                                @include('component.form.input',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
+                            </div>
                             @include('component.form.textarea',['name'=> 'content', 'label' => 'Mô tả chi tiết' ,'placeholder' => '
 - Thời gian sử dụng
 - Bảo hành nếu có
 - Sửa chữa, nâng cấp, phụ kiện đi kèm
 '])
 
-                            @include('component.form.input',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
+
                             <div>
                                 <h5>Hình ảnh và Video sản phẩm</h5>
                                 @include('component.form.uploadFiles')
@@ -46,11 +50,14 @@
                     </section>
 
 
-
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center gap-10">
+                        <a class="btn btn-back" href="{{route('myPost')}}">Về danh sách</a>
                         <button class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk">
                             {{isset($obj['id']) ? 'Lưu thay đổi' : 'ĐĂNG TIN' }}
                         </button>
+                        @if(isset($obj))
+                            <a class="btn" href="{{getProductUrl($obj)}}" target="_blank">Xem trước</a>
+                        @endif
                     </div>
                     @csrf
                 </form>

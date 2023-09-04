@@ -32,6 +32,17 @@ class PostController extends Controller
         $attrs['obj'] = $post;
         return view('pages/post/detail', $attrs);
     }
+    public function postDetail($catCode, $code)
+    {
+        $post = Posts::select('*')
+            ->with('avatar')
+            ->with('files')
+            ->with('category')
+            ->with('author')
+            ->where('code', $code)
+            ->first();
+        return view('pages/post', ['obj' => $post]);
+    }
 
     public function store(PostRequest $request)
     {
@@ -41,17 +52,18 @@ class PostController extends Controller
         if (!$userid) {
             return redirect()->route('login');
         }
+        $files = $request->input('file_ids');
+        if ($files) {
+            $params['avatar_id'] = $files[0];
+        }
 
-        $params['code'] = $userid . '-' . time();
+        $params['code'] = time() . '-' . $userid;
         $params['author_id'] = $userid;
         $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
 
         $obj = Posts::create($params);
-        if ($obj) {
-            $files = $request->input('file_ids');
-            if ($files) {
-                $obj->files()->sync($files);
-            }
+        if ($obj && $files) {
+            $obj->files()->sync($files);
         }
 
         return ['status' => true, 'result' => $obj];
@@ -59,6 +71,10 @@ class PostController extends Controller
 
     public function create()
     {
+        if (!Auth::check()) {
+            return view('pages/login');
+        }
+
         $postModel = new Posts();
         $attrs = $postModel->getAttOptions();
         return view('pages/post/detail', $attrs);

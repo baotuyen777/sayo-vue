@@ -110,21 +110,25 @@ jQuery('.notify').find('button').click(() => {
     jQuery('.notify').fadeOut();
 })
 
-const showNotify = (text = 'Thành công') => {
-    jQuery('.notify').fadeOut()
+const showNotify = (text = 'Thành công', type = 'success') => {
+    jQuery('.notify').fadeOut().addClass(type)
     $('.notify .content').html(text);
     $('.notify').fadeIn();
-    setTimeout(() => jQuery('.notify').fadeOut(), 2000)
+    setTimeout(() => jQuery('.notify').fadeOut(), 5000)
 }
 jQuery('.form-ajax').on('submit', function (event) {
     // Stop propagation
     event.preventDefault();
     event.stopPropagation();
 
+    var $form = $(this);
     const isPut = $(this).data('id');
     let data = isPut ? $(this).serialize() : new FormData(this);
 
     state.file_ids.forEach((item) => data.append("file_ids[]", item))
+
+    $(`.validate`).html('');
+    $(`.form-control`).removeClass('error');
     $.ajax({
         url: jQuery('.form-ajax').attr('action'),
         data,
@@ -134,16 +138,17 @@ jQuery('.form-ajax').on('submit', function (event) {
         type: isPut ? 'PUT' : 'POST',
         success: function (res) {
             if (res.status) {
-                showNotify()
+                showNotify();
+                setTimeout(() => $form.find(".btn-back")[0].click(), 1000)
             }
-            // console.log(data);
         },
-        error: (jqXHR, textStatus, error)=>{
+        error: (jqXHR, textStatus, error) => {
             const errors = JSON.parse(jqXHR.responseText).errors;
             Object.keys(errors).forEach(field => {
-                $(`.validate-${field}` ).html(errors[field][0])
-                $(`.form-control-${field}` ).addClass('error')
+                $(`.validate-${field}`).html(errors[field][0])
+                $(`.form-control-${field}`).addClass('error')
             })
+            showNotify(JSON.parse(jqXHR.responseText).message, 'error')
             console.log(errors)
         }
     });
@@ -172,7 +177,6 @@ $(document).ready(function () {
                     state.file_ids = state.file_ids.concat(response.ids);
                     for (let index = 0; index < response.result.length; index++) {
                         var src = response.result[index].url_full;
-                        console.log(src,33)
                         // Add img element in <div id='preview'>
                         formControl.find('.preview').append(`<img src="${src}">`);
                     }

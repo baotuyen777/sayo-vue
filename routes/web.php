@@ -6,7 +6,7 @@ use \App\Http\Controllers\Fe\AuthController;
 use \App\Http\Controllers\Fe\PostController;
 use \App\Http\Controllers\Fe\UserController;
 
-    /*
+/*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/cat/{slug}', [HomeController::class, 'archive']);
 
-Route::get('/mua-ban-{catSlug}/{postId}.htm', [HomeController::class, 'postDetail']);
+
 Route::get('/page/{slug}.htm', [HomeController::class, 'page']);
 
 
@@ -31,14 +31,15 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'store']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
-Route::get('/post/me',[PostController::class, 'me'])->name('myPost');
-Route::get('/post/edit/{slug}.htm',[PostController::class, 'show'])->name('postEdit');
-Route::post('/post/edit/{slug}.htm',[PostController::class, 'update'])->name('postUpdate');
+Route::get('/mua-ban-{catSlug}/{slug}.htm', [PostController::class, 'postDetail'])->where('catSlug', '[A-Za-z0-9-]+');
+Route::get('/post/me', [PostController::class, 'me'])->name('myPost');
+Route::get('/post/edit/{slug}.htm', [PostController::class, 'show'])->name('postEdit');
+Route::post('/post/edit/{slug}.htm', [PostController::class, 'update'])->name('postUpdate');
 Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
 Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 
-Route::resource('user',UserController::class);
+Route::resource('user', UserController::class);
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
-Route::view("/admin/{any}","app")->where("any",".*");
+Route::view("/admin/{any}", "app")->where("any", ".*");
 

@@ -38,16 +38,7 @@ class HomeController extends Controller
         return view('pages/archive', ['posts' => $posts, 'category' => $category]);
     }
 
-    public function postDetail($postId)
-    {
-        $post = Posts::select('*')
-            ->with('avatar')
-            ->with('files')
-            ->with('category')
-            ->with('author')
-            ->first();
-        return view('pages/post', ['obj' => $post]);
-    }
+
 
     public function page($code)
     {
