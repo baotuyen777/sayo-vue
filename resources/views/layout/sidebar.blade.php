@@ -1,6 +1,6 @@
 <aside>
 
-    <section >
+    <section>
         <div class="backdrop">
             <img src="{{asset('img/banner/9555d3ff737c0f48c390ff5426c382f8-2840158350697184195.png')}}">
         </div>
@@ -9,14 +9,13 @@
             <div class="avatar">
                 <img alt="Avatar" src="https://cdn.chotot.com/uac2/1047384">
             </div>
-                <h1>{{ Auth::user()->name ?? 'Chưa đăng nhập' }} <small>Chưa có đánh giá</small></h1>
-                <p class="d-flex gap-10">
-                    <a href="#">Người theo dõi: <b>1</b></a>
-                    <a href="#">Đang theo dõi: <b>0</b></a>
-                </p>
-
-                <button class="btn btn--primary full">Chỉnh sửa thông tin</button>
-
+            <h1>{{ Auth::user()->name ?? 'Chưa đăng nhập' }} <small>Chưa có đánh giá</small></h1>
+            <p class="d-flex gap-10">
+                <a href="#">Người theo dõi: <b>1</b></a>
+                <a href="#">Đang theo dõi: <b>0</b></a>
+            </p>
+            <button class="btn btn--primary full">Chỉnh sửa thông tin</button>
+            <br>
             <div class="label-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
                     <path fill-rule="evenodd"
@@ -36,7 +35,7 @@
                           d="M6 2.477a.7.7 0 01.7.7v1.5a.7.7 0 11-1.4 0v-1.5a.7.7 0 01.7-.7zm12 0a.7.7 0 01.7.7v1.5a.7.7 0 11-1.4 0v-1.5a.7.7 0 01.7-.7zM2.25 7.727h19.5v1.4H2.25v-1.4z"
                           clip-rule="evenodd"></path>
                 </svg>
-                Đã tham gia:<span>7 năm 7 tháng </span>
+                Đã tham gia:<span>{{showHumanTime(Auth::user()->created_at)}} </span>
             </div>
             <div class="label-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" aria-hidden="true" fill="currentColor">

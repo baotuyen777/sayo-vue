@@ -30,6 +30,7 @@ class PostController extends Controller
 
         $post['file_ids'] = $post['files']->pluck('id');
         $attrs['obj'] = $post;
+        $post['attr'] = json_decode(str_replace('%22','',$post['attr']));
         return view('pages/post/detail', $attrs);
     }
     public function postDetail($catCode, $code)

@@ -33,7 +33,10 @@ a {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    &>div:nth-child(even){
+    //&>div:nth-child(even){
+    //    flex: 1;
+    //}
+    &.grid-5>div:last-child{
         flex: 1;
     }
 }
@@ -74,6 +77,10 @@ a {
 
 .grid-2 > div {
     flex: 0 0 calc(50% - 20px);
+
+    &:nth-child(even){
+        flex: 1;
+    }
     //padding: 10px;
 }
 

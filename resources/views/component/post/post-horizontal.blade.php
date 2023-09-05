@@ -1,25 +1,12 @@
 <div class="post-horizontal ctad ctNewAd newDashboardAd ctadPublished ">
-    <div class="ctadBody">
-        <div class="ctadImage" style="background-image: url('{{($post['avatar']['url'] ?? '')}}')">
-{{--            <img src="{{($post['avatar']['url'] ?? '')}}" alt="{{$post['avatar']['name']}}">--}}
+    <div class="body card">
+        <div class="img" style="background-image: url('{{($post['avatar']['url'] ?? '')}}')">
+            {{--            <img src="{{($post['avatar']['url'] ?? '')}}" alt="{{$post['avatar']['name']}}">--}}
         </div>
-        <div class="ctadInfo">
-            <div class="upperBlock upperBlockLayout upperBlockLayoutWithExpiredDate">
-                <div class="ctadWrapper">
-                    <div class="ctadTitle">
-                        <a class="title" href="{{editProductUrl($post)}}">{{$post['name']}}</a></div>
-
-                    <div class="ctadPrice ctadPriceWithExpiredDate">
-                        <span><b>{{moneyFormat($post['price'])}} đ</b></span></div>
-                    <div class="addinBlock addinBlockWithExpiredDate">
-                        <div>
-                            <span class="ctadDate listTime">Đã đăng {{$post['created_at']}}</span>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <div class="info">
+                <p class="card__title"><a class="" href="{{editProductUrl($post)}}">{{$post['name']}}</a></p>
+                <p class="card__price"><b>{{moneyFormat($post['price'])}}</b></p>
+                <p class="datetime"><small>Đã đăng {{showHumanTime($post['created_at'])}}</small></p>
         </div>
     </div>
 
