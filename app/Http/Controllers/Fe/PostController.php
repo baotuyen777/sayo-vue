@@ -30,9 +30,10 @@ class PostController extends Controller
 
         $post['file_ids'] = $post['files']->pluck('id');
         $attrs['obj'] = $post;
-        $post['attr'] = json_decode(str_replace('%22','',$post['attr']));
+        $post['attr'] = json_decode(str_replace('%22', '', $post['attr']));
         return view('pages/post/detail', $attrs);
     }
+
     public function postDetail($catCode, $code)
     {
         $post = Posts::select('*')
@@ -109,10 +110,21 @@ class PostController extends Controller
 
     }
 
-    public function me()
+    public function me(Request $request)
     {
-        $posts = Posts::with('avatar')->get();
-        return view('pages/post/me', ['posts' => $posts]);
+        $userid = Auth::id();
+        if (!$userid) {
+            return redirect()->route('login');
+        }
+
+        $s = $request->input('s');
+        $currentPage = $request->input('current');
+        $pageSize = $request->input('page_size') ?? 10;
+
+        $posts = Posts::with('avatar')
+            ->orderBy('created_at', 'desc')
+            ->paginate($pageSize, ['*'], 'page', $currentPage);;
+        return view('pages/post/me', ['objs' => $posts]);
     }
 
 }

@@ -35,7 +35,7 @@
                           d="M6 2.477a.7.7 0 01.7.7v1.5a.7.7 0 11-1.4 0v-1.5a.7.7 0 01.7-.7zm12 0a.7.7 0 01.7.7v1.5a.7.7 0 11-1.4 0v-1.5a.7.7 0 01.7-.7zM2.25 7.727h19.5v1.4H2.25v-1.4z"
                           clip-rule="evenodd"></path>
                 </svg>
-                Đã tham gia:<span>{{showHumanTime(Auth::user()->created_at)}} </span>
+{{--                Đã tham gia:<span>{{showHumanTime(Auth::user()->created_at)}} </span>--}}
             </div>
             <div class="label-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" aria-hidden="true" fill="currentColor">
@@ -46,7 +46,7 @@
                           d="M12 3.873a8.2 8.2 0 100 16.4 8.2 8.2 0 000-16.4zm-9.8 8.2c0-5.412 4.388-9.8 9.8-9.8 5.413 0 9.8 4.388 9.8 9.8 0 5.413-4.387 9.8-9.8 9.8-5.412 0-9.8-4.387-9.8-9.8z"
                           clip-rule="evenodd"></path>
                 </svg>
-                {{Auth::user()->verified_level> 0 ?"Đã xác thực" : 'Chưa xác thực'}}
+{{--                {{Auth::user()->verified_level> 0 ?"Đã xác thực" : 'Chưa xác thực'}}--}}
 
             </div>
             <div class="label-icon">

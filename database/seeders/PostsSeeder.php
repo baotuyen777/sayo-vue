@@ -16,25 +16,70 @@ class PostsSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = \Faker\Factory::create();
+//        $faker = \Faker\Factory::create();
 
-        for ($i = 1; $i < 10; $i++) {
+//        for ($i = 1; $i < 10; $i++) {
+//
+//            DB::table('posts')->insert([
+//                'name' => $faker->name . $faker->name . $faker->name . $faker->name . $faker->name . '__' . $i,
+//                'code' => time() . '_' . $i,
+//                'content' => 'value ' . $i,
+//                'category_id' => 1,
+//                'avatar_id' => rand(1, 2),
+//                'author_id' => 1,
+//                'ward_id' => 5,
+//                'district_id' => 2,
+//                'province_id' => 1,
+//                'price' => rand(50000, 2400000000),
+//                'attr' => json_encode(['material' => 'Gỗ']),
+//                'created_at'=> Carbon::now(),
+//            ]);
+//        }
 
-            DB::table('posts')->insert([
-                'name' => $faker->name . $faker->name . $faker->name . $faker->name . $faker->name . '__' . $i,
-                'code' => time() . '_' . $i,
-                'content' => 'value ' . $i,
-                'category_id' => 1,
-                'avatar_id' => rand(1, 2),
-                'author_id' => 1,
-                'ward_id' => 5,
-                'district_id' => 2,
-                'province_id' => 1,
-                'price' => rand(50000, 2400000000),
-                'attr' => json_encode(['material' => 'Gỗ']),
-                'created_at'=> Carbon::now(),
-            ]);
-        }
+        DB::table('posts')->insert([
+            'name' => 'Cho thuê phòng tuyệt đẹp, đầy đủ tiện nghi, thuận tiện giao thông, ngõ 116 Miếu Đầm',
+            'code' => time(),
+            'content' => 'value ' . 'Chính chủ em có phòng tại số nhà 25 ngõ 116 Miếu Đầm, diện tích 35m² thiết kế theo tiêu chuẩn khách sạn, cửa gỗ lim, khóa cửa phòng mở theo mã số, phòng có cửa sổ, ban công có nhiều ánh sáng và thoáng.
+Nhà đầy đủ tiện nghi điều hòa, bình nóng lạnh, giường và tủ quần áo, bàn ghế shopha, tủ lạnh, tủ bếp trên dưới, bếp từ, máy giặt và máy sấy, thang máy tốc độ cao, khóa Vân tay đi lại tự do.
+Nhà gần chợ, gần đường lớn, chỉ mấy bước chân ra Phạm Hùng, Keang Nam, gần nhiều trường mầm non, gần nhiều khi vui chơi giải trí ăn uống..
+Giá thuê chỉ từ 5,2tr tới 5,5tr/ tháng tùy căn.
+Ngoài ra có căn hộ 1 ngủ 1 khách diện tích 40m², full đồ giá là : 5,5tr /tháng',
+            'category_id' => 1,
+            'avatar_id' => rand(1, 2),
+            'author_id' => 1,
+            'ward_id' => 5,
+            'district_id' => 2,
+            'province_id' => 1,
+            'price' => rand(1000000, 5000000),
+            'attr' => json_encode(['acreage' => '35', 'garret' => '1', 'deposit' => 2000000, 'furniture' => 1]),
+            'created_at' => Carbon::now(),
+        ]);
+
+//        DB::table('posts')->insert([
+//            'name' => 'Cho thuê phòng tuyệt đẹp, đầy đủ tiện nghi, thuận tiện giao thông, ngõ 116 Miếu Đầm',
+//            'code' => time(),
+//            'content' => 'value ' . 'Chính chủ em có phòng tại số nhà 25 ngõ 116 Miếu Đầm, diện tích 35m² thiết kế theo tiêu chuẩn khách sạn, cửa gỗ lim, khóa cửa phòng mở theo mã số, phòng có cửa sổ, ban công có nhiều ánh sáng và thoáng.
+//Nhà đầy đủ tiện nghi điều hòa, bình nóng lạnh, giường và tủ quần áo, bàn ghế shopha, tủ lạnh, tủ bếp trên dưới, bếp từ, máy giặt và máy sấy, thang máy tốc độ cao, khóa Vân tay đi lại tự do.
+//Nhà gần chợ, gần đường lớn, chỉ mấy bước chân ra Phạm Hùng, Keang Nam, gần nhiều trường mầm non, gần nhiều khi vui chơi giải trí ăn uống..
+//Giá thuê chỉ từ 5,2tr tới 5,5tr/ tháng tùy căn.
+//Ngoài ra có căn hộ 1 ngủ 1 khách diện tích 40m², full đồ giá là : 5,5tr /tháng',
+//            'category_id' => 1,
+//            'avatar_id' => rand(1, 2),
+//            'author_id' => 1,
+//            'ward_id' => 5,
+//            'district_id' => 2,
+//            'province_id' => 1,
+//            'price' => rand(1000000, 5000000),
+//            'attr' => json_encode(['acreage' => '35', 'garret' => '1', 'deposit' => 2000000, 'furniture' => 1]),
+//            'created_at' => Carbon::now(),
+//        ]);
+
+//        for ($i = 1; $i++; $i <= 4) {
+//            DB::table('posts_files')->insert([
+//                'posts_id' => 1,
+//                'files_id' => $i
+//            ]);
+//        }
 
 
     }

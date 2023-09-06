@@ -13,11 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('files')->insert(['name' => 1, 'url' => 'uploads/2023-08-12/3f115d4b4d8285dcdc93.jpg']);
-        DB::table('files')->insert(['name' => 2, 'url' => 'uploads/2023-08-12/33.jpg']);
+//        DB::table('files')->insert(['name' => 1, 'url' => 'uploads/2023-08-12/3f115d4b4d8285dcdc93.jpg']);
+//        DB::table('files')->insert(['name' => 2, 'url' => 'uploads/2023-08-12/33.jpg']);
 
         $this->call([
             PdwsSeeder::class,
+            FilesSeeder::class,
             DepartmentSeeder::class,
             UserSeeder::class,
             CategoriesSeeder::class,
