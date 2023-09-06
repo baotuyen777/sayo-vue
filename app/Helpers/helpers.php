@@ -37,6 +37,7 @@ function getProductUrl($post): string
 {
     return env('APP_URL') . "/mua-ban-{$post['category']['code']}/" . $post["code"] . '.htm';
 }
+
 function editProductUrl($post): string
 {
     return env('APP_URL') . "/post/edit/" . $post["code"] . '.htm';
@@ -61,13 +62,9 @@ function showHumanTime($actionTime)
 
     if ($days > 0) {
         $timeString .= $days . ' Ngày ';
-    }
-
-    if ($hours > 0) {
+    } else if ($hours > 0) {
         $timeString .= $hours . ' Giờ ';
-    }
-
-    if ($minutes > 0) {
+    } else if ($minutes > 0) {
         $timeString .= $minutes . ' Phút ';
     }
 

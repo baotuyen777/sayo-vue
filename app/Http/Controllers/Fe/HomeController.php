@@ -32,22 +32,13 @@ class HomeController extends Controller
                 $query->where('code', $catSlug);
             })
             ->with('avatar')
-            ->with('gallery')
+            ->with('files')
             ->paginate($pageSize, ['*'], 'page', $currentPage);
 
         return view('pages/archive', ['posts' => $posts, 'category' => $category]);
     }
 
-    public function postDetail($postId)
-    {
-        $post = Posts::select('*')
-            ->with('avatar')
-            ->with('gallery')
-            ->with('category')
-            ->with('author')
-            ->first();
-        return view('pages/post', ['obj' => $post]);
-    }
+
 
     public function page($code)
     {

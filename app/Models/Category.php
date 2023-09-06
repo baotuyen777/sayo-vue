@@ -21,9 +21,9 @@ class Category extends Model
 
     public function avatar()
     {
-        return $this->belongsTo(Medias::class)
-            ->select(['medias.*'])
-            ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", medias.url) as url ');
+        return $this->belongsTo(Files::class)
+            ->select(['files.*'])
+            ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", files.url) as url ');
     }
 
 

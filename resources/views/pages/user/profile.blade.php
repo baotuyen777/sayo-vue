@@ -6,9 +6,9 @@
             <form method="post" class="form-ajax" enctype="multipart/form-data"
                   action="{{route('user.update',['user'=>$obj['id']])}}" data-id={{$obj['id']}}>
 
-                <section class="">
-                    <h5 class="">Hồ sơ cá nhân</h5>
-                    <div class="">
+                <section>
+                    <h5>Hồ sơ cá nhân</h5>
+                    <div>
                         @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
                         @include('component.form.textarea',['name'=> 'bio', 'label' => 'Giới thiệu', 'placeholder'=> 'Viết vài dòng giới thiệu về bạn'])
 

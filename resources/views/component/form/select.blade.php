@@ -1,13 +1,19 @@
-<div class="form-control   @error($name) error @enderror">
+<div class="form-control form-control-{{$name}}  @error($name) error @enderror">
     <select class="select ihj19gg isDropdown hasValue required" name="{{$name}}">
         <option value=""></option>
 
         @foreach($options as $k => $option)
-            <option {{isset($obj) && $k == $obj[$name] ? 'selected' : ''}}
-                    value="{{$option['id'] ?? $k}}">{{$option['name'] ?? $option}}</option>
+            <option
+                {{isset($obj) && $k == $obj[$name] ||(
+                         isset($obj['attr'])
+                         && isset($attr)
+                         && isset($obj['attr']->$attr)
+                         &&  $obj['attr']->$attr == $k
+                    )
+                 ? 'selected' : ''
+                 }}
+                value="{{$option['id'] ?? $k}}">{{$option['name'] ?? $option}}</option>
         @endforeach
-
-
     </select>
     <label for="{{$name}}">{{$label}}</label>
     <svg data-type="monochrome"
@@ -22,7 +28,10 @@
     <p class="helptext "></p>
     @error($name)
     <p class="mocked-styled-10 ">{{ $message }}</p>
+    <p>{{ $message }}</p>
     @enderror
+    <p class="validate validate-{{$name}}"></p>
+    <p class="helptext p131urh5"></p>
 </div>
 
 

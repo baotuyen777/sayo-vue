@@ -10,19 +10,19 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('posts_gallery', function (Blueprint $table) {
+        Schema::create('posts_files', function (Blueprint $table) {
             $table->id();
 
 //            $table->foreignId('posts_id')->constrained();
-//            $table->foreignId('medias_id')->constrained();
+//            $table->foreignId('files_id')->constrained();
             $table->unsignedBigInteger('posts_id');
-            $table->unsignedBigInteger('medias_id');
+            $table->unsignedBigInteger('files_id');
 //
 //
             $table->foreign('posts_id')->references('id')->on('posts')->onDelete('cascade');
-            $table->foreign('medias_id')->references('id')->on('medias')->onDelete('cascade');
+            $table->foreign('files_id')->references('id')->on('files')->onDelete('cascade');
 
-            $table->string('type')->default('gallery');
+            $table->string('type')->default('files');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts_gallery');
+        Schema::dropIfExists('posts_files');
     }
 };

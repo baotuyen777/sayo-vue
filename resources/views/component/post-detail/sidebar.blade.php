@@ -1,5 +1,5 @@
 <div>
-    <div class="" style="position: fixed; top: 80px; ">
+    <div style="position: fixed; top: 80px; ">
         <div class="NextAds_buttonWraper__oSIaL">
             <button class="NextAds_preAds__FsxYM" type="button">Về danh sách</button>
             <button class="NextAds_nextAds__pn7aA" type="button">Tin Tiếp</button>
@@ -26,7 +26,7 @@
                 </a>
                 <div class="SellerProfile_inforWrapper__KXg71">
                     <div class="SellerProfile_inforItem__B3Pzq">
-                        <div class="SellerProfile_inforText__D7tPA"><p class="">Cá nhân</p><span
+                        <div class="SellerProfile_inforText__D7tPA"><p>Cá nhân</p><span
                                 class="SellerProfile_inforValue__hK4rb"><img
                                     src="https://static.chotot.com/storage/chotot-icons/png/private-grey-icon.png"
                                     alt="icon-canhan"
@@ -60,7 +60,7 @@
                     rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9">
                     <img src="https://static.chotot.com/storage/chotot-icons/png/chat_green.png"
                          alt="chat"><span>CHAT VỚI NGƯỜI BÁN</span></a></div>
-            <div class="">
+            <div>
                 <a
                     href="https://chat.chotot.com/chatroom/join/MjU2ODExMjl8MTA5MDg2Njg4"
                     rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9">

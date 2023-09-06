@@ -8,7 +8,7 @@
                     {{Route::is('login') ? 'Đăng Nhập' : 'Đăng ký tài khoản'}}
                 </h1>
 
-                <form method="post" class="mocked-styled-13 fei2bp7">
+                <form method="post" class="mocked-styled-13 fei2bp7" action="{{route('login')}}">
                     @if(Route::is('register'))
                         @include('component.form.input',['name'=> 'phone', 'label' => 'Họ và tên1'])
                         @include('component.form.input',['name'=> 'email', 'label' => 'Email', 'inputmode' =>'email', 'type' =>'email'])
@@ -29,7 +29,7 @@
                     <span>Hoặc đăng nhập bằng</span>
                     <hr/>
                 </div>
-                <div class="">
+                <div>
 
                     <div class="mocked-styled-15 g15384yj">
                         <button class="mocked-styled-18 b10u9umr">

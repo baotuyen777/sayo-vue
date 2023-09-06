@@ -35,15 +35,15 @@
         {{--                        </a>--}}
         {{--                    </div>--}}
         <div class="aw__d15qd39x">Quản lí tin </div>
-        <div class="aw__l1txzw95">
-            <a class="aw__iys36jq" href="#">
-                <img class="aw__i13p2z3b"
-                     src="https://static.chotot.com/storage/chotot-icons/svg/escrow_buy_orders.svg"
-                     alt="Lịch sử mua">
-                <span>Quản lý đơn hàng</span>
+{{--        <div class="aw__l1txzw95">--}}
+{{--            <a class="aw__iys36jq" href="#">--}}
+{{--                <img class="aw__i13p2z3b"--}}
+{{--                     src="https://static.chotot.com/storage/chotot-icons/svg/escrow_buy_orders.svg"--}}
+{{--                     alt="Lịch sử mua">--}}
+{{--                <span>Quản lý đơn hàng</span>--}}
 
-            </a>
-        </div>
+{{--            </a>--}}
+{{--        </div>--}}
 
         <div class="aw__l1txzw95">
             <a class="aw__iys36jq" href="{{route('myPost')}}">

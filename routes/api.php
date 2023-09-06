@@ -10,7 +10,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\MediasController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\PdwsController;
 
 /*
@@ -48,7 +48,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('products', ProductsController::class);
     Route::resource('roles', RolesController::class);
     Route::resource('orders', OrdersController::class);
-    Route::resource('medias', MediasController::class);
+    Route::resource('files', FileController::class);
     Route::resource('pdws', PdwsController::class);
     Route::resource('posts', PostsController::class);
     Route::post('posts/add-media/{id}', [PostsController::class, 'addMedia']);

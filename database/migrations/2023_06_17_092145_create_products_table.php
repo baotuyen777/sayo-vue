@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->text('content')->nullable();
             $table->string('avatar')->nullable();
-            $table->string('gallery')->nullable();
+            $table->string('files')->nullable();
             $table->string('video')->nullable();
             $table->integer('status')->default(1);
             $table->unsignedBigInteger('category_id');

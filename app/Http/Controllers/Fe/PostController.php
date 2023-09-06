@@ -13,34 +13,37 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    public function show($id)
+    function __construct(private Posts $postModel)
     {
-        $categories = DB::table('categories')->select('id as value', 'name as label')->get();
-        $provinces = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 1)->get();
-        $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
-        $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
+        $this->postModel = $postModel;
+    }
 
-        $post = Posts::with('gallery')
+    public function show($code)
+    {
+        $post = Posts::with('category')
             ->with('avatar')
-            ->with('category')
+            ->with('files')
             ->with('pdws')
-            ->find($id);
+            ->where('code', $code)
+            ->first();
+        $attrs = $this->postModel->getAttOptions();
 
-//        return response()->json([
-//            'result' => $obj,
-//            'expand' => [
-//                'categories' => $categories,
-//                'provinces' => $provinces,
-//                'districts' => $districts,
-//                'wards' => $wards,
-//            ],
-//            'status' => true
-//        ]);
+        $post['file_ids'] = $post['files']->pluck('id');
+        $attrs['obj'] = $post;
+        $post['attr'] = json_decode(str_replace('%22', '', $post['attr']));
+        return view('pages/post/detail', $attrs);
+    }
 
-        $postModel = new Posts();
-        $attrs = $postModel->getAttOptions();
-        $attrs['post'] = $post;
-        return view('pages/post/public-post', $attrs);
+    public function postDetail($catCode, $code)
+    {
+        $post = Posts::select('*')
+            ->with('avatar')
+            ->with('files')
+            ->with('category')
+            ->with('author')
+            ->where('code', $code)
+            ->first();
+        return view('pages/post', ['obj' => $post]);
     }
 
     public function store(PostRequest $request)
@@ -51,17 +54,18 @@ class PostController extends Controller
         if (!$userid) {
             return redirect()->route('login');
         }
+        $files = $request->input('file_ids');
+        if ($files) {
+            $params['avatar_id'] = $files[0];
+        }
 
-        $params['code'] = $userid . '-' . time();
+        $params['code'] = time() . '-' . $userid;
         $params['author_id'] = $userid;
         $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
 
         $obj = Posts::create($params);
-        if ($obj) {
-            $galleryIds = $request->input('media_ids');
-            if ($galleryIds) {
-                $obj->gallery()->sync($galleryIds);
-            }
+        if ($obj && $files) {
+            $obj->files()->sync($files);
         }
 
         return ['status' => true, 'result' => $obj];
@@ -69,11 +73,13 @@ class PostController extends Controller
 
     public function create()
     {
+        if (!Auth::check()) {
+            return view('pages/login');
+        }
+
         $postModel = new Posts();
         $attrs = $postModel->getAttOptions();
-//        dd($attrs);
-//        return view('pages/public-post', ['categories' => $categories, 'postStates' => Posts::$states, 'address' => $address]);
-        return view('pages/post/public-post', $attrs);
+        return view('pages/post/detail', $attrs);
     }
 
     public function edit($id)
@@ -81,9 +87,22 @@ class PostController extends Controller
 
     }
 
-    public function update($id)
+    public function update(PostRequest $request, $code)
     {
+//        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
+        $post = Posts::where('code', $code)->first();
+        $files = $request->input('file_ids');
 
+        if ($files) {
+            $post->files()->sync($files);
+        }
+
+//        $request->except('files');
+//        $params = $request->except(['file_ids', 'files']);
+//        $params =
+        $res = $post->update($request->all());
+
+        return response()->json(['status' => true, 'result' => $res]);
     }
 
     public function destroy($id)
@@ -91,10 +110,21 @@ class PostController extends Controller
 
     }
 
-    public function me()
+    public function me(Request $request)
     {
-        $posts = Posts::with('avatar')->get();
-        return view('pages/post/me', ['posts' => $posts]);
+        $userid = Auth::id();
+        if (!$userid) {
+            return redirect()->route('login');
+        }
+
+        $s = $request->input('s');
+        $currentPage = $request->input('current');
+        $pageSize = $request->input('page_size') ?? 10;
+
+        $posts = Posts::with('avatar')
+            ->orderBy('created_at', 'desc')
+            ->paginate($pageSize, ['*'], 'page', $currentPage);;
+        return view('pages/post/me', ['objs' => $posts]);
     }
 
 }

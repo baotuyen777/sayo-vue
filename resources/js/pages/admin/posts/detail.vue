@@ -18,7 +18,7 @@
                 <Input label="Địa chỉ" v-model="address" :error_mes="errors?.address"/>
                 <TextArea label="Mô tả chi tiết" v-model="content" :error_mes="errors?.content"/>
                 <Upload label="Avatar" v-model="avatar" :show-upload-list="true" :error_mes="errors?.avatar_id"/>
-                <Upload label="Bộ sưu tập" v-model="gallery" :error_mes="errors?.media_ids"/>
+                <Upload label="Bộ sưu tập" v-model="files" :error_mes="errors?.file_ids"/>
 
             </div>
         </a-card>
@@ -54,8 +54,8 @@ const state = reactive({
     status: 1,
     price: 0,
     category_id: null,
-    gallery: [],
-    media_ids: [],
+    files: [],
+    file_ids: [],
     avatar: [],
     avatar_id: [],
     province_id: null,
@@ -83,7 +83,7 @@ const getDetail = async () => {
             })
 
             state.avatar = result.avatar ? [result.avatar] : []
-            state.gallery = result.gallery
+            state.files = result.files
 
             Object.keys(res.data.expand).forEach(field => {
                 expand[field] = res.data.expand[field]
@@ -104,12 +104,12 @@ const handleUpdate = async () => {
     errors.value = {}
     try {
         const formData = {...state}
-        if (state.gallery) {
-            formData.media_ids = state.gallery.map((file) => {
+        if (state.files) {
+            formData.file_ids = state.files.map((file) => {
                 return file?.response?.result?.id || file?.id
             })
 
-            delete formData.gallery;
+            delete formData.files;
         }
 
         if (state.avatar) {
@@ -137,7 +137,7 @@ const {
     code,
     value,
     status,
-    gallery,
+    files,
     avatar,
     category_id,
     price,

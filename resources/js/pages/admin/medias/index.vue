@@ -6,7 +6,7 @@
 import {useMenu} from "../../../store/use-menu.js";
 import ListView from "../../../components/list/ListView.vue";
 
-const module = 'medias';
+const module = 'files';
 useMenu().onSelectedKeys([`admin-${module}`]);
 
 const columns = [
