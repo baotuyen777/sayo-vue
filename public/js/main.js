@@ -117,15 +117,15 @@ const showNotify = (text = 'Thành công', type = 'success') => {
     setTimeout(() => jQuery('.notify').fadeOut(), 5000)
 }
 jQuery('.form-ajax').on('submit', function (event) {
-    // Stop propagation
     event.preventDefault();
     event.stopPropagation();
 
     var $form = $(this);
     const isPut = $(this).data('id');
     let data = isPut ? $(this).serialize() : new FormData(this);
-
-    state.file_ids.forEach((item) => data.append("file_ids[]", item))
+    if (state?.file_ids?.length) {
+        state.file_ids.forEach((item) => data.append("file_ids[]", item))
+    }
 
     $(`.validate`).html('');
     $(`.form-control`).removeClass('error');
@@ -133,13 +133,15 @@ jQuery('.form-ajax').on('submit', function (event) {
         url: jQuery('.form-ajax').attr('action'),
         data,
         processData: false,
-        // contentType: 'application/json',
         contentType: isPut ? 'application/x-www-form-urlencoded' : false,
         type: isPut ? 'PUT' : 'POST',
         success: function (res) {
             if (res.status) {
                 showNotify();
-                setTimeout(() => $form.find(".btn-back")[0].click(), 1000)
+                if ($form.find(".btn-back")[0]) {
+                    setTimeout(() => $form.find(".btn-back")[0].click(), 2000)
+                }
+
             }
         },
         error: (jqXHR, textStatus, error) => {

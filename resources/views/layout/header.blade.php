@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="aw__r1fkdta0">
-            @include('layout.account-menu')
+            @include('layout.common.account-menu')
             <a class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk"
                href="{{route('publicPost')}}" rel="nofollow">ĐĂNG TIN</a>
         </div>

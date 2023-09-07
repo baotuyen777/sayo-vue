@@ -4,7 +4,7 @@
     <main>
         <div class="container">
             <div class="ct-detail adview">
-               @include('component.breadcrumb')
+
 
                 <div class="p-10">
                         <h1>Giới thiệu Sayo</h1>

@@ -1,6 +1,6 @@
 @include('layout.header')
 <div class="container ">
-    @include('component.breadcrumb')
+    @include('component.common.breadcrumb')
     <div class="two-column">
         <div class="sidebar">
             @include('layout.sidebar')

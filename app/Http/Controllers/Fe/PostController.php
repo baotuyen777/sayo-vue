@@ -43,6 +43,9 @@ class PostController extends Controller
             ->with('author')
             ->where('code', $code)
             ->first();
+        if (!$post) {
+            return view('pages/404');
+        }
         return view('pages/post', ['obj' => $post]);
     }
 
@@ -74,7 +77,7 @@ class PostController extends Controller
     public function create()
     {
         if (!Auth::check()) {
-            return view('pages/login');
+            return view('pages/auth/login');
         }
 
         $postModel = new Posts();
