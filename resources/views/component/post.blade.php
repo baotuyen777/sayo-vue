@@ -1,5 +1,5 @@
 <div class="card card--product">
-    <a  href="{{getProductUrl($obj)}}">
+    <a  href="{{route('postView',['catSlug'=>$obj['category']['code'],'slug'=>$obj['code']])}}">
         <div class="avatar"
              style="background: url({{$obj['avatar']['url'] ?? asset('img/sayo-default-vertical.webp')}})"></div>
     </a>

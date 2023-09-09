@@ -9,7 +9,7 @@
                     <div class="d-flex-wrap grid-6">
                         @foreach($categories as $category)
                             <div>
-                                <a href="{{getCatUrl($category['code'])}}">
+                                <a href="{{route('archive',['catCode'=>$category['code']])}}">
                                     <div class="card--category">
                                         <img alt="{{$category['name']}}"
                                              src="{{$category['avatar']['url'] ?? asset('img/icon/sayo-'.$category['code'].'.webp') ??  asset('img/icon/sayo-bds.webp')}}"

@@ -28,24 +28,29 @@ function moneyFormat($number): string
     return $result;
 }
 
-function getCatUrl($code): string
-{
-    return env('APP_URL') . '/cat/' . $code;
-}
+//function getCatUrl($code): string
+//{
+//    return env('APP_URL') . '/cat/' . $code;
+//}
 
-function getProductUrl($post): string
+//function getProductUrl($post): string
+//{
+//    return env('APP_URL') . "/mua-ban-{$post['category']['code']}/" . $post["code"] . '.htm';
+//}
+//
+//function editProductUrl($post): string
+//{
+//    return env('APP_URL') . "/post/edit/" . $post["code"] . '.htm';
+//}
+//
+function getArchiveUrl($params = []): string
 {
-    return env('APP_URL') . "/mua-ban-{$post['category']['code']}/" . $post["code"] . '.htm';
-}
+//    $params = array_filter([$catCode, $provinceCode, $districtCode, $wardCode], function ($item) {
+//        return $item;
+//    });
 
-function editProductUrl($post): string
-{
-    return env('APP_URL') . "/post/edit/" . $post["code"] . '.htm';
-}
-
-function getPageUrl($code): string
-{
-    return env('APP_URL') . "/page/{$code}" . '.htm';
+    $param2Url = $params ? '-' . implode('-', $params) : '';
+    return env('APP_URL') . "/mua-ban{$param2Url}";
 }
 
 function showHumanTime($actionTime)
@@ -71,6 +76,11 @@ function showHumanTime($actionTime)
     $timeString .= ' trước';
 
     return $timeString;
+}
+
+function dj($var)
+{
+    return dd($var);
 }
 
 function vn2str($str)
@@ -109,10 +119,23 @@ function vn2str($str)
         $str = preg_replace("/($uni)/i", $nonUnicode, $str);
 
     }
-    $str = str_replace([' '], '_', $str);
-    $str = str_replace(['__'], '_', $str);
-    $str = str_replace(['-'], '', $str);
+
 
     return $str;
+}
 
+function vn2code($str)
+{
+    $str = vn2str($str);
+    $str = str_replace(['-',], '', $str);
+    $str = str_replace([' '], '-', $str);
+    $str = str_replace(['--'], '-', $str);
+    return strtolower($str);
+}
+
+function vn2pdw($str)
+{
+    $str = vn2code($str);
+    $str = str_replace(['tinh-', 'thanh-pho-'], '', $str);
+    return $str;
 }

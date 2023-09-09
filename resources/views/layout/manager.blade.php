@@ -1,9 +1,9 @@
 @include('layout.header')
 <div class="container ">
-    @include('component.common.breadcrumb')
+    @include('layout.common.breadcrumb')
     <div class="two-column">
         <div class="sidebar">
-            @include('layout.sidebar')
+            @include('layout.common.sidebar')
         </div>
         <div class="main">
             @yield('content')

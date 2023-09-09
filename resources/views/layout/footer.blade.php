@@ -1,9 +1,9 @@
 <footer class="white-box">
     <div class="d-flex justify-content-center">
-        <a href="{{getPageUrl('gioi-thieu')}}" target="_blank">Giới thiệu</a><span>•</span>
-        <a href="{{getPageUrl('gioi-thieu')}}" target="_blank">Quy chế hoạt động sàn</a><span>•</span>
-        <a href="{{getPageUrl('gioi-thieu')}}" target="_blank">Chính sách bảo mật</a><span>•</span>
-        <a href="{{getPageUrl('gioi-thieu')}}" target="_blank">Liên hệ hỗ trợ</a>
+        <a href="{{route('pageView',['code'=>'gioi-thieu'])}}" target="_blank">Giới thiệu</a><span>•</span>
+        <a href="{{route('pageView',['code'=>'gioi-thieu'])}}" target="_blank">Quy chế hoạt động sàn</a><span>•</span>
+        <a href="{{route('pageView',['code'=>'gioi-thieu'])}}" target="_blank">Chính sách bảo mật</a><span>•</span>
+        <a href="{{route('pageView',['code'=>'gioi-thieu'])}}" target="_blank">Liên hệ hỗ trợ</a>
     </div>
 
     {{--    <section class="container">--}}

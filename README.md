@@ -18,6 +18,10 @@
 
 > file watcher: npm install -g sass
 
+> php artisan vendor:publish --provider="Kjmtrue\VietnamZone\ServiceProvider"
+> php artisan vietnamzone:import
+https://viblo.asia/p/database-don-vi-hanh-chinh-viet-nam-cho-laravel-naQZR9jQKvx
+
 
 phpstorm
 select text ctr+j  ctr+al+shift => multi cursor

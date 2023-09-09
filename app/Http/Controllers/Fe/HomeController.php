@@ -8,6 +8,9 @@ use App\Models\Pdws;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use \Kjmtrue\VietnamZone\Models\Province;
+use \Kjmtrue\VietnamZone\Models\District;
+use \Kjmtrue\VietnamZone\Models\Ward;
 
 class HomeController extends Controller
 {
@@ -16,31 +19,39 @@ class HomeController extends Controller
         $categories = Category::with('avatar')->get();
         $posts = Posts::with('avatar')->get();
 
-        return view('home', ['categories' => $categories, 'posts' => $posts]);
+        return view('pages/home', ['categories' => $categories, 'posts' => $posts]);
     }
 
-    public function archive(Request $request, $catSlug)
+    public function archive(Request $request, $catSlug = null, $provinceCode = null)
     {
         $s = $request->input('s');
         $currentPage = $request->input('current') ?? 1;
         $pageSize = $request->input('page_size') ?? 20;
 
         $category = Category::where('code', $catSlug)->first();
-        $provinces = Pdws::where('level', 1)->get();
-//        $provinces = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 1)->get();
 
+        $province = Province::where('code', $provinceCode)->first();
         $posts = Posts::select('*')
             ->where('name', 'like', "%{$s}%")
             ->whereHas('category', function ($query) use ($catSlug) {
                 $query->where('code', $catSlug);
             })
-            ->with('avatar')
-            ->with('files')
-            ->paginate($pageSize, ['*'], 'page', $currentPage);
+            ->with('avatar')->with('files');
 
-        return view('pages/archive', ['posts' => $posts, 'category' => $category, 'provinces' => $provinces]);
+        if ($provinceCode) {
+            $posts->where('province_id', $province->id);
+        }
+
+        $posts = $posts->paginate($pageSize, ['*'], 'page', $currentPage);
+
+        $provinces = Province::get();
+        $districts = District::whereProvinceId(50)->get();
+        $wards = Ward::whereDistrictId(552)->get();
+
+        return view('pages/archive', ['posts' => $posts, 'category' => $category,
+            'provinces' => $provinces, 'districts' => $districts, 'wards' => $wards
+        ]);
     }
-
 
 
     public function page($code)

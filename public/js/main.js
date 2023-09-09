@@ -1,9 +1,9 @@
 jQuery(document).ready(function ($) {
-    let screenWidth = $(window).width();
+    // let screenWidth = $(window).width();
     // if (screenWidth < 768) {
     //     $('.slider ul li').css({width: screenWidth, height: 200});
     // }
-    const slide = $('.post-slider .slick-track')
+    const slide = jQuery('.post-slider .slick-track')
     const item = $('.post-slider .item')
     var slideCount = item.length;
     var slideWidth = 620;
@@ -21,7 +21,7 @@ jQuery(document).ready(function ($) {
             $('.post-slider .slick-track .item:last-child').prependTo('.post-slider .slick-track');
             slide.css('left', '');
         });
-    };
+    }
 
     function moveRight() {
         // $('.post-slider .slick-track').attr('margin-left',0)
@@ -31,16 +31,16 @@ jQuery(document).ready(function ($) {
             $('.post-slider .slick-track .item:first-child').appendTo('.post-slider .slick-track');
             slide.css('margin-left', '');
         });
-    };
+    }
 
     $('.control_prev').click(function () {
         console.log(2212);
         moveLeft();
-    });
+    })
 
     $('.control_next').click(function () {
         moveRight();
-    });
+    })
 
 });
 
@@ -52,6 +52,13 @@ jQuery('.select5__button').click(function (){
 //
     jQuery(this).parent().find('.select5__body').toggleClass('show')
 })
+jQuery('.select5__button').blur(function(){
+    // jQuery(this).parent().find('.select5__body').removeClass('show')
+})
+
+// jQuery('.select5__body').find('a').click(function(){
+//     console.log(window.location.href);
+// })
 // jQuery('body').click(() => {
 //     jQuery('.account-menu').find('.menu').hide()
 // })
@@ -146,10 +153,9 @@ jQuery('.form-ajax').on('submit', function (event) {
                 if ($form.find(".btn-back")[0]) {
                     setTimeout(() => $form.find(".btn-back")[0].click(), 2000)
                 }
-
             }
         },
-        error: (jqXHR, textStatus, error) => {
+        error: (jqXHR) => {
             const errors = JSON.parse(jqXHR.responseText).errors;
             Object.keys(errors).forEach(field => {
                 $(`.validate-${field}`).html(errors[field][0])
@@ -185,7 +191,7 @@ $(document).ready(function () {
                     for (let index = 0; index < response.result.length; index++) {
                         var src = response.result[index].url_full;
                         // Add img element in <div id='preview'>
-                        formControl.find('.preview').append(`<img src="${src}">`);
+                        formControl.find('.preview').append(`<img src="${src}" alt="">`);
                     }
                 }
             },

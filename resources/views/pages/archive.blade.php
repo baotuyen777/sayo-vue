@@ -2,9 +2,10 @@
 
 @section('content')
     <main>
-        <section class="white-box p-10 container">
-
-            @include('component.form.select5')
+        <section class="white-box p-10 container d-flex gap-10">
+            @include('component.form.selectProvince', ['options' => $provinces,'first'=>'Toàn quốc', 'obj'=> $category])
+            @include('component.form.select5', ['options' => $districts,'first'=>'Tất cả', 'obj'=> $category])
+            @include('component.form.selectWard', ['options' => $wards,'first'=>'Tất cả', 'obj'=> $category])
         </section>
         <section>
             <div class="container">
