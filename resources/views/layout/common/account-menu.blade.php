@@ -22,7 +22,7 @@
                 <a href="{{ route('profile') }}"><span class="aw__n171wcvy">{{ Auth::user()->name }}</span></a>
             @endauth
         </div>
-
+        @auth
 
         {{--                    <div class="aw__l1txzw95">--}}
         {{--                        <a class="aw__iys36jq"--}}
@@ -34,7 +34,7 @@
         {{--                            <div >Cài đặt tài khoản</div>--}}
         {{--                        </a>--}}
         {{--                    </div>--}}
-        <div class="aw__d15qd39x">Quản lí tin </div>
+{{--        <div class="aw__d15qd39x">Quản lí tin </div>--}}
 {{--        <div class="aw__l1txzw95">--}}
 {{--            <a class="aw__iys36jq" href="#">--}}
 {{--                <img class="aw__i13p2z3b"--}}
@@ -53,22 +53,22 @@
                 <span>Quản lý bài đăng</span>
             </a></div>
 
-        <div class="aw__l1txzw95">
-            <a class="aw__iys36jq" href="#">
-                <img class="aw__i13p2z3b"
-                     src="https://static.chotot.com/storage/chotot-icons/svg/escrow-orders.svg"
-                     alt="Đơn bán">
-                <span>Quản lý cửa hàng</span>
-            </a></div>
-        <div class="aw__l1txzw95">
-            <a class="aw__iys36jq " href="#">
-                <img class="aw__i13p2z3b"
-                     src="https://static.chotot.com/storage/chotot-icons/svg/escrow.svg"
-                     alt="Ví bán hàng">
-                <span>0 VND</span>
-            </a>
-        </div>
-        @auth
+{{--        <div class="aw__l1txzw95">--}}
+{{--            <a class="aw__iys36jq" href="#">--}}
+{{--                <img class="aw__i13p2z3b"--}}
+{{--                     src="https://static.chotot.com/storage/chotot-icons/svg/escrow-orders.svg"--}}
+{{--                     alt="Đơn bán">--}}
+{{--                <span>Quản lý cửa hàng</span>--}}
+{{--            </a></div>--}}
+{{--        <div class="aw__l1txzw95">--}}
+{{--            <a class="aw__iys36jq " href="#">--}}
+{{--                <img class="aw__i13p2z3b"--}}
+{{--                     src="https://static.chotot.com/storage/chotot-icons/svg/escrow.svg"--}}
+{{--                     alt="Ví bán hàng">--}}
+{{--                <span>0 VND</span>--}}
+{{--            </a>--}}
+{{--        </div>--}}
+
             <div class="aw__d15qd39x">Tài khoản</div>
             <div class="aw__l1txzw95">
                 <a class="aw__iys36jq " href="{{route('profile')}}">

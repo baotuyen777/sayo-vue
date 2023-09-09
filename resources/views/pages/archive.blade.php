@@ -1,6 +1,11 @@
 @extends('layout/index')
+
 @section('content')
     <main>
+        <section class="white-box p-10 container">
+
+            @include('component.form.select5')
+        </section>
         <section>
             <div class="container">
                 <div class="card">

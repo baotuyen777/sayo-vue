@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Pdws;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,8 @@ class HomeController extends Controller
         $pageSize = $request->input('page_size') ?? 20;
 
         $category = Category::where('code', $catSlug)->first();
+        $provinces = Pdws::where('level', 1)->get();
+//        $provinces = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 1)->get();
 
         $posts = Posts::select('*')
             ->where('name', 'like', "%{$s}%")
@@ -35,7 +38,7 @@ class HomeController extends Controller
             ->with('files')
             ->paginate($pageSize, ['*'], 'page', $currentPage);
 
-        return view('pages/archive', ['posts' => $posts, 'category' => $category]);
+        return view('pages/archive', ['posts' => $posts, 'category' => $category, 'provinces' => $provinces]);
     }
 
 

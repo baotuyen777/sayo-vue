@@ -4,7 +4,7 @@
 
         @foreach($options as $k => $option)
             <option
-                {{isset($obj) && $k == $obj[$name] ||(
+                {{isset($obj) && $k == $obj[$name] || (
                          isset($obj['attr'])
                          && isset($attr)
                          && isset($obj['attr']->$attr)

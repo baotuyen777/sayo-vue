@@ -1,10 +1,12 @@
-.upload-files{
+.upload-files {
     display: flex;
     gap: 10px;
-    .preview{
+
+    .preview {
         gap: 10px;
         display: flex;
-        img{
+
+        img {
             height: 100px;
         }
     }
@@ -34,4 +36,18 @@
         color: white;
     }
 
+}
+
+button {
+    display: flex;
+    gap: 5px;
+
+    i {
+        width: 1em;
+        height: 1.3em;
+        color: #222;
+        background-image: url(https://static.chotot.com/storage/chotot-icons/svg/new-location.svg);
+        background-size: 1em 1.3em;
+        background-repeat: no-repeat;
+    }
 }

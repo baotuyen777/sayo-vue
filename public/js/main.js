@@ -47,6 +47,11 @@ jQuery(document).ready(function ($) {
 jQuery('.account-menu').click(function () {
     jQuery(this).find('.menu').toggle('show')
 });
+
+jQuery('.select5__button').click(function (){
+//
+    jQuery(this).parent().find('.select5__body').toggleClass('show')
+})
 // jQuery('body').click(() => {
 //     jQuery('.account-menu').find('.menu').hide()
 // })
