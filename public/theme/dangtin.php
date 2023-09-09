@@ -784,7 +784,6 @@
                      style="--snf9jyk-0:initial;--snf9jyk-1:initial;--snf9jyk-2:100%;--snf9jyk-4:initial;--snf9jyk-6:100%;--snf9jyk-8:initial;--snf9jyk-10:100%;--snf9jyk-12:initial;--snf9jyk-14:66.66666666666666%;--snf9jyk-16:initial;--snf9jyk-18:66.66666666666666%;--snf9jyk-20:initial">
                     <div class="f1wri8l5">
                         <form>
-                            <div></div>
                             <div>
                                 <div class="wbtmmtj"></div>
                                 <div class="l1kr9d9v">

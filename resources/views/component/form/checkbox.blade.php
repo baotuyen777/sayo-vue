@@ -1,5 +1,5 @@
 {{--<div class="form-control @error($name) error @enderror">--}}
-{{--    <input class="ire0wc " name="{{$name}}" type="{{$type ?? 'text'}}"--}}
+{{--    <input class="minput " name="{{$name}}" type="{{$type ?? 'text'}}"--}}
 {{--           inputmode="{{$inputmode ?? 'text'}}" value="{{ old($name) }}">--}}
 {{--    <label for="{{$name}}">{{$label}}</label>--}}
 {{--    <button tabindex="-1" type="button">--}}
