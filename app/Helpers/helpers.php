@@ -73,7 +73,4 @@ function showHumanTime($actionTime)
     return $timeString;
 }
 
-function getProductAttr()
-{
 
-}

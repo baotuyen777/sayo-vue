@@ -4,13 +4,12 @@
     <main>
         <div class="container">
             <div class="ct-detail adview">
-                @include('component.breadcrumb')
 
                 <div class="row base">
                     <div class="col-md-8">
                         @include('component.post-detail.slider')
                         <div class="AdDecription_adDecriptionWrapper____nLb">
-                            <h1 class="AdDecription_adTitle__AG9r4"> {{$obj['name']}}}</h1>
+                            <h1 class="AdDecription_adTitle__AG9r4"> {{$obj['name']}}</h1>
                             <div class="AdDecription_priceWrapper__ObnxA">
                                 <div class="AdDecription_adPrice__MQzGw" itemprop="price">
                                     {{moneyFormat($obj['price'])}}
@@ -118,7 +117,7 @@
                         @include('component.post-detail.report')
                     </div>
 
-                    <div class="col-md-4 no-padding dtView">
+                    <div class="col-md-4">
                         @include('component.post-detail.sidebar')
                     </div>
                 </div>

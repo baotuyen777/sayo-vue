@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\Category;
 use App\Models\Posts;
 use App\Services\AuthService;
@@ -33,36 +34,38 @@ class AuthController extends Controller
 
     public function login()
     {
-        return view('pages/login');
+//        dd(getBreadcrumb());
+        return view('pages/auth/login');
     }
 
     public function register()
     {
-        return view('pages/login');
+        return view('pages/auth/register');
     }
 
 
-
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|string|max:20|unique:users',
-            'password' => 'required|string',
-//            'password' => 'required|string|min:8|confirmed',
-//            'password_confirmation' => 'required',
-        ]);
+
+//        $request->validate([
+//            'name' => 'required|string|max:255',
+//            'email' => 'required|string|email|max:255|unique:users',
+//            'phone' => 'required|string|max:20|unique:users',
+//            'password' => 'required|string',
+////            'password' => 'required|string|min:8|confirmed',
+////            'password_confirmation' => 'required',
+//        ]);
 
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
+//            'email' => $request->email,
             'phone' => $request->phone,
             'username' => $request->phone,
             'password' => Hash::make($request->password),
 
         ]);
-
+        return ['result' => $user, 'status' => true];
+//return $user
         return redirect()->route('login')->with('notify', 'Tạo tài khoản thành công');
     }
 

@@ -4,27 +4,19 @@
         <progress hidden=""></progress>
         <div class=" w1eil6in">
             <div class="b4hnkwj">
-                <h1 class=" b13ldopu">
-                    {{Route::is('login') ? 'Đăng Nhập' : 'Đăng ký tài khoản'}}
-                </h1>
+                <h1 class=" b13ldopu">Đăng Nhập</h1>
 
                 <form method="post" class="mocked-styled-13 fei2bp7" action="{{route('login')}}">
-                    @if(Route::is('register'))
-                        @include('component.form.input',['name'=> 'phone', 'label' => 'Họ và tên1'])
-                        @include('component.form.input',['name'=> 'email', 'label' => 'Email', 'inputmode' =>'email', 'type' =>'email'])
-                    @endif
 
                     @include('component.form.input',['name'=> 'phone', 'label' => 'Số điện thoại', 'inputmode' =>'numeric', 'type' =>'tel'])
                     @include('component.form.input',['name'=> 'password', 'label' => 'Mật khẩu',  'type' =>'password'])
 
                     <a class="forgot-password-btn" href="forget-password">Quên mật khẩu?</a>
-                    <button class="bns1dlc primary large w-bold i-left stretch">
-                        {{Route::is('login') ? '   ĐĂNG NHẬP' : 'ĐĂNG KÝ'}}
-                    </button>
+                    <button class="bns1dlc primary large w-bold i-left stretch">ĐĂNG NHẬP</button>
                     @csrf
                 </form>
 
-                <div class="mocked-styled-16 a1k9ogns">
+                <div class=" a1k9ogns">
                     <hr/>
                     <span>Hoặc đăng nhập bằng</span>
                     <hr/>
@@ -53,12 +45,8 @@
                         <div id="google-login-btn"></div>
                     </div>
                 </div>
-                @if(Route::is('login'))
-                    <p class="mocked-styled-33 rnv45ui">Chưa có tài khoản? <a href="register">Đăng ký tài khoản mới</a>
-                    </p>
-                @else
+
                     <p class="mocked-styled-33 rnv45ui">Đã có tài khoản? <a href="login">Đăng nhập ngay</a></p>
-                @endif
 
             </div>
         </div>

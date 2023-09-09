@@ -1,4 +1,4 @@
-<div>
+<div class="post-sidebar">
     <div style="position: fixed; top: 80px; ">
         <div class="NextAds_buttonWraper__oSIaL">
             <button class="NextAds_preAds__FsxYM" type="button">Về danh sách</button>

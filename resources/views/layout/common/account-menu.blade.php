@@ -16,7 +16,7 @@
         <div class="aw__ntc1674" style="--ntc1674-2: 72px;">
             <span class="aw__nrouw61" style="--nrouw61-3: 48px;"></span>
             @guest
-                <a href="{{ route('login') }}"><span class="aw__n171wcvy">Đăng nhập / Đăng ký</span></a>
+                <span class="aw__n171wcvy"><a href="{{ route('login') }}">Đăng nhập</a> / <a href="{{ route('register') }}">Đăng ký</a></span>
             @endguest
             @auth
                 <a href="{{ route('profile') }}"><span class="aw__n171wcvy">{{ Auth::user()->name }}</span></a>
@@ -71,7 +71,7 @@
         @auth
             <div class="aw__d15qd39x">Tài khoản</div>
             <div class="aw__l1txzw95">
-                <a class="aw__iys36jq " href="#">
+                <a class="aw__iys36jq " href="{{route('profile')}}">
                     <img class="aw__i13p2z3b"
                          src="https://static.chotot.com/storage/icons/svg/setting.svg"
                          alt="Ví bán hàng">
@@ -79,7 +79,7 @@
                 </a>
             </div>
             <div class="aw__l1txzw95">
-                <a class="aw__iys36jq " href="{{env('APP_URL')}}/logout">
+                <a class="aw__iys36jq " href="{{route('logout')}}">
                     <img class="aw__i13p2z3b"
                          src="https://static.chotot.com/storage/icons/svg/logout.svg"
                          alt="Ví bán hàng">

@@ -28,8 +28,8 @@ Route::get('/page/{slug}.htm', [HomeController::class, 'page']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'doLogin'])->name('doLogin ');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register', [AuthController::class, 'store']);
-Route::get('/logout', [AuthController::class, 'logout']);
+Route::post('/register', [AuthController::class, 'store'])->name('doRegister');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/mua-ban-{catSlug}/{slug}.htm', [PostController::class, 'postDetail'])->where('catSlug', '[A-Za-z0-9-]+');
 Route::get('/post/me', [PostController::class, 'me'])->name('myPost');
