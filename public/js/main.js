@@ -93,12 +93,12 @@ jQuery('.select5__button').click(function (){
 //     });
 // });
 
-if (jQuery('.ire0wc').val()) {
-    jQuery('.ire0wc').addClass('hasValue')
+if (jQuery('.minput').val()) {
+    jQuery('.minput').addClass('hasValue')
 } else {
-    jQuery('.ire0wc').removeClass('hasValue')
+    jQuery('.minput').removeClass('hasValue')
 }
-jQuery('.ire0wc').change(function () {
+jQuery('.minput').change(function () {
     if (jQuery(this).val()) {
         jQuery(this).addClass('hasValue')
     } else {

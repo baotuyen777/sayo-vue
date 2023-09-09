@@ -269,7 +269,7 @@
     }
 }
 
-.ire0wc {
+.minput {
     width: 100%;
     height: 100%;
     font-size: .875rem;
@@ -284,31 +284,31 @@
     background-color: #fff
 }
 
-.ire0wc.required + label:after {
+.minput.required + label:after {
     content: "*";
     margin-left: 4px;
     color: #e5193b
 }
 
-.ire0wc.isDropdown {
+.minput.isDropdown {
     cursor: pointer
 }
 
-.ire0wc:disabled {
+.minput:disabled {
     background-color: #f4f4f4;
     cursor: default
 }
 
-.ire0wc.noLabel {
+.minput.noLabel {
     padding-top: 0
 }
 
-.ire0wc.hasValue + label, .ire0wc:-webkit-autofill + label {
+.minput.hasValue + label, .minput:-webkit-autofill + label {
     transform: scale(.7143) translateY(-10px);
     font-weight: 700
 }
 
-.ire0wc:focus + label {
+.minput:focus + label {
     transform: scale(.7143) translateY(-10px);
     font-weight: 700
 }
