@@ -1,11 +1,11 @@
 
 <div class="form-control1 ">
-    <div class="select5">
-        <button class="select5__button">
+    <div class="dropdown">
+        <button class="dropdown__button">
             <i></i>
             <span>{{$options[0]['name'] ?? ''}}</span>
         </button>
-        <div class="select5__body">
+        <div class="dropdown__body">
             <div>
 
                 <ul>

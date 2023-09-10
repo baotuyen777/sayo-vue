@@ -2,14 +2,23 @@
 
 @section('content')
     <main>
-        <section class="white-box p-10 container d-flex gap-10">
-            @include('component.form.selectProvince', ['options' => $provinces,'first'=>'Toàn quốc'])
-            @if($province)
-                @include('component.form.selectDistrict', ['options' => $districts,'first'=>'Tất cả'])
-            @endif
-            @if($district)
-                @include('component.form.selectWard', ['options' => $wards,'first'=>'Tất cả'])
-            @endif
+        <section>
+            <form action="{{url()->current()}}">
+                <div class="white-box p-10 container d-flex gap-10">
+                    @include('component.form.filter.selectProvince', ['options' => $provinces])
+                    @if($province)
+                        @include('component.form.filter.selectDistrict', ['options' => $districts])
+                    @endif
+                    @if($district)
+                        @include('component.form.filter.selectWard', ['options' => $wards])
+                    @endif
+
+                    @include('component.form.filter.rangePrice')
+                    @include('component.form.filter.keyword')
+                </div>
+
+            </form>
+
 
         </section>
         <section>

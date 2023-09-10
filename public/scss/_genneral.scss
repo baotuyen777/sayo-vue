@@ -162,6 +162,12 @@ svg {
 .hide{
     display: none;
 }
+.scroll{
+    overflow: scroll;
+}
+.no-radius{
+    border-radius: 0;
+}
 
 @media (max-width: 991px) {
     .grid-2 > div {

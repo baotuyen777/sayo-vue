@@ -1,11 +1,11 @@
 
 <div class="form-control1 ">
-    <div class="select5">
-        <button class="select5__button">
-            <i></i>
+    <div class="dropdown">
+        <button class="dropdown__button" type="button">
+            <i class="location"></i>
             <span>{{$province['name'] ?? 'Toàn quốc'}}</span>
         </button>
-        <div class="select5__body">
+        <div class="dropdown__body scroll">
             <div>
                   <ul>
                     <li><a href="{{route('archive',['catCode' =>$category['code']])}}"

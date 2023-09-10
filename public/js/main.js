@@ -48,15 +48,15 @@ jQuery('.account-menu').click(function () {
     jQuery(this).find('.menu').toggle('show')
 });
 
-jQuery('.select5__button').click(function (){
+jQuery('.dropdown__button').click(function (){
 //
-    jQuery(this).parent().find('.select5__body').toggleClass('show')
+    jQuery(this).parent().find('.dropdown__body').toggleClass('show')
 })
-jQuery('.select5__button').blur(function(){
-    // jQuery(this).parent().find('.select5__body').removeClass('show')
+jQuery('.dropdown__button').blur(function(){
+    // jQuery(this).parent().find('.dropdown__body').removeClass('show')
 })
 
-// jQuery('.select5__body').find('a').click(function(){
+// jQuery('.dropdown__body').find('a').click(function(){
 //     console.log(window.location.href);
 // })
 // jQuery('body').click(() => {

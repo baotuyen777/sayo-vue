@@ -22,10 +22,11 @@ class HomeController extends Controller
         return view('pages/home', ['categories' => $categories, 'posts' => $posts]);
     }
 
-    public function archive(Request $request, $catSlug = null, $provinceCode = null, $districtCode = null, $wardCode= null)
+    public function archive(Request $request, $catSlug = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
+//        dd(url());
 //        dd($catSlug, $provinceCode , $districtCode);
-        $s = $request->input('s');
+
         $currentPage = $request->input('current') ?? 1;
         $pageSize = $request->input('page_size') ?? 20;
 
@@ -44,13 +45,27 @@ class HomeController extends Controller
         ];
 
         $posts = Posts::select('*')
-            ->where('name', 'like', "%{$s}%")
             ->where('category_id', $category->id)
 //            ->whereHas('category', function ($query) use ($catSlug) {
 //                $query->where('code', $catSlug);
 //            })
             ->with('avatar')->with('files');
 
+
+        $price_from = $request->input('price_from');
+        if ($price_from) {
+            $posts->where('price', '>', $price_from);
+        }
+
+        $price_to = $request->input('price_to');
+        if ($price_to) {
+            $posts->where('price', '<', $price_to);
+        }
+
+        $s = $request->input('s');
+        if ($s) {
+            $posts->where('name', 'like', "%{$s}%");
+        }
 
         if ($provinceCode && $province) {
             $posts->where('province_id', $province->id);
@@ -63,9 +78,9 @@ class HomeController extends Controller
                 $attr['wards'] = Ward::whereDistrictId($district->id)->get();
 
                 $ward = Ward::where('code', $wardCode)->first();
-                if($ward){
+                if ($ward) {
                     $attr['ward'] = $ward;
-                    $posts->where('ward_id',$ward->id);
+                    $posts->where('ward_id', $ward->id);
                 }
 
             }
