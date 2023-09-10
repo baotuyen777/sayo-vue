@@ -8,9 +8,9 @@ use App\Models\Pdws;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use \Kjmtrue\VietnamZone\Models\Province;
-use \Kjmtrue\VietnamZone\Models\District;
-use \Kjmtrue\VietnamZone\Models\Ward;
+use App\Models\Pdw\Province;
+use App\Models\Pdw\District;
+use App\Models\Pdw\Ward;
 
 class HomeController extends Controller
 {
