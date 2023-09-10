@@ -78,10 +78,7 @@ function showHumanTime($actionTime)
     return $timeString;
 }
 
-function dj($var)
-{
-    return dd($var);
-}
+
 
 function vn2str($str)
 {
@@ -133,7 +130,7 @@ function vn2code($str)
     return strtolower($str);
 }
 
-function vn2pdw($str)
+function vn2Province($str)
 {
     $str = vn2code($str);
     $str = str_replace(['tinh-', 'thanh-pho-'], '', $str);

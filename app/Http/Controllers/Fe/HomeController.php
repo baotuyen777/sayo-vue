@@ -22,35 +22,59 @@ class HomeController extends Controller
         return view('pages/home', ['categories' => $categories, 'posts' => $posts]);
     }
 
-    public function archive(Request $request, $catSlug = null, $provinceCode = null)
+    public function archive(Request $request, $catSlug = null, $provinceCode = null, $districtCode = null, $wardCode= null)
     {
+//        dd($catSlug, $provinceCode , $districtCode);
         $s = $request->input('s');
         $currentPage = $request->input('current') ?? 1;
         $pageSize = $request->input('page_size') ?? 20;
 
-        $category = Category::where('code', $catSlug)->first();
-
         $province = Province::where('code', $provinceCode)->first();
+
+        $category = Category::where('code', $catSlug)->first();
+        $attr = [
+            'category' => $category,
+            'provinces' => Province::get(),
+            'province' => $province,
+            'district' => [],
+            'districts' => [],
+            'wards' => [],
+            'ward' => [],
+            'objs' => [],
+        ];
+
         $posts = Posts::select('*')
             ->where('name', 'like', "%{$s}%")
-            ->whereHas('category', function ($query) use ($catSlug) {
-                $query->where('code', $catSlug);
-            })
+            ->where('category_id', $category->id)
+//            ->whereHas('category', function ($query) use ($catSlug) {
+//                $query->where('code', $catSlug);
+//            })
             ->with('avatar')->with('files');
 
-        if ($provinceCode) {
+
+        if ($provinceCode && $province) {
             $posts->where('province_id', $province->id);
+
+            $attr['districts'] = District::whereProvinceId($province->id ?? 1)->get();
+            $district = District::where('code', $districtCode)->first();
+            $attr['district'] = $district;
+            if ($districtCode && $district) {
+                $posts->where('district_id', $district->id);
+                $attr['wards'] = Ward::whereDistrictId($district->id)->get();
+
+                $ward = Ward::where('code', $wardCode)->first();
+                if($ward){
+                    $attr['ward'] = $ward;
+                    $posts->where('ward_id',$ward->id);
+                }
+
+            }
+
         }
 
-        $posts = $posts->paginate($pageSize, ['*'], 'page', $currentPage);
+        $attr['objs'] = $posts->paginate($pageSize, ['*'], 'page', $currentPage);
 
-        $provinces = Province::get();
-        $districts = District::whereProvinceId(50)->get();
-        $wards = Ward::whereDistrictId(552)->get();
-
-        return view('pages/archive', ['posts' => $posts, 'category' => $category,
-            'provinces' => $provinces, 'districts' => $districts, 'wards' => $wards
-        ]);
+        return view('pages/archive', $attr);
     }
 
 

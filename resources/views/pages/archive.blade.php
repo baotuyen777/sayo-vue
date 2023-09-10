@@ -3,17 +3,22 @@
 @section('content')
     <main>
         <section class="white-box p-10 container d-flex gap-10">
-            @include('component.form.selectProvince', ['options' => $provinces,'first'=>'Toàn quốc', 'obj'=> $category])
-            @include('component.form.select5', ['options' => $districts,'first'=>'Tất cả', 'obj'=> $category])
-            @include('component.form.selectWard', ['options' => $wards,'first'=>'Tất cả', 'obj'=> $category])
+            @include('component.form.selectProvince', ['options' => $provinces,'first'=>'Toàn quốc'])
+            @if($province)
+                @include('component.form.selectDistrict', ['options' => $districts,'first'=>'Tất cả'])
+            @endif
+            @if($district)
+                @include('component.form.selectWard', ['options' => $wards,'first'=>'Tất cả'])
+            @endif
+
         </section>
         <section>
             <div class="container">
                 <div class="card">
                     <h2>{{$category['name']}}</h2>
                     <div class="d-flex-wrap grid-6">
-                        @foreach($posts as $post)
-                            @include('component.post',['obj'=> $post])
+                        @foreach($objs as $obj)
+                            @include('component.post',['obj'=> $obj])
                         @endforeach
                     </div>
                 </div>

@@ -22,14 +22,14 @@ return new class extends Migration {
 
             $table->json('attr')->nullable();
 
-            $table->unsignedBigInteger('ward_id')->nullable();
-            $table->foreign('ward_id')->references('id')->on('pdws')->onDelete('cascade');
+            $table->unsignedBigInteger('province_id')->nullable();
+            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
 
             $table->unsignedBigInteger('district_id')->nullable();
-            $table->foreign('district_id')->references('id')->on('pdws')->onDelete('cascade');
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
 
-            $table->unsignedBigInteger('province_id')->nullable();
-            $table->foreign('province_id')->references('id')->on('pdws')->onDelete('cascade');
+            $table->unsignedBigInteger('ward_id')->nullable();
+            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
 
             $table->unsignedBigInteger('avatar_id')->nullable();
             $table->foreign('avatar_id')->references('id')->on('files')->onDelete('cascade');

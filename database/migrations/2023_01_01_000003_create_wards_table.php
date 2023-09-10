@@ -26,6 +26,7 @@ class CreateWardsTable extends Migration
                 ->on('districts')
                 ->cascadeOnDelete();
         });
+        \Illuminate\Support\Facades\Artisan::call('vietnamzone:import');
     }
 
     /**
