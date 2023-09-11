@@ -1,7 +1,7 @@
 <div class="form-control1 ">
     <div class="dropdown">
         <button class="dropdown__button" type="button">
-            <i class="price"></i>
+            <i class="search"></i>
             @if(request()->get('s'))
                 <span>{{request()->get('s')}}</span>
             @else

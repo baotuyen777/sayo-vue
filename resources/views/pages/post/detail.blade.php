@@ -56,7 +56,9 @@
                             {{isset($obj['id']) ? 'Lưu thay đổi' : 'ĐĂNG TIN' }}
                         </button>
                         @if(isset($obj))
-                            <a class="btn" href="{{getProductUrl($obj)}}" target="_blank">Xem trước</a>
+                            <a class="btn"
+                               href="{{route('postView',['catSlug'=>$obj['category']['code'],'slug'=>$obj['code']])}}"
+                               target="_blank">Xem trước</a>
                         @endif
                     </div>
                     @csrf

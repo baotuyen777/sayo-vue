@@ -4,7 +4,7 @@
             {{--            <img src="{{($post['avatar']['url'] ?? '')}}" alt="{{$post['avatar']['name']}}">--}}
         </div>
         <div class="info">
-                <p class="card__title"><a class="" href="{{editProductUrl($post)}}">{{$post['name']}}</a></p>
+                <p class="card__title"><a class="" href="{{route('postEdit',['slug'=>$post['code']])}}">{{$post['name']}}</a></p>
                 <p class="card__price"><b>{{moneyFormat($post['price'])}}</b></p>
                 <p class="datetime"><small>Đã đăng {{showHumanTime($post['created_at'])}}</small></p>
         </div>

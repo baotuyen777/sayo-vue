@@ -15,10 +15,10 @@
         <div class="dropdown__body">
             <div class="range">
                 <div class="range__body">
-                    <input class="" type="number" placeholder="₫ TỪ" name="price_from"
-                           value="{{request()->get('price_from') ??0}}">
+                    <input class="" type="number" placeholder="₫ TỪ" name="price_from" step="10000"
+                           value="{{request()->get('price_from') ?? ''}}">
                     <span class="line"></span>
-                    <input type="number" placeholder="₫ ĐẾN" name="price_to" value="{{request()->get('price_to') ??0}}">
+                    <input type="number" placeholder="₫ ĐẾN" name="price_to" step="10000" value="{{request()->get('price_to') ?? ''}}">
                 </div>
                 <button class="btn--primary full no-radius">Áp dụng</button>
             </div>
