@@ -2,9 +2,9 @@
 
 @section('content')
     <main>
-        <section>
+        <section class="container">
             <form action="{{url()->current()}}">
-                <div class="white-box p-10 container d-flex gap-10">
+                <div class="flex-row">
                     @include('component.form.filter.selectProvince', ['options' => $provinces])
                     @if($province)
                         @include('component.form.filter.selectDistrict', ['options' => $districts])

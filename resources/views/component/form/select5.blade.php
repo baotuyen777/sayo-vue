@@ -5,7 +5,7 @@
             <i></i>
             <span>{{$options[0]['name'] ?? ''}}</span>
         </button>
-        <div class="dropdown__body">
+        <div class="dropdown__content">
             <div>
 
                 <ul>

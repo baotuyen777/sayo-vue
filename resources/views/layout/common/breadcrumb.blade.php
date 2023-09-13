@@ -1,35 +1,20 @@
 @php
-
-
-       // Get the current route
-       $currentRoute = \Route::currentRouteName();
-
-       // Define your breadcrumb mapping
-       $breadcrumbs = [
-           'home' => 'Trang chủ',
-           'products.index' => 'Products',
-           'products.show' => 'Product Details',
-       ];
-
-
+    $breadcrumbs = [
+        'home' => 'Trang chủ',
+    ];
 
 @endphp
-<div class="container">
-    <ol class="breadcrumb">
-        <li><a href="{{env('APP_URL')}}">Trang chủ</a></li>
-        <li>
-            <a href="https://www.chotot.com/mua-ban-ban-ghe"><span
-                >Bàn ghế</span></a></li>
-        <li>
-            <a href="https://www.chotot.com/mua-ban-ban-ghe-ha-noi"><span
-                >Bàn ghế Hà Nội</span></a></li>
-        <li>
-            <a href="https://www.chotot.com/mua-ban-ban-ghe-quan-nam-tu-liem-ha-noi"><span
-                >Bàn ghế Quận Nam Từ Liêm</span></a>
-        </li>
-        <li class="BreadCrumb_breadcrumbItem__M8Q4i" itemprop="itemListElement">
-            <span>ghế xoay mới 95%</span>
-        </li>
-    </ol>
+@if(isset($obj['name']))
+    <div class="container">
+        <ol class="breadcrumb">
+            @foreach($breadcrumbs as $k=> $label)
+                <li><a href="{{route($k)}}">{{$label}}</a></li>
+            @endforeach
+            <li class="BreadCrumb_breadcrumbItem__M8Q4i" itemprop="itemListElement">
+                <span>{{$obj['name']}}</span>
+            </li>
 
-</div>
+        </ol>
+
+    </div>
+@endif

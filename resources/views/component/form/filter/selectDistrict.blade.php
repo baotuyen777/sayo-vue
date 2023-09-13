@@ -10,19 +10,22 @@
             <i class="location"></i>
             <span>{{$district['name'] ?? 'Tất cả huyện'}}</span>
         </button>
-        <div class="dropdown__body scroll">
-            <div>
-                <ul>
-                    <li><a href="{{route('archive',array_merge($urlParams,['catCode' =>$category['code'],'provinceCode' => $province['code']]))}}"
-                           data-id="0"><span>{{$first?? 'Tất cả'}}</span><img
-                                src="https://static.chotot.com/storage/chotot-icons/svg/grey-next.svg"></a></li>
-                    @foreach($options as $i=>$option)
+        <div class="dropdown__content ">
+            <div class="head">
+                <h4>Chọn quận/huyện</h4>
+                <button class="dropdown__close" type="button"><i class="close"></i></button>
 
+            </div>
+            <div class="body scroll">
+                <ul>
+                    <li>
+                        <a href="{{route('archive',array_merge($urlParams,['catCode' =>$category['code'],'provinceCode' => $province['code']]))}}"
+                           data-id="0"><span>{{$first?? 'Tất cả'}}</span></a></li>
+                    @foreach($options as $i=>$option)
                         <li>
                             <a
                                 href="{{route('archive',array_merge(['catCode'=>$category['code'],'provinceCode' => $province['code'],'districtCode'=>$option['code']], $urlParams))}}"
-                               data-id="{{$option['id'] ?? $i}}"><span>{{$option['name'] ?? $option}}</span><i
-                                    class="next"></i></a></li>
+                                data-id="{{$option['id'] ?? $i}}"><span>{{$option['name'] ?? $option}}</span></a></li>
                     @endforeach
                 </ul>
             </div>

@@ -8,8 +8,13 @@
                 <span>Từ khóa</span>
             @endif
         </button>
-        <div class="dropdown__body">
-            <div class="range">
+        <div class="dropdown__content">
+            <div class="head">
+                <h4>Chọn khoảng giá</h4>
+                <button class="dropdown__close" type="button"><i class="close"></i></button>
+
+            </div>
+            <div class="body">
                 <div class="range__body">
                     <input class=""  placeholder="Tìm từ khóa" name="s"
                            value="{{request()->get('s') ?? ''}}">

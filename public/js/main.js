@@ -49,14 +49,19 @@ jQuery('.account-menu').click(function () {
 });
 
 jQuery('.dropdown__button').click(function (){
-//
-    jQuery(this).parent().find('.dropdown__body').toggleClass('show')
-})
-jQuery('.dropdown__button').blur(function(){
-    // jQuery(this).parent().find('.dropdown__body').removeClass('show')
+
+    jQuery('.dropdown').removeClass('show')
+    jQuery(this).parent().toggleClass('show')
 })
 
-// jQuery('.dropdown__body').find('a').click(function(){
+$('.dropdown__close').click(function(){
+    jQuery(this).parents('.dropdown').removeClass('show')
+})
+jQuery('.dropdown__button').blur(function(){
+    // jQuery(this).parent().find('.dropdown__content').removeClass('show')
+})
+
+// jQuery('.dropdown__content').find('a').click(function(){
 //     console.log(window.location.href);
 // })
 // jQuery('body').click(() => {

@@ -44,20 +44,46 @@
     }
 
 }
-i{
-    &.location{
+
+i {
+    &.location {
         background-image: url(https://static.chotot.com/storage/chotot-icons/svg/new-location.svg);
     }
-    &.price{
+
+    &.price {
         background-image: url('/img/icon/price2.svg');
     }
-    &.search{
+
+    &.search {
         background-image: url('/img/icon/search-black.svg');
     }
 
+    &.close {
+        width: 10px;
+        height: 10px;
+
+        &:before, &:after {
+            position: absolute;
+            left: 5px;
+            content: ' ';
+            height: 10px;
+            width: 3px;
+            background-color: #000;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+    }
+
+
 }
 
-input{
+input {
     height: 36px;
 }
 
@@ -77,15 +103,51 @@ input{
 
 .dropdown {
     position: relative;
-    &__body {
+
+    &.show {
+        .dropdown__content {
+            display: block;
+        }
+    }
+
+    &__content {
         background: white;
-        width: 300px;
-        max-height: 300px;
+
         //overflow: scroll;
         position: absolute;
         top: 36px;
-        border: 1px solid silver;
+        //border: 1px solid silver;
         display: none;
+        z-index: 3;
+
+        .head {
+            position: relative;
+            background-color: #f4f4f4;
+            padding: 10px;
+
+            h4 {
+                text-align: center;
+                margin: 0;
+            }
+
+            .dropdown__close {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border: 0;
+                opacity: 0.5;
+
+                &:hover {
+                    background: transparent;
+                    opacity: 1;
+                }
+            }
+        }
+
+        .body {
+            width: 300px;
+            max-height: 300px;
+        }
 
         &.show {
             display: block;
@@ -116,7 +178,8 @@ input{
                 position: absolute;
                 line-height: 45px;
                 padding: 0 25px;
-                img{
+
+                img {
                     height: 14px;
                     margin-left: auto;
                 }
@@ -203,8 +266,6 @@ input{
 }
 
 
-
-
 .styles_headerCustom__WFf0U .styles_titleCustom__nikjG {
     line-height: 45px;
     margin: 0;
@@ -227,8 +288,8 @@ input{
     background: none;
 }
 
-.range{
-    &__body{
+.range {
+    &__body {
         display: flex;
         align-items: center;
         padding: 10px;
@@ -239,7 +300,8 @@ input{
             margin: 0 0.625rem;
             width: 25px;
         }
-        input{
+
+        input {
             flex: 1;
             min-width: 0;
         }
@@ -247,6 +309,21 @@ input{
 
 }
 
+@media (max-width: 767px) {
+    .dropdown {
+        &__content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+
+            .body {
+                width: 100%;
+            }
+        }
+    }
+}
 
 
 

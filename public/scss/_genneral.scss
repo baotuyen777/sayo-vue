@@ -1,6 +1,7 @@
 *, :after, :before {
     box-sizing: border-box
 }
+
 body {
     margin: 0;
     background: #ccc;
@@ -36,7 +37,7 @@ a {
     //&>div:nth-child(even){
     //    flex: 1;
     //}
-    &.grid-5>div:last-child{
+    &.grid-5 > div:last-child {
         flex: 1;
     }
 }
@@ -52,7 +53,8 @@ a {
 .white-box {
     background: white;
 }
-.box-radius{
+
+.box-radius {
     border-radius: 5px;
 }
 
@@ -63,7 +65,8 @@ a {
 .p-10 {
     padding: 10px;
 }
-.m-10{
+
+.m-10 {
     margin: 10px;
 }
 
@@ -78,9 +81,10 @@ a {
 .grid-2 > div {
     flex: 0 0 calc(50% - 20px);
 
-    &:nth-child(even){
+    &:nth-child(even) {
         flex: 1;
     }
+
     //padding: 10px;
 }
 
@@ -99,11 +103,12 @@ a {
     padding: 10px;
 }
 
-.row{
-    >div{
+.row {
+    > div {
         float: left;
     }
 }
+
 .col-md-4 {
     width: 33.33333333%;
 
@@ -159,14 +164,29 @@ svg {
 .full {
     width: 100%;
 }
-.hide{
+
+.hide {
     display: none;
 }
-.scroll{
+
+.scroll {
     overflow: scroll;
 }
-.no-radius{
+
+.no-radius {
     border-radius: 0;
+}
+
+
+.flex-row {
+    display: flex;
+
+    padding: 10px;
+    background: white;
+    flex-wrap: wrap;
+    >div{
+        margin: 5px 10px 10px 0;
+    }
 }
 
 @media (max-width: 991px) {
@@ -204,6 +224,6 @@ svg {
     //}
     //
     .grid-6 > div {
-        flex: 0 0 calc(50% - 20px);
+        flex: 1 0 calc(50% - 20px);
     }
 }

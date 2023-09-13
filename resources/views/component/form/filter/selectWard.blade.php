@@ -10,9 +10,13 @@
             <i class="location"></i>
             <span>{{$ward['name'] ?? 'Tất cả phường'}}</span>
         </button>
-        <div class="dropdown__body scroll">
-            <div>
+        <div class="dropdown__content">
+            <div class="head">
+                <h4>Chọn tỉnh/thành phố</h4>
+                <button class="dropdown__close" type="button"><i class="close"></i></button>
 
+            </div>
+            <div class="body scroll">
                 <ul>
                     <li>
                         <a href="{{route('archive',array_merge(['catCode' =>$category['code'],'provinceCode'=>$province['code'],'districtCode'=>$district['code']], $urlParams))}}"
