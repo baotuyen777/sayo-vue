@@ -22,7 +22,7 @@ class HomeController extends Controller
         return view('pages/home', ['categories' => $categories, 'posts' => $posts]);
     }
 
-    public function archive(Request $request, $catSlug = null, $provinceCode = null, $districtCode = null, $wardCode = null)
+    public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
 //        dd(url());
 //        dd($catSlug, $provinceCode , $districtCode);
@@ -32,7 +32,7 @@ class HomeController extends Controller
 
         $province = Province::where('code', $provinceCode)->first();
 
-        $category = Category::where('code', $catSlug)->first();
+        $category = Category::where('code', $catCode)->first();
         $attr = [
             'category' => $category,
             'provinces' => Province::get(),
@@ -46,8 +46,8 @@ class HomeController extends Controller
         ];
 
         $posts = Posts::select('*')->with('avatar')->with('files');
-        if ($catSlug && $category) {
-            $posts->where('category_id', '>', $category->id);
+        if ($catCode && $category) {
+            $posts->where('category_id', $category->id);
             //            ->whereHas('category', function ($query) use ($catSlug) {
 //                $query->where('code', $catSlug);
 //            })

@@ -26,57 +26,68 @@ $border-color_4: currentColor;
     color: $white;
     background-color: $background-color_1;
     border-color: $border-color_1;
+
     &:hover {
         color: $white;
         background-color: $background-color_2;
         border-color: $border-color_2;
     }
+
     &:active {
         color: $white;
         background-color: $background-color_3;
         border-color: $border-color_3;
     }
 }
+
 .aw__b1358qut.i-left {
-    >svg {
+    > svg {
         margin-right: .5em;
         margin-left: 0;
         font-size: 1rem;
     }
 }
+
 .aw__b1358qut.medium.i-left {
-    >svg {
+    > svg {
         font-size: 1rem;
     }
 }
+
 .aw__b1358qut.primary {
     color: $white;
     background-color: $background-color_1;
     border-color: $border-color_1;
+
     &:hover {
         color: $white;
         background-color: $background-color_2;
         border-color: $border-color_2;
     }
+
     &:active {
         color: $white;
         background-color: $background-color_3;
         border-color: $border-color_3;
     }
 }
+
 .aw__b1358qut.r-normal {
     border-radius: 4px;
 }
+
 .aw__b1358qut.w-bold {
     font-weight: 700;
 }
+
 .aw__s16g438w {
-    >input {
+    > input {
         visibility: hidden;
         width: 0;
         height: 0;
     }
-    >span {
+
+    > span {
         position: absolute;
         top: 0;
         border: 1px solid;
@@ -86,22 +97,25 @@ $border-color_4: currentColor;
         border-color: $border-color_4;
     }
 }
+
 .aw__s16g438w.primary {
-    >span {
+    > span {
         color: $color_2;
     }
 }
+
 .aw__s1c52820 {
-    >button {
+    > button {
         height: 40px;
         line-height: 1.25;
     }
 }
+
 .main-header {
     line-height: 1.5;
     //height: 56px;
     //background-color: $background-color_5;
-    background: linear-gradient(-180deg,#f53d2d,#f63);
+    background: linear-gradient(-180deg, #f53d2d, #f63);
     position: sticky;
     top: 0;
     font-size: .875rem;
@@ -121,10 +135,12 @@ $border-color_4: currentColor;
     position: relative;
     height: 100%;
     margin: 15px;
+
     &:hover {
         opacity: 70%;
     }
 }
+
 .aw__mpdl6d2 {
     position: relative;
     height: 100%;
@@ -147,10 +163,12 @@ $border-color_4: currentColor;
     //-webkit-transition-duration: .2s;
     //transition-duration: .2s;
 }
+
 .search-form-wrapper {
     width: 100%;
     padding: 10px;
 }
+
 .btn-search {
     top: 0;
     position: absolute;
@@ -179,10 +197,12 @@ $border-color_4: currentColor;
         text-indent: 12px;
         width: calc(100% - 40px);
     }
-    button{
+
+    button {
         height: 28px;
     }
 }
+
 .aw__d1g2y39b {
     position: relative;
     display: -webkit-box;
@@ -190,10 +210,12 @@ $border-color_4: currentColor;
     display: -ms-flexbox;
     display: flex;
 }
+
 .aw__s1wdsl35 {
     width: 100%;
     padding-right: 32px;
 }
+
 .aw__h1gb9yk {
     height: 36px;
     width: 144px;
@@ -202,16 +224,19 @@ $border-color_4: currentColor;
     justify-content: center;
 
     align-items: center;
+
     &:hover {
         background-color: $background-color_3 !important;
         border-color: $border-color_3 !important;
     }
 }
+
 .aw__c19wws31 {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .aw__dtt35j3 {
     width: 1.125rem;
     height: 100%;
@@ -220,6 +245,7 @@ $border-color_4: currentColor;
 .aw__rjogxfr {
     display: none;
 }
+
 .aw__la2dsz4 {
 
 
@@ -241,10 +267,12 @@ $border-color_4: currentColor;
 
     justify-content: center;
     align-items: center;
-    >span {
+
+    > span {
         z-index: 101;
     }
 }
+
 .aw__nygw70q {
     display: -webkit-box;
     display: -webkit-flex;
@@ -252,11 +280,13 @@ $border-color_4: currentColor;
     display: flex;
     gap: 8px;
 }
+
 .aw__s575q7c {
     input {
         font-size: 1rem;
     }
-    >div {
+
+    > div {
         margin: 0 auto;
 
         display: flex;
@@ -267,22 +297,24 @@ $border-color_4: currentColor;
 .account-menu {
     position: relative;
     cursor: pointer;
+
     .menu {
         position: absolute;
         width: 300px;
         top: 50px;
-        border: 1px solid rgba(0,0,0,0.15);
-        box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         border-top: none;
         width: 290px;
 
-        left: 0px;
+        right: 0px;
         background: #FFFFFF;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
         padding: 4px 0px;
         display: none;
-        .show{
+
+        .show {
             display: block;
         }
     }
@@ -294,12 +326,14 @@ $border-color_4: currentColor;
     width: 100%;
     height: var(--ntc1674-2);
 }
+
 .aw__n1kniwks a {
     font-size: 0.875rem;
 }
+
 .aw__d15qd39x {
     height: 38px;
-    background-color:  #f5f5f5;
+    background-color: #f5f5f5;
     padding: 10px 0 10px 12px;
     font-weight: bold;
 }
@@ -321,6 +355,7 @@ $border-color_4: currentColor;
     padding: 12px;
     width: 100%;
     height: var(--ntc1674-2);
+
     .aw__nrouw61 {
         display: block;
         background-image: url(https://static.chotot.com/storage/marketplace/common/png/default_user.png);
@@ -331,6 +366,7 @@ $border-color_4: currentColor;
         float: left;
         position: relative;
     }
+
     .aw__n171wcvy {
         float: left;
         margin-left: 8px;
@@ -356,34 +392,44 @@ $border-color_4: currentColor;
 
     }
 }
-.main-header{
+
+.main-header {
 
     .avatar {
         display: flex;
         justify-items: center;
         margin: 10px;
 
-        img{
+        img {
             border-radius: 50%;
             width: 24px;
             height: 24px;
             margin-right: 5px;
         }
-        svg{
+
+        svg {
             height: 24px;
         }
     }
 }
 
 @media (max-width: 991px) {
-    .aw__r1fkdta0, .search-form-wrapper, .top-menu{
+    .aw__r1fkdta0, .search-form-wrapper, .top-menu {
+        .aw__h1gb9yk {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .search-form-wrapper {
         display: none;
     }
 }
 
 
-.logo{
-    img{
+.logo {
+    img {
         height: 45px;
     }
 }

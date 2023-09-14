@@ -3,6 +3,11 @@
     $urlParams=[];
     if(isset($url_components['query']))
         parse_str($url_components['query'], $urlParams);
+
+     $urlParams['catCode'] = request('catCode') ?? 'tat-ca';
+
+     $urlParams['provinceCode'] =  $province['code'];
+     $urlParams['districtCode'] =  $district['code'];
 @endphp
 <div class="form-control1 ">
     <div class="dropdown">
@@ -19,13 +24,10 @@
             <div class="body scroll">
                 <ul>
                     <li>
-                        <a href="{{route('archive',array_merge(['catCode' =>$category['code'],'provinceCode'=>$province['code'],'districtCode'=>$district['code']], $urlParams))}}"
-                           data-id="0"><span>{{$first?? 'Tất cả'}}</span><img
-                                src="https://static.chotot.com/storage/chotot-icons/svg/grey-next.svg"></a></li>
+                        <a href="{{route('archive',$urlParams)}}"
+                           data-id="0"><span>{{$first?? 'Tất cả'}}</span></a></li>
                     @foreach($options as $i=>$option)
-
-                        <li><a href="{{route('archive',array_merge(['catCode'=>$category['code'],'provinceCode'=>$province['code'],
-'districtCode'=>$district['code'], 'wardCode' => $option['code']], $urlParams))}}"
+                        <li><a href="{{route('archive',array_merge(['wardCode' => $option['code']], $urlParams))}}"
                                data-id="{{$option['id'] ?? $i}}"><span>{{$option['name'] ?? $option}}</span><i
                                     class="next"></i></a></li>
                     @endforeach

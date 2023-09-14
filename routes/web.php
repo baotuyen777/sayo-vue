@@ -41,6 +41,8 @@ Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 //Route::get('/cat/{slug}', [HomeController::class, 'archive']);
 
 Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [HomeController::class, 'archive'])->name('archive');
+//Route::get('/rao-vat/{provinceCode?}/{districtCode?}/{wardCode?}', [HomeController::class, 'archive'])->name('archiveAll');
+//Route::get('/mua-ban/{provinceCode?}/{districtCode?}/{wardCode?}', [HomeController::class, 'archive'])->name('archive');
 //Route::get('/mua-ban-{catCode?}-{provinceCode?}-{districtCode?}', [HomeController::class, 'archive'])->name('archiveDistrict');
 //Route::get('/mua-ban-{catCode?}-{provinceCode?}', [HomeController::class, 'archive'])->name('archiveProvince');
 //Route::get('/mua-ban-{catCode?}', [HomeController::class, 'archive'])->name('archive');
