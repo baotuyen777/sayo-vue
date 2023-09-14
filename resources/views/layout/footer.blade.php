@@ -38,6 +38,14 @@
 </div>
 
 <script src='{{ env('APP_URL')}}/js/main.js'></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XRDH5DCMQM"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
+    gtag('config', 'G-XRDH5DCMQM');
+</script>
 </body>
 </html>

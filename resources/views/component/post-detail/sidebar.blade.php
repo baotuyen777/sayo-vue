@@ -7,7 +7,7 @@
         <div class="d-lg-block d-none">
             <div class="SellerProfile_profileWrapper__ubLwW ">
                 <a class="SellerProfile_sellerWrapper__GlDwe" target="_blank" rel="nofollow"
-                   href="https://www.chotot.com/user/4fb72d06fd71ddbeb9a14b63a31d8955#xtatc=INT-10-[Adview]">
+                   href="{{route('user.show',['user'=>$obj->author->username])}}">
                     <div
                         class="img-thumbnail img-circle Avatar_imageWrapper__6tGNZ Avatar_defaultSize__a_WTh"></div>
                     <div class="SellerProfile_nameBounder__btDeS" role="button" tabindex="0">
@@ -56,13 +56,13 @@
                 </div>
             </div>
             <div class="LeadButton_chatDesktopButton__HSQyg"><a
-                    href="https://chat.chotot.com/chatroom/join/MjU2ODExMjl8MTA5MDg2Njg4"
-                    rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9">
+                    href="https://zalo.me/{{$obj->author->phone}}"
+                    rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9" target="_blank">
                     <img src="https://static.chotot.com/storage/chotot-icons/png/chat_green.png"
                          alt="chat"><span>CHAT VỚI NGƯỜI BÁN</span></a></div>
             <div>
                 <a
-                    href="https://chat.chotot.com/chatroom/join/MjU2ODExMjl8MTA5MDg2Njg4"
+                    href="#"
                     rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9">
                   <span>Mua ngay</span></a></div>
         </div>
