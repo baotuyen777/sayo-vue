@@ -10,7 +10,7 @@
         </button>
         <div class="dropdown__content">
             <div class="head">
-                <h4>Chọn khoảng giá</h4>
+                <h4>Tìm theo từ khóa</h4>
                 <button class="dropdown__close" type="button"><i class="close"></i></button>
 
             </div>

@@ -5,6 +5,7 @@
         <section class="container">
             <form action="{{url()->current()}}">
                 <div class="flex-row">
+                    @include('component.form.filter.selectCategory', ['options' => $categories])
                     @include('component.form.filter.selectProvince', ['options' => $provinces])
                     @if($province)
                         @include('component.form.filter.selectDistrict', ['options' => $districts])
@@ -24,7 +25,7 @@
         <section>
             <div class="container">
                 <div class="card">
-                    <h2>{{$category['name']}}</h2>
+                    <h2>{{$category['name'] ?? 'Tất cả danh mục'}}</h2>
                     <div class="d-flex-wrap grid-6">
                         @foreach($objs as $obj)
                             @include('component.post',['obj'=> $obj])

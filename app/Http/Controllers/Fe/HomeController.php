@@ -42,15 +42,16 @@ class HomeController extends Controller
             'wards' => [],
             'ward' => [],
             'objs' => [],
+            'categories' => Category::with('avatar')->get()
         ];
 
-        $posts = Posts::select('*')
-            ->where('category_id', $category->id)
-//            ->whereHas('category', function ($query) use ($catSlug) {
+        $posts = Posts::select('*')->with('avatar')->with('files');
+        if ($catSlug && $category) {
+            $posts->where('category_id', '>', $category->id);
+            //            ->whereHas('category', function ($query) use ($catSlug) {
 //                $query->where('code', $catSlug);
 //            })
-            ->with('avatar')->with('files');
-
+        }
 
         $price_from = $request->input('price_from');
         if ($price_from) {
