@@ -110,13 +110,20 @@ if (jQuery('.minput').val()) {
 } else {
     jQuery('.minput').removeClass('hasValue')
 }
-jQuery('.minput').change(function () {
+jQuery('.minput').keyup(function () {
     if (jQuery(this).val()) {
         jQuery(this).addClass('hasValue')
+        $(this).parent().find('.btn-close').addClass('show');
     } else {
         jQuery(this).removeClass('hasValue')
+        $(this).parent().find('.btn-close').removeClass('show');
     }
 });
+$('.btn-close').click(function (){
+    $(this).parent().find('.minput').val(null);
+    jQuery('.minput').removeClass('hasValue')
+    $(this).removeClass('show');
+})
 
 jQuery('.btn_addfile').click(function (e) {
     e.preventDefault();

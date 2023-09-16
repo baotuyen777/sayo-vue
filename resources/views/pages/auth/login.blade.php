@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                    <p class="mocked-styled-33 rnv45ui">Đã có tài khoản? <a href="login">Đăng nhập ngay</a></p>
+                    <p class="mocked-styled-33 rnv45ui">Chưa có tài khoản? <a href="{{route('register')}}">Đăng ký ngay</a></p>
 
             </div>
         </div>

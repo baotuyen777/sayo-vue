@@ -125,6 +125,7 @@ class PostController extends Controller
         $pageSize = $request->input('page_size') ?? 10;
 
         $posts = Posts::with('avatar')
+            ->where('author_id',Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate($pageSize, ['*'], 'page', $currentPage);;
         return view('pages/post/me', ['objs' => $posts]);

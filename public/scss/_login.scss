@@ -336,6 +336,12 @@
     &.error{
         margin-bottom: 40px;
     }
+    .btn-close{
+        &.show{
+            display: flex;
+        }
+        display: none;
+    }
 }
 
 .form-control:focus-within {

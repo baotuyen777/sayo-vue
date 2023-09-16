@@ -3,7 +3,7 @@
            inputmode="{{$inputmode ?? 'text'}}" value="{{ $obj[$name] ?? old($name) }}" maxlength="{{$maxleng ??'' }}">
     <label for="{{$name}}">{{$label}}</label>
     @if(!isset($type) || in_array($type,['text']))
-        <button tabindex="-1" type="button">
+        <button tabindex="-1" type="button" class="btn-close">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="1em" height="1em" fill="none">
                 <g fill="none" fill-rule="evenodd">
                     <circle fill="#8C8C8C" cx="6" cy="6" r="6"></circle>

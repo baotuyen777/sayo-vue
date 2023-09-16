@@ -46,7 +46,7 @@
 {{--        </div>--}}
 
         <div class="aw__l1txzw95">
-            <a class="aw__iys36jq" href="{{route('myPost')}}">
+            <a class="aw__iys36jq" href="{{route('user.show',['user'=>Auth()->user()->username])}}">
                 <img class="aw__i13p2z3b"
                      src="https://static.chotot.com/storage/chotot-icons/svg/escrow_buy_orders.svg"
                      alt="Lịch sử mua">
