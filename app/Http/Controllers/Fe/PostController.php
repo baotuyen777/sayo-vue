@@ -6,16 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Posts;
+use App\Services\PostService;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+
 class PostController extends Controller
 {
-    function __construct(private Posts $postModel)
+    function __construct(private Posts $postModel, private PostService $postsService)
     {
-        $this->postModel = $postModel;
+//        $this->postModel = $postModel;
     }
 
     public function show($code)
@@ -46,6 +48,9 @@ class PostController extends Controller
         if (!$post) {
             return view('pages/404');
         }
+
+        $post['attr'] = $this->postsService->getAttrField($post);
+//        dd($post['attr']);
         return view('pages/post', ['obj' => $post]);
     }
 
@@ -82,7 +87,7 @@ class PostController extends Controller
 
         $postModel = new Posts();
         $attrs = $postModel->getAttOptions();
-        return view('pages/post/detail', $attrs);
+        return view('pages/post/create', $attrs);
     }
 
     public function edit($id)
@@ -125,9 +130,10 @@ class PostController extends Controller
         $pageSize = $request->input('page_size') ?? 10;
 
         $posts = Posts::with('avatar')
-            ->where('author_id',Auth::id())
+            ->where('author_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate($pageSize, ['*'], 'page', $currentPage);;
+
         return view('pages/post/me', ['objs' => $posts]);
     }
 

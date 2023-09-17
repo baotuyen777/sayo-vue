@@ -2,12 +2,12 @@
 
     <section>
         <div class="backdrop">
-            <img src="{{asset('img/banner/9555d3ff737c0f48c390ff5426c382f8-2840158350697184195.png')}}">
+            <img src="{{asset('img/banner/9555d3ff737c0f48c390ff5426c382f8-2840158350697184195.png')}}" alt="user-backdrop">
         </div>
 
         <div class="profile">
             <div class="avatar">
-                <img alt="Avatar" src="https://cdn.chotot.com/uac2/1047384">
+                <img alt="Avatar" src="{{ asset('img/icon/default_user.png')}}">
             </div>
             <h1>{{ Auth::user()->name ?? 'Chưa đăng nhập' }} <small>Chưa có đánh giá</small></h1>
             <p class="d-flex gap-10">

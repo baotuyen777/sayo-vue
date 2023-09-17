@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Pdw\District;
+use App\Models\Pdw\Province;
+use App\Models\Pdw\Ward;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +17,24 @@ class Posts extends Model
         1 => 'Mới',
         2 => 'Đã sử dụng(chưa sửa chữa)',
         3 => 'Đã sử dụng(đã sửa chữa)',
+    ];
+    public static array $attr = [
+        'garret' => ['label' => 'Gác xép', 'type' => 'boolean'],
+        'acreage' => ['label' => 'Diện tích', 'type' => 's'],
+        'deposit' => ['label' => 'Đặt cọc', 'type' => 'money'],
+        'furniture' => [
+            'label' => 'Nội thất ',
+            'options' => [
+                1 => 'Đầy đủ',
+                2 => 'Cơ bản',
+                3 => 'Phòng trống'
+            ]
+        ],
+        'material' => ['label' => 'Chất liệu'],
+        'color' => ['label' => 'Màu sắc', 'options' => ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác']],
+        'branch' => ['label' => 'Thương hiệu', 'options' => ['Samsung', 'Apple']],
+        'madein' => ['label' => 'Xuất xứ', 'options' => ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác']],
+        'storages' => ['label' => 'Dung lượng', 'options' => ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G']],
     ];
 //    protected $table ='posts';
     protected $fillable = [
@@ -41,9 +62,19 @@ class Posts extends Model
             ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
     }
 
-    public function pdws()
+    public function province()
     {
-        return $this->belongsTo(Pdws::class, 'pdws_id');
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function ward()
+    {
+        return $this->belongsTo(Ward::class);
     }
 
     public function files()

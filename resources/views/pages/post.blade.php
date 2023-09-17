@@ -14,77 +14,61 @@
                                 <div class="AdDecription_adPrice__MQzGw" itemprop="price">
                                     {{moneyFormat($obj['price'])}}
                                 </div>
-                                <button type="button" class="SaveAd_saveAdViewDetail__UGkS5"><p>Lưu tin </p>
-                                    <img height="20" width="20"
-                                         src="https://static.chotot.com/storage/icons/saveAd/save-ad.svg"
-                                         alt="like" loading="lazy"></button>
+                                <button type="button" class="SaveAd_saveAdViewDetail__UGkS5">Lưu tin
+                                    <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like" loading="lazy"></button>
                             </div>
 
                             <p class="AdDecription_adBody__qp2KG" itemprop="description">{{$obj['content']}}</p>
                         </div>
 
-                        <div class="d-lg-block d-none">
-                            <div class="InlineShowPhoneButton_wrapper__NtHmX">
-                                <div
-                                    class="InlineShowPhoneButton_linkContact__YEWbK InlineShowPhoneButton_phoneHidden__GJPGi">
-                                    <span>Nhấn để hiện số: 097301 ***</span></div>
-                            </div>
-                        </div>
+                        <p class="d-lg-block d-none">
+                            <a href="tel:{{$obj->author->phone}}">{{$obj->author->phone}} BẤM ĐỂ GỌI</a>
+                        </p>
 
-                        <div class="col-xs-12 no-padding">
-                            <div class="col-md-6 no-padding AdParam_adParamItem__Yi2I0">
-                                <div class="AdParam_adMediaParam__3epxo">
-                                    <div class="media-left media-top"><img class="AdParam_adParamIcon__m87Vj"
-                                                                           alt="Tình trạng"
-                                                                           src="https://static.chotot.com/storage/icons/logos/ad-param/condition_ad.png">
-                                    </div>
-                                    <div class="media-body media-middle"><span><span>Tình trạng: </span><span
-                                                class="AdParam_adParamValue__IfaYa">Đã sử dụng</span></span></div>
-                                </div>
+                        <section class="grid-2">
+                            <div class="align-center">
+                                <i class="state-used"></i>
+                                <span><b>Tình trạng:</b> <span>Đã sử dụng</span></span>
                             </div>
                             @if($obj['attr'])
-                                @foreach(json_decode($obj['attr']) as $field=>$val)
-                                    <div class="col-md-6 no-padding AdParam_adParamItem__Yi2I0 d-flex">
-                                        <img class="AdParam_adParamIcon__m87Vj" alt="{{$field}}"
-                                             src="https://static.chotot.com/storage/icons/logos/ad-param/product_type.png">
-                                        <span>{{$field}}: </span>&nbsp;
-                                        <span itemprop="product_type"
-                                              class="AdParam_adParamValue__IfaYa"> {{$val}}</span>
+                                @foreach($obj['attr'] as $field=>$attr)
+                                    <div>
+                                        <p class="align-center">
+                                            <i class="product-type"></i>
+                                            <span><b>{{$attr['label']}}</b>: {{$attr['value']}}</span>&nbsp;
+                                        </p>
                                     </div>
+
                                 @endforeach
                             @endif
 
-                            {{--                            <div class="col-md-6 no-padding AdParam_adParamItem__Yi2I0" data-testid="param-item">--}}
-                            {{--                                <div class="AdParam_adMediaParam__3epxo">--}}
-                            {{--                                    <div class="media-left media-top"><img class="AdParam_adParamIcon__m87Vj"--}}
-                            {{--                                                                           alt="Chất liệu"--}}
-                            {{--                                                                           src="https://static.chotot.com/storage/icons/logos/ad-param/product_material.png">--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class="media-body media-middle"><span><span>Chất liệu: </span><span--}}
-                            {{--                                                itemprop="product_material"--}}
-                            {{--                                                class="AdParam_adParamValue__IfaYa">Nệm</span></span></div>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
-                            {{--                            <div class="col-md-6 no-padding AdParam_adParamItem__Yi2I0" data-testid="param-item">--}}
-                            {{--                                <div class="AdParam_adMediaParam__3epxo">--}}
-                            {{--                                    <div class="media-left media-top"><img class="AdParam_adParamIcon__m87Vj"--}}
-                            {{--                                                                           alt="Thông tin sử dụng"--}}
-                            {{--                                                                           src="https://static.chotot.com/storage/icons/logos/ad-param/usage_information.png">--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class="media-body media-middle"><span><span>Thông tin sử dụng: </span><span--}}
-                            {{--                                                itemprop="usage_information" class="AdParam_adParamValue__IfaYa">In trên bao bì</span></span>--}}
-                            {{--                                    </div>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
-                        </div>
-                        <section class="col-xs-12 no-padding">
 
-                            <img class="AdParam_adParamIcon__m87Vj"
-                                 alt="location"
-                                 src="https://static.chotot.com/storage/icons/logos/ad-param/location.svg"><strong>Khu
-                                Vực:</strong>
-                            <span>Phường Xuân Phương, Quận Nam Từ Liêm, Hà Nội</span>
-
+                            {{--                                                        <div class="col-md-6 no-padding AdParam_adParamItem__Yi2I0" data-testid="param-item">--}}
+                            {{--                                                            <div class="AdParam_adMediaParam__3epxo">--}}
+                            {{--                                                                <div class="media-left media-top"><img class="AdParam_adParamIcon__m87Vj"--}}
+                            {{--                                                                                                       alt="Chất liệu"--}}
+                            {{--                                                                                                       src="https://static.chotot.com/storage/icons/logos/ad-param/product_material.png">--}}
+                            {{--                                                                </div>--}}
+                            {{--                                                                <div class="media-body media-middle"><span><span>Chất liệu: </span><span--}}
+                            {{--                                                                            itemprop="product_material"--}}
+                            {{--                                                                            class="AdParam_adParamValue__IfaYa">Nệm</span></span></div>--}}
+                            {{--                                                            </div>--}}
+                            {{--                                                        </div>--}}
+                            {{--                                                        <div class="col-md-6 no-padding AdParam_adParamItem__Yi2I0" data-testid="param-item">--}}
+                            {{--                                                            <div class="AdParam_adMediaParam__3epxo">--}}
+                            {{--                                                                <div class="media-left media-top"><img class="AdParam_adParamIcon__m87Vj"--}}
+                            {{--                                                                                                       alt="Thông tin sử dụng"--}}
+                            {{--                                                                                                       src="https://static.chotot.com/storage/icons/logos/ad-param/usage_information.png">--}}
+                            {{--                                                                </div>--}}
+                            {{--                                                                <div class="media-body media-middle"><span><span>Thông tin sử dụng: </span><span--}}
+                            {{--                                                                            itemprop="usage_information" class="AdParam_adParamValue__IfaYa">In trên bao bì</span></span>--}}
+                            {{--                                                                </div>--}}
+                            {{--                                                            </div>--}}
+                            {{--                                                        </div>--}}
+                        </section>
+                        <section class="align-center">
+                            <i class="location"></i><strong>Khu Vực:</strong>
+                            <span>{{$obj->ward->name ?? ''}}, {{$obj->district->name ?? ''}}, {{$obj->province->name?? ''}}</span>
                         </section>
 
 

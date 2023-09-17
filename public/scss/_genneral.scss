@@ -78,18 +78,23 @@ a {
     gap: 15px;
 }
 
-.grid-2 > div {
-    flex: 0 0 calc(50% - 20px);
+.grid-2,.grid-3, .grid-4, .grid-5 {
+    display: flex;
+    flex-wrap: wrap;
+}
 
-    &:nth-child(even) {
-        flex: 1;
-    }
+.grid-2 > div {
+    flex: 1 0 calc(50% - 20px);
+
+    //&:nth-child(even) {
+    //    flex: 1;
+    //}
 
     //padding: 10px;
 }
 
 .grid-3 > div {
-    flex: 0 0 calc(33% - 20px);
+    flex: 1 0 calc(33% - 20px);
     padding: 10px;
 }
 
@@ -145,7 +150,7 @@ a {
     font-stretch: normal;
     font-style: normal;
     line-height: 1.33;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 
@@ -184,9 +189,16 @@ svg {
     padding: 10px;
     background: white;
     flex-wrap: wrap;
-    >div{
+
+    > div {
         margin: 5px 10px 10px 0;
     }
+}
+
+.align-center {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 @media (max-width: 991px) {
@@ -209,7 +221,7 @@ svg {
 }
 
 @media (max-width: 540px) {
-    .grid-2 > div, grid-3 > div, grid-4 > div, grid-5 > div {
+    .grid-2 > div, .grid-3 > div, .grid-4 > div, .grid-5 > div {
         width: 100%;
         flex: 1 0 100%;
     }

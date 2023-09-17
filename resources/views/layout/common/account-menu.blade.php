@@ -1,7 +1,7 @@
 <div class="account-menu">
     <div class="avatar">
         <img class="aw__is4v2dl aw__i1408gg0 aw__uevk1au"
-             src="https://cdn.chotot.com/uac2/1047384" alt="Sayo">
+             src="{{ asset('img/icon/default_user.png')}}" alt="Sayo">
         <span class="no-wrap">Tài khoản</span>
         <svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none"
              xmlns="http://www.w3.org/2000/svg" class="aw__dvoj89e">

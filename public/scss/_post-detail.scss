@@ -163,7 +163,7 @@
     cursor: pointer;
     color: transparent;
     border: 0;
-    outline: clear;
+    outline: none;
     background: 0 0;
     border-radius: 50%;
     background-color: gray;
@@ -353,10 +353,10 @@ legend {
     white-space: normal
 }
 
-::-webkit-datetime-edit {
-    overflow: visible;
-    line-height: 0
-}
+//::-webkit-datetime-edit {
+//    overflow: visible;
+//    line-height: 0
+//}
 
 [type=search] {
     outline-offset: -2px;
@@ -593,57 +593,57 @@ $color_2: #000;
     background: url(https://static.chotot.com/storage/chotot-icons/svg/white-next.svg)
 }
 
-@-webkit-keyframes fadeIn-s27u2ro {
-    0% {
-        opacity: 0;
-        -webkit-transform: scale(.9);
-        transform: scale(.9)
-    }
-    to {
-        opacity: 1;
-        -webkit-transform: scale(1);
-        transform: scale(1)
-    }
-}
-
-@keyframes fadeIn-s27u2ro {
-    0% {
-        opacity: 0;
-        -webkit-transform: scale(.9);
-        transform: scale(.9)
-    }
-    to {
-        opacity: 1;
-        -webkit-transform: scale(1);
-        transform: scale(1)
-    }
-}
-
-@-webkit-keyframes fadeOut-s27u2ro {
-    0% {
-        opacity: 1;
-        -webkit-transform: scale(1);
-        transform: scale(1)
-    }
-    to {
-        opacity: 0;
-        -webkit-transform: scale(.9);
-        transform: scale(.9)
-    }
-}
-
-@keyframes fadeOut-s27u2ro {
-    0% {
-        opacity: 1;
-        -webkit-transform: scale(1);
-        transform: scale(1)
-    }
-    to {
-        opacity: 0;
-        -webkit-transform: scale(.9);
-        transform: scale(.9)
-    }
-}
+//@-webkit-keyframes fadeIn-s27u2ro {
+//    0% {
+//        opacity: 0;
+//        -webkit-transform: scale(.9);
+//        transform: scale(.9)
+//    }
+//    to {
+//        opacity: 1;
+//        -webkit-transform: scale(1);
+//        transform: scale(1)
+//    }
+//}
+//
+//@keyframes fadeIn-s27u2ro {
+//    0% {
+//        opacity: 0;
+//        -webkit-transform: scale(.9);
+//        transform: scale(.9)
+//    }
+//    to {
+//        opacity: 1;
+//        -webkit-transform: scale(1);
+//        transform: scale(1)
+//    }
+//}
+//
+//@-webkit-keyframes fadeOut-s27u2ro {
+//    0% {
+//        opacity: 1;
+//        -webkit-transform: scale(1);
+//        transform: scale(1)
+//    }
+//    to {
+//        opacity: 0;
+//        -webkit-transform: scale(.9);
+//        transform: scale(.9)
+//    }
+//}
+//
+//@keyframes fadeOut-s27u2ro {
+//    0% {
+//        opacity: 1;
+//        -webkit-transform: scale(1);
+//        transform: scale(1)
+//    }
+//    to {
+//        opacity: 0;
+//        -webkit-transform: scale(.9);
+//        transform: scale(.9)
+//    }
+//}
 
 .AdDecription_adDecriptionWrapper____nLb {
     margin-top: 10px
@@ -715,30 +715,7 @@ $color_2: #000;
     align-items: start
 }
 
-.AdParam_adParamItem__Yi2I0 {
-    height: 31px;
-    font-size: 13px;
-    display: table
-}
 
-@media (min-width: 992px) {
-    .AdParam_adParamItem__Yi2I0 {
-        height: 45px
-    }
-}
-
-@media (max-width: 768px) {
-    .AdParam_adParamItem__Yi2I0 {
-        margin: 15px 0;
-        height: 35px
-    }
-}
-
-@media (max-width: 320px) {
-    .AdParam_adParamItem__Yi2I0 {
-        height: 35px
-    }
-}
 
 .AdParam_adParamIcon__m87Vj {
     display: inline-block;
@@ -771,14 +748,14 @@ $color_2: #000;
     }
 }
 
-.AdParam_legend__Vp_14 {
-    color: #8f8297;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: bold4;
-    border-bottom: 1px solid #ebebeb;
-    padding-bottom: 5px
-}
+//.AdParam_legend__Vp_14 {
+//    color: #8f8297;
+//    margin-bottom: 0;
+//    font-size: 14px;
+//    font-weight: bold4;
+//    border-bottom: 1px solid #ebebeb;
+//    padding-bottom: 5px
+//}
 
 .AdParam_address__5wp1F:active, .AdParam_address__5wp1F:focus {
     outline-width: 0
@@ -866,18 +843,18 @@ $color_2: #000;
     width: 100%
 }
 
-.InlineShowPhoneButton_linkContact__YEWbK {
-    display: block;
-    margin-bottom: 0;
-    vertical-align: middle;
-    touch-action: manipulation;
-    background-image: none;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    line-height: 1.42857;
-    border-radius: "4px";
-    color: #33659c
-}
+//.InlineShowPhoneButton_linkContact__YEWbK {
+//    display: block;
+//    margin-bottom: 0;
+//    vertical-align: middle;
+//    touch-action: manipulation;
+//    background-image: none;
+//    border: 1px solid transparent;
+//    white-space: nowrap;
+//    line-height: 1.42857;
+//    border-radius: 4px;
+//    color: #33659c
+//}
 
 .InlineShowPhoneButton_phoneHidden__GJPGi {
     text-decoration: underline;
@@ -900,7 +877,7 @@ $color_2: #000;
     width: max-content;
     border-radius: 20px;
     padding: 7px 10px;
-    height: -moz-fit-content;
+    //height: -moz-fit-content;
     height: fit-content
 }
 
@@ -964,7 +941,7 @@ $color_2: #000;
 }
 
 .SellerProfile_profileWrapper__ubLwW .SellerProfile_inforWrapper__KXg71 > a :hover {
-    color: none;
+    color: transparent;
     text-decoration: none;
     text-decoration: initial
 }
@@ -1299,4 +1276,39 @@ $color_2: #000;
     width: 24px;
     vertical-align: middle;
     margin-right: 10px
+}
+
+
+
+//chat
+.ChatTemplate_titleChatTemp__IWGIA {
+    padding: 5px 5px 5px 0;
+    margin: 0 !important;
+    border-bottom: 1px solid #cacaca;
+    color: #777;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.ChatTemplate_sent__bouS1, .ChatTemplate_templateItem__7p1c6 {
+    border: 1px solid #fe9900;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 10px;
+    display: inline-block;
+    font-size: 13px;
+    color: #222;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.ChatTemplate_templateMessage__a_aks {
+    margin: 0 10px;
+}
+
+.ChatTemplate_templateMessage__a_aks {
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 0;
+    margin: 0;
 }

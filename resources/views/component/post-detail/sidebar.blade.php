@@ -48,9 +48,12 @@
                 <div class="ShowPhoneButton_wrapper__B627I ">
                     <div
                         class="ShowPhoneButton_phoneButton__p5Cvt ShowPhoneButton_phoneNotClicked__dlQn_">
-                        <div class="ShowPhoneButton_flexDiv__3qpNj"><span>
-                                <img alt="loadingIcon" class="ShowPhoneButton_icon__wsnZ5"
-                                     src="https://static.chotot.com/storage/chotot-icons/svg/white-phone.svg">097301 ***</span>&nbsp;&nbsp;<span>BẤM ĐỂ HIỆN SỐ</span>
+                        <div class="ShowPhoneButton_flexDiv__3qpNj">
+
+                            <span>
+                                <img alt="phone-icon" class="ShowPhoneButton_icon__wsnZ5"
+                                     src="{{asset('img/icon/white-phone.svg')}}">{{$obj->author->phone}}</span>&nbsp;&nbsp;
+                            <a href="tel:{{$obj->author->phone}}">BẤM ĐỂ GỌI</a>
                         </div>
                     </div>
                 </div>
@@ -60,10 +63,7 @@
                     rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9" target="_blank">
                     <img src="https://static.chotot.com/storage/chotot-icons/png/chat_green.png"
                          alt="chat"><span>CHAT VỚI NGƯỜI BÁN</span></a></div>
-            <div>
-                <a
-                    href="#"
-                    rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9">
+            <div><a href="#" rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9">
                   <span>Mua ngay</span></a></div>
         </div>
 
@@ -72,10 +72,8 @@
                 <div class="SafeTips_SafeTipsWrapper___i5Fm">
                     <img alt="safe tips"
                          class="pull-left" width="100"
-                         src="{{ env('APP_URL') }}/img/mua-ban.png">
-                    <div class="SafeTips_TipText__mMXwX"><p >Hẹn gặp ở nơi công cộng và quen thuộc khi giao dịch.</p><a
-                            href="https://trogiup.chotot.com/mua-hang-tai-chotot-vn/meo-mua-hang-tim-viec/meo-mua-hang-an-toan/?utm_source=chotot&amp;utm_medium=ad_view&amp;utm_campaign=safety_tip_adview"
-                            target="blank" rel="nofollow">Tìm hiểu thêm »</a>
+                         src="{{ asset('/img/mua-ban.png') }}">
+                    <div class="SafeTips_TipText__mMXwX"><p >Hẹn gặp ở nơi công cộng và quen thuộc khi giao dịch.</p>
                     </div>
                 </div>
             </div>
