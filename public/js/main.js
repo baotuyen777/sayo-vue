@@ -48,16 +48,16 @@ jQuery('.account-menu').click(function () {
     jQuery(this).find('.menu').toggle('show')
 });
 
-jQuery('.dropdown__button').click(function (){
+jQuery('.dropdown__button').click(function () {
 
     jQuery('.dropdown').removeClass('show')
     jQuery(this).parent().toggleClass('show')
 })
 
-$('.dropdown__close').click(function(){
+$('.dropdown__close').click(function () {
     jQuery(this).parents('.dropdown').removeClass('show')
 })
-jQuery('.dropdown__button').blur(function(){
+jQuery('.dropdown__button').blur(function () {
     // jQuery(this).parent().find('.dropdown__content').removeClass('show')
 })
 
@@ -105,6 +105,7 @@ jQuery('.dropdown__button').blur(function(){
 //     });
 // });
 
+//form effect
 if (jQuery('.minput').val()) {
     jQuery('.minput').addClass('hasValue')
 } else {
@@ -119,7 +120,7 @@ jQuery('.minput').keyup(function () {
         $(this).parent().find('.btn-close').removeClass('show');
     }
 });
-$('.btn-close').click(function (){
+$('.btn-close').click(function () {
     $(this).parent().find('.minput').val(null);
     jQuery('.minput').removeClass('hasValue')
     $(this).removeClass('show');
@@ -129,6 +130,42 @@ jQuery('.btn_addfile').click(function (e) {
     e.preventDefault();
     $('#files').click();
 });
+
+//selection
+$('.selection').find('.minput').focus(function () {
+    console.log(11231)
+    $(this).parents('.selection').find('.selection__list').toggleClass('show')
+})
+$('.selection__list').on('click', 'li', function () {
+    const selection = $(this).parents('.selection');
+    const li = $(this);
+    selection.find('.input').val(li.data('id'))
+    selection.find('.minput').val(li.html())
+    selection.find('.minput').addClass('hasValue')
+    selection.find('.btn-close').addClass('show');
+    selection.find('.selection__list').removeClass('show');
+    if (selection.data('async-url')) {
+        $.ajax({
+            url: selection.data('async-url') + '/' + li.data('id'),
+            // dataType: 'json',
+            // contentType: false,
+            // processData: false,
+            success: function (response) {
+                if (response.status) {
+                    let html = '';
+                    response.result.forEach((obj) => {
+                        html += `<li data-id="${obj.id}">${obj.name}</li>`
+                    })
+
+                    $('#' + selection.data('async-field')).find('.selection__list').html(html)
+
+                }
+            },
+        });
+    }
+
+})
+
 
 jQuery('.notify').find('button').click(() => {
     jQuery('.notify').fadeOut();

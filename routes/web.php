@@ -5,6 +5,7 @@ use \App\Http\Controllers\Fe\HomeController;
 use \App\Http\Controllers\Fe\AuthController;
 use \App\Http\Controllers\Fe\PostController;
 use \App\Http\Controllers\Fe\UserController;
+use \App\Http\Controllers\Fe\PdwController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +20,7 @@ use \App\Http\Controllers\Fe\UserController;
 //Route::view("/","home")->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
-
-
 Route::get('/page/{code}.htm', [HomeController::class, 'page'])->name('pageView');
-
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'doLogin'])->name('doLogin ');
@@ -31,29 +28,21 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'store'])->name('doRegister');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::resource('user', UserController::class);
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/post/me', [PostController::class, 'me'])->name('myPost');
-Route::get('/post/edit/{slug}.htm', [PostController::class, 'show'])->name('postEdit');
+Route::get('/post/edit/{slug}.htm', [PostController::class, 'edit'])->name('postEdit');
 Route::post('/post/edit/{slug}.htm', [PostController::class, 'update'])->name('postUpdate');
 Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
 Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
-
-//Route::get('/cat/{slug}', [HomeController::class, 'archive']);
-
-Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [HomeController::class, 'archive'])->name('archive');
-//Route::get('/rao-vat/{provinceCode?}/{districtCode?}/{wardCode?}', [HomeController::class, 'archive'])->name('archiveAll');
-//Route::get('/mua-ban/{provinceCode?}/{districtCode?}/{wardCode?}', [HomeController::class, 'archive'])->name('archive');
-//Route::get('/mua-ban-{catCode?}-{provinceCode?}-{districtCode?}', [HomeController::class, 'archive'])->name('archiveDistrict');
-//Route::get('/mua-ban-{catCode?}-{provinceCode?}', [HomeController::class, 'archive'])->name('archiveProvince');
-//Route::get('/mua-ban-{catCode?}', [HomeController::class, 'archive'])->name('archive');
+Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');
+Route::get('/xem-tin-{catSlug}/{slug}.htm', [PostController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
 
 
 
-
-Route::get('/xem-tin-{catSlug}/{slug}.htm', [PostController::class, 'postDetail'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
-
-Route::resource('user', UserController::class);
-Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+Route::get('/get-districts/{provinceId?}', [PdwController::class, 'getDistricts'])->name('getDistricts');
+Route::get('/get-wards/{districtId?}', [PdwController::class, 'getWards'])->name('getWards');
 
 Route::view("/admin/{any}", "app")->where("any", ".*");
 

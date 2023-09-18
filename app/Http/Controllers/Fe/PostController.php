@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Fe;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
+use App\Models\Pdw\District;
+use App\Models\Pdw\Province;
+use App\Models\Pdw\Ward;
 use App\Models\Posts;
 use App\Services\PostService;
 use Dflydev\DotAccessData\Data;
@@ -17,26 +20,29 @@ class PostController extends Controller
 {
     function __construct(private Posts $postModel, private PostService $postsService)
     {
-//        $this->postModel = $postModel;
     }
 
-    public function show($code)
+    public function edit($code)
     {
         $post = Posts::with('category')
             ->with('avatar')
             ->with('files')
-            ->with('pdws')
+//            ->with('pdws')
             ->where('code', $code)
             ->first();
         $attrs = $this->postModel->getAttOptions();
 
         $post['file_ids'] = $post['files']->pluck('id');
+        $post['attr'] = $this->postsService->getAttrField($post);
+
         $attrs['obj'] = $post;
-        $post['attr'] = json_decode(str_replace('%22', '', $post['attr']));
+//        $post['attr'] = json_decode(str_replace('%22', '', $post['attr']));
+
         return view('pages/post/detail', $attrs);
     }
 
-    public function postDetail($catCode, $code)
+    //Show the form for editing .
+    public function show($catCode, $code)
     {
         $post = Posts::select('*')
             ->with('avatar')
@@ -79,6 +85,7 @@ class PostController extends Controller
         return ['status' => true, 'result' => $obj];
     }
 
+
     public function create()
     {
         if (!Auth::check()) {
@@ -87,12 +94,7 @@ class PostController extends Controller
 
         $postModel = new Posts();
         $attrs = $postModel->getAttOptions();
-        return view('pages/post/create', $attrs);
-    }
-
-    public function edit($id)
-    {
-
+        return view('pages/post/detail', $attrs);
     }
 
     public function update(PostRequest $request, $code)
@@ -135,6 +137,77 @@ class PostController extends Controller
             ->paginate($pageSize, ['*'], 'page', $currentPage);;
 
         return view('pages/post/me', ['objs' => $posts]);
+    }
+
+    public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
+    {
+//        dd(url());
+//        dd($catSlug, $provinceCode , $districtCode);
+
+        $currentPage = $request->input('current') ?? 1;
+        $pageSize = $request->input('page_size') ?? 20;
+
+        $province = Province::where('code', $provinceCode)->first();
+
+        $category = Category::where('code', $catCode)->first();
+        $attr = [
+            'category' => $category,
+            'provinces' => Province::get(),
+            'province' => $province,
+            'district' => [],
+            'districts' => [],
+            'wards' => [],
+            'ward' => [],
+            'objs' => [],
+            'categories' => Category::with('avatar')->get()
+        ];
+
+        $posts = Posts::select('*')->with('avatar')->with('files');
+        if ($catCode && $category) {
+            $posts->where('category_id', $category->id);
+            //            ->whereHas('category', function ($query) use ($catSlug) {
+//                $query->where('code', $catSlug);
+//            })
+        }
+
+        $price_from = $request->input('price_from');
+        if ($price_from) {
+            $posts->where('price', '>', $price_from);
+        }
+
+        $price_to = $request->input('price_to');
+        if ($price_to) {
+            $posts->where('price', '<', $price_to);
+        }
+
+        $s = $request->input('s');
+        if ($s) {
+            $posts->where('name', 'like', "%{$s}%");
+        }
+
+        if ($provinceCode && $province) {
+            $posts->where('province_id', $province->id);
+
+            $attr['districts'] = District::whereProvinceId($province->id ?? 1)->get();
+            $district = District::where('code', $districtCode)->first();
+            $attr['district'] = $district;
+            if ($districtCode && $district) {
+                $posts->where('district_id', $district->id);
+                $attr['wards'] = Ward::whereDistrictId($district->id)->get();
+
+                $ward = Ward::where('code', $wardCode)->first();
+                if ($ward) {
+                    $attr['ward'] = $ward;
+                    $posts->where('ward_id', $ward->id);
+                }
+
+            }
+
+        }
+
+        $attr['objs'] = $posts->paginate($pageSize, ['*'], 'page', $currentPage);
+
+        return view('pages/archive', $attr);
     }
 
 }

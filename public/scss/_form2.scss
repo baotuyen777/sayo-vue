@@ -1,4 +1,3 @@
-
 .btn, button {
     display: flex;
     justify-content: center;
@@ -71,6 +70,7 @@ i {
     &.state-used {
         background-image: url('/img/icon/state_used.png');
     }
+
     &.product-type {
         background-image: url('/img/icon/product_type.png');
     }
@@ -103,7 +103,48 @@ i {
 input {
     height: 36px;
 }
+.minput {
+    width: 100%;
+    height: 100%;
+    color: #222;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+    padding: 14px 12px 0;
+    border-radius: 4px;
+    background-color: #fff
+}
 
+.minput.required + label:after {
+    content: "*";
+    margin-left: 4px;
+    color: #e5193b
+}
+
+.minput.isDropdown {
+    cursor: pointer
+}
+
+.minput:disabled {
+    background-color: #f4f4f4;
+    cursor: default
+}
+
+.minput.noLabel {
+    padding-top: 0
+}
+
+.minput.hasValue + label, .minput:-webkit-autofill + label {
+    transform: scale(.7143) translateY(-10px);
+    font-weight: 700
+}
+
+.minput:focus + label {
+    transform: scale(.7143) translateY(-10px);
+    font-weight: 700
+}
 .upload-files {
     display: flex;
     gap: 10px;
@@ -244,7 +285,42 @@ input {
             min-width: 0;
         }
     }
+}
 
+.selection {
+    position: relative;
+
+    &__list {
+        min-width: 100%;
+        max-height: 300px;
+        position: absolute;
+        top: 47px;
+        left: 0;
+        background-color: #fff;
+
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+        list-style: none;
+        overflow-y: auto;
+        padding: 0;
+        z-index: 2;
+        border-radius: $border;
+        color: $text-disabled;
+        display: none;
+
+        &.show {
+            display: block;
+        }
+
+        li {
+            cursor: pointer;
+            //color: #8c8c8c;
+            padding: 8px 0 8px 12px;
+
+            &:hover {
+                background-color: #e8e8e8;
+            }
+        }
+    }
 }
 
 @media (max-width: 767px) {

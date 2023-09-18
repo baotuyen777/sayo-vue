@@ -30,9 +30,14 @@
                     <section>
                         <h5>Địa chỉ</h5>
                         <div class="grid-3 gap-10">
-                            @include('component.form.select',['name'=> 'province_id', 'label' => 'Tỉnh/thành phố', 'options' => $provinces])
-                            @include('component.form.select',['name'=> 'district_id', 'label' => 'Huyện', 'options' => $districts])
-                            @include('component.form.select',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards])
+                            @include('component.form.selectAsync',['name'=> 'province_id', 'label' => 'Tỉnh/thành phố', 'options' => $provinces,
+'asyncUrl' =>route('getDistricts'), 'asyncField' =>'district_id'])
+                            @include('component.form.selectAsync',['name'=> 'district_id', 'label' => 'Quận/Huyện', 'options' => $districts,
+'asyncUrl' =>route('getWards'), 'asyncField' =>'ward_id'])
+                            @include('component.form.selectAsync',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards])
+{{--                            @include('component.form.select',['name'=> 'province_id', 'label' => 'Tỉnh/thành phố', 'options' => $provinces])--}}
+{{--                            @include('component.form.select',['name'=> 'district_id', 'label' => 'Huyện', 'options' => $districts])--}}
+{{--                            @include('component.form.select',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards])--}}
                         </div>
 
                         <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
@@ -44,12 +49,12 @@
                         <div class="d-flex-wrap grid-2 gap-10">
                             {{--                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])--}}
                             @include('component.form.select',['name'=> 'attr["state"]', 'label' => 'Tình trạng', 'options' => $postStates,'attr'=>'state'])
-{{--                            @include('component.form.select',['name'=> 'attr["brand"]', 'label' => 'Hãng/ Thương hiệu', 'options' => $brands,'attr'=>'brand'])--}}
+                            {{--                            @include('component.form.select',['name'=> 'attr["brand"]', 'label' => 'Hãng/ Thương hiệu', 'options' => $brands,'attr'=>'brand'])--}}
                             @include('component.form.select',['name'=> 'attr["color"]', 'label' => 'Màu sắc', 'options' => $colors,'attr'=>'color'])
-{{--                            @include('component.form.select',['name'=> 'attr["storage"]', 'label' => 'Dung lượng', 'options' => $storages,'attr'=>'storage'])--}}
+                            {{--                            @include('component.form.select',['name'=> 'attr["storage"]', 'label' => 'Dung lượng', 'options' => $storages,'attr'=>'storage'])--}}
                             @include('component.form.select',['name'=> 'attr["guarantee"]', 'label' => 'Bảo Hành', 'options' => $postStates,'attr'=>'guarantee'])
                             @include('component.form.select',['name'=> 'attr["made_in"]', 'label' => 'Xuất xứ', 'options' => $madeIns,'attr'=>'made_in'])
-{{--                            @include('component.form.input',['name'=> 'attr["acreage"]', 'label' => 'Diện tích', 'attr'=>'acreage'])--}}
+                            {{--                            @include('component.form.input',['name'=> 'attr["acreage"]', 'label' => 'Diện tích', 'attr'=>'acreage'])--}}
                         </div>
                     </section>
 

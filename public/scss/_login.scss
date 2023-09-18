@@ -269,49 +269,7 @@
     }
 }
 
-.minput {
-    width: 100%;
-    height: 100%;
-    font-size: .875rem;
-    color: #222;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    outline: none;
-    border: none;
-    padding: 14px 12px 0;
-    border-radius: 4px;
-    background-color: #fff
-}
 
-.minput.required + label:after {
-    content: "*";
-    margin-left: 4px;
-    color: #e5193b
-}
-
-.minput.isDropdown {
-    cursor: pointer
-}
-
-.minput:disabled {
-    background-color: #f4f4f4;
-    cursor: default
-}
-
-.minput.noLabel {
-    padding-top: 0
-}
-
-.minput.hasValue + label, .minput:-webkit-autofill + label {
-    transform: scale(.7143) translateY(-10px);
-    font-weight: 700
-}
-
-.minput:focus + label {
-    transform: scale(.7143) translateY(-10px);
-    font-weight: 700
-}
 
 .c5ntovc {
     width: var(--c5ntovc-0)

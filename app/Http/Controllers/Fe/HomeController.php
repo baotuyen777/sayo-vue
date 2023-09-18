@@ -22,76 +22,7 @@ class HomeController extends Controller
         return view('pages/home', ['categories' => $categories, 'posts' => $posts]);
     }
 
-    public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
-    {
-//        dd(url());
-//        dd($catSlug, $provinceCode , $districtCode);
 
-        $currentPage = $request->input('current') ?? 1;
-        $pageSize = $request->input('page_size') ?? 20;
-
-        $province = Province::where('code', $provinceCode)->first();
-
-        $category = Category::where('code', $catCode)->first();
-        $attr = [
-            'category' => $category,
-            'provinces' => Province::get(),
-            'province' => $province,
-            'district' => [],
-            'districts' => [],
-            'wards' => [],
-            'ward' => [],
-            'objs' => [],
-            'categories' => Category::with('avatar')->get()
-        ];
-
-        $posts = Posts::select('*')->with('avatar')->with('files');
-        if ($catCode && $category) {
-            $posts->where('category_id', $category->id);
-            //            ->whereHas('category', function ($query) use ($catSlug) {
-//                $query->where('code', $catSlug);
-//            })
-        }
-
-        $price_from = $request->input('price_from');
-        if ($price_from) {
-            $posts->where('price', '>', $price_from);
-        }
-
-        $price_to = $request->input('price_to');
-        if ($price_to) {
-            $posts->where('price', '<', $price_to);
-        }
-
-        $s = $request->input('s');
-        if ($s) {
-            $posts->where('name', 'like', "%{$s}%");
-        }
-
-        if ($provinceCode && $province) {
-            $posts->where('province_id', $province->id);
-
-            $attr['districts'] = District::whereProvinceId($province->id ?? 1)->get();
-            $district = District::where('code', $districtCode)->first();
-            $attr['district'] = $district;
-            if ($districtCode && $district) {
-                $posts->where('district_id', $district->id);
-                $attr['wards'] = Ward::whereDistrictId($district->id)->get();
-
-                $ward = Ward::where('code', $wardCode)->first();
-                if ($ward) {
-                    $attr['ward'] = $ward;
-                    $posts->where('ward_id', $ward->id);
-                }
-
-            }
-
-        }
-
-        $attr['objs'] = $posts->paginate($pageSize, ['*'], 'page', $currentPage);
-
-        return view('pages/archive', $attr);
-    }
 
 
     public function page($code)

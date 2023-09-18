@@ -33,8 +33,20 @@ class Posts extends Model
         'material' => ['label' => 'Chất liệu'],
         'color' => ['label' => 'Màu sắc', 'options' => ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác']],
         'branch' => ['label' => 'Thương hiệu', 'options' => ['Samsung', 'Apple']],
-        'madein' => ['label' => 'Xuất xứ', 'options' => ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác']],
-        'storages' => ['label' => 'Dung lượng', 'options' => ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G']],
+        'made_in' => ['label' => 'Xuất xứ', 'options' => ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác']],
+        'storage' => ['label' => 'Dung lượng', 'options' => ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G']],
+
+        'state' => ['label' => 'Tình trạng', 'options' => [
+            1 => 'Mới',
+            2 => 'Đã sử dụng(chưa sửa chữa)',
+            3 => 'Đã sử dụng(đã sửa chữa)',
+        ]],
+        'guarantee' => ['label' => 'Bảo hành', 'options' => [
+            1 => 'Hết bảo hành',
+            2 => 'Còn bảo hành',
+            3 => 'Còn bảo hành trên 6 tháng',
+        ]],
+
     ];
 //    protected $table ='posts';
     protected $fillable = [

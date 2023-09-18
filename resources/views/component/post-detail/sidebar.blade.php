@@ -49,7 +49,6 @@
                     <div
                         class="ShowPhoneButton_phoneButton__p5Cvt ShowPhoneButton_phoneNotClicked__dlQn_">
                         <div class="ShowPhoneButton_flexDiv__3qpNj">
-
                             <span>
                                 <img alt="phone-icon" class="ShowPhoneButton_icon__wsnZ5"
                                      src="{{asset('img/icon/white-phone.svg')}}">{{$obj->author->phone}}</span>&nbsp;&nbsp;
@@ -64,17 +63,15 @@
                     <img src="https://static.chotot.com/storage/chotot-icons/png/chat_green.png"
                          alt="chat"><span>CHAT VỚI NGƯỜI BÁN</span></a></div>
             <div><a href="#" rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9">
-                  <span>Mua ngay</span></a></div>
+                    <span>Mua ngay</span></a></div>
         </div>
 
         <div class="d-lg-block">
-            <div>
-                <div class="SafeTips_SafeTipsWrapper___i5Fm">
-                    <img alt="safe tips"
-                         class="pull-left" width="100"
-                         src="{{ asset('/img/mua-ban.png') }}">
-                    <div class="SafeTips_TipText__mMXwX"><p >Hẹn gặp ở nơi công cộng và quen thuộc khi giao dịch.</p>
-                    </div>
+            <div class="SafeTips_SafeTipsWrapper___i5Fm">
+                <img alt="safe tips"
+                     class="pull-left" width="100"
+                     src="{{ asset('/img/mua-ban.png') }}">
+                <div class="SafeTips_TipText__mMXwX"><p>Hẹn gặp ở nơi công cộng và quen thuộc khi giao dịch.</p>
                 </div>
             </div>
 
