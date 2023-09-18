@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->text('content')->nullable();
             $table->tinyInteger('state')->default(1)->comment('1: hang moi, 2: cu con bao hanh, 3: cu het bao hanh ');
             $table->tinyInteger('status')->default(1);
-            $table->bigInteger('price')->default(0);
-            $table->string('address')->default(0);
+            $table->bigInteger('price')->default(0)->nullable();
+            $table->string('address')->nullable();
 
             $table->json('attr')->nullable();
 

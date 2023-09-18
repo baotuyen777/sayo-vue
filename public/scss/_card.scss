@@ -100,6 +100,21 @@
             background-size: cover
         }
     }
+    .product-label{
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: gray;
+        color: white;
+        padding: 2px;
+        font-size: 0.8em;
+        &.danger{
+            background: red;
+        }
+        &.success{
+            background: green;
+        }
+    }
 }
 
 

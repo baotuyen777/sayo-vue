@@ -96,5 +96,6 @@ function vn2Province($str)
     return $str;
 }
 
-function getAttrLabel($key){
-}
+//function getStatusLabel($key){
+//
+//}

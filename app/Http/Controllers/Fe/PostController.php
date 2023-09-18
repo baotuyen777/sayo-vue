@@ -30,7 +30,7 @@ class PostController extends Controller
 //            ->with('pdws')
             ->where('code', $code)
             ->first();
-        $attrs = $this->postModel->getAttOptions();
+        $attrs = $this->postsService->getAttrOptions($post);
 
         $post['file_ids'] = $post['files']->pluck('id');
         $post['attr'] = $this->postsService->getAttrField($post);
@@ -92,8 +92,7 @@ class PostController extends Controller
             return view('pages/auth/login');
         }
 
-        $postModel = new Posts();
-        $attrs = $postModel->getAttOptions();
+        $attrs = $this->postsService->getAttrOptions();
         return view('pages/post/detail', $attrs);
     }
 
@@ -107,10 +106,11 @@ class PostController extends Controller
             $post->files()->sync($files);
         }
 
-//        $request->except('files');
-//        $params = $request->except(['file_ids', 'files']);
-//        $params =
-        $res = $post->update($request->all());
+
+        $params = $request->all();
+        $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
+
+        $res = $post->update($params);
 
         return response()->json(['status' => true, 'result' => $res]);
     }
@@ -141,9 +141,6 @@ class PostController extends Controller
 
     public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
-//        dd(url());
-//        dd($catSlug, $provinceCode , $districtCode);
-
         $currentPage = $request->input('current') ?? 1;
         $pageSize = $request->input('page_size') ?? 20;
 
