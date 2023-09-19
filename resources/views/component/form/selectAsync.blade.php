@@ -1,6 +1,6 @@
 <div class="form-control selection" data-async-url="{{($asyncUrl ?? '')}}" id="{{$name}}"
          data-async-field="{{$asyncField ?? ''}}">
-        <input class="minput" placeholder="{{$placeholder ??''}}" value=""
+        <input class="minput" placeholder="{{$placeholder ??''}}" value="{{$valueLabel ?? ''}}"
                inputmode="{{$inputmode ?? 'text'}}" maxlength="{{$maxleng ?? '' }}">
         <label for="{{$name}}">{{$label}}</label>
         <input class="input" type="hidden" name="{{$name}}" value="{{ $obj[$name] ?? old($name) }}">

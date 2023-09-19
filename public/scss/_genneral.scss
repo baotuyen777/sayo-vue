@@ -219,6 +219,14 @@ svg {
         flex: 1 0 calc(30% - 20px);
     }
 }
+@media (max-width:768px) {
+    .col-md-4, .col-md-8{
+        width: 100%;
+    }
+    .d-lg-block{
+        display: none;
+    }
+}
 
 @media (max-width: 540px) {
     .grid-2 > div, .grid-3 > div, .grid-4 > div, .grid-5 > div {

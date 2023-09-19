@@ -32,6 +32,10 @@ class PostController extends Controller
             ->first();
         $attrs = $this->postsService->getAttrOptions($post);
 
+        $post['province_name'] = $attrs['provinces']->get($post->province_id)->name ?? '';
+        $post['district_name'] = $attrs['districts']->get($post->district_id)->name ?? '11';
+        $post['ward_name'] = $attrs['wards']->get($post->ward_id)->name ?? '';
+
         $post['file_ids'] = $post['files']->pluck('id');
         $post['attr'] = $this->postsService->getAttrField($post);
 
@@ -57,7 +61,7 @@ class PostController extends Controller
 
         $post['attr'] = $this->postsService->getAttrField($post);
 //        dd($post['attr']);
-        return view('pages/post', ['obj' => $post]);
+        return view('pages/post/view', ['obj' => $post]);
     }
 
     public function store(PostRequest $request)
@@ -113,11 +117,6 @@ class PostController extends Controller
         $res = $post->update($params);
 
         return response()->json(['status' => true, 'result' => $res]);
-    }
-
-    public function destroy($id)
-    {
-
     }
 
     public function me(Request $request)
@@ -205,6 +204,11 @@ class PostController extends Controller
         $attr['objs'] = $posts->paginate($pageSize, ['*'], 'page', $currentPage);
 
         return view('pages/archive', $attr);
+    }
+
+    public function destroy($id)
+    {
+
     }
 
 }

@@ -1,10 +1,10 @@
 <div class="post-sidebar">
-    <div style="position: fixed; top: 80px; ">
-        <div class="NextAds_buttonWraper__oSIaL">
+    <div>
+        <div class="NextAds_buttonWraper__oSIaL d-lg-block ">
             <button class="NextAds_preAds__FsxYM" type="button">Về danh sách</button>
             <button class="NextAds_nextAds__pn7aA" type="button">Tin Tiếp</button>
         </div>
-        <div class="d-lg-block d-none">
+        <div class="">
             <div class="SellerProfile_profileWrapper__ubLwW ">
                 <a class="SellerProfile_sellerWrapper__GlDwe" target="_blank" rel="nofollow"
                    href="{{route('user.show',['user'=>$obj->author->username])}}">

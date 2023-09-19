@@ -21,7 +21,7 @@
                             <p class="AdDecription_adBody__qp2KG" itemprop="description">{{$obj['content']}}</p>
                         </div>
 
-                        <p class="d-lg-block d-none">
+                        <p class="">
                             <a href="tel:{{$obj->author->phone}}">{{$obj->author->phone}} BẤM ĐỂ GỌI</a>
                         </p>
 

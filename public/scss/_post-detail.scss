@@ -510,11 +510,11 @@ $color_2: #000;
     content: ""
 }
 
-@media only screen and (max-width: 767px) {
-    .post-slider .AdImage_sliderWrapper___jIpt {
-        display: inline-block
-    }
-}
+//@media only screen and (max-width: 767px) {
+//    .post-slider .AdImage_sliderWrapper___jIpt {
+//        display: inline-block
+//    }
+//}
 
 .post-slider .AdImage_imageCaption__aUFNp {
     background: #000;
@@ -1027,7 +1027,7 @@ $color_2: #000;
     text-align: center
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media (max-width: 991px) {
     .LeadButton_wrapperLeadButtonDesktop__SVKE8 {
         position: fixed;
         bottom: 0;
@@ -1041,11 +1041,11 @@ $color_2: #000;
     }
 }
 
-@media only screen and (max-width: 767px) {
-    .LeadButton_wrapperLeadButtonDesktop__SVKE8 {
-        display: none
-    }
-}
+//@media only screen and (max-width: 767px) {
+//    .LeadButton_wrapperLeadButtonDesktop__SVKE8 {
+//        display: none
+//    }
+//}
 
 .LeadButton_wrapperLeadButtonDesktop__SVKE8 .LeadButton_buttonChatDesktop__gbYM9 {
     display: flex;
@@ -1209,11 +1209,11 @@ $color_2: #000;
     object-fit: cover
 }
 
-@keyframes Spinner_spinning__tI8Nx {
-    to {
-        transform: rotate(1turn)
-    }
-}
+//@keyframes Spinner_spinning__tI8Nx {
+//    to {
+//        transform: rotate(1turn)
+//    }
+//}
 
 .ShowPhoneButton_wrapper__B627I {
     width: 100%
@@ -1311,4 +1311,13 @@ $color_2: #000;
     white-space: nowrap;
     padding: 0;
     margin: 0;
+}
+
+@media (max-width:767px){
+    .post-slider{
+        height: 300px;
+        .item{
+            width: 350px;
+        }
+    }
 }
