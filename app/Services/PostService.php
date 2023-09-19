@@ -39,7 +39,7 @@ class PostService
         return $attrs;
     }
 
-    public function getAttrOptions($post)
+    public function getAttrOptions($post = null)
     {
         $categories = Category::with('avatar')->get();
 //        $address = [
@@ -50,8 +50,8 @@ class PostService
 //        $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
 //        $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
         $provinces = Province::get()->keyBy('id');
-        $districts = District::whereProvinceId($post->province_id)->get()->keyBy('id');
-        $wards = Ward::whereDistrictId($post->district_id)->get()->keyBy('id');
+        $districts = $post ? District::whereProvinceId($post->province_id)->get()->keyBy('id') : [];
+        $wards = $post ? Ward::whereDistrictId($post->district_id)->get()->keyBy('id') : [];
 
         $postStates = Posts::$states;
 

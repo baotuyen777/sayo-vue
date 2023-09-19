@@ -31,13 +31,13 @@
                         <h5>Địa chỉ</h5>
                         <div class="grid-3 gap-10">
                             @include('component.form.selectAsync',['name'=> 'province_id', 'label' => 'Tỉnh/thành phố', 'options' => $provinces,
-'asyncUrl' =>route('getDistricts'), 'asyncField' =>'district_id', 'valueLabel'=>$obj['province_name']])
+'asyncUrl' =>route('getDistricts'), 'asyncField' =>'district_id', 'valueLabel'=>$obj['province_name'] ?? ''])
                             @include('component.form.selectAsync',['name'=> 'district_id', 'label' => 'Quận/Huyện', 'options' => $districts,
-'asyncUrl' =>route('getWards'), 'asyncField' =>'ward_id','valueLabel'=>$obj['district_name']])
-                            @include('component.form.selectAsync',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards, 'valueLabel'=>$obj['ward_name']])
-{{--                            @include('component.form.select',['name'=> 'province_id', 'label' => 'Tỉnh/thành phố', 'options' => $provinces])--}}
-{{--                            @include('component.form.select',['name'=> 'district_id', 'label' => 'Huyện', 'options' => $districts])--}}
-{{--                            @include('component.form.select',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards])--}}
+'asyncUrl' =>route('getWards'), 'asyncField' =>'ward_id','valueLabel'=>$obj['district_name'] ?? ''])
+                            @include('component.form.selectAsync',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards, 'valueLabel'=>$obj['ward_name']?? ''])
+                            {{--                            @include('component.form.select',['name'=> 'province_id', 'label' => 'Tỉnh/thành phố', 'options' => $provinces])--}}
+                            {{--                            @include('component.form.select',['name'=> 'district_id', 'label' => 'Huyện', 'options' => $districts])--}}
+                            {{--                            @include('component.form.select',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards])--}}
                         </div>
 
                         <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
