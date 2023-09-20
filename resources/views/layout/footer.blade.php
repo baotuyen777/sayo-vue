@@ -24,7 +24,8 @@
     {{--    </section>--}}
 
 </footer>
-<div class="notify {{session('notify_type') ?? ''}}" style="display: {{session('notify') ? 'block' : 'none'}}">
+<div class="notify {{session('notify_type') ?"notify--".session('notify_type'): ''}}"
+     style="display: {{session('notify') ? 'block' : 'none'}}">
     <span class="content">{{ session('notify') }}</span>
     <button tabindex="-1" type="button">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="1em" height="1em" fill="none">

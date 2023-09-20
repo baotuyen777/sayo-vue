@@ -24,8 +24,9 @@ class AuthController extends Controller
     {
         $res = $this->authService->login($request);
         if ($res['status_code'] == 200) {
-            return redirect()->route('home')->with('notify', 'success');
+            return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
         }
+
         return redirect()->route('login')->with('notify', 'Sai tài khoản hoặc mật khẩu')->with('notify_type', 'error');
 
 

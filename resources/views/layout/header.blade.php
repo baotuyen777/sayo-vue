@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{env('APP_URL')}}/css/main.css" type="text/css">
     {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
     {{--    <script src='https://icybernet.vn/wp-includes/js/jquery/jquery.min.js?ver=3.6.1' id='jquery-core-js'></script>--}}
-    <script src="{{env('PRODUCTION')?'https://code.jquery.com': env('APP_URL').'/js'}}/jquery-1.12.4.min.js"
+    <script src="{{env('PRODUCTION')?'https://code.jquery.com': env('APP_URL').'/js/libs/'}}/jquery-1.12.4.min.js"
             integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
             crossorigin="anonymous"></script>
     <script type="text/javascript"

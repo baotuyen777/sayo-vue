@@ -1,13 +1,16 @@
 .notify{
-    background: green;
+    background: gray;
     position: fixed;
     right: 0;
     bottom: 0;
     padding: 15px 25px 15px 10px;
     border-radius: 4px;
     color: white;
-    &.error{
+    &--error{
         background: #d22b2b;
+    }
+    &--success{
+        background: green;
     }
 
     button {

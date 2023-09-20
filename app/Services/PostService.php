@@ -16,27 +16,31 @@ class PostService
 
 //        $attrs = json_decode($post->attr);
         $attrs = json_decode(str_replace('%22', '', $post->attr));
-
-        foreach ($attrs as $k => $v) {
-            $item = $config[$k];
-
-            $item['value'] = $item['options'][$v] ?? $v;
-            if (isset($item['type'])) {
-                if ($item['type'] == 'boolean') {
-                    $item['value'] = $v ? 'Có' : 'Không';
-                }
-                if ($item['type'] == 'money') {
-                    $item['value'] = moneyFormat($v);
-                }
-                if ($item['type'] == 's') {
-                    $item['value'] = $v . ' m2';
+//dd($attrs);
+        foreach ($config as $k => &$item) {
+//            $item = $config[$k];
+            if (isset($attrs->$k)) {
+                $rawValue = $attrs->$k;
+                $item['value'] = $rawValue;
+                $item['valueLabel'] = $item['options'][$rawValue] ?? $rawValue;
+                if (isset($item['type'])) {
+                    if ($item['type'] == 'boolean') {
+                        $item['valueLabel'] = $rawValue ? 'Có' : 'Không';
+                    }
+                    if ($item['type'] == 'money') {
+                        $item['valueLabel'] = moneyFormat($rawValue);
+                    }
+                    if ($item['type'] == 's') {
+                        $item['valueLabel'] = $rawValue . ' m2';
+                    }
                 }
             }
 
-            $attrs->$k = $item;
+
+//            $attrs->$k = $item;
         }
 
-        return $attrs;
+        return $config;
     }
 
     public function getAttrOptions($post = null)
@@ -53,12 +57,12 @@ class PostService
         $districts = $post ? District::whereProvinceId($post->province_id)->get()->keyBy('id') : [];
         $wards = $post ? Ward::whereDistrictId($post->district_id)->get()->keyBy('id') : [];
 
-        $postStates = Posts::$states;
-
-        $brands = ['Samsung', 'Apple'];
-        $colors = ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác'];
-        $storages = ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G'];
-        $madeIns = ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác'];
+//        $postStates = Posts::$states;
+//
+//        $brands = ['Samsung', 'Apple'];
+//        $colors = ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác'];
+//        $storages = ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G'];
+//        $madeIns = ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác'];
 
 
         return get_defined_vars();

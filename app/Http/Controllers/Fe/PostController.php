@@ -30,19 +30,19 @@ class PostController extends Controller
 //            ->with('pdws')
             ->where('code', $code)
             ->first();
-        $attrs = $this->postsService->getAttrOptions($post);
-
-        $post['province_name'] = $attrs['provinces']->get($post->province_id)->name ?? '';
-        $post['district_name'] = $attrs['districts']->get($post->district_id)->name ?? '11';
-        $post['ward_name'] = $attrs['wards']->get($post->ward_id)->name ?? '';
+        $output = $this->postsService->getAttrOptions($post);
+//$relations =[];
+        $post['province_name'] = $output['provinces']->get($post->province_id)->name ?? '';
+        $post['district_name'] = $output['districts']->get($post->district_id)->name ?? '';
+        $post['ward_name'] = $output['wards']->get($post->ward_id)->name ?? '';
 
         $post['file_ids'] = $post['files']->pluck('id');
         $post['attr'] = $this->postsService->getAttrField($post);
-
-        $attrs['obj'] = $post;
+//dd($post['attr']);
+        $output['obj'] = $post;
 //        $post['attr'] = json_decode(str_replace('%22', '', $post['attr']));
 
-        return view('pages/post/detail', $attrs);
+        return view('pages/post/detail', $output);
     }
 
     //Show the form for editing .
@@ -112,7 +112,10 @@ class PostController extends Controller
 
 
         $params = $request->all();
-        $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
+        if(isset($params['attr'])){
+            $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
+        }
+
 
         $res = $post->update($params);
 

@@ -48,19 +48,22 @@
                         <h5>Thông tin thêm <small>(càng chi tiết càng dễ bán hơn)</small></h5>
                         <div class="d-flex-wrap grid-2 gap-10">
                             {{--                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])--}}
-                            @include('component.form.select',['name'=> 'attr["state"]', 'label' => 'Tình trạng', 'options' => $postStates,'attr'=>'state'])
+                            @include('component.form.select',['name' => 'state', 'label' => 'Tình trạng','isAttr' => 1])
+                            @include('component.form.select',['name' => 'color', 'label' => 'Màu sắc','isAttr' => 1])
+                            @include('component.form.select',['name' => 'guarantee', 'label' => 'Bảo hành','isAttr'=> 1])
+                            @include('component.form.select',['name' => 'made_in', 'label' => 'Xuất xứ','isAttr'=> 1])
                             {{--                            @include('component.form.select',['name'=> 'attr["brand"]', 'label' => 'Hãng/ Thương hiệu', 'options' => $brands,'attr'=>'brand'])--}}
-                            @include('component.form.select',['name'=> 'attr["color"]', 'label' => 'Màu sắc', 'options' => $colors,'attr'=>'color'])
+                            {{--                            @include('component.form.select',['name'=> 'attr["color"]', 'label' => 'Màu sắc', 'options' => $colors,'attr'=>'color'])--}}
                             {{--                            @include('component.form.select',['name'=> 'attr["storage"]', 'label' => 'Dung lượng', 'options' => $storages,'attr'=>'storage'])--}}
-                            @include('component.form.select',['name'=> 'attr["guarantee"]', 'label' => 'Bảo Hành', 'options' => $postStates,'attr'=>'guarantee'])
-                            @include('component.form.select',['name'=> 'attr["made_in"]', 'label' => 'Xuất xứ', 'options' => $madeIns,'attr'=>'made_in'])
+                            {{--                            @include('component.form.select',['name'=> 'attr["guarantee"]', 'label' => 'Bảo Hành', 'options' => $postStates,'attr'=>'guarantee'])--}}
+                            {{--                            @include('component.form.select',['name'=> 'attr["made_in"]', 'label' => 'Xuất xứ', 'options' => $madeIns,'attr'=>'made_in'])--}}
                             {{--                            @include('component.form.input',['name'=> 'attr["acreage"]', 'label' => 'Diện tích', 'attr'=>'acreage'])--}}
                         </div>
                     </section>
 
 
                     <div class="d-flex justify-content-center gap-10">
-                        <a class="btn btn-back" href="{{route('myPost')}}">Về danh sách</a>
+                        <a class="btn btn-back1" href="{{route('myPost')}}">Về danh sách</a>
                         <button class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk">
                             {{isset($obj['id']) ? 'Lưu thay đổi' : 'ĐĂNG TIN' }}
                         </button>

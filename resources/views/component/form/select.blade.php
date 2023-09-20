@@ -1,19 +1,30 @@
+@php
+    $value =$obj[$name] ?? '';
+
+    if(isset($isAttr)){
+        $options = $obj['attr'][$name]['options'] ?? [];
+        $value= $obj['attr'][$name]['value'] ?? '';
+
+        $name ="attr[$name]";
+    }
+@endphp
+
 <div class="form-control form-control-{{$name}}  @error($name) error @enderror">
     <select class="select mselect isDropdown hasValue required" name="{{$name}}">
         <option value=""></option>
 
         @foreach($options as $k => $option)
-            <option
-                {{isset($obj) && $k == $obj[$name] || (
-                         isset($obj['attr'])
-                         && isset($attr)
-                         && isset($obj['attr']->$attr)
-                         &&  $obj['attr']->$attr == $k
-                    )
-                 ? 'selected' : ''
-                 }}
-                value="{{$option['id'] ?? $k}}">{{$option['name'] ?? $option}}</option>
+            @if(isset($option['id']))
+                <option
+                    {{ $option['id'] == $value ? 'selected' : ''}}
+                    value="{{$option['id'] ?? $k}}">{{$option['name'] ?? $option}}</option>
+            @else
+                <option
+                    {{ $k == $value? 'selected' : ''}}
+                    value="{{$option['id'] ?? $k}}">{{$option['name'] ?? $option}}</option>
+            @endif
         @endforeach
+
     </select>
     <label for="{{$name}}">{{$label}}</label>
     <svg data-type="monochrome"

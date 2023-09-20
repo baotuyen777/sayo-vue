@@ -69,41 +69,7 @@ jQuery('.dropdown__button').blur(function () {
 // })
 
 
-// function callAjaxForm(e, form, success) {
-//     e.preventDefault();
-//     var $form = $(form);
-//     var data = new FormData(form);
-//     jQuery.ajax({
-//         type: "POST",
-//         url: $form.attr('action'),
-//         data: new FormData(form),
-//         contentType: false,
-//         cache: false,
-//         processData: false, //
-//         beforeSend: function () {
-//             $form.find('button').addClass('loading');
-//             $form.find('.btn_sumbit').attr('disabled', true);
-//         },
-//         success
-//     });
-// }
 
-// jQuery('.form_ajax').submit(function (e) {
-//     var form = $(this);
-//
-//     callAjaxForm(e, this, function (result) {
-//         form.find('button').removeClass('loading');
-//         if (result.status) {
-//             toastr.success(result.mes);
-//             if (form.find('.btn_back').length > 0) {
-//                 setTimeout(window.location.href = jQuery(".btn_back").attr('href'), 1000)
-//             }
-//         } else {
-//             toastr.error(result.mes);
-//         }
-//
-//     });
-// });
 
 //form effect
 if (jQuery('.minput').val()) {
@@ -147,18 +113,13 @@ $('.selection__list').on('click', 'li', function () {
     if (selection.data('async-url')) {
         $.ajax({
             url: selection.data('async-url') + '/' + li.data('id'),
-            // dataType: 'json',
-            // contentType: false,
-            // processData: false,
             success: function (response) {
                 if (response.status) {
                     let html = '';
                     response.result.forEach((obj) => {
                         html += `<li data-id="${obj.id}">${obj.name}</li>`
                     })
-
                     $('#' + selection.data('async-field')).find('.selection__list').html(html)
-
                 }
             },
         });

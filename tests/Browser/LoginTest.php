@@ -19,7 +19,7 @@ class LoginTest extends DuskTestCase
                 ->type('password', '123456')
 
                 ->press('.btn-submit')
-                ->assertSee('success');
+                ->assertSee('.notify--success');
         });
     }
 }
