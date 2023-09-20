@@ -59,7 +59,7 @@ class PostController extends Controller
             return view('pages/404');
         }
 
-        $post['attr'] = $this->postsService->getAttrField($post);
+        $post['attr'] = $this->postsService->getAttrField($post, true);
 //        dd($post['attr']);
         return view('pages/post/view', ['obj' => $post]);
     }
@@ -95,9 +95,12 @@ class PostController extends Controller
         if (!Auth::check()) {
             return view('pages/auth/login');
         }
-
-        $attrs = $this->postsService->getAttrOptions();
-        return view('pages/post/detail', $attrs);
+        $options = $this->postsService->getAttrOptions();
+//        $post['attr'] = $this->postsService->getAttrField();
+//        $attrs = $this->postsService->getAttrOptions();
+        $attrs = Posts::$attr;
+//dd($attrs);
+        return view('pages/post/detail', array_merge($attrs,$options));
     }
 
     public function update(PostRequest $request, $code)
@@ -112,6 +115,7 @@ class PostController extends Controller
 
 
         $params = $request->all();
+        dd($params['attr']);
         if(isset($params['attr'])){
             $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
         }

@@ -2,11 +2,13 @@
     $value =$obj[$name] ?? '';
 
     if(isset($isAttr)){
-        $options = $obj['attr'][$name]['options'] ?? [];
+        $options = $$name['options'] ?? $obj['attr'][$name]['options'] ?? [];
         $value= $obj['attr'][$name]['value'] ?? '';
-
+// dd( $obj['attr']);
         $name ="attr[$name]";
+
     }
+
 @endphp
 
 <div class="form-control form-control-{{$name}}  @error($name) error @enderror">

@@ -35,7 +35,7 @@
                                     <div>
                                         <p class="align-center">
                                             <i class="product-type"></i>
-                                            <span><b>{{$attr['label']}}</b>: {{$attr['value']}}</span>&nbsp;
+                                            <span><b>{{$attr['label']}}</b>: {{$attr['valueLabel'] ?? ''}}</span>&nbsp;
                                         </p>
                                     </div>
 

@@ -10,15 +10,13 @@ use App\Models\Posts;
 
 class PostService
 {
-    function getAttrField($post)
+    function getAttrField($post=false, $filterNull= false)
     {
         $config = Posts::$attr;
 
-//        $attrs = json_decode($post->attr);
         $attrs = json_decode(str_replace('%22', '', $post->attr));
-//dd($attrs);
-        foreach ($config as $k => &$item) {
-//            $item = $config[$k];
+        $res = [];
+        foreach ($config as $k => $item) {
             if (isset($attrs->$k)) {
                 $rawValue = $attrs->$k;
                 $item['value'] = $rawValue;
@@ -31,16 +29,17 @@ class PostService
                         $item['valueLabel'] = moneyFormat($rawValue);
                     }
                     if ($item['type'] == 's') {
-                        $item['valueLabel'] = $rawValue . ' m2';
+                        $item['valueLabel'] = $rawValue . 'm2';
                     }
                 }
+            }else if ($filterNull) {
+                continue;
             }
 
-
-//            $attrs->$k = $item;
+            $res[$k] = $item;
         }
 
-        return $config;
+        return $res;
     }
 
     public function getAttrOptions($post = null)
