@@ -68,6 +68,10 @@ jQuery('.dropdown__button').blur(function () {
 //     jQuery('.account-menu').find('.menu').hide()
 // })
 
+$('a, .btn-submit').click(function(e){
+    $('.loader').show();
+})
+
 
 
 

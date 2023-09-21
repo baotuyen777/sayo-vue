@@ -37,6 +37,7 @@
         </svg>
     </button>
 </div>
+<div class="loader"></div>
 
 <script src='{{ env('APP_URL')}}/js/main.js'></script>
 <!-- Google tag (gtag.js) -->

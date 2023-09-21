@@ -115,7 +115,7 @@ class PostController extends Controller
 
 
         $params = $request->all();
-        dd($params['attr']);
+
         if(isset($params['attr'])){
             $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
         }
