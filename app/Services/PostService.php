@@ -10,7 +10,7 @@ use App\Models\Posts;
 
 class PostService
 {
-    function getAttrField($post=false, $filterNull= false)
+    function getAttrField($post = false, $filterNull = false)
     {
         $config = Posts::$attr;
 
@@ -32,7 +32,7 @@ class PostService
                         $item['valueLabel'] = $rawValue . 'm2';
                     }
                 }
-            }else if ($filterNull) {
+            } else if ($filterNull) {
                 continue;
             }
 
@@ -45,26 +45,79 @@ class PostService
     public function getAttrOptions($post = null)
     {
         $categories = Category::with('avatar')->get();
-//        $address = [
-//            ['id' => 1, 'name' => 'Phường Thanh Xuân Bắc, Quận Thanh Xuân, Hà Nội'],
-//            ['id' => 2, 'name' => 'Phường Thanh Xuân Trung, Quận Thanh Xuân, Hà Nội'],
-//        ];
-//        $provinces = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 1)->get();
-//        $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
-//        $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
         $provinces = Province::get()->keyBy('id');
         $districts = $post ? District::whereProvinceId($post->province_id)->get()->keyBy('id') : [];
         $wards = $post ? Ward::whereDistrictId($post->district_id)->get()->keyBy('id') : [];
 
-//        $postStates = Posts::$states;
-//
-//        $brands = ['Samsung', 'Apple'];
-//        $colors = ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác'];
-//        $storages = ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G'];
-//        $madeIns = ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác'];
-
-
         return get_defined_vars();
+    }
+
+    public function getAll($request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
+    {
+        $currentPage = $request->input('current') ?? 1;
+        $pageSize = $request->input('page_size') ?? 20;
+
+        $province = Province::where('code', $provinceCode)->first();
+
+        $category = Category::where('code', $catCode)->first();
+        $res = [
+            'category' => $category,
+            'provinces' => Province::get(),
+            'province' => $province,
+            'district' => [],
+            'districts' => [],
+            'wards' => [],
+            'ward' => [],
+            'objs' => [],
+            'categories' => Category::with('avatar')->get()
+        ];
+
+        $posts = Posts::select('*')->with('avatar')->with('files');
+        if ($catCode && $category) {
+            $posts->where('category_id', $category->id);
+            //            ->whereHas('category', function ($query) use ($catSlug) {
+//                $query->where('code', $catSlug);
+//            })
+        }
+
+        $price_from = $request->input('price_from');
+        if ($price_from) {
+            $posts->where('price', '>', $price_from);
+        }
+
+        $price_to = $request->input('price_to');
+        if ($price_to) {
+            $posts->where('price', '<', $price_to);
+        }
+
+        $s = $request->input('s');
+        if ($s) {
+            $posts->where('name', 'like', "%{$s}%");
+        }
+
+        if ($provinceCode && $province) {
+            $posts->where('province_id', $province->id);
+
+            $res['districts'] = District::whereProvinceId($province->id ?? 1)->get();
+            $district = District::where('code', $districtCode)->first();
+            $res['district'] = $district;
+            if ($districtCode && $district) {
+                $posts->where('district_id', $district->id);
+                $res['wards'] = Ward::whereDistrictId($district->id)->get();
+
+                $ward = Ward::where('code', $wardCode)->first();
+                if ($ward) {
+                    $res['ward'] = $ward;
+                    $posts->where('ward_id', $ward->id);
+                }
+
+            }
+
+        }
+
+        $res['objs'] = $posts->paginate($pageSize, ['*'], 'page', $currentPage);
+
+        return $res;
     }
 
 }

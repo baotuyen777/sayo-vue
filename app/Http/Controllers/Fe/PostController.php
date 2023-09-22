@@ -100,7 +100,7 @@ class PostController extends Controller
 //        $attrs = $this->postsService->getAttrOptions();
         $attrs = Posts::$attr;
 //dd($attrs);
-        return view('pages/post/detail', array_merge($attrs,$options));
+        return view('pages/post/detail', array_merge($attrs, $options));
     }
 
     public function update(PostRequest $request, $code)
@@ -116,7 +116,7 @@ class PostController extends Controller
 
         $params = $request->all();
 
-        if(isset($params['attr'])){
+        if (isset($params['attr'])) {
             $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
         }
 
@@ -147,70 +147,9 @@ class PostController extends Controller
 
     public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
-        $currentPage = $request->input('current') ?? 1;
-        $pageSize = $request->input('page_size') ?? 20;
+        $res = $this->postsService->getAll($request, $catCode, $provinceCode, $districtCode, $wardCode);
 
-        $province = Province::where('code', $provinceCode)->first();
-
-        $category = Category::where('code', $catCode)->first();
-        $attr = [
-            'category' => $category,
-            'provinces' => Province::get(),
-            'province' => $province,
-            'district' => [],
-            'districts' => [],
-            'wards' => [],
-            'ward' => [],
-            'objs' => [],
-            'categories' => Category::with('avatar')->get()
-        ];
-
-        $posts = Posts::select('*')->with('avatar')->with('files');
-        if ($catCode && $category) {
-            $posts->where('category_id', $category->id);
-            //            ->whereHas('category', function ($query) use ($catSlug) {
-//                $query->where('code', $catSlug);
-//            })
-        }
-
-        $price_from = $request->input('price_from');
-        if ($price_from) {
-            $posts->where('price', '>', $price_from);
-        }
-
-        $price_to = $request->input('price_to');
-        if ($price_to) {
-            $posts->where('price', '<', $price_to);
-        }
-
-        $s = $request->input('s');
-        if ($s) {
-            $posts->where('name', 'like', "%{$s}%");
-        }
-
-        if ($provinceCode && $province) {
-            $posts->where('province_id', $province->id);
-
-            $attr['districts'] = District::whereProvinceId($province->id ?? 1)->get();
-            $district = District::where('code', $districtCode)->first();
-            $attr['district'] = $district;
-            if ($districtCode && $district) {
-                $posts->where('district_id', $district->id);
-                $attr['wards'] = Ward::whereDistrictId($district->id)->get();
-
-                $ward = Ward::where('code', $wardCode)->first();
-                if ($ward) {
-                    $attr['ward'] = $ward;
-                    $posts->where('ward_id', $ward->id);
-                }
-
-            }
-
-        }
-
-        $attr['objs'] = $posts->paginate($pageSize, ['*'], 'page', $currentPage);
-
-        return view('pages/archive', $attr);
+        return view('pages/post/archive', $res);
     }
 
     public function destroy($id)

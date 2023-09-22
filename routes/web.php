@@ -6,7 +6,7 @@ use \App\Http\Controllers\Fe\AuthController;
 use \App\Http\Controllers\Fe\PostController;
 use \App\Http\Controllers\Fe\UserController;
 use \App\Http\Controllers\Fe\PdwController;
-
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +43,12 @@ Route::get('/xem-tin-{catSlug}/{slug}.htm', [PostController::class, 'show'])->wh
 
 Route::get('/get-districts/{provinceId?}', [PdwController::class, 'getDistricts'])->name('getDistricts');
 Route::get('/get-wards/{districtId?}', [PdwController::class, 'getWards'])->name('getWards');
+
+
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+    return view('pages/auth/login');
+});
 
 Route::view("/admin/{any}", "app")->where("any", ".*");
 

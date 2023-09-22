@@ -5,19 +5,22 @@
 - **Start frontend** ```npm run dev```
 - **Migrate** ```php artisan migrate:refresh --seed```
 - **Generate key** ```php artisan key:generate```
+- **Generate image link** ```php artisan storage:link```
 
 https://viblo.asia/p/database-don-vi-hanh-chinh-viet-nam-cho-laravel-naQZR9jQKvx
 - **Generate swagger** ``php artisan l5-swagger:generate``` http://localhost:8000/api/documentation#/Register
 - php artisan config:cache => xóa cache config để hàm env ko bị null
 > php artisan config:clear
 
-> compile sass: setting->tool->file watcher -> create scss-> include folder
+- **compile sass:** setting->tool->file watcher -> create scss-> include folder
+- **file watcher**: npm install -g sass
+- argument $FileName$:$FileParentDir$/css/$FileNameWithoutExtension$.css
 
 > composer dump-autoload
 > php artisan db:wipe -> xóa db nếu ko thể chạy migrate:refresh
 > php artisan storage:link
 
-> file watcher: npm install -g sass
+> 
 
 > php artisan vendor:publish --provider="Kjmtrue\VietnamZone\ServiceProvider"
 > php artisan vietnamzone:import

@@ -82,4 +82,11 @@
             </button>
         </div>
     </section>
+
+    <section class="white-box p-10 box-radius">
+        <h4>Quản lý</h4>
+        <p><a href="">Quản lý bài đăng</a></p>
+        <p><a href="">Quản lý user</a></p>
+
+    </section>
 </aside>
