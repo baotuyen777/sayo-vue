@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Fe;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\Category;
-use App\Models\Posts;
+use App\Models\Post;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

@@ -2,8 +2,8 @@
 
 @section('content')
 <section class="card">
-    @include('component.post.table')
+    @include('component.user.table')
 </section>
 
-    @include('component.list.pagination')
+
 @endsection

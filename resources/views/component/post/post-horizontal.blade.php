@@ -8,5 +8,6 @@
             <p class="datetime"><small>Đã đăng {{showHumanTime($post['created_at'])}}</small></p>
         </div>
     </div>
-    <div class="product-label {{\App\Models\Posts::$statusClass[$post['status']]}}">{{\App\Models\Posts::$status[$post['status']]}}</div>
+    <div
+        class="product-label {{\App\Models\Post::$statusClass[$post['status']]}}">{{\App\Models\Post::$status[$post['status']]}}</div>
 </div>

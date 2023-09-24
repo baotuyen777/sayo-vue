@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
 
-use App\Models\Posts;
+use App\Models\Post;
 use App\Services\PostService;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class PostController extends Controller
 
     public function edit($code)
     {
-        $post = Posts::with('category')
+        $post = Post::with('category')
             ->with('avatar')
             ->with('files')
 //            ->with('pdws')
@@ -53,7 +53,7 @@ class PostController extends Controller
     //Show the form for editing .
     public function show($catCode, $code)
     {
-        $post = Posts::select('*')
+        $post = Post::select('*')
             ->with('avatar')
             ->with('files')
             ->with('category')
@@ -86,7 +86,7 @@ class PostController extends Controller
         $params['author_id'] = $userid;
         $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
 
-        $obj = Posts::create($params);
+        $obj = Post::create($params);
         if ($obj && $files) {
             $obj->files()->sync($files);
         }
@@ -102,26 +102,26 @@ class PostController extends Controller
 
         $options = $this->postsService->getAttrOptions();
 
-        return view('pages/post/detail', array_merge(Posts::$attr, $options));
+        return view('pages/post/detail', array_merge(Post::$attr, $options));
     }
 
     public function updateSimple(Request $request, $code)
     {
-        $post = Posts::where('code', $code)->first();
+        $post = Post::where('code', $code)->first();
 
         $params = $request->all();
         $res = $post->update($params);
         if ($res) {
-            $post = Posts::where('code', $code)->first();
+            $post = Post::where('code', $code)->first();
         }
 
-        return response()->json(['status' => $res  , 'result' => $post]);
+        return response()->json(['status' => $res, 'result' => $post]);
     }
 
     public function update(PostRequest $request, $code)
     {
 //        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
-        $post = Posts::where('code', $code)->first();
+        $post = Post::where('code', $code)->first();
         $files = $request->input('file_ids');
 
         if ($files) {
@@ -139,22 +139,10 @@ class PostController extends Controller
         return response()->json(['status' => true, 'result' => $res]);
     }
 
-//    public function me(Request $request)
-//    {
-//        $userid = Auth::id();
-//        if (!$userid) {
-//            return redirect()->route('login');
-//        }
-//        $posts = $this->postService->getAllSimple($request, ['author_id' => $userid]);
-//
-//
-//        return view('pages/post/me', ['objs' => $posts]);
-//    }
-
     public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
         $res = $this->postsService->getAll($request, $catCode, $provinceCode, $districtCode, $wardCode);
-
+        $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name);
         return view('pages/post/archive', $res);
     }
 

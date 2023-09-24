@@ -18,7 +18,7 @@ class Files extends Model
 
     public function posts()
     {
-        return $this->belongsToMany(Posts::class);
+        return $this->belongsToMany(Post::class);
     }
 
 }

@@ -1,19 +1,18 @@
 @php
-    $route =Route::currentRouteName()
+    $route =Route::currentRouteName();
+
 @endphp
 <div class="post-table">
     <form action="{{url()->current()}}">
         <div class="flex-row">
-            @include('component.form.filter.selectCategory', ['options' => $categories,'route'=>$route])
-            @include('component.form.filter.selectProvince', ['options' => $provinces,'route'=>$route])
-            @if($province)
+            {{--            @include('component.form.filter.selectProvince', ['options' => $provinces,'route'=>$route])--}}
+            @if(isset($province))
                 @include('component.form.filter.selectDistrict', ['options' => $districts,'route'=>$route])
             @endif
-            @if($district)
+            @if(isset($district))
                 @include('component.form.filter.selectWard', ['options' => $wards,'route'=>$route])
             @endif
 
-            @include('component.form.filter.rangePrice')
             @include('component.form.filter.keyword')
         </div>
 
@@ -24,7 +23,7 @@
         <tr>
             <th>STT</th>
             <th>Avatar</th>
-            <th>Tên</th>
+            <th>Thông tin</th>
             <th>Hành động</th>
         </tr>
         </thead>
@@ -35,28 +34,34 @@
                 <td>
                     <div class="post-avatar" style="background-image: url('{{($obj['avatar']['url'] ?? '')}}')">
                         <label
-                            class="{{$obj['status']==2?'success':''}}" {{\App\Models\Post::$statusClass[$obj['status']]}}>{{\App\Models\Post::$status[$obj['status']]}}</label>
+                            class="{{$obj['status']==2?'success':''}}" {{\App\Models\Post::$statusClass[$obj['status']]}}>
+                            {{\App\Models\Post::$status[$obj['status']]}}</label>
                     </div>
                 </td>
                 <td valign="top">
-                    <a href="{{route('postEdit',['slug'=>$obj['code']])}}">{{$obj->name}}</a>
+                    {{--                    <a href="{{route('user.edit',['user'=>$obj['code']])}}">{{$obj->name}}</a>--}}
+                    <span>{{$obj['name']}}</span>
                     <p>
+
                         <small>{{showHumanTime($obj->created_at)}}</small>
-                        <span class="price">{{moneyFormat($obj->price)}}</span>
                     </p>
                 </td>
                 <td>
                     <div class="d-flex-wrap gap-10">
+                        <button class="btn--small btn-ajax danger"
+                                data-url="{{route('user.destroy',['user'=>$obj['username']])}}">
+                            Xóa
+                        </button>
                         @if($obj['status']!=2)
                             <button class="btn--small btn-ajax success"
-                                    data-url="{{route('postUpdateSimple',['slug'=>$obj['code']])}}"
+                                    data-url="{{route('userUpdateSimple',['username'=>$obj['username']])}}"
                                     data-param='{"status":2}'>
                                 Duyệt
                             </button>
                         @endif
                         @if($obj['status'] !=3)
-                            <button class="btn--small btn-ajax danger"
-                                    data-url="{{route('postUpdateSimple',['slug'=>$obj['code']])}}"
+                            <button class="btn--small btn-ajax warning"
+                                    data-url="{{route('userUpdateSimple',['username'=>$obj['username']])}}"
                                     data-param='{"status":3}'>Từ chối
                             </button>
                         @endif
@@ -69,5 +74,6 @@
         </tbody>
     </table>
     <span class="csrf hide">{{csrf_token()}}</span>
+    @include('component.list.pagination')
 </div>
 {{--<form action="{{route('postEdit',['slug'=>$post['code']])}}"></form>--}}

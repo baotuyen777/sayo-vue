@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Files;
-use App\Models\Posts;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;

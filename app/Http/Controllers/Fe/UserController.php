@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Fe;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Services\PostService;
-use App\Models\Posts;
+use App\Models\Post;
 use App\Services\AuthService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,7 +18,22 @@ class UserController extends Controller
 {
     public function __construct(private User $userModel, private PostService $postService)
     {
+    }
 
+    public function index(Request $request)
+    {
+        $s = $request->input('s');
+        $pageSize = $request->input('page_size') ?? 24;
+        $rolesLabel = DB::raw('if(role < 3, "Staff", "Khách") as role_label');
+        $selectStatus = DB::raw('if(status = 1, "Hoạt động", "Tạm dừng") as status_label');
+
+        $objs = User::join('departments', 'users.departments_id', '=', 'departments.id')
+
+            ->select('users.*',  $rolesLabel,$selectStatus)
+            ->where('users.name', 'like', "%{$s}%")
+            ->paginate($pageSize);
+
+        return view('pages/user/list', ['objs'=> $objs]);
     }
 
     public function show(Request $request, $userName)
@@ -59,6 +74,25 @@ class UserController extends Controller
         }
         User::find($id)->update($request->all());
         $res = User::find($id);
+        return response()->json(['status' => true, 'result' => $res]);
+    }
+
+    public function updateSimple(Request $request, $useName)
+    {
+        $post = User::where('code', $useName)->first();
+
+        $params = $request->all();
+        $res = $post->update($params);
+        if ($res) {
+            $post = User::where('username', $useName)->first();
+        }
+
+        return response()->json(['status' => $res, 'result' => $post]);
+    }
+
+    public function destroy($id)
+    {
+        $res = DB::table($this->module)->where('id', $id)->delete();
         return response()->json(['status' => true, 'result' => $res]);
     }
 

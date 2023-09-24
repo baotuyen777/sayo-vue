@@ -6,13 +6,13 @@ use App\Models\Category;
 use App\Models\Pdw\District;
 use App\Models\Pdw\Province;
 use App\Models\Pdw\Ward;
-use App\Models\Posts;
+use App\Models\Post;
 
 class PostService
 {
     function getAttrField($post = false, $filterNull = false)
     {
-        $config = Posts::$attr;
+        $config = Post::$attr;
 
         $attrs = json_decode(str_replace('%22', '', $post->attr));
         $res = [];
@@ -74,7 +74,7 @@ class PostService
             'categories' => Category::with('avatar')->get()
         ];
 
-        $posts = Posts::select('*')->with('avatar')->with('files');
+        $posts = Post::select('*')->with('avatar')->with('files');
         if ($catCode && $category) {
             $posts->where('category_id', $category->id);
             //            ->whereHas('category', function ($query) use ($catSlug) {
@@ -128,7 +128,7 @@ class PostService
         $currentPage = $request->input('current') ?? $request->input('page');
         $pageSize = $request->input('page_size') ?? 10;
 
-        $posts = Posts::with('avatar');
+        $posts = Post::with('avatar');
         if ($s) {
             $posts->where('name', 'like', "%{$s}%");
         }

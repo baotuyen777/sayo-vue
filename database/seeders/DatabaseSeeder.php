@@ -43,13 +43,13 @@ class DatabaseSeeder extends Seeder
         }
 
 
-        DB::table('posts_files')->insert([
-            'posts_id' => 1,
-            'files_id' => 1,
-        ]);
-        DB::table('posts_files')->insert([
-            'posts_id' => 1,
-            'files_id' => 2,
-        ]);
+//        DB::table('posts_files')->insert([
+//            'posts_id' => 1,
+//            'files_id' => 1,
+//        ]);
+//        DB::table('posts_files')->insert([
+//            'posts_id' => 1,
+//            'files_id' => 2,
+//        ]);
     }
 }

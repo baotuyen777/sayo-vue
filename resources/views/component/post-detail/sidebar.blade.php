@@ -1,10 +1,9 @@
 <div class="post-sidebar">
     <div>
-        <div class="NextAds_buttonWraper__oSIaL d-lg-block ">
-            <button class="NextAds_preAds__FsxYM" type="button">Về danh sách</button>
-            <button class="NextAds_nextAds__pn7aA" type="button">Tin Tiếp</button>
-        </div>
-        <div class="">
+{{--        <div class="NextAds_buttonWraper__oSIaL d-lg-block ">--}}
+{{--            <a href="{{route('archive')}}" class="NextAds_preAds__FsxYM" type="button">Về danh sách</a>--}}
+{{--            <button class="NextAds_nextAds__pn7aA" type="button">Tin Tiếp</button>--}}
+{{--        </div>--}}
             <div class="SellerProfile_profileWrapper__ubLwW ">
                 <a class="SellerProfile_sellerWrapper__GlDwe" target="_blank" rel="nofollow"
                    href="{{route('user.show',['user'=>$obj->author->username])}}">
@@ -42,7 +41,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         <div class="LeadButton_wrapperLeadButtonDesktop__SVKE8">
             <div class="LeadButton_showPhoneButton__1BIwH">
                 <div class="ShowPhoneButton_wrapper__B627I ">

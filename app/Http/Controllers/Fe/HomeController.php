@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Fe;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Pdws;
-use App\Models\Posts;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Pdw\Province;
@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::with('avatar')->get();
-        $posts = Posts::with('avatar')->get();
+        $posts = Post::with('avatar')->get();
 
         return view('pages/home', ['categories' => $categories, 'posts' => $posts]);
     }
@@ -27,7 +27,7 @@ class HomeController extends Controller
 
     public function page($code)
     {
-        $obj = Posts::where('code', $code)->first();
+        $obj = Post::where('code', $code)->first();
         return view('pages/page', ['obj' => $obj]);
     }
 

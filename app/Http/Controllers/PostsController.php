@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Files;
-use App\Models\Posts;
-use App\Models\Products;
+use App\Models\Post;
+use App\Models\Product;
 use App\Services\BaseService;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ class PostsController extends Controller
         $currentPage = $request->input('current');
         $pageSize = $request->input('page_size') ?? 5;
         $selectStatus = DB::raw('if(status = 1, "Hoạt động", "Tạm dừng") as status_label');
-        $objs = Posts::select('*', $selectStatus)
+        $objs = Post::select('*', $selectStatus)
             ->where('name', 'like', "%{$s}%")
             ->where('code', 'like', "%{$s}%")
             ->with('avatar')
@@ -45,7 +45,7 @@ class PostsController extends Controller
         $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
         $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
 
-        $obj = Posts::with('files')
+        $obj = Post::with('files')
             ->with('avatar')
             ->with('category')
             ->with('pdws')
@@ -73,7 +73,7 @@ class PostsController extends Controller
     public function update(PostRequest $request, $id)
     {
 //        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
-        $posts = Posts::find($id);
+        $posts = Post::find($id);
 
         $files = $request->input('file_ids');
 
@@ -83,7 +83,7 @@ class PostsController extends Controller
 
 //        $request->except('files');
         $params = $request->except(['file_ids', 'files']);
-        $res = Posts::where('id', $id)->update($params);
+        $res = Post::where('id', $id)->update($params);
 
         return response()->json(['status' => true, 'result' => $res]);
     }

@@ -15,11 +15,11 @@ return new class extends Migration {
 
 //            $table->foreignId('posts_id')->constrained();
 //            $table->foreignId('files_id')->constrained();
-            $table->unsignedBigInteger('posts_id');
+            $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('files_id');
 //
 //
-            $table->foreign('posts_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->foreign('files_id')->references('id')->on('files')->onDelete('cascade');
 
             $table->string('type')->default('files');

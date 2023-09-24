@@ -74,11 +74,11 @@ Cách công viên Thống nhất 100m, không khí thoáng mát, trong lành.',
         }
         for ($i = 1; $i <= 4; $i++) {
             DB::table('posts_files')->insert([
-                'posts_id' => 1,
+                'post_id' => 1,
                 'files_id' => $i
             ]);
             DB::table('posts_files')->insert([
-                'posts_id' => 2,
+                'post_id' => 2,
                 'files_id' => $i
             ]);
         }

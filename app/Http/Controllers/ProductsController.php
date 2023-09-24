@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Posts;
-use App\Models\Products;
+use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +17,7 @@ class ProductsController extends CommonController
         $s = $request->input('s');
         $pageSize = $request->input('page_size') ?? 5;
         $selectStatus = DB::raw('if(status = 1, "Hoạt động", "Tạm dừng") as status_label');
-        $objs = Products::select('*', $selectStatus)
+        $objs = Product::select('*', $selectStatus)
             ->where('name', 'like', "%{$s}%")
             ->where('code', 'like', "%{$s}%")
 //           ->with('category')
