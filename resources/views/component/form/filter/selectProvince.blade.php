@@ -5,13 +5,18 @@
         parse_str($url_components['query'], $urlParams);
 
     $urlParams['catCode'] = request('catCode') ?? 'tat-ca';
+
+    unset($urlParams['provinceCode']);
+    $urlClear = route($route ?? 'archive', $urlParams);
 @endphp
 <div class="form-control1 ">
     <div class="dropdown">
         <button class="dropdown__button" type="button">
             <i class="location"></i>
-            {{--            <i class="close"></i>--}}
             <span>{{$province['name'] ?? 'Toàn quốc'}}</span>
+            @if(isset($province['name']))
+            <a href="{{$urlClear}}"><i class="close clear"></i></a>
+            @endif
         </button>
         <div class="dropdown__content ">
             <div class="head">
@@ -20,10 +25,11 @@
             </div>
             <div class="body scroll">
                 <ul>
-                    <li><a href="{{route('archive',$urlParams)}}"
+                    <li><a href="{{$urlClear}}"
                            data-id="0"><span>{{$first?? 'Tất cả'}}</span></a></li>
                     @foreach($options as $i=>$option)
-                        <li><a href="{{route('archive',array_merge(['provinceCode'=>$option['code']],$urlParams))}}"
+                        <li>
+                            <a href="{{route($route ?? 'archive',array_merge($urlParams,['provinceCode'=>$option['code']]))}}"
                                data-id="{{$option['id'] ?? $i}}"><span>{{$option['name'] ?? $option}}</span><i
                                     class="next"></i></a></li>
                     @endforeach

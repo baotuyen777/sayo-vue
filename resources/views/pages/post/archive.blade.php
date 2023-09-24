@@ -31,10 +31,9 @@
                             @include('component.post',['obj'=> $obj])
                         @endforeach
                     </div>
+                    @include('component.list.pagination')
                 </div>
-                <div class="p-10">
-                    <a class="view-more">Xem thêm <i id="arrowIcon" class="fa fa-angle-down"></i></a>
-                </div>
+
 
             </div>
         </section>

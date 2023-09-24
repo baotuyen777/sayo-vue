@@ -23,6 +23,15 @@ return new class extends Migration {
 
             $table->unsignedBigInteger('avatar_id')->nullable();
             $table->foreign('avatar_id')->references('id')->on('files')->onDelete('cascade');
+
+            $table->unsignedBigInteger('province_id')->nullable();
+            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
+
+            $table->unsignedBigInteger('district_id')->nullable();
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
+
+            $table->unsignedBigInteger('ward_id')->nullable();
+            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
         });
     }
 
@@ -34,6 +43,9 @@ return new class extends Migration {
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign('users_departments_id_foreign');
             $table->dropForeign('users_avatar_id_foreign');
+            $table->dropForeign('users_province_id_foreign');
+            $table->dropForeign('users_district_id_foreign');
+            $table->dropForeign('users_ward_id_foreign');
 //            $table->dropColumn('departments_id', 'status');
         });
     }

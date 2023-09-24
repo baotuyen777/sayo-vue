@@ -5,6 +5,8 @@
         parse_str($url_components['query'], $urlParams);
 
      $urlParams['catCode'] = request('catCode') ?? 'tat-ca';
+     $urlParams['provinceCode'] = request('provinceCode') ;
+     $urlParams['catCode'] = request('catCode') ?? 'tat-ca';
 
     $urlParams['provinceCode'] =  $province['code'];
 @endphp
@@ -23,12 +25,12 @@
             <div class="body scroll">
                 <ul>
                     <li>
-                        <a href="{{route('archive',$urlParams)}}"
+                        <a href="{{route($route ?? 'archive',$urlParams)}}"
                            data-id="0"><span>{{$first?? 'Tất cả'}}</span></a></li>
                     @foreach($options as $i=>$option)
                         <li>
                             <a
-                                href="{{route('archive',array_merge(['districtCode'=>$option['code']], $urlParams))}}"
+                                href="{{route($route ?? 'archive',array_merge($urlParams,['districtCode'=>$option['code']]))}}"
                                 data-id="{{$option['id'] ?? $i}}"><span>{{$option['name'] ?? $option}}</span></a></li>
                     @endforeach
                 </ul>

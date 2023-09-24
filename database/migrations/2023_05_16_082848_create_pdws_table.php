@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pdws', function (Blueprint $table) {
-            $table->id();
-            $table->string('code')->unique();
-            $table->string('name');
-            $table->tinyInteger('level')->default(1);
-            $table->integer('status')->default(1);
-
-            $table->unsignedBigInteger('parent_id')->default(1);
-//            $table->foreign('parent_id')->references('id')->on('pdws')->onDelete('cascade');
-
-            $table->timestamps();
-        });
+//        Schema::create('pdws', function (Blueprint $table) {
+//            $table->id();
+//            $table->string('code')->unique();
+//            $table->string('name');
+//            $table->tinyInteger('level')->default(1);
+//            $table->integer('status')->default(1);
+//
+//            $table->unsignedBigInteger('parent_id')->default(1);
+////            $table->foreign('parent_id')->references('id')->on('pdws')->onDelete('cascade');
+//
+//            $table->timestamps();
+//        });
     }
 
     /**

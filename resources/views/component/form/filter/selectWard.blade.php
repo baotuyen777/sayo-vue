@@ -24,10 +24,10 @@
             <div class="body scroll">
                 <ul>
                     <li>
-                        <a href="{{route('archive',$urlParams)}}"
+                        <a href="{{route($route ?? 'archive',$urlParams)}}"
                            data-id="0"><span>{{$first?? 'Tất cả'}}</span></a></li>
                     @foreach($options as $i=>$option)
-                        <li><a href="{{route('archive',array_merge(['wardCode' => $option['code']], $urlParams))}}"
+                        <li><a href="{{route($route ?? 'archive',array_merge($urlParams,['wardCode' => $option['code']]))}}"
                                data-id="{{$option['id'] ?? $i}}"><span>{{$option['name'] ?? $option}}</span><i
                                     class="next"></i></a></li>
                     @endforeach

@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if ($this->app->environment('local','testing','staging')){
+        if ($this->app->environment('local')){
             $this->app->register(DuskServiceProvider::class);
             $this->app->register(DebugBarServiceProvider::class);
         }

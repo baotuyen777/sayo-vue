@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 //        DB::table('files')->insert(['name' => 2, 'url' => 'uploads/2023-08-12/33.jpg']);
 
         $this->call([
-            PdwsSeeder::class,
+//            PdwsSeeder::class,
             FilesSeeder::class,
             DepartmentSeeder::class,
             UserSeeder::class,

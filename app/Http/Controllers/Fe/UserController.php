@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Services\PostService;
 use App\Models\Posts;
 use App\Services\AuthService;
 use Carbon\Carbon;
@@ -15,10 +16,9 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function __construct(private User $userModel,private Posts $postModel)
+    public function __construct(private User $userModel, private PostService $postService)
     {
-        $this->userModel = $userModel;
-        $this->postModel = $postModel;
+
     }
 
     public function show(Request $request, $userName)
@@ -28,21 +28,17 @@ class UserController extends Controller
             return redirect()->route('login');
         }
 
-        $user = User::where('username',$userName)->first();
-        if($user){
-            $s = $request->input('s');
-            $currentPage = $request->input('current');
-            $pageSize = $request->input('page_size') ?? 10;
+        $user = User::where('username', $userName)->first();
+        if ($user) {
+            $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id]);
 
-            $posts = Posts::with('avatar')
-                ->where('author_id',$user->id)
-                ->orderBy('created_at', 'desc')
-                ->paginate($pageSize, ['*'], 'page', $currentPage);;
+
             return view('pages/user/dashboard', ['posts' => $posts]);
         }
         return view('pages/404');
 
     }
+
     public function profile()
     {
         $attrs = $this->userModel->getAttOptions();

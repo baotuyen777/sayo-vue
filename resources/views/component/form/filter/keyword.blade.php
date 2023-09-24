@@ -7,6 +7,9 @@
             @else
                 <span>Từ khóa</span>
             @endif
+            @if(request()->get('s'))
+                <i class="close clear"></i>
+            @endif
         </button>
         <div class="dropdown__content">
             <div class="head">

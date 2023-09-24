@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Fe;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
-use App\Models\Pdw\District;
-use App\Models\Pdw\Province;
-use App\Models\Pdw\Ward;
+
 use App\Models\Posts;
 use App\Services\PostService;
 use Dflydev\DotAccessData\Data;
@@ -18,8 +16,15 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    function __construct(private Posts $postModel, private PostService $postsService)
+    function __construct(private readonly PostService $postsService)
     {
+    }
+
+    public function index(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
+    {
+        $res = $this->postsService->getAll($request, $catCode, $provinceCode, $districtCode, $wardCode);
+
+        return view('pages/post/list', $res);
     }
 
     public function edit($code)
@@ -89,18 +94,28 @@ class PostController extends Controller
         return ['status' => true, 'result' => $obj];
     }
 
-
     public function create()
     {
         if (!Auth::check()) {
             return view('pages/auth/login');
         }
+
         $options = $this->postsService->getAttrOptions();
-//        $post['attr'] = $this->postsService->getAttrField();
-//        $attrs = $this->postsService->getAttrOptions();
-        $attrs = Posts::$attr;
-//dd($attrs);
-        return view('pages/post/detail', array_merge($attrs, $options));
+
+        return view('pages/post/detail', array_merge(Posts::$attr, $options));
+    }
+
+    public function updateSimple(Request $request, $code)
+    {
+        $post = Posts::where('code', $code)->first();
+
+        $params = $request->all();
+        $res = $post->update($params);
+        if ($res) {
+            $post = Posts::where('code', $code)->first();
+        }
+
+        return response()->json(['status' => $res  , 'result' => $post]);
     }
 
     public function update(PostRequest $request, $code)
@@ -113,37 +128,28 @@ class PostController extends Controller
             $post->files()->sync($files);
         }
 
-
         $params = $request->all();
 
         if (isset($params['attr'])) {
             $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
         }
 
-
         $res = $post->update($params);
 
         return response()->json(['status' => true, 'result' => $res]);
     }
 
-    public function me(Request $request)
-    {
-        $userid = Auth::id();
-        if (!$userid) {
-            return redirect()->route('login');
-        }
-
-        $s = $request->input('s');
-        $currentPage = $request->input('current');
-        $pageSize = $request->input('page_size') ?? 10;
-
-        $posts = Posts::with('avatar')
-            ->where('author_id', Auth::id())
-            ->orderBy('created_at', 'desc')
-            ->paginate($pageSize, ['*'], 'page', $currentPage);;
-
-        return view('pages/post/me', ['objs' => $posts]);
-    }
+//    public function me(Request $request)
+//    {
+//        $userid = Auth::id();
+//        if (!$userid) {
+//            return redirect()->route('login');
+//        }
+//        $posts = $this->postService->getAllSimple($request, ['author_id' => $userid]);
+//
+//
+//        return view('pages/post/me', ['objs' => $posts]);
+//    }
 
     public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {

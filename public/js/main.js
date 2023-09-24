@@ -1,3 +1,4 @@
+//1.slider
 jQuery(document).ready(function ($) {
     // let screenWidth = $(window).width();
     // if (screenWidth < 768) {
@@ -44,104 +45,7 @@ jQuery(document).ready(function ($) {
 
 });
 
-jQuery('.account-menu').click(function () {
-    jQuery(this).find('.menu').toggle('show')
-});
-
-jQuery('.dropdown__button').click(function () {
-
-    jQuery('.dropdown').removeClass('show')
-    jQuery(this).parent().toggleClass('show')
-})
-
-$('.dropdown__close').click(function () {
-    jQuery(this).parents('.dropdown').removeClass('show')
-})
-jQuery('.dropdown__button').blur(function () {
-    // jQuery(this).parent().find('.dropdown__content').removeClass('show')
-})
-
-// jQuery('.dropdown__content').find('a').click(function(){
-//     console.log(window.location.href);
-// })
-// jQuery('body').click(() => {
-//     jQuery('.account-menu').find('.menu').hide()
-// })
-
-$('a, .btn-submit').click(function(e){
-    $('.loader').show();
-})
-
-
-
-
-//form effect
-if (jQuery('.minput').val()) {
-    jQuery('.minput').addClass('hasValue')
-} else {
-    jQuery('.minput').removeClass('hasValue')
-}
-jQuery('.minput').keyup(function () {
-    if (jQuery(this).val()) {
-        jQuery(this).addClass('hasValue')
-        $(this).parent().find('.btn-close').addClass('show');
-    } else {
-        jQuery(this).removeClass('hasValue')
-        $(this).parent().find('.btn-close').removeClass('show');
-    }
-});
-$('.btn-close').click(function () {
-    $(this).parent().find('.minput').val(null);
-    jQuery('.minput').removeClass('hasValue')
-    $(this).removeClass('show');
-})
-
-jQuery('.btn_addfile').click(function (e) {
-    e.preventDefault();
-    $('#files').click();
-});
-
-//selection
-$('.selection').find('.minput').focus(function () {
-    console.log(11231)
-    $(this).parents('.selection').find('.selection__list').toggleClass('show')
-})
-$('.selection__list').on('click', 'li', function () {
-    const selection = $(this).parents('.selection');
-    const li = $(this);
-    selection.find('.input').val(li.data('id'))
-    selection.find('.minput').val(li.html())
-    selection.find('.minput').addClass('hasValue')
-    selection.find('.btn-close').addClass('show');
-    selection.find('.selection__list').removeClass('show');
-    if (selection.data('async-url')) {
-        $.ajax({
-            url: selection.data('async-url') + '/' + li.data('id'),
-            success: function (response) {
-                if (response.status) {
-                    let html = '';
-                    response.result.forEach((obj) => {
-                        html += `<li data-id="${obj.id}">${obj.name}</li>`
-                    })
-                    $('#' + selection.data('async-field')).find('.selection__list').html(html)
-                }
-            },
-        });
-    }
-
-})
-
-
-jQuery('.notify').find('button').click(() => {
-    jQuery('.notify').fadeOut();
-})
-
-const showNotify = (text = 'Thành công', type = 'success') => {
-    jQuery('.notify').fadeOut().addClass(type)
-    $('.notify .content').html(text);
-    $('.notify').fadeIn();
-    setTimeout(() => jQuery('.notify').fadeOut(), 5000)
-}
+// 2. form ajax
 jQuery('.form-ajax').on('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();
@@ -182,35 +86,159 @@ jQuery('.form-ajax').on('submit', function (event) {
 
 });
 
-$(document).ready(function () {
-    $('#files').change(function () {
-        var form_data = new FormData();
+//3. upload
+$('#files').change(function () {
+    var form_data = new FormData();
+    // Read selected files
+    var totalfiles = document.getElementById('files').files.length;
+    for (var index = 0; index < totalfiles; index++) {
+        form_data.append("files[]", document.getElementById('files').files[index]);
+    }
+    const formControl = $(this).parent();
+    $.ajax({
+        url: '/api/files',
+        type: 'post',
+        data: form_data,
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response.status) {
+                state.file_ids = state.file_ids.concat(response.ids);
+                for (let index = 0; index < response.result.length; index++) {
+                    var src = response.result[index].url_full;
+                    // Add img element in <div id='preview'>
+                    formControl.find('.preview').append(`<img src="${src}" alt="">`);
+                }
+            }
+        },
+    });
+});
 
-        // Read selected files
-        var totalfiles = document.getElementById('files').files.length;
-        for (var index = 0; index < totalfiles; index++) {
-            form_data.append("files[]", document.getElementById('files').files[index]);
-        }
-        const formControl = $(this).parent();
+//4. button confirm api
+$('.btn-ajax').click(function () {
+    const $this = $(this);
+
+    const data = {_token: $('.csrf').html(), ...$this.data('param')}
+    $.ajax({
+        url: $this.data('url'),
+        type: 'post',
+        data,
+        dataType: 'json',
+        success: function (response) {
+            if(response.status){
+                window.location.reload()
+            }
+            // if (response.status) {
+            //     state.file_ids = state.file_ids.concat(response.ids);
+            //     for (let index = 0; index < response.result.length; index++) {
+            //         var src = response.result[index].url_full;
+            //         // Add img element in <div id='preview'>
+            //         formControl.find('.preview').append(`<img src="${src}" alt="">`);
+            //     }
+            // }
+        },
+    });
+})
+jQuery('.account-menu').click(function () {
+    jQuery(this).find('.menu').toggle('show')
+});
+
+jQuery('.dropdown__button').click(function () {
+
+    jQuery('.dropdown').removeClass('show')
+    jQuery(this).parent().toggleClass('show')
+})
+
+$('.dropdown__close').click(function () {
+    jQuery(this).parents('.dropdown').removeClass('show')
+})
+jQuery('.dropdown__button').blur(function () {
+    // jQuery(this).parent().find('.dropdown__content').removeClass('show')
+})
+
+$('.clear').click(function(){
+    $(this).parents('.dropdown').find('input').val('');
+    $(this).parents('form').submit();
+})
+
+// jQuery('.dropdown__content').find('a').click(function(){
+//     console.log(window.location.href);
+// })
+// jQuery('body').click(() => {
+//     jQuery('.account-menu').find('.menu').hide()
+// })
+
+$('a, .btn-submit').click(function (e) {
+    $('.loader').show();
+})
+
+
+//form effect
+if (jQuery('.minput').val()) {
+    jQuery('.minput').addClass('hasValue')
+} else {
+    jQuery('.minput').removeClass('hasValue')
+}
+jQuery('.minput').keyup(function () {
+    if (jQuery(this).val()) {
+        jQuery(this).addClass('hasValue')
+        $(this).parent().find('.btn-close').addClass('show');
+    } else {
+        jQuery(this).removeClass('hasValue')
+        $(this).parent().find('.btn-close').removeClass('show');
+    }
+});
+$('.btn-close').click(function () {
+    $(this).parent().find('.minput').val(null);
+    jQuery('.minput').removeClass('hasValue')
+    $(this).removeClass('show');
+})
+
+jQuery('.btn_addfile').click(function (e) {
+    e.preventDefault();
+    $('#files').click();
+});
+
+//selection
+$('.selection').find('.minput').focus(function () {
+    $(this).parents('.selection').find('.selection__list').toggleClass('show')
+})
+$('.selection__list').on('click', 'li', function () {
+    const selection = $(this).parents('.selection');
+    const li = $(this);
+    selection.find('.input').val(li.data('id'))
+    selection.find('.minput').val(li.html())
+    selection.find('.minput').addClass('hasValue')
+    selection.find('.btn-close').addClass('show');
+    selection.find('.selection__list').removeClass('show');
+    if (selection.data('async-url')) {
         $.ajax({
-            url: '/api/files',
-            type: 'post',
-            data: form_data,
-            dataType: 'json',
-            contentType: false,
-            processData: false,
+            url: selection.data('async-url') + '/' + li.data('id'),
             success: function (response) {
                 if (response.status) {
-                    state.file_ids = state.file_ids.concat(response.ids);
-                    for (let index = 0; index < response.result.length; index++) {
-                        var src = response.result[index].url_full;
-                        // Add img element in <div id='preview'>
-                        formControl.find('.preview').append(`<img src="${src}" alt="">`);
-                    }
+                    let html = '';
+                    response.result.forEach((obj) => {
+                        html += `<li data-id="${obj.id}">${obj.name}</li>`
+                    })
+                    $('#' + selection.data('async-field')).find('.selection__list').html(html)
                 }
             },
         });
-    });
+    }
+})
 
-});
+
+jQuery('.notify').find('button').click(() => {
+    jQuery('.notify').fadeOut();
+})
+
+const showNotify = (text = 'Thành công', type = 'success') => {
+    jQuery('.notify').fadeOut().addClass(type)
+    $('.notify .content').html(text);
+    $('.notify').fadeIn();
+    setTimeout(() => jQuery('.notify').fadeOut(), 5000)
+}
+
+
 

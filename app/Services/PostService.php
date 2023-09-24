@@ -54,11 +54,13 @@ class PostService
 
     public function getAll($request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
-        $currentPage = $request->input('current') ?? 1;
-        $pageSize = $request->input('page_size') ?? 20;
+        $currentPage = $request->input('current');
+        $pageSize = $request->input('page_size') ?? 24;
 
+        $provinceCode = $provinceCode ?? $request->input('provinceCode');
         $province = Province::where('code', $provinceCode)->first();
 
+        $catCode = $catCode ?? $request->input('catCode');
         $category = Category::where('code', $catCode)->first();
         $res = [
             'category' => $category,
@@ -115,9 +117,28 @@ class PostService
 
         }
 
-        $res['objs'] = $posts->paginate($pageSize, ['*'], 'page', $currentPage);
+        $res['objs'] = $posts->orderBy('status')->orderBy('created_at', 'desc')->paginate($pageSize, ['*'], 'page', $currentPage);
 
         return $res;
+    }
+
+    function getAllSimple($request, $where = [])
+    {
+        $s = $request->input('s');
+        $currentPage = $request->input('current') ?? $request->input('page');
+        $pageSize = $request->input('page_size') ?? 10;
+
+        $posts = Posts::with('avatar');
+        if ($s) {
+            $posts->where('name', 'like', "%{$s}%");
+        }
+
+        foreach ($where as $k => $v) {
+            $posts->where($k, $v);
+        }
+//dd($currentPage);
+        return $posts->orderBy('created_at', 'desc')
+            ->paginate($pageSize, ['*'], 'page', $currentPage);
     }
 
 }

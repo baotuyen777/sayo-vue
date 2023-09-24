@@ -33,6 +33,9 @@ class UserSeeder extends Seeder
             'role' => 1,
             'avatar_id' => 1,
             'created_at'=> Carbon::now(),
+            'province_id'=>1,
+            'district_id'=>1,
+            'ward_id'=>1,
         ]);
 
         DB::table('users')->insert([
@@ -46,6 +49,9 @@ class UserSeeder extends Seeder
             'role' => 2,
             'avatar_id' => 1,
             'created_at'=> Carbon::now(),
+            'province_id'=>2,
+            'district_id'=>2,
+            'ward_id'=>2,
         ]);
 
         DB::table('users')->insert([
@@ -59,6 +65,9 @@ class UserSeeder extends Seeder
             'role' => 3,
             'avatar_id' => 1,
             'created_at'=> Carbon::now(),
+            'province_id'=>3,
+            'district_id'=>3,
+            'ward_id'=>3,
         ]);
     }
 }

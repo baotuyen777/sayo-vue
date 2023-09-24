@@ -71,8 +71,7 @@
                 <img alt="safe tips"
                      class="pull-left" width="100"
                      src="{{ asset('/img/mua-ban.png') }}">
-                <div class="SafeTips_TipText__mMXwX"><p>Hẹn gặp ở nơi công cộng và quen thuộc khi giao dịch.</p>
-                </div>
+                <div class="SafeTips_TipText__mMXwX"><p>Hẹn gặp ở nơi công cộng và quen thuộc khi giao dịch.</p></div>
             </div>
 
         </div>
