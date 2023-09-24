@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Pdw\District;
+use App\Models\Pdw\Province;
+use App\Models\Pdw\Ward;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,6 +63,20 @@ class User extends Authenticatable
         return $this->belongsTo(Files::class)
             ->select(['files.*'])
             ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", files.url) as url');
+    }
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function ward()
+    {
+        return $this->belongsTo(Ward::class);
     }
     public function getAttOptions(): array
     {

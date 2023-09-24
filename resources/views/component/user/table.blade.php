@@ -49,7 +49,7 @@
                 <td>
                     <div class="d-flex-wrap gap-10">
                         <button class="btn--small btn-ajax danger"
-                                data-url="{{route('user.destroy',['user'=>$obj['username']])}}">
+                                data-url="{{route('user.destroy',['user'=>$obj['username']])}}"  data-method="delete">
                             Xóa
                         </button>
                         @if($obj['status']!=2)

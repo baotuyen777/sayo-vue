@@ -28,12 +28,11 @@ class UserController extends Controller
         $selectStatus = DB::raw('if(status = 1, "Hoạt động", "Tạm dừng") as status_label');
 
         $objs = User::join('departments', 'users.departments_id', '=', 'departments.id')
-
-            ->select('users.*',  $rolesLabel,$selectStatus)
+            ->select('users.*', $rolesLabel, $selectStatus)
             ->where('users.name', 'like', "%{$s}%")
             ->paginate($pageSize);
 
-        return view('pages/user/list', ['objs'=> $objs]);
+        return view('pages/user/list', ['objs' => $objs]);
     }
 
     public function show(Request $request, $userName)
@@ -43,12 +42,17 @@ class UserController extends Controller
             return redirect()->route('login');
         }
 
-        $user = User::where('username', $userName)->first();
+        $user = User::where('username', $userName)
+            ->with('province')
+            ->with('district')
+            ->with('ward')
+            ->first();
+
         if ($user) {
             $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id]);
 
 
-            return view('pages/user/dashboard', ['posts' => $posts]);
+            return view('pages/user/dashboard', ['posts' => $posts, 'user' => $user]);
         }
         return view('pages/404');
 
@@ -63,8 +67,27 @@ class UserController extends Controller
         return view('pages/user/profile', $attrs);
     }
 
+    public function updateSimple(Request $request, $useName)
+    {
+        if (!Auth::user() || Auth::user()->role > 1) {
+            return view('pages/404');
+        }
+        $post = User::where('code', $useName)->first();
+
+        $params = $request->all();
+        $res = $post->update($params);
+        if ($res) {
+            $post = User::where('username', $useName)->first();
+        }
+
+        return response()->json(['status' => $res, 'result' => $post]);
+    }
+
     public function update(Request $request, $id)
     {
+        if (!Auth::user() || Auth::user()->role > 1) {
+            return view('pages/404');
+        }
 
         if ($request->input('change_password')) {
             $request->merge([
@@ -77,23 +100,13 @@ class UserController extends Controller
         return response()->json(['status' => true, 'result' => $res]);
     }
 
-    public function updateSimple(Request $request, $useName)
+    public function destroy($userName)
     {
-        $post = User::where('code', $useName)->first();
-
-        $params = $request->all();
-        $res = $post->update($params);
-        if ($res) {
-            $post = User::where('username', $useName)->first();
+        if (!Auth::user() || Auth::user()->role > 1) {
+            return view('pages/404');
         }
 
-        return response()->json(['status' => $res, 'result' => $post]);
+        $obj = User::where('username', $userName)->delete();
+        return response()->json(['status' => true, 'result' => $obj]);
     }
-
-    public function destroy($id)
-    {
-        $res = DB::table($this->module)->where('id', $id)->delete();
-        return response()->json(['status' => true, 'result' => $res]);
-    }
-
 }
