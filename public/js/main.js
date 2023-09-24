@@ -120,23 +120,16 @@ $('.btn-ajax').click(function () {
     const $this = $(this);
 
     const data = {_token: $('.csrf').html(), ...$this.data('param')}
+    const type = $this.data('method') || 'post'
     $.ajax({
         url: $this.data('url'),
-        type: 'post',
+        type,
         data,
         dataType: 'json',
         success: function (response) {
             if(response.status){
                 window.location.reload()
             }
-            // if (response.status) {
-            //     state.file_ids = state.file_ids.concat(response.ids);
-            //     for (let index = 0; index < response.result.length; index++) {
-            //         var src = response.result[index].url_full;
-            //         // Add img element in <div id='preview'>
-            //         formControl.find('.preview').append(`<img src="${src}" alt="">`);
-            //     }
-            // }
         },
     });
 })

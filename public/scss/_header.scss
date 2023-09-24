@@ -54,23 +54,7 @@ $border-color_4: currentColor;
     }
 }
 
-.aw__b1358qut.primary {
-    color: $white;
-    background-color: $background-color_1;
-    border-color: $border-color_1;
 
-    &:hover {
-        color: $white;
-        background-color: $background-color_2;
-        border-color: $border-color_2;
-    }
-
-    &:active {
-        color: $white;
-        background-color: $background-color_3;
-        border-color: $border-color_3;
-    }
-}
 
 .aw__b1358qut.r-normal {
     border-radius: 4px;
@@ -216,20 +200,20 @@ $border-color_4: currentColor;
     padding-right: 32px;
 }
 
-.aw__h1gb9yk {
-    height: 36px;
-    width: 144px;
-    display: flex;
-    -ms-flex-pack: center;
-    justify-content: center;
-
-    align-items: center;
-
-    &:hover {
-        background-color: $background-color_3 !important;
-        border-color: $border-color_3 !important;
-    }
-}
+//.aw__h1gb9yk {
+//    height: 36px;
+//    width: 144px;
+//    display: flex;
+//    -ms-flex-pack: center;
+//    justify-content: center;
+//
+//    align-items: center;
+//
+//    &:hover {
+//        background-color: $background-color_3 !important;
+//        border-color: $border-color_3 !important;
+//    }
+//}
 
 .aw__c19wws31 {
     display: flex;
@@ -394,7 +378,6 @@ $border-color_4: currentColor;
 }
 
 .main-header {
-
     .avatar {
         display: flex;
         justify-items: center;
@@ -413,23 +396,37 @@ $border-color_4: currentColor;
     }
 }
 
-@media (max-width: 991px) {
-    .aw__r1fkdta0, .search-form-wrapper, .top-menu {
-        .aw__h1gb9yk {
-            display: none;
-        }
-    }
-}
+//@media (max-width: 991px) {
+//    .aw__r1fkdta0, .search-form-wrapper, .top-menu {
+//        .aw__h1gb9yk {
+//            display: none;
+//        }
+//    }
+//}
 
-@media (max-width: 600px) {
-    .search-form-wrapper {
-        display: none;
-    }
-}
 
 
 .logo {
     img {
         height: 45px;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-header {
+        .avatar {
+            span, svg{
+                display: none;
+            }
+        }
+    }
+    .search-form-wrapper {
+        display: none;
+    }
+
+    .logo {
+        img {
+            height: 35px;
+        }
     }
 }

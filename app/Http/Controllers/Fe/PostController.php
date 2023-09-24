@@ -22,6 +22,10 @@ class PostController extends Controller
 
     public function index(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
+        if (!Auth::user() || Auth::user()->role > 1) {
+            return view('pages/404');
+        }
+
         $res = $this->postsService->getAll($request, $catCode, $provinceCode, $districtCode, $wardCode);
 
         return view('pages/post/list', $res);
@@ -32,20 +36,22 @@ class PostController extends Controller
         $post = Post::with('category')
             ->with('avatar')
             ->with('files')
-//            ->with('pdws')
             ->where('code', $code)
             ->first();
+
+        if (!checkAuthor($post->author_id)) {
+            return view('pages/404');
+        }
         $output = $this->postsService->getAttrOptions($post);
-//$relations =[];
+
         $post['province_name'] = $output['provinces']->get($post->province_id)->name ?? '';
         $post['district_name'] = $output['districts']->get($post->district_id)->name ?? '';
         $post['ward_name'] = $output['wards']->get($post->ward_id)->name ?? '';
 
         $post['file_ids'] = $post['files']->pluck('id');
         $post['attr'] = $this->postsService->getAttrField($post);
-//dd($post['attr']);
+
         $output['obj'] = $post;
-//        $post['attr'] = json_decode(str_replace('%22', '', $post['attr']));
 
         return view('pages/post/detail', $output);
     }
@@ -142,13 +148,19 @@ class PostController extends Controller
     public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
         $res = $this->postsService->getAll($request, $catCode, $provinceCode, $districtCode, $wardCode);
-        $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name);
+        $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');
         return view('pages/post/archive', $res);
     }
 
-    public function destroy($id)
+    public function destroy($code)
     {
+        $obj = Post::where('code', $code)->first();
+        if (!checkAuthor($obj->author_id)) {
+            return view('pages/404');
+        }
 
+        $obj->delete();
+        return response()->json(['status' => true, 'result' => $obj]);
     }
 
 }

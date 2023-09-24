@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 function moneyFormat($number): string
 {
@@ -99,3 +100,10 @@ function vn2Province($str)
 //function getStatusLabel($key){
 //
 //}
+function checkAuthor($authorId)
+{
+    if (!Auth::user() || Auth::user()->id != $authorId || Auth::user()->role > 1) {
+        return false;
+    }
+    return true;
+}

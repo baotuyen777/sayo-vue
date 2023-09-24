@@ -47,6 +47,10 @@
                 </td>
                 <td>
                     <div class="d-flex-wrap gap-10">
+                        <button class="btn--small btn-ajax danger"
+                                data-url="{{route('post.destroy',['post'=>$obj['code']])}}" data-method="delete">
+                            Xóa
+                        </button>
                         @if($obj['status']!=2)
                             <button class="btn--small btn-ajax success"
                                     data-url="{{route('postUpdateSimple',['slug'=>$obj['code']])}}"
@@ -55,7 +59,7 @@
                             </button>
                         @endif
                         @if($obj['status'] !=3)
-                            <button class="btn--small btn-ajax danger"
+                            <button class="btn--small btn-ajax warning"
                                     data-url="{{route('postUpdateSimple',['slug'=>$obj['code']])}}"
                                     data-param='{"status":3}'>Từ chối
                             </button>
