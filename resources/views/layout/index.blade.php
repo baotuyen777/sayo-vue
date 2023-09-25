@@ -1,5 +1,7 @@
 @include('layout.header')
-@include('layout.common.breadcrumb')
-@yield('content')
+<main>
+    @include('layout.common.breadcrumb')
+    @yield('content')
+</main>
 
 @include('layout.footer')

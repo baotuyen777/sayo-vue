@@ -62,8 +62,12 @@ class UserController extends Controller
     {
         $attrs = $this->userModel->getAttOptions();
         $userId = Auth::user()->id;
-        $user = User::with('avatar')->find($userId);
+        $user = User::with('avatar')->with('province')
+            ->with('district')
+            ->with('ward')->find($userId);
+
         $attrs['obj'] = $user;
+        $attrs['user'] = $user;
         return view('pages/user/profile', $attrs);
     }
 

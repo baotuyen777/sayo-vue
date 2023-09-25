@@ -1,3 +1,11 @@
+html, body{
+    height: 100%;
+    //margin-bottom: -50px;
+}
+main{
+    min-height: calc(100% - 142px);
+}
+
 .main-nav{
     display: flex;
     justify-content: space-between;

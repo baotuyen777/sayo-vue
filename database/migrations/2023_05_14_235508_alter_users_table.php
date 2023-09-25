@@ -12,14 +12,14 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('departments_id')->nullable()->constrained('departments');
-            $table->integer('status')->default(1);
+            $table->integer('status')->default(1)->comment('1: init, 2: approved, 3: reject');
             $table->integer('role')->default(3); // 1:admin, 2:staff, 3:customer
             $table->string('phone');
             $table->text('bio')->nullable();
             $table->string('cccd')->nullable();
             $table->date('birthday')->nullable();
             $table->tinyInteger('gender')->nullable();
-            $table->integer('verified_level')->default(0);
+//            $table->integer('verified_level')->default(0);
 
             $table->unsignedBigInteger('avatar_id')->nullable();
             $table->foreign('avatar_id')->references('id')->on('files')->onDelete('cascade');
