@@ -6,6 +6,7 @@
 - **Migrate** ```php artisan migrate:refresh --seed```
 - **Generate key** ```php artisan key:generate```
 - **Generate image link** ```php artisan storage:link```
+- **Import news** ``` php artisan news:import```
 
 https://viblo.asia/p/database-don-vi-hanh-chinh-viet-nam-cho-laravel-naQZR9jQKvx
 - **Generate swagger** ``php artisan l5-swagger:generate``` http://localhost:8000/api/documentation#/Register

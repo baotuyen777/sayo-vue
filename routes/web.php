@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Fe\HomeController;
 use \App\Http\Controllers\Fe\AuthController;
 use \App\Http\Controllers\Fe\PostController;
+use \App\Http\Controllers\Fe\NewsController;
 use \App\Http\Controllers\Fe\UserController;
 use \App\Http\Controllers\Fe\PdwController;
 use Illuminate\Support\Facades\Artisan;
@@ -41,6 +42,17 @@ Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
 Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');
 Route::get('/xem-tin-{catSlug?}/{slug}.htm', [PostController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
+
+
+//Route::resource('news', NewsController::class);
+//Route::get('/post/edit/{slug}.htm', [NewsController::class, 'edit'])->name('postEdit');
+//Route::post('/post/edit/{slug}.htm', [NewsController::class, 'update'])->name('postUpdate');
+//Route::post('/post/update-simple/{slug}.htm', [NewsController::class, 'updateSimple'])->name('postUpdateSimple');
+//Route::get('/dang-tin', [NewsController::class, 'create'])->name('publicPost');
+//Route::post('/dang-tin', [NewsController::class, 'store'])->name('storePost');
+//Route::get('/tin-tuc/hotgirl', [NewsController::class, 'archive'])->name('archive');
+//Route::get('/xem-tin-{catSlug?}/{slug}.htm', [NewsController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
+Route::get('/news/crawl', [NewsController::class, 'crawl'])->name('newsCrawl');
 
 
 
