@@ -14,8 +14,8 @@
                                 <div class="AdDecription_adPrice__MQzGw" itemprop="price">
                                     {{moneyFormat($obj['price'])}}
                                 </div>
-                                <button type="button" class="SaveAd_saveAdViewDetail__UGkS5">Lưu tin
-                                    <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like" loading="lazy"></button>
+{{--                                <button type="button" class="btn--oval">Lưu tin--}}
+{{--                                    <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like"></button>--}}
                             </div>
 
                             <p class="AdDecription_adBody__qp2KG" itemprop="description">{{$obj['content']}}</p>

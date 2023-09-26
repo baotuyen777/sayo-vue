@@ -22,13 +22,31 @@ class PostController extends Controller
 
     public function index(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
-        if (!Auth::user() || Auth::user()->role > 1) {
-            return view('pages/404');
+
+        if (!Auth::user()) {
+            return view('pages/auth/login');
+        }
+        $extraParam = ['catCode' => $catCode, 'provinceCode' => $provinceCode, 'districtCode' => $districtCode, 'wardCode' => $wardCode];
+
+        if (Auth::user()->role > 1) {
+            $extraParam['author_id'] = Auth::user()->id;
         }
 
-        $res = $this->postsService->getAll($request, $catCode, $provinceCode, $districtCode, $wardCode);
+        $request->merge($extraParam);
+
+        $res = $this->postsService->getAll($request);
 
         return view('pages/post/list', $res);
+    }
+
+    public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
+    {
+        $extraParam = ['catCode' => $catCode, 'provinceCode' => $provinceCode, 'districtCode' => $districtCode, 'wardCode' => $wardCode];
+
+        $request->merge($extraParam);
+        $res = $this->postsService->getAll($request);
+        $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');
+        return view('pages/post/archive', $res);
     }
 
     public function edit($code)
@@ -56,7 +74,7 @@ class PostController extends Controller
         return view('pages/post/detail', $output);
     }
 
-    //Show the form for editing .
+    //Show the form for editing . $catCode dung tren url
     public function show($catCode, $code)
     {
         $post = Post::select('*')
@@ -71,6 +89,7 @@ class PostController extends Controller
         }
 
         $post['attr'] = $this->postsService->getAttrField($post, true);
+//        $post['cat_code'] = $catCode;
 //        dd($post['attr']);
         return view('pages/post/view', ['obj' => $post]);
     }
@@ -145,12 +164,6 @@ class PostController extends Controller
         return response()->json(['status' => true, 'result' => $res]);
     }
 
-    public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
-    {
-        $res = $this->postsService->getAll($request, $catCode, $provinceCode, $districtCode, $wardCode);
-        $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');
-        return view('pages/post/archive', $res);
-    }
 
     public function destroy($code)
     {

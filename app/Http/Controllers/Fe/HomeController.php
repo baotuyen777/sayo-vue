@@ -17,12 +17,11 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::with('avatar')->get();
-        $posts = Post::with('avatar')->get();
+
+        $posts = Post::with('avatar')->with('category')->paginate(24);
 
         return view('pages/home', ['categories' => $categories, 'posts' => $posts]);
     }
-
-
 
 
     public function page($code)
@@ -31,14 +30,4 @@ class HomeController extends Controller
         return view('pages/page', ['obj' => $obj]);
     }
 
-//    public function publicPost()
-//    {
-//        $categories = Category::with('avatar')->get();
-//        $address = [
-//            ['id' => 1, 'name' => 'Phường Thanh Xuân Bắc, Quận Thanh Xuân, Hà Nội'],
-//            ['id' => 2, 'name' => 'Phường Thanh Xuân Trung, Quận Thanh Xuân, Hà Nội'],
-//        ];
-//
-//        return view('pages/public-post', ['categories' => $categories, 'postStates' => Posts::$states, 'address' => $address]);
-//    }
 }

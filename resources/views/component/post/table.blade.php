@@ -51,20 +51,29 @@
                                 data-url="{{route('post.destroy',['post'=>$obj['code']])}}" data-method="delete">
                             Xóa
                         </button>
-                        @if($obj['status']!=2)
-                            <button class="btn--small btn-ajax success"
+                        @if(Auth::user()->role===4)
+                            <button class="btn--small btn-ajax danger"
                                     data-url="{{route('postUpdateSimple',['slug'=>$obj['code']])}}"
-                                    data-param='{"status":2}'>
-                                Duyệt
+                                    data-param='{"status":4}'>
+                                Ẩn
                             </button>
                         @endif
-                        @if($obj['status'] !=3)
-                            <button class="btn--small btn-ajax warning"
-                                    data-url="{{route('postUpdateSimple',['slug'=>$obj['code']])}}"
-                                    data-param='{"status":3}'>Từ chối
-                            </button>
-                        @endif
+                        @if(Auth::user()->role===1)
 
+                            @if($obj['status']!=2)
+                                <button class="btn--small btn-ajax success"
+                                        data-url="{{route('postUpdateSimple',['slug'=>$obj['code']])}}"
+                                        data-param='{"status":2}'>
+                                    Duyệt
+                                </button>
+                            @endif
+                            @if($obj['status'] !=3)
+                                <button class="btn--small btn-ajax warning"
+                                        data-url="{{route('postUpdateSimple',['slug'=>$obj['code']])}}"
+                                        data-param='{"status":3}'>Từ chối
+                                </button>
+                            @endif
+                        @endif
                     </div>
                 </td>
             </tr>

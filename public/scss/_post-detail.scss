@@ -523,7 +523,7 @@ $color_2: #000;
     width: 100%;
     opacity: .8;
     text-align: right;
-    padding: 4px
+    padding: 7px
 }
 
 .post-slider .AdImage_imageCaptionText__ScM56 {
@@ -782,15 +782,11 @@ $color_2: #000;
     }
 }
 
-.SaveAd_saveAdViewDetail__UGkS5 {
-    background: 0 0;
-    cursor: pointer;
-    outline: 0;
+.btn--oval {
     border: 1px solid #c90927;
     border-radius: 20px;
     padding: 5px 10px;
     color: #c90927;
-    display: flex
 }
 
 .LeadButtonSlide_wrapperLeadButton__gyTxQ {
@@ -865,7 +861,7 @@ $color_2: #000;
 .SellerProfile_profileWrapper__ubLwW {
     margin-bottom: 10px;
     padding: 10px 0;
-    border-top: 1px solid #e5e5e5
+    //border-top: 1px solid #e5e5e5
 }
 
 .SellerProfile_profileWrapper__ubLwW .SellerProfile_secondaryButton__qJNPr {

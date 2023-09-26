@@ -7,6 +7,7 @@ use App\Models\Pdw\District;
 use App\Models\Pdw\Province;
 use App\Models\Pdw\Ward;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostService
 {
@@ -52,15 +53,15 @@ class PostService
         return get_defined_vars();
     }
 
-    public function getAll($request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
+    public function getAll($request)
     {
         $currentPage = $request->input('current');
         $pageSize = $request->input('page_size') ?? 24;
 
-        $provinceCode = $provinceCode ?? $request->input('provinceCode');
+        $provinceCode = $request->input('provinceCode');
         $province = Province::where('code', $provinceCode)->first();
 
-        $catCode = $catCode ?? $request->input('catCode');
+        $catCode = $request->input('catCode');
         $category = Category::where('code', $catCode)->first();
         $res = [
             'category' => $category,
@@ -74,7 +75,13 @@ class PostService
             'categories' => Category::with('avatar')->get()
         ];
 
-        $posts = Post::select('*')->with('avatar')->with('files');
+
+        $posts = Post::select('*')->with('avatar')->with('files')->with('category');
+
+        if ($request->input('author_id')) {
+            $posts->where('author_id', $request->input('author_id'));
+        }
+
         if ($catCode && $category) {
             $posts->where('category_id', $category->id);
             //            ->whereHas('category', function ($query) use ($catSlug) {
@@ -101,13 +108,16 @@ class PostService
             $posts->where('province_id', $province->id);
 
             $res['districts'] = District::whereProvinceId($province->id ?? 1)->get();
+            $districtCode = $request->input('districtCode');
             $district = District::where('code', $districtCode)->first();
             $res['district'] = $district;
+
             if ($districtCode && $district) {
                 $posts->where('district_id', $district->id);
                 $res['wards'] = Ward::whereDistrictId($district->id)->get();
-
+                $wardCode = $request->input('wardCode');
                 $ward = Ward::where('code', $wardCode)->first();
+
                 if ($ward) {
                     $res['ward'] = $ward;
                     $posts->where('ward_id', $ward->id);

@@ -1,10 +1,14 @@
+@php
+    $detailLink =  route('postView',['catSlug'=>$obj['category']['code'],'slug'=>$obj['code']]);
+    $bg= $obj['avatar']['url'] ?? asset('img/sayo-default-vertical.webp');
+@endphp
+
 <div class="card card--product">
-    <a  href="{{route('postView',['catSlug'=>$obj['category']['code'],'slug'=>$obj['code']])}}">
-        <div class="avatar"
-             style="background: url({{$obj['avatar']['url'] ?? asset('img/sayo-default-vertical.webp')}})"></div>
+    <a href="{{$detailLink}}">
+        <div class="avatar" style="background: url({{$bg}})"></div>
     </a>
     <div class="product__caption">
-        <a  href="#" class="card__title">{{$obj['name']}}</a>
+        <a href="{{$detailLink}}" class="card__title">{{$obj['name']}}</a>
         {{--        <div class="product__feedback">--}}
         {{--            <div>--}}
         {{--                <button type="button" aria-haspopup="true" aria-expanded="false">--}}
@@ -21,16 +25,16 @@
 
         {{--            </div>--}}
         {{--        </div>--}}
-{{--        <div class="card__extra-attr text-gray">--}}
-{{--            <div>20 m² - 2 PN</div>--}}
-{{--        </div>--}}
+        {{--        <div class="card__extra-attr text-gray">--}}
+        {{--            <div>20 m² - 2 PN</div>--}}
+        {{--        </div>--}}
         <div><span class="card__price">{{moneyFormat($obj['price'])}}</span></div>
     </div>
     <div class="card__footer text-small text-gray">
-{{--        <img height="16"--}}
-{{--             src="https://static.chotot.com/storage/chotot-icons/svg/user.svg"--}}
-{{--             alt="{{$obj['author']['name'] ?? 'sayo'}}">   --}}
-        <img height="16" src="https://static.chotot.com/storage/chotot-icons/svg/user.svg">
+        {{--        <img height="16"--}}
+        {{--             src="https://static.chotot.com/storage/chotot-icons/svg/user.svg"--}}
+        {{--             alt="{{$obj['author']['name'] ?? 'sayo'}}">   --}}
+        <img height="16" src="{{asset('/img/icon/default_user.png')}}">
         <span>Hà Nội- hôm qua</span>
     </div>
 </div>

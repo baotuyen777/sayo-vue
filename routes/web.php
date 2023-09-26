@@ -40,7 +40,7 @@ Route::post('/post/update-simple/{slug}.htm', [PostController::class, 'updateSim
 Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
 Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');
-Route::get('/xem-tin-{catSlug}/{slug}.htm', [PostController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
+Route::get('/xem-tin-{catSlug?}/{slug}.htm', [PostController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
 
 
 
