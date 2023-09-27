@@ -8,16 +8,19 @@ use App\Models\Category;
 
 use App\Models\News;
 use App\Models\Post;
+use App\Services\NewsService;
 use App\Services\PostService;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use App\Exports\NewsExport;
+
 
 class NewsController extends Controller
 {
-    function __construct(private readonly PostService $postsService)
+    function __construct(private readonly PostService $postsService, private readonly NewsService $crawlNewsService)
     {
     }
 
@@ -179,21 +182,16 @@ class NewsController extends Controller
 
     public function crawl(Request $request)
     {
-        $context = stream_context_create(
-            array(
-                "http" => array(
-                    "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
-                )
-            )
-        );
         $url = 'https://badova.net/hotteen-9x-thuy-duong-khoe-kheo-hinh-xam-o-cho-hiem-gay-thuong-nho-boi-net-dep-quyen-ru-va-vo-cung-dang-yeu/';
-        $html = file_get_html($url,null, $context);
-        $content = $html->find('.single-page');
-        $content = str_ireplace("https://badova.net/hotgirl/",'https://badova.net/hotgirl/',$content);
-        echo $content[0];
-//        foreach ($tags as $element) {
-//            echo $element;
-//        }
+        $this->crawlNewsService->crawl($url);
     }
+
+    public function export()
+    {
+        $storagePath = storage_path('app/public/exel/');
+//        return Excel::download(new NewsExport, 'xxxx.xlsx'); //download file export
+        return Excel::store(new NewsExport, 'news.xlsx', $storagePath); //lưu file export trên ổ cứng
+    }
+
 
 }
