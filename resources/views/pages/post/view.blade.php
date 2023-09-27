@@ -14,15 +14,15 @@
                                 <div class="AdDecription_adPrice__MQzGw" itemprop="price">
                                     {{moneyFormat($obj['price'])}}
                                 </div>
-{{--                                <button type="button" class="btn--oval">Lưu tin--}}
-{{--                                    <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like"></button>--}}
+                                <button type="button" class="btn--oval">Lưu tin
+                                    <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like"></button>
                             </div>
 
                             <p class="AdDecription_adBody__qp2KG" itemprop="description">{{$obj['content']}}</p>
                         </div>
 
                         <p class="">
-                            <a href="tel:{{$obj->author->phone}}">{{$obj->author->phone}} BẤM ĐỂ GỌI</a>
+                            <a href="tel:{{$obj->author->phone}}"> BẤM ĐỂ GỌI: {{$obj->author->phone}}</a>
                         </p>
 
                         <section class="grid-2">
@@ -43,28 +43,17 @@
                             @endif
 
 
-                            {{--                                                        <div class="col-md-6 no-padding AdParam_adParamItem__Yi2I0" data-testid="param-item">--}}
-                            {{--                                                            <div class="AdParam_adMediaParam__3epxo">--}}
-                            {{--                                                                <div class="media-left media-top"><img class="AdParam_adParamIcon__m87Vj"--}}
-                            {{--                                                                                                       alt="Chất liệu"--}}
-                            {{--                                                                                                       src="https://static.chotot.com/storage/icons/logos/ad-param/product_material.png">--}}
-                            {{--                                                                </div>--}}
-                            {{--                                                                <div class="media-body media-middle"><span><span>Chất liệu: </span><span--}}
-                            {{--                                                                            itemprop="product_material"--}}
-                            {{--                                                                            class="AdParam_adParamValue__IfaYa">Nệm</span></span></div>--}}
-                            {{--                                                            </div>--}}
-                            {{--                                                        </div>--}}
-                            {{--                                                        <div class="col-md-6 no-padding AdParam_adParamItem__Yi2I0" data-testid="param-item">--}}
-                            {{--                                                            <div class="AdParam_adMediaParam__3epxo">--}}
-                            {{--                                                                <div class="media-left media-top"><img class="AdParam_adParamIcon__m87Vj"--}}
-                            {{--                                                                                                       alt="Thông tin sử dụng"--}}
-                            {{--                                                                                                       src="https://static.chotot.com/storage/icons/logos/ad-param/usage_information.png">--}}
-                            {{--                                                                </div>--}}
-                            {{--                                                                <div class="media-body media-middle"><span><span>Thông tin sử dụng: </span><span--}}
-                            {{--                                                                            itemprop="usage_information" class="AdParam_adParamValue__IfaYa">In trên bao bì</span></span>--}}
-                            {{--                                                                </div>--}}
-                            {{--                                                            </div>--}}
-                            {{--                                                        </div>--}}
+                            <div class="align-center">
+                                <div class="AdParam_adMediaParam__3epxo">
+                                    <div class="media-left media-top"><img class="AdParam_adParamIcon__m87Vj"
+                                                                           alt="Chất liệu"
+                                                                           src="https://static.chotot.com/storage/icons/logos/ad-param/property_legal_document.png">
+                                    </div>
+                                    <div class="media-body media-middle"><span><span>Giấy tờ pháp lý: </span><span
+                                                itemprop="product_material"
+                                                class="AdParam_adParamValue__IfaYa">Đã có sổ</span></span></div>
+                                </div>
+                            </div>
                         </section>
                         <section class="align-center">
                             <i class="location"></i><strong>Khu Vực:</strong>
