@@ -10,13 +10,30 @@ class NewsService
 {
     public $context;
 
+    public function init()
+    {
+        $this->context = stream_context_create(
+            array(
+                "http" => array(
+                    "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
+                )
+            )
+        );
+    }
     public function crawl($url)
     {
-
+        $this->init();
+        $html = file_get_html($url, null, $this->context);
+        $tags = $html->find('.large-columns-1', 0)->find('a');
+        foreach ($tags as $tag) {
+            echo '<hr/>';
+            $this->crawlPost($tag->href);
+        }
+        $this->saveImage($html);
     }
+
     public function crawlPost($url)
     {
-        $this->init();
         $html = file_get_html($url, null, $this->context);
         $this->replaceLayzySrc($html);
         $this->removeUnuse($html);
@@ -50,21 +67,10 @@ class NewsService
         if (!$obj) {
             News::create($param);
             echo ' -------->insert success';
-        }else{
+        } else {
             echo ' -------->abort';
         }
 
-    }
-
-    public function init()
-    {
-        $this->context = stream_context_create(
-            array(
-                "http" => array(
-                    "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
-                )
-            )
-        );
     }
 
     function replaceLayzySrc($html)
@@ -93,7 +99,7 @@ class NewsService
 
     function saveImage($html)
     {
-        $imgs = $html->find('.single-page img');
+        $imgs = $html->find('.large-9 img');
         $storagePath = storage_path('app/public/uploads/hotgirl/');
         if (!file_exists($storagePath)) {
             mkdir($storagePath, 0775);

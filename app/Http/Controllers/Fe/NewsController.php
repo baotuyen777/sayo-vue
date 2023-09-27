@@ -81,57 +81,20 @@ class NewsController extends Controller
     //Show the form for editing . $catCode dung tren url
     public function show($code)
     {
-        $post = Post::select('*')
+        $obj = News::select('*')
             ->with('avatar')
-            ->with('files')
-            ->with('category')
+//            ->with('files')
             ->with('author')
             ->where('code', $code)
             ->first();
-        if (!$post) {
+        if (!$obj) {
             return view('pages/404');
         }
 
-        $post['attr'] = $this->postsService->getAttrField($post, true);
+//        $post['attr'] = $this->postsService->getAttrField($post, true);
 //        $post['cat_code'] = $catCode;
 //        dd($post['attr']);
-        return view('pages/post/view', ['obj' => $post]);
-    }
-
-    public function store(PostRequest $request)
-    {
-        $params = $request->all();
-        $userid = Auth::id();
-
-        if (!$userid) {
-            return redirect()->route('login');
-        }
-        $files = $request->input('file_ids');
-        if ($files) {
-            $params['avatar_id'] = $files[0];
-        }
-
-        $params['code'] = time() . '-' . $userid;
-        $params['author_id'] = $userid;
-        $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
-
-        $obj = Post::create($params);
-        if ($obj && $files) {
-            $obj->files()->sync($files);
-        }
-
-        return ['status' => true, 'result' => $obj];
-    }
-
-    public function create()
-    {
-        if (!Auth::check()) {
-            return view('pages/auth/login');
-        }
-
-        $options = $this->postsService->getAttrOptions();
-
-        return view('pages/post/detail', array_merge(Post::$attr, $options));
+        return view('pages/news/view', ['obj' => $obj]);
     }
 
     public function updateSimple(Request $request, $code)
@@ -168,7 +131,6 @@ class NewsController extends Controller
         return response()->json(['status' => true, 'result' => $res]);
     }
 
-
     public function destroy($code)
     {
         $obj = Post::where('code', $code)->first();
@@ -182,7 +144,7 @@ class NewsController extends Controller
 
     public function crawl(Request $request)
     {
-        $url = 'https://badova.net/hotteen-9x-thuy-duong-khoe-kheo-hinh-xam-o-cho-hiem-gay-thuong-nho-boi-net-dep-quyen-ru-va-vo-cung-dang-yeu/';
+        $url = $request->input('url') ?? 'https://badova.net/hotgirl/';
         $this->crawlNewsService->crawl($url);
     }
 
@@ -191,6 +153,42 @@ class NewsController extends Controller
         $storagePath = storage_path('app/public/exel/');
 //        return Excel::download(new NewsExport, 'xxxx.xlsx'); //download file export
         return Excel::store(new NewsExport, 'news.xlsx', $storagePath); //lưu file export trên ổ cứng
+    }
+
+    public function store(PostRequest $request)
+    {
+        $params = $request->all();
+        $userid = Auth::id();
+
+        if (!$userid) {
+            return redirect()->route('login');
+        }
+        $files = $request->input('file_ids');
+        if ($files) {
+            $params['avatar_id'] = $files[0];
+        }
+
+        $params['code'] = time() . '-' . $userid;
+        $params['author_id'] = $userid;
+        $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
+
+        $obj = Post::create($params);
+        if ($obj && $files) {
+            $obj->files()->sync($files);
+        }
+
+        return ['status' => true, 'result' => $obj];
+    }
+
+    public function create()
+    {
+        if (!Auth::check()) {
+            return view('pages/auth/login');
+        }
+
+        $options = $this->postsService->getAttrOptions();
+
+        return view('pages/post/detail', array_merge(Post::$attr, $options));
     }
 
 
