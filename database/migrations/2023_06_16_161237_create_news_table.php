@@ -29,7 +29,7 @@ return new class extends Migration {
 
             $table->timestamps();
         });
-        \Illuminate\Support\Facades\Artisan::call('news:import');
+//        \Illuminate\Support\Facades\Artisan::call('news:import');
     }
 
     /**

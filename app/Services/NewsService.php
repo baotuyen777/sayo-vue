@@ -10,29 +10,22 @@ class NewsService
 {
     public $context;
 
-    public function init()
-    {
-        $this->context = stream_context_create(
-            array(
-                "http" => array(
-                    "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
-                )
-            )
-        );
-    }
     public function crawl($url)
     {
         $this->init();
         $html = file_get_html($url, null, $this->context);
-        $tags = $html->find('.large-columns-1', 0)->find('a');
+        $tags = $html->find('.large-columns-1', 0)->find('.post-item');
         foreach ($tags as $tag) {
             echo '<hr/>';
-            $this->crawlPost($tag->href);
+            $avatarLink = $this->getImageLink($tag);
+            $a = $tag->find('a', 0);
+            $this->crawlPost($a->href, $avatarLink);
         }
         $this->saveImage($html);
+
     }
 
-    public function crawlPost($url)
+    public function crawlPost($url, $avatarLink)
     {
         $html = file_get_html($url, null, $this->context);
         $this->replaceLayzySrc($html);
@@ -57,7 +50,7 @@ class NewsService
             'code' => str_replace(['https://badova.net/', '/'], '', $url),
             'content' => $content[0],
             'category_id' => 1,
-            'avatar_link' => $this->getFirstImage($content[0]),
+            'avatar_link' => $avatarLink,
             'author_id' => 1,
             'created_at' => Carbon::now()
         ];
@@ -72,7 +65,29 @@ class NewsService
         }
 
     }
+    public function init()
+    {
+        $this->context = stream_context_create(
+            array(
+                "http" => array(
+                    "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
+                )
+            )
+        );
+    }
 
+    function getImageLink($html)
+    {
+//        $html = str_get_html($content);
+        $img = $html->find('img', 0);
+        $link = $img->src;
+
+        $pattern = '/(https:\/\/badova\.net\/[^ ]+\/\d{4}\/\d{2}\/)([^ ]+\.jpg)/';
+
+        $replacement = asset('storage/uploads/hotgirl/$2');
+
+        return preg_replace($pattern, $replacement, $link);
+    }
     function replaceLayzySrc($html)
     {
         $imgElements = $html->find('img');
@@ -120,12 +135,5 @@ class NewsService
     {
         $tag = $html->find('h1', 0);
         return $tag->plaintext ?? ';';
-    }
-
-    function getFirstImage($content)
-    {
-        $html = str_get_html($content);
-        $img = $html->find('img', 0);
-        return $img->src;
     }
 }

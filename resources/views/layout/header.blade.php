@@ -68,7 +68,7 @@
                     </ul>
 
                 </li>
-                <li><a href="{{route('hotgirl')}}">Hotgirls</a></li>
+                <li><a href="{{route('hotgirl')}}">Hot girl</a></li>
             </ul>
 
 
