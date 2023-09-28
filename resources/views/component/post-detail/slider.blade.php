@@ -26,7 +26,7 @@
                     <div class="AdImage_sliderImage__ddiFA">
                         <div class="AdImage_sliderWrapper___jIpt">
                             <div class="AdImage_imageWrapper__j1z2m">
-                                <img alt="{{$obj['name']}}" src="{{asset('storage/'.$img['url'])}}">
+                                <img alt="{{$obj['name']}}" src="{{$img['url'])}}">
                             </div>
                         </div>
                     </div>
