@@ -107,3 +107,23 @@ function checkAuthor($authorId)
     }
     return true;
 }
+
+function getCategories()
+{
+    return
+        [
+            "bds" =>'Bất động sản',
+//            "do-dien-tu"=>'Đồ điện tử',
+            "do-gia-dung"=>'Đồ gia dụng',
+            "dich-vu"=>'Dịch vụ',
+//            "me-va-be"=>'Mẹ và bé',
+//            "thu-cung"=>'Thú cưng',
+//            "do-an"=>'Đồ ăn',
+//            "dien-lanh"=>'Điện lạnh',
+//            "thoi-trang"=>'Thời trang',
+//            "van-phong"=>'Văn phòng',
+//            "cho-tang-mien-phi"=>'Cho tặng miễn phí',
+            "khac"=>'Khác'
+        ];
+}
+

@@ -107,7 +107,7 @@ $border-color_4: currentColor;
     -webkit-transition-property: height;
     transition-property: height;
     transition-duration: .2s;
-    padding: 10px;
+    padding-top: 10px;
 }
 
 .top-menu {
@@ -409,6 +409,7 @@ $border-color_4: currentColor;
 .logo {
     img {
         height: 45px;
+        min-width: 100px;
     }
 }
 

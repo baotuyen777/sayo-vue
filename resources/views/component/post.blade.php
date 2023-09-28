@@ -34,7 +34,7 @@
         {{--        <img height="16"--}}
         {{--             src="https://static.chotot.com/storage/chotot-icons/svg/user.svg"--}}
         {{--             alt="{{$obj['author']['name'] ?? 'sayo'}}">   --}}
-        <img height="16" src="{{asset('/img/icon/default_user.png')}}">
+        <img class="author-avatar"  src="{{asset('/img/icon/default_user.png')}}" alt="{{$obj['author']['name'] ?? 'sayo'}}">
         <span>Hà Nội- hôm qua</span>
     </div>
 </div>

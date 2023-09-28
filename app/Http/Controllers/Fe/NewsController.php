@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers\Fe;
 
+use App\Exports\NewsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
-use App\Models\Category;
-
 use App\Models\News;
 use App\Models\Post;
 use App\Services\NewsService;
-use App\Services\PostService;
-use Dflydev\DotAccessData\Data;
+use App\Services\Post\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-
-use App\Exports\NewsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class NewsController extends Controller
@@ -81,21 +77,75 @@ class NewsController extends Controller
     //Show the form for editing . $catCode dung tren url
     public function show($code)
     {
-        $post = Post::select('*')
+        $obj = News::select('*')
             ->with('avatar')
-            ->with('files')
-            ->with('category')
             ->with('author')
             ->where('code', $code)
             ->first();
-        if (!$post) {
+        if (!$obj) {
             return view('pages/404');
         }
 
-        $post['attr'] = $this->postsService->getAttrField($post, true);
-//        $post['cat_code'] = $catCode;
-//        dd($post['attr']);
-        return view('pages/post/view', ['obj' => $post]);
+        $objs = News::with('avatar')->inRandomOrder()->limit(9)->get();
+        return view('pages/news/view', ['obj' => $obj, 'objs' => $objs]);
+    }
+
+    public function updateSimple(Request $request, $code)
+    {
+        $post = Post::where('code', $code)->first();
+
+        $params = $request->all();
+        $res = $post->update($params);
+        if ($res) {
+            $post = Post::where('code', $code)->first();
+        }
+
+        return response()->json(['status' => $res, 'result' => $post]);
+    }
+
+    public function update(PostRequest $request, $code)
+    {
+//        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
+        $post = Post::where('code', $code)->first();
+        $files = $request->input('file_ids');
+
+        if ($files) {
+            $post->files()->sync($files);
+        }
+
+        $params = $request->all();
+
+        if (isset($params['attr'])) {
+            $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
+        }
+
+        $res = $post->update($params);
+
+        return response()->json(['status' => true, 'result' => $res]);
+    }
+
+    public function destroy($code)
+    {
+        $obj = Post::where('code', $code)->first();
+        if (!checkAuthor($obj->author_id)) {
+            return view('pages/404');
+        }
+
+        $obj->delete();
+        return response()->json(['status' => true, 'result' => $obj]);
+    }
+
+    public function crawl(Request $request)
+    {
+        $url = $request->input('url') ?? 'https://badova.net/hotgirl/';
+        $isSingle = $request->input('is_single') ?? false;
+        $this->crawlNewsService->crawl($url, $isSingle);
+    }
+
+    public function export()
+    {
+//        return Excel::download(new NewsExport, 'news.xlsx'); //download file export
+        return Excel::store(new NewsExport, 'exel/news.xlsx', 'public'); //lưu file export trên ổ cứng
     }
 
     public function store(PostRequest $request)
@@ -133,65 +183,4 @@ class NewsController extends Controller
 
         return view('pages/post/detail', array_merge(Post::$attr, $options));
     }
-
-    public function updateSimple(Request $request, $code)
-    {
-        $post = Post::where('code', $code)->first();
-
-        $params = $request->all();
-        $res = $post->update($params);
-        if ($res) {
-            $post = Post::where('code', $code)->first();
-        }
-
-        return response()->json(['status' => $res, 'result' => $post]);
-    }
-
-    public function update(PostRequest $request, $code)
-    {
-//        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
-        $post = Post::where('code', $code)->first();
-        $files = $request->input('file_ids');
-
-        if ($files) {
-            $post->files()->sync($files);
-        }
-
-        $params = $request->all();
-
-        if (isset($params['attr'])) {
-            $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
-        }
-
-        $res = $post->update($params);
-
-        return response()->json(['status' => true, 'result' => $res]);
-    }
-
-
-    public function destroy($code)
-    {
-        $obj = Post::where('code', $code)->first();
-        if (!checkAuthor($obj->author_id)) {
-            return view('pages/404');
-        }
-
-        $obj->delete();
-        return response()->json(['status' => true, 'result' => $obj]);
-    }
-
-    public function crawl(Request $request)
-    {
-        $url = 'https://badova.net/hotteen-9x-thuy-duong-khoe-kheo-hinh-xam-o-cho-hiem-gay-thuong-nho-boi-net-dep-quyen-ru-va-vo-cung-dang-yeu/';
-        $this->crawlNewsService->crawl($url);
-    }
-
-    public function export()
-    {
-        $storagePath = storage_path('app/public/exel/');
-//        return Excel::download(new NewsExport, 'xxxx.xlsx'); //download file export
-        return Excel::store(new NewsExport, 'news.xlsx', $storagePath); //lưu file export trên ổ cứng
-    }
-
-
 }

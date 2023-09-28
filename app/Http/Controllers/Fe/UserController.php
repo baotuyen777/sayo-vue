@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Services\PostService;
-use App\Models\Post;
-use App\Services\AuthService;
+use App\Models\User;
+use App\Services\Post\PostService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller

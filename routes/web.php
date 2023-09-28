@@ -50,9 +50,10 @@ Route::get('/xem-tin-{catSlug?}/{slug}.htm', [PostController::class, 'show'])->w
 //Route::post('/post/update-simple/{slug}.htm', [NewsController::class, 'updateSimple'])->name('postUpdateSimple');
 //Route::get('/dang-tin', [NewsController::class, 'create'])->name('publicPost');
 //Route::post('/dang-tin', [NewsController::class, 'store'])->name('storePost');
-//Route::get('/tin-tuc/hotgirl', [NewsController::class, 'archive'])->name('archive');
-//Route::get('/xem-tin-{catSlug?}/{slug}.htm', [NewsController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
+Route::get('/tin-tuc/hotgirl', [NewsController::class, 'archive'])->name('hotgirl');
+Route::get('/tin-tuc/hotgirl/{slug}.htm', [NewsController::class, 'show'])->name('newsView');
 Route::get('/news/crawl', [NewsController::class, 'crawl'])->name('newsCrawl');
+Route::get('/news/export', [NewsController::class, 'export'])->name('newsExport');
 
 
 
