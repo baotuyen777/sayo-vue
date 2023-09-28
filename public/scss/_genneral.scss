@@ -4,7 +4,7 @@
 
 body {
     margin: 0;
-    background: #ccc;
+    background: whitesmoke;
     color: #222;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -57,6 +57,10 @@ table {
 
 img {
     max-width: 100%;
+    height: auto;
+}
+figure{
+    width: fit-content !important;
 }
 
 ul {

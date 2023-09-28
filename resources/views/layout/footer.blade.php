@@ -1,29 +1,11 @@
-<footer class="white-box">
-    <div class="d-flex justify-content-center">
+<footer class="p-10">
+    <div class="d-flex justify-content-center gap-10">
         <a href="{{route('pageView',['code'=>'gioi-thieu'])}}" target="_blank">Giới thiệu</a><span>•</span>
         <a href="{{route('pageView',['code'=>'gioi-thieu'])}}" target="_blank">Quy chế hoạt động sàn</a><span>•</span>
         <a href="{{route('pageView',['code'=>'gioi-thieu'])}}" target="_blank">Chính sách bảo mật</a><span>•</span>
         <a href="{{route('pageView',['code'=>'gioi-thieu'])}}" target="_blank">Liên hệ hỗ trợ</a>
     </div>
-
-    {{--    <section class="container">--}}
-    {{--        <div class="d-flex grid-3">--}}
-
-    {{--            <div><p>Về SAYO</p>--}}
-    {{--                <ul>--}}
-    {{--                    <li><a href="{{getPageUrl('gioi-thieu')}}">Giới thiệu</a></li>--}}
-    {{--                    <li><a>Quy chế hoạt động sàn</a></li>--}}
-    {{--                    <li><a>Chính sách bảo mật</a></li>--}}
-    {{--                    <li><a>Giải quyết tranh chấp</a></li>--}}
-    {{--                    <li><a href="https://careers.sayo.vn">Tuyển dụng</a></li>--}}
-
-    {{--                </ul>--}}
-    {{--            </div>--}}
-
-    {{--        </div>--}}
-    {{--    </section>--}}
-
-</footer>
+    </footer>
 <div class="notify {{session('notify_type') ?"notify--".session('notify_type'): ''}}"
      style="display: {{session('notify') ? 'block' : 'none'}}">
     <span class="content">{{ session('notify') }}</span>
