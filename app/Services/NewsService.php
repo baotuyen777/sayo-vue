@@ -14,6 +14,7 @@ class NewsService
     {
         $this->init();
         $html = file_get_html($url, null, $this->context);
+        $this->removeUnuse($html);
         $this->saveImage($html);
 
         if ($isSingle) {
@@ -61,7 +62,6 @@ class NewsService
                 $imageData = file_get_contents($imageSrc, false, $this->context);
                 file_put_contents($storagePath . $filename, $imageData);
             }
-//            $this->saveImageInSrcSet($img);
         }
     }
 
@@ -69,13 +69,21 @@ class NewsService
     {
         $imgElements = $html->find('img');
         foreach ($imgElements as $imgElement) {
-            $src = strpos($imgElement->src, '.jpg') ? $imgElement->src : $imgElement->getAttribute('data-lazy-src');
+
+            $src = preg_match('/\.(jpg|png|webp|jpeg)$/', $imgElement->src) ? $imgElement->src : $imgElement->getAttribute('data-lazy-src');
+            if($imgElement->src=='https://badova.net/wp-content/uploads/2019/08/logo-badova.png'){
+                continue;
+            }
 
             if (!$src) {
                 $srcset = $imgElement->getAttribute('srcset');
                 if ($srcset) {
                     $src = explode(' ', $srcset[0])[0];
                 }
+            }
+
+            if(!$src){
+                dd($imgElement);
             }
             $imgElement->src = $src;
 
@@ -90,13 +98,15 @@ class NewsService
     public function crawlPost($url, $avatarLink = '')
     {
         $html = file_get_html($url, null, $this->context);
-        $this->replaceLayzySrc($html);
         $this->removeUnuse($html);
+        $this->replaceLayzySrc($html);
+
+        $this->saveImage($html);
 
         $content = $html->find('.single-page');
 
 
-        $pattern = '/(https:\/\/badova\.net\/[^ ]+\/\d{4}\/\d{2}\/)([^ ]+\.jpg)/';
+        $pattern = '/(https:\/\/badova\.net\/[^ ]+\/\d{4}\/\d{2}\/)([^ ]+\.(jpg|png|webp|jpeg))/';
 
         $replacement = asset('storage/uploads/hotgirl/$2');
 
@@ -106,7 +116,7 @@ class NewsService
         $content = str_replace('Badova', 'Sayo', $content);
 
 
-        $this->saveImage($html);
+
         $param = [
             'name' => $this->getTitle($html),
             'code' => str_replace(['https://badova.net/', '/'], '', $url),
@@ -131,6 +141,12 @@ class NewsService
     function removeUnuse($html)
     {
         $divToRemove = $html->find('.blog-share', 0);
+        if ($divToRemove !== null) {
+            $divToRemove->outertext = '';
+        }
+
+        $divToRemove = $html->find('.header', 0);
+
         if ($divToRemove !== null) {
             $divToRemove->outertext = '';
         }
