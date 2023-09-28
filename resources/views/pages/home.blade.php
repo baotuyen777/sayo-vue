@@ -7,14 +7,14 @@
                 <div class="card">
                     <h2>Khám phá danh mục</h2>
                     <div class="d-flex-wrap grid-6">
-                        @foreach($categories as $category)
+                        @foreach(getCategories() as $code=>$name)
                             <div>
-                                <a href="{{route('archive',['catCode'=>$category['code']])}}">
+                                <a href="{{route('archive',['catCode'=>$code])}}">
                                     <div class="card--category">
-                                        <img alt="{{$category['name']}}"
-                                             src="{{$category['avatar']['url'] ?? asset('img/icon/sayo-'.$category['code'].'.webp') ??  asset('img/icon/sayo-bds.webp')}}"
+                                        <img alt="{{$name}}"
+                                             src="{{$category['avatar']['url'] ?? asset('img/icon/sayo-'.$code.'.webp') ??  asset('img/icon/sayo-bds.webp')}}"
                                         >
-                                        <div class="card__title">{{$category['name']}}</div>
+                                        <div class="card__title">{{$name}}</div>
                                     </div>
 
                                 </a>

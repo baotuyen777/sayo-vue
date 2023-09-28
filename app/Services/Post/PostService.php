@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Post;
 
 use App\Models\Category;
 use App\Models\Pdw\District;
 use App\Models\Pdw\Province;
 use App\Models\Pdw\Ward;
 use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
 
 class PostService
 {

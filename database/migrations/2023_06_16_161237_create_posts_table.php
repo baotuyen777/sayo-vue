@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->string('address')->nullable();
 
             $table->json('attr')->nullable();
+            $table->string('original_link')->nullable();
 
             $table->unsignedBigInteger('province_id')->nullable();
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');

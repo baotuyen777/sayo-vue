@@ -65,7 +65,7 @@ class Post extends Model
 //    protected $table ='posts';
     protected $fillable = [
         'name', 'code', 'content', 'category_id', 'status', 'author_id', 'price',
-        'address', 'attr', 'ward_id', 'district_id', 'province_id', 'avatar_id', 'video_id',
+        'address', 'attr', 'ward_id', 'district_id', 'province_id', 'avatar_id', 'video_id','original_link'
     ];
     protected $appends = ['category_name'];
     protected $primaryKey = 'id';

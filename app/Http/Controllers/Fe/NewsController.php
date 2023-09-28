@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers\Fe;
 
+use App\Exports\NewsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
-use App\Models\Category;
-
 use App\Models\News;
 use App\Models\Post;
 use App\Services\NewsService;
-use App\Services\PostService;
-use Dflydev\DotAccessData\Data;
+use App\Services\Post\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-
-use App\Exports\NewsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 
