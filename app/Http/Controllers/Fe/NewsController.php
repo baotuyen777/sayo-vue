@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Exports\NewsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class NewsController extends Controller
@@ -145,14 +146,14 @@ class NewsController extends Controller
     public function crawl(Request $request)
     {
         $url = $request->input('url') ?? 'https://badova.net/hotgirl/';
-        $this->crawlNewsService->crawl($url);
+        $isSingle = $request->input('is_single') ?? false;
+        $this->crawlNewsService->crawl($url, $isSingle);
     }
 
     public function export()
     {
-        $storagePath = storage_path('app/public/exel/');
-//        return Excel::download(new NewsExport, 'xxxx.xlsx'); //download file export
-        return Excel::store(new NewsExport, 'news.xlsx', $storagePath); //lưu file export trên ổ cứng
+//        return Excel::download(new NewsExport, 'news.xlsx'); //download file export
+        return Excel::store(new NewsExport, 'exel/news.xlsx', 'public'); //lưu file export trên ổ cứng
     }
 
     public function store(PostRequest $request)
@@ -190,6 +191,4 @@ class NewsController extends Controller
 
         return view('pages/post/detail', array_merge(Post::$attr, $options));
     }
-
-
 }

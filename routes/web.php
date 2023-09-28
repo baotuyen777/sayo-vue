@@ -53,6 +53,7 @@ Route::get('/xem-tin-{catSlug?}/{slug}.htm', [PostController::class, 'show'])->w
 Route::get('/tin-tuc/hotgirl', [NewsController::class, 'archive'])->name('hotgirl');
 Route::get('/tin-tuc/hotgirl/{slug}.htm', [NewsController::class, 'show'])->name('newsView');
 Route::get('/news/crawl', [NewsController::class, 'crawl'])->name('newsCrawl');
+Route::get('/news/export', [NewsController::class, 'export'])->name('newsExport');
 
 
 

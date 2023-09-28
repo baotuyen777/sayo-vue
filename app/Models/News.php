@@ -22,8 +22,7 @@ class News extends Model
     ];
 //    protected $table ='posts';
     protected $fillable = [
-        'name', 'code', 'content', 'category_id', 'status', 'author_id', 'avatar_link',
-        'avatar_id',
+        'name', 'code', 'content', 'category_id', 'avatar_link', 'author_id', 'status', 'avatar_id',
     ];
     protected $primaryKey = 'id';
 
