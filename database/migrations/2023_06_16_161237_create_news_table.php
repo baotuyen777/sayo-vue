@@ -26,6 +26,8 @@ return new class extends Migration {
             $table->tinyInteger('state')->default(1)->comment('1: hang moi, 2: cu con bao hanh, 3: cu het bao hanh ');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
+
+            $table->index(['code', 'updated_at']);
         });
 //        \Illuminate\Support\Facades\Artisan::call('news:import');
     }

@@ -84,7 +84,6 @@ class NewsController extends Controller
     {
         $obj = News::select('*')
             ->with('avatar')
-//            ->with('files')
             ->with('author')
             ->where('code', $code)
             ->first();
@@ -92,10 +91,8 @@ class NewsController extends Controller
             return view('pages/404');
         }
 
-//        $post['attr'] = $this->postsService->getAttrField($post, true);
-//        $post['cat_code'] = $catCode;
-//        dd($post['attr']);
-        return view('pages/news/view', ['obj' => $obj]);
+        $objs = News::with('avatar')->inRandomOrder()->limit(9)->get();
+        return view('pages/news/view', ['obj' => $obj, 'objs' => $objs]);
     }
 
     public function updateSimple(Request $request, $code)

@@ -22,6 +22,15 @@
                     {{--                    @include('component.post-detail.sidebar')--}}
                 </div>
             </div>
+            <div class="card">
+                <h2>{{'Có thể bạn quan tâm'}}</h2>
+                <div class="d-flex-wrap grid-3">
+                    @foreach($objs as $obj)
+                        @include('component.news.card',['obj'=> $obj])
+                    @endforeach
+                </div>
+
+            </div>
         </div>
     </main>
 @endsection
