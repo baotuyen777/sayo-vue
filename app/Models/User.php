@@ -62,7 +62,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Files::class)
             ->select(['files.*'])
-            ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", files.url) as url');
+            ->selectRaw('CONCAT("' .  asset('storage') . '/", files.url) as url');
     }
     public function province()
     {

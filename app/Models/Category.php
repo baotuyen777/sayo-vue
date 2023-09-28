@@ -23,7 +23,7 @@ class Category extends Model
     {
         return $this->belongsTo(Files::class)
             ->select(['files.*'])
-            ->selectRaw('CONCAT("' . env('MEDIA_URL') . '", files.url) as url ');
+            ->selectRaw('CONCAT("' .  asset('storage') . '/", files.url) as url ');
     }
 
 
