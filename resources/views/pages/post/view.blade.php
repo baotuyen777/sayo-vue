@@ -12,21 +12,24 @@
                             <h1 class="AdDecription_adTitle__AG9r4"> {{$obj['name']}}</h1>
                             <div class="AdDecription_priceWrapper__ObnxA">
                                 <div class="AdDecription_adPrice__MQzGw" itemprop="price">
-                                    {{moneyFormat($obj['price'])}}
+                                    {{moneyFormat($obj['price'])}}/tháng
                                 </div>
                                 <button type="button" class="btn--oval">Lưu tin
                                     <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like"></button>
                             </div>
-
+                            <span><b>Thông tin chi tiết:</b></span>
                             <p class="AdDecription_adBody__qp2KG" itemprop="description">{{$obj['content']}}</p>
                         </div>
 
                         <p class="">
                             <a href="tel:{{$obj->author->phone}}"> BẤM ĐỂ GỌI: {{$obj->author->phone}}</a>
                         </p>
-
+                        <div>
+                            <span><b>Đặc điểm bất động sản:</b></span>
+                        </div>
                         <section class="grid-2">
                             <div class="align-center">
+
                                 <i class="state-used"></i>
                                 <span><b>Tình trạng:</b> <span>Đã sử dụng</span></span>
                             </div>
