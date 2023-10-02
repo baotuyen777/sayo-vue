@@ -225,18 +225,18 @@ $color_2: #000;
 .post-slider .AdImage_button__ho9Jx.AdImage_Next__TX7EW i {
     background: url(https://static.chotot.com/storage/chotot-icons/svg/white-next.svg)
 }
-.AdDecription_adDecriptionWrapper____nLb {
+.ad-imagewrapper {
     margin-top: 10px
 }
 
-.AdDecription_adDecriptionWrapper____nLb .AdDecription_adTitle__AG9r4 {
+.ad-imagewrapper .ad-title {
     font-size: 16px;
     font-weight: 700;
     margin-top: 20px;
     margin-bottom: 10px
 }
 
-.AdDecription_adDecriptionWrapper____nLb .AdDecription_priceWrapper__ObnxA {
+.ad-imagewrapper .ad-pricewrapper {
     background-color: transparent;
     text-overflow: ellipsis;
     padding: 0;
@@ -245,29 +245,29 @@ $color_2: #000;
     justify-content: space-between;
     align-items: center
 }
-.AdDecription_adDecriptionWrapper____nLb .AdDecription_priceWrapper__ObnxA .AdDecription_saveAd__A7pLt {
+.ad-imagewrapper .ad-pricewrapper .ad-savead {
     right: auto;
     bottom: auto;
     position: relative
 }
 
-.AdDecription_adDecriptionWrapper____nLb .AdDecription_priceWrapper__ObnxA .AdDecription_price__L2jjH {
+.ad-imagewrapper .ad-pricewrapper .ad-price {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between
 }
-.AdDecription_adDecriptionWrapper____nLb .AdDecription_priceWrapper__ObnxA .AdDecription_price__L2jjH > img {
+.ad-imagewrapper .ad-pricewrapper .ad-price > img {
     margin: 4px 0
 }
 
-.AdDecription_adDecriptionWrapper____nLb .AdDecription_priceWrapper__ObnxA .AdDecription_adPrice__MQzGw {
+.ad-imagewrapper .ad-pricewrapper .ad-adPrice {
     font-size: 16px;
     color: #c90927;
     font-weight: 700
 }
 
-.AdDecription_adDecriptionWrapper____nLb .AdDecription_adBody__qp2KG {
+.ad-imagewrapper .ad-body {
     padding-top: 10px;
     text-align: justify;
     margin-bottom: 10px;
@@ -275,14 +275,14 @@ $color_2: #000;
     overflow-wrap: break-word
 }
 
-.AdParam_adMediaParam__3epxo {
+.ad-mediaparam {
     display: flex;
     align-items: start
 }
 
 
 
-.AdParam_adParamIcon__m87Vj {
+.ad-paramicon {
     display: inline-block;
     vertical-align: middle;
     margin-right: 10px;
@@ -290,11 +290,11 @@ $color_2: #000;
     height: 20px
 }
 
-.AdParam_adParamValue__IfaYa {
+.ad-paramvalue {
     white-space: pre-line
 }
 
-.AdParam_adParamValue__IfaYa > a {
+.ad-paramvalue > a {
     color: #2275d3;
     cursor: pointer;
     outline: 0;
@@ -642,7 +642,7 @@ $color_2: #000;
 
 
 //chat
-.ChatTemplate_titleChatTemp__IWGIA {
+.chat-titleChatTemp {
     padding: 5px 5px 5px 0;
     margin: 0 !important;
     border-bottom: 1px solid #cacaca;
@@ -651,7 +651,7 @@ $color_2: #000;
     font-weight: 700;
 }
 
-.ChatTemplate_sent__bouS1, .ChatTemplate_templateItem__7p1c6 {
+.ChatTemplate_sent__bouS1, .chat-templateItem {
     border: 1px solid #fe9900;
     padding: 5px 10px;
     border-radius: 20px;
@@ -663,13 +663,9 @@ $color_2: #000;
     cursor: pointer;
 }
 
-.ChatTemplate_templateMessage__a_aks {
+.chat_templateMessage {
     margin: 0 10px;
-}
-
-.ChatTemplate_templateMessage__a_aks {
     overflow-y: hidden;
     white-space: nowrap;
     padding: 0;
-    margin: 0;
 }
