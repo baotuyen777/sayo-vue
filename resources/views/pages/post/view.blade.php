@@ -8,17 +8,17 @@
                 <div class="row base">
                     <div class="col-md-8">
                         @include('component.post-detail.slider')
-                        <div class="AdDecription_adDecriptionWrapper____nLb">
-                            <h1 class="AdDecription_adTitle__AG9r4"> {{$obj['name']}}</h1>
-                            <div class="AdDecription_priceWrapper__ObnxA">
-                                <div class="AdDecription_adPrice__MQzGw" itemprop="price">
+                        <div class="ad-imagewrapper">
+                            <h1 class="ad-title"> {{$obj['name']}}</h1>
+                            <div class="ad-pricewrapper">
+                                <div class="ad-adPrice" itemprop="price">
                                     {{moneyFormat($obj['price'])}}
                                 </div>
                                 <button type="button" class="btn--oval">Lưu tin
                                     <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like"></button>
                             </div>
 
-                            <p class="AdDecription_adBody__qp2KG" itemprop="description">{{$obj['content']}}</p>
+                            <p class="ad-body" itemprop="description">{{$obj['content']}}</p>
                         </div>
 
                         <p class="">
@@ -44,14 +44,14 @@
 
 
                             <div class="align-center">
-                                <div class="AdParam_adMediaParam__3epxo">
-                                    <div class="media-left media-top"><img class="AdParam_adParamIcon__m87Vj"
+                                <div class="ad-mediaparam">
+                                    <div class="media-left media-top"><img class="ad-paramicon"
                                                                            alt="Chất liệu"
                                                                            src="https://static.chotot.com/storage/icons/logos/ad-param/property_legal_document.png">
                                     </div>
                                     <div class="media-body media-middle"><span><span>Giấy tờ pháp lý: </span><span
                                                 itemprop="product_material"
-                                                class="AdParam_adParamValue__IfaYa">Đã có sổ</span></span></div>
+                                                class="ad-paramvalue">Đã có sổ</span></span></div>
                                 </div>
                             </div>
                         </section>
@@ -64,22 +64,22 @@
                         <section class="col-xs-12 no-padding">
                             <div class="IntersectBox " style="min-height: 100px;">
                                 <div class="ChatTemplate_chatTempWrapper__uAELZ">
-                                    <div class="ChatTemplate_titleChatTemp__IWGIA">Hỏi người bán qua chat</div>
+                                    <div class="chat-titleChatTemp">Hỏi người bán qua chat</div>
                                     <div class="ChatTemplate_templateItemWrapper__AP8xV">
-                                        <ul class="ChatTemplate_templateMessage__a_aks">
-                                            <li class="ChatTemplate_templateItem__7p1c6" role="menuitem">Sản phẩm này
+                                        <ul class="chat_templateMessage">
+                                            <li class="chat-templateItem" role="menuitem">Sản phẩm này
                                                 còn không ạ?
                                             </li>
-                                            <li class="ChatTemplate_templateItem__7p1c6" role="menuitem">Bạn có ship
+                                            <li class="chat-templateItem" role="menuitem">Bạn có ship
                                                 hàng không?
                                             </li>
-                                            <li class="ChatTemplate_templateItem__7p1c6" role="menuitem">Sản phẩm này có
+                                            <li class="chat-templateItem" role="menuitem">Sản phẩm này có
                                                 còn bảo hành không?
                                             </li>
-                                            <li class="ChatTemplate_templateItem__7p1c6" role="menuitem">Chất liệu sản
+                                            <li class="chat-templateItem" role="menuitem">Chất liệu sản
                                                 phẩm là gì vậy ạ?
                                             </li>
-                                            <li class="ChatTemplate_templateItem__7p1c6" role="menuitem">Bạn có các sản
+                                            <li class="chat-templateItem" role="menuitem">Bạn có các sản
                                                 phẩm khác tương tự?
                                             </li>
                                         </ul>
