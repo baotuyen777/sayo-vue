@@ -8,9 +8,9 @@
                 <div class="row base">
                     <div class="col-md-8">
                         @include('component.post-detail.slider')
-                        <div class="ad-imagewrapper">
+                        <div class="ad-image-wrapper">
                             <h1 class="ad-title"> {{$obj['name']}}</h1>
-                            <div class="ad-pricewrapper">
+                            <div class="ad-price-wrapper">
                                 <div class="ad-adPrice" itemprop="price">
                                     {{moneyFormat($obj['price'])}}
                                 </div>
@@ -44,14 +44,14 @@
 
 
                             <div class="align-center">
-                                <div class="ad-mediaparam">
-                                    <div class="media-left media-top"><img class="ad-paramicon"
+                                <div class=ad-media-param>
+                                    <div class="media-left media-top"><img class="ad-param-icon"
                                                                            alt="Chất liệu"
                                                                            src="https://static.chotot.com/storage/icons/logos/ad-param/property_legal_document.png">
                                     </div>
                                     <div class="media-body media-middle"><span><span>Giấy tờ pháp lý: </span><span
                                                 itemprop="product_material"
-                                                class="ad-paramvalue">Đã có sổ</span></span></div>
+                                                class="ad-param-value">Đã có sổ</span></span></div>
                                 </div>
                             </div>
                         </section>
