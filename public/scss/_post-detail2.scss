@@ -118,13 +118,13 @@ $color_2: #000;
         width: 620px;
     }
 }
-.post-slider, .post-slider .AdImage_sliderImage__ddiFA {
+.post-slider, .post-slider .ad-slider-image {
     position: relative;
     overflow: hidden;
     outline: 0
 }
 
-.post-slider .AdImage_sliderImage__ddiFA .AdImage_imageWrapper__j1z2m {
+.post-slider .ad-slider-image .ad-image-wrapper-slider {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -134,7 +134,7 @@ $color_2: #000;
     outline: 0;
 }
 
-.post-slider .AdImage_sliderImage__ddiFA .AdImage_imageWrapper__j1z2m img {
+.post-slider .ad-slider-image .ad-image-wrapper-slider img {
     cursor: zoom-in;
     vertical-align: middle;
     max-height: 100%;
@@ -147,17 +147,17 @@ $color_2: #000;
     outline: 0
 }
 
-.post-slider .AdImage_sliderImage__ddiFA span {
+.post-slider .ad-slider-image span {
     display: inline-block;
     height: 100%;
     vertical-align: middle
 }
-.post-slider .AdImage_sliderWrapper___jIpt:after {
+.post-slider .ad-image-slider:after {
     padding-top: 75%;
     display: block;
     content: ""
 }
-.post-slider .AdImage_imageCaption__aUFNp {
+.post-slider .ad-image-caption {
     background: #000;
     position: absolute;
     bottom: 0;
@@ -167,14 +167,14 @@ $color_2: #000;
     padding: 7px
 }
 
-.post-slider .AdImage_imageCaptionText__ScM56 {
+.post-slider .ad-image-caption-text {
     display: inline-block;
     vertical-align: middle;
     color: #f5f5f5;
     margin-right: 4px;
     font-size: 14px
 }
-.post-slider .AdImage_button__ho9Jx, .post-slider .AdImage_button__ho9Jx.AdImage_Next__TX7EW, .post-slider .AdImage_button__ho9Jx.AdImage_Prev__ciQdk {
+.post-slider .ad-image-button, .post-slider .ad-image-button.ad-image-next, .post-slider .ad-image-button.ad-image-prev {
     position: absolute;
     top: 50%;
     z-index: 1;
@@ -188,15 +188,15 @@ $color_2: #000;
     box-shadow: none;
     border: none
 }
-.post-slider .AdImage_button__ho9Jx:focus {
+.post-slider .ad-image-button:focus {
     outline: 0
 }
 
-.post-slider .AdImage_button__ho9Jx:active {
+.post-slider .ad-image-button:active {
     opacity: .7
 }
 
-.post-slider .AdImage_button__ho9Jx .AdImage_icon__g7L3b, .post-slider .AdImage_button__ho9Jx.AdImage_Next__TX7EW i, .post-slider .AdImage_button__ho9Jx.AdImage_Prev__ciQdk i {
+.post-slider .ad-image-button .AdImage_icon__g7L3b, .post-slider .ad-image-button.ad-image-next i, .post-slider .ad-image-button.ad-image-prev i {
     display: inline-block;
     width: 10px;
     height: 38px;
@@ -206,37 +206,37 @@ $color_2: #000;
     cursor: pointer
 }
 
-.post-slider .AdImage_button__ho9Jx.AdImage_Prev__ciQdk {
+.post-slider .ad-image-button.ad-image-prev {
     padding: 0 13px 0 10px;
     left: 0;
     border-radius: 0 5px 5px 0
 }
 
-.post-slider .AdImage_button__ho9Jx.AdImage_Prev__ciQdk i {
+.post-slider .ad-image-button.ad-image-prev i {
     background: url(https://static.chotot.com/storage/chotot-icons/svg/white-back.svg)
 }
 
-.post-slider .AdImage_button__ho9Jx.AdImage_Next__TX7EW {
+.post-slider .ad-image-button.ad-image-next {
     right: 0;
     border-radius: 5px 0 0 5px;
     padding: 0 10px 0 13px
 }
 
-.post-slider .AdImage_button__ho9Jx.AdImage_Next__TX7EW i {
+.post-slider .ad-image-button.ad-image-next i {
     background: url(https://static.chotot.com/storage/chotot-icons/svg/white-next.svg)
 }
-.ad-imagewrapper {
+.ad-image-wrapper {
     margin-top: 10px
 }
 
-.ad-imagewrapper .ad-title {
+.ad-image-wrapper .ad-title {
     font-size: 16px;
     font-weight: 700;
     margin-top: 20px;
     margin-bottom: 10px
 }
 
-.ad-imagewrapper .ad-pricewrapper {
+.ad-image-wrapper .ad-price-wrapper {
     background-color: transparent;
     text-overflow: ellipsis;
     padding: 0;
@@ -245,29 +245,29 @@ $color_2: #000;
     justify-content: space-between;
     align-items: center
 }
-.ad-imagewrapper .ad-pricewrapper .ad-savead {
+.ad-image-wrapper .ad-price-wrapper .ad-save-ad {
     right: auto;
     bottom: auto;
     position: relative
 }
 
-.ad-imagewrapper .ad-pricewrapper .ad-price {
+.ad-image-wrapper .ad-price-wrapper .ad-price {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between
 }
-.ad-imagewrapper .ad-pricewrapper .ad-price > img {
+.ad-image-wrapper .ad-price-wrapper .ad-price > img {
     margin: 4px 0
 }
 
-.ad-imagewrapper .ad-pricewrapper .ad-adPrice {
+.ad-image-wrapper .ad-price-wrapper .ad-adPrice {
     font-size: 16px;
     color: #c90927;
     font-weight: 700
 }
 
-.ad-imagewrapper .ad-body {
+.ad-image-wrapper .ad-body {
     padding-top: 10px;
     text-align: justify;
     margin-bottom: 10px;
@@ -275,14 +275,14 @@ $color_2: #000;
     overflow-wrap: break-word
 }
 
-.ad-mediaparam {
+.ad-media-param {
     display: flex;
     align-items: start
 }
 
 
 
-.ad-paramicon {
+.ad-param-icon {
     display: inline-block;
     vertical-align: middle;
     margin-right: 10px;
@@ -290,11 +290,11 @@ $color_2: #000;
     height: 20px
 }
 
-.ad-paramvalue {
+.ad-param-value {
     white-space: pre-line
 }
 
-.ad-paramvalue > a {
+.ad-param-value > a {
     color: #2275d3;
     cursor: pointer;
     outline: 0;
@@ -308,7 +308,7 @@ $color_2: #000;
     color: #c90927;
 }
 
-.LeadButtonSlide_wrapperLeadButton__gyTxQ {
+.lead-button-slide-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -319,7 +319,7 @@ $color_2: #000;
     z-index: 1
 }
 
-.LeadButtonSlide_wrapperLeadButton__gyTxQ .LeadButtonSlide_buttonDefault__iE9j1, .LeadButtonSlide_wrapperLeadButton__gyTxQ .LeadButtonSlide_buttonInsertAd__vX15_ {
+.lead-button-slide-wrapper .lead-button-default, .lead-button-slide-wrapper .lead-button-slide-insert-ad {
     background-color: #fff;
     border-radius: 25px;
     padding: 10px 20px;
@@ -332,20 +332,20 @@ $color_2: #000;
     z-index: 9999
 }
 
-.LeadButtonSlide_wrapperLeadButton__gyTxQ .LeadButtonSlide_buttonDefault__iE9j1 img, .LeadButtonSlide_wrapperLeadButton__gyTxQ .LeadButtonSlide_buttonInsertAd__vX15_ img {
+.lead-button-slide-wrapper .lead-button-default img, .lead-button-slide-wrapper .lead-button-slide-insert-ad img {
     height: 25px;
     margin: 0 5px
 }
 
-.LeadButtonSlide_wrapperLeadButton__gyTxQ .LeadButtonSlide_buttonDefaultPhone__FUOYD {
+.lead-button-slide-wrapper .lead-button-slide-default-phone {
     cursor: pointer
 }
 
-.LeadButtonSlide_wrapperLeadButton__gyTxQ .LeadButtonSlide_buttonDefaultPhone__FUOYD:hover {
+.lead-button-slide-wrapper .lead-button-slide-default-phone:hover {
     color: #33a637
 }
 
-.LeadButtonSlide_wrapperLeadButton__gyTxQ .LeadButtonSlide_buttonInsertAd__vX15_ {
+.lead-button-slide-wrapper .lead-button-slide-insert-ad {
     background-color: #fe9900;
     color: #fff;
     z-index: 999999;
