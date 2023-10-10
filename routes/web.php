@@ -33,7 +33,7 @@ Route::resource('user', UserController::class);
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 Route::post('/user/update-simple/{username}.htm', [UserController::class, 'updateSimple'])->name('userUpdateSimple');
 
-Route::resource('post', PostController::class);
+Route::get('/post/crawl', [PostController::class, 'crawl'])->name('postCrawl');
 Route::get('/post/me', [PostController::class, 'me'])->name('myPost');
 Route::get('/post/edit/{slug}.htm', [PostController::class, 'edit'])->name('postEdit');
 Route::post('/post/edit/{slug}.htm', [PostController::class, 'update'])->name('postUpdate');
@@ -42,7 +42,7 @@ Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
 Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');
 Route::get('/xem-tin-{catSlug?}/{slug}.htm', [PostController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
-
+Route::resource('post', PostController::class);
 
 //Route::resource('news', NewsController::class);
 //Route::get('/post/edit/{slug}.htm', [NewsController::class, 'edit'])->name('postEdit');

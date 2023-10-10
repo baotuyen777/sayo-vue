@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fe;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    function __construct(private readonly PostService $postsService)
+    function __construct(private readonly PostService $postsService, private readonly PostCrawlService $postCrawlService)
     {
     }
 
@@ -172,4 +173,10 @@ class PostController extends Controller
         return response()->json(['status' => true, 'result' => $obj]);
     }
 
+    public function crawl(Request $request)
+    {
+        $url = $request->input('url') ?? 'https://rongbay.com/Ha-Noi/Nha-rieng-nguyen-can-Cho-thue-nha-c272-t786-trang1.html?ft=1&md=';
+        $isSingle = $request->input('is_single') ?? false;
+        $this->postCrawlService->crawl($url, $isSingle);
+    }
 }
