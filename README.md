@@ -1,4 +1,5 @@
 ## Setup
+- **install laragon, using php 8.1** 
 - **Pull code, create .env file from .env_sample**
 - **Run command line** ```composer install, npm install```
 - **Start backend** ```php artisan serve```
