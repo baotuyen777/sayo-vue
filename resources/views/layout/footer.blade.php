@@ -31,5 +31,6 @@
 
     gtag('config', 'G-XRDH5DCMQM');
 </script>
+@stack('js')
 </body>
 </html>

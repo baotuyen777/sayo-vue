@@ -26,6 +26,7 @@
     <script>
         var state = {};
     </script>
+    @stack('css')
 
 </head>
 <body>
