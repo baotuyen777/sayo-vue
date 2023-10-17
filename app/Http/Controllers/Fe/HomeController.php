@@ -16,7 +16,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Category::with('avatar')->get();
+        $categories = getCategories();// Category::with('avatar')->get() ;
 
         $posts = Post::with('avatar')->with('category')->paginate(24);
 

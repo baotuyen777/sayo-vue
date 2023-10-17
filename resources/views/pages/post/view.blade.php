@@ -43,17 +43,17 @@
                             @endif
 
 
-                            <div class="align-center">
-                                <div class=ad-media-param>
-                                    <div class="media-left media-top"><img class="ad-param-icon"
-                                                                           alt="Chất liệu"
-                                                                           src="https://static.chotot.com/storage/icons/logos/ad-param/property_legal_document.png">
-                                    </div>
-                                    <div class="media-body media-middle"><span><span>Giấy tờ pháp lý: </span><span
-                                                itemprop="product_material"
-                                                class="ad-param-value">Đã có sổ</span></span></div>
-                                </div>
-                            </div>
+{{--                            <div class="align-center">--}}
+{{--                                <div class=ad-media-param>--}}
+{{--                                    <div class="media-left media-top"><img class="ad-param-icon"--}}
+{{--                                                                           alt="Chất liệu"--}}
+{{--                                                                           src="https://static.chotot.com/storage/icons/logos/ad-param/property_legal_document.png">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="media-body media-middle"><span><span>Giấy tờ pháp lý: </span><span--}}
+{{--                                                itemprop="product_material"--}}
+{{--                                                class="ad-param-value">Đã có sổ</span></span></div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </section>
                         <section class="align-center">
                             <i class="location"></i><strong>Khu Vực:</strong>

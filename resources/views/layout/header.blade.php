@@ -60,7 +60,7 @@
         <div class=" ">
             <ul class="nav">
                 <li class="active">
-                    <a href="#"> DANH MỤC</a>
+                    <a href="{{route('archive')}}"> DANH MỤC</a>
                     <ul class="sub-menu">
                         @foreach(getCategories() as $code=>$name)
                             <li><a href="{{route('archive',['catCode'=>$code])}}">{{$name}}</a></li>

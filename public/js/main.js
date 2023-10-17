@@ -127,7 +127,7 @@ $('.btn-ajax').click(function () {
         data,
         dataType: 'json',
         success: function (response) {
-            if(response.status){
+            if (response.status) {
                 window.location.reload()
             }
         },
@@ -150,7 +150,7 @@ jQuery('.dropdown__button').blur(function () {
     // jQuery(this).parent().find('.dropdown__content').removeClass('show')
 })
 
-$('.clear').click(function(){
+$('.clear').click(function () {
     $(this).parents('.dropdown').find('input').val('');
     $(this).parents('form').submit();
 })
@@ -164,6 +164,9 @@ $('.clear').click(function(){
 
 $('a, .btn-submit').click(function (e) {
     $('.loader').show();
+    setTimeout(function(){
+        $('.loader').hide()
+    }, 3000)
 })
 
 
