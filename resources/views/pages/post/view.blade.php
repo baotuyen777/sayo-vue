@@ -1,7 +1,10 @@
 @extends('layout.index')
+@php
+    $location = array_filter([$obj->ward->name?? null ,$obj->district->name ?? null ,$obj->province->name?? null]);
 
+@endphp
 @section('content')
-    <main>
+    <main class="post-detail">
         <div class="container">
             <div class="ct-detail adview">
 
@@ -18,7 +21,7 @@
                                     <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like"></button>
                             </div>
 
-                            <p class="ad-body" itemprop="description">{{$obj['content']}}</p>
+                            <div class="post-detail__content" itemprop="description">{!! $obj['content'] !!}</div>
                         </div>
 
                         <p class="">
@@ -41,23 +44,10 @@
 
                                 @endforeach
                             @endif
-
-
-{{--                            <div class="align-center">--}}
-{{--                                <div class=ad-media-param>--}}
-{{--                                    <div class="media-left media-top"><img class="ad-param-icon"--}}
-{{--                                                                           alt="Chất liệu"--}}
-{{--                                                                           src="https://static.chotot.com/storage/icons/logos/ad-param/property_legal_document.png">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="media-body media-middle"><span><span>Giấy tờ pháp lý: </span><span--}}
-{{--                                                itemprop="product_material"--}}
-{{--                                                class="ad-param-value">Đã có sổ</span></span></div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                         </section>
                         <section class="align-center">
                             <i class="location"></i><strong>Khu Vực:</strong>
-                            <span>{{$obj->ward->name ?? ''}}, {{$obj->district->name ?? ''}}, {{$obj->province->name?? ''}}</span>
+                            <span>{{$location ? implode(', ',$location) : ''}}</span>
                         </section>
 
 

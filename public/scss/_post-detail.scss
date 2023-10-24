@@ -858,13 +858,13 @@ $color_2: #000;
 //    color: #33659c
 //}
 
-.SellerProfile_profileWrapper__ubLwW {
+.seller-profile {
     margin-bottom: 10px;
     padding: 10px 0;
     //border-top: 1px solid #e5e5e5
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_secondaryButton__qJNPr {
+.seller-profile .SellerProfile_secondaryButton__qJNPr {
     cursor: pointer;
     text-align: center;
     transition: background-color .2s ease-in-out;
@@ -877,51 +877,51 @@ $color_2: #000;
     height: fit-content
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_secondaryButton__qJNPr:active, .SellerProfile_profileWrapper__ubLwW .SellerProfile_secondaryButton__qJNPr:focus {
+.seller-profile .SellerProfile_secondaryButton__qJNPr:active, .seller-profile .SellerProfile_secondaryButton__qJNPr:focus {
     outline: 0;
     box-shadow: none
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_secondaryButton__qJNPr {
+.seller-profile .SellerProfile_secondaryButton__qJNPr {
     background-color: #fff;
     color: #fe9900;
     border: 1px solid #fe9900
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_secondaryButton__qJNPr:hover {
+.seller-profile .SellerProfile_secondaryButton__qJNPr:hover {
     background-color: #e2e6ea
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_inforItem__B3Pzq {
+.seller-profile .SellerProfile_inforItem__B3Pzq {
     flex: 1 1
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_inforItem__B3Pzq:focus p, .SellerProfile_profileWrapper__ubLwW .SellerProfile_inforItem__B3Pzq:focus span, .SellerProfile_profileWrapper__ubLwW .SellerProfile_inforItem__B3Pzq:hover p, .SellerProfile_profileWrapper__ubLwW .SellerProfile_inforItem__B3Pzq:hover span {
+.seller-profile .SellerProfile_inforItem__B3Pzq:focus p, .seller-profile .SellerProfile_inforItem__B3Pzq:focus span, .seller-profile .SellerProfile_inforItem__B3Pzq:hover p, .seller-profile .SellerProfile_inforItem__B3Pzq:hover span {
     outline: 0;
     text-decoration: none
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_inforItem__B3Pzq > p {
+.seller-profile .SellerProfile_inforItem__B3Pzq > p {
     font-size: 12px;
     color: #9b9b9b;
     margin-bottom: 5px
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_inforItem__B3Pzq > span {
+.seller-profile .SellerProfile_inforItem__B3Pzq > span {
     color: #222;
     font-weight: 600
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_inforItem__B3Pzq img {
+.seller-profile .SellerProfile_inforItem__B3Pzq img {
     margin-right: 0 !important
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_inforItem__B3Pzq .SellerProfile_inforValue__hK4rb {
+.seller-profile .SellerProfile_inforItem__B3Pzq .SellerProfile_inforValue__hK4rb {
     color: #222;
     font-weight: 600
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_inforWrapper__KXg71 {
+.seller-profile .SellerProfile_inforWrapper__KXg71 {
     display: flex;
     justify-content: space-around;
     padding-top: 10px;
@@ -931,29 +931,29 @@ $color_2: #000;
     color: #9b9b9b
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_inforWrapper__KXg71 > a {
+.seller-profile .SellerProfile_inforWrapper__KXg71 > a {
     flex: 1 1;
     color: #9b9b9b
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_inforWrapper__KXg71 > a :hover {
+.seller-profile .SellerProfile_inforWrapper__KXg71 > a :hover {
     color: transparent;
     text-decoration: none;
     text-decoration: initial
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_nameBounder__btDeS {
+.seller-profile .SellerProfile_nameBounder__btDeS {
     flex: 1 1;
     padding-left: 8px;
     width: 100%;
     max-width: calc(100% - 50px)
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_flexDiv__IEgQl {
+.seller-profile .SellerProfile_flexDiv__IEgQl {
     display: flex
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_nameDiv__sjPxP {
+.seller-profile .SellerProfile_nameDiv__sjPxP {
     margin: 5px 5px 3px 0;
     font-size: 13px;
     flex: 1 1;
@@ -965,24 +965,24 @@ $color_2: #000;
     -webkit-line-clamp: 2
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_statusOnlineDiv__iiwUQ {
+.seller-profile .SellerProfile_statusOnlineDiv__iiwUQ {
     font-size: 11px;
     color: #9b9b9b;
     display: flex
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
+.seller-profile .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
     font-size: 30px;
     color: #589f39;
     line-height: 21px;
     margin-right: 5px
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
+.seller-profile .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
     color: #9b9b9b
 }
 
-.SellerProfile_profileWrapper__ubLwW .SellerProfile_seperateLine__H_bJa {
+.seller-profile .SellerProfile_seperateLine__H_bJa {
     border-left: 1px solid #cacaca;
     height: 20px;
     width: 1px
@@ -1009,7 +1009,7 @@ $color_2: #000;
 //    }
 //}
 
-.SellerProfile_offlineBullet__by5mZ, .SellerProfile_profileWrapper__ubLwW .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
+.SellerProfile_offlineBullet__by5mZ, .seller-profile .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
     font-size: 30px;
     color: #589f39;
     line-height: 16px;

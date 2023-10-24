@@ -2,8 +2,12 @@
 
 namespace App\Services\Post;
 
+use App\Models\Files;
 use App\Models\News;
+use App\Models\Post;
 use Carbon\Carbon;
+use Faker\Core\File;
+use Illuminate\Support\Facades\DB;
 
 class PostCrawlService
 {
@@ -16,69 +20,43 @@ class PostCrawlService
         $this->init();
         $this->html = file_get_html($url, null, $this->context);
         $this->removeNode(['.NaviPage', '.des_bottom']);
-//        $this->saveImage($html);
 
         if ($isSingle) {
-            $this->crawlPost($url);
+//            $img
+//            $this->saveImage($,$dir);
+//            $this->crawlPost($url);
             return;
         }
 
-//        $tags = $html->find('.large-columns-1', 0)->find('.post-item');
-        $this->html  = $this->html->find('.list_content_bds',0);
+        $this->html = $this->html->find('.list_content_bds', 0);
 
         $posts = $this->html->find('.subCateBDS ');
 
-//        echo ($this->html[0]);
-        foreach ($posts as $post) {
+        foreach ($posts as $i => $post) {
+            $img = $post->find('img', 0);
+            $imageSrc = $img->src;
+            if (strpos($imageSrc, 'no_images')) {
+                continue;
+            }
+
+            $month = date('Y-m');
+            $dir = "{$month}/bds";
+            $file = $this->saveImage($imageSrc, $dir);
+
+            if (!$file) {
+                continue;
+            }
+
+            $avatarLink = asset("storage/{$file['url']}");
+
+            $a = $post->find('.ad_item_id', 0);
+            echo $i . '. ' . $avatarLink;
+            $this->crawlPost($a->href, $file);
             echo '<hr/>';
-            $avatarLink = $this->getAvatar($post);
-            $a = $tag->find('a', 0);
-            $this->crawlPost($a->href, $avatarLink);
+            if ($i > 1) {
+                break;
+            }
         }
-
-
-    }
-
-    public function crawlPost($url, $avatarLink = '')
-    {
-        $html = file_get_html($url, null, $this->context);
-        $this->removeUnuse($html);
-        $this->replaceLayzySrc($html);
-
-        $this->saveImage($html);
-
-        $content = $html->find('.single-page');
-
-
-        $pattern = '/(https:\/\/badova\.net\/[^ ]+\/\d{4}\/\d{2}\/)([^ ]+\.(jpg|png|webp|jpeg))/';
-
-        $replacement = asset('storage/uploads/hotgirl/$2');
-
-        $content = preg_replace($pattern, $replacement, $content);
-
-        $content = str_replace('badova.net', 'sayo.vn', $content);
-        $content = str_replace('Badova', 'Sayo', $content);
-
-
-        $param = [
-            'name' => $this->getTitle($html),
-            'code' => str_replace(['https://badova.net/', '/'], '', $url),
-            'content' => $content[0],
-            'category_id' => 1,
-            'avatar_link' => $avatarLink,
-            'author_id' => 1,
-            'created_at' => Carbon::now()
-        ];
-
-        $obj = News::where('code', $param['code'])->first();
-        echo $param['name'];
-        if (!$obj) {
-            News::create($param);
-            echo ' -------->insert success';
-        } else {
-            echo ' -------->abort';
-        }
-
     }
 
     public function init()
@@ -90,33 +68,96 @@ class PostCrawlService
     {
         foreach ($selectors as $selector) {
             $divToRemove = $this->html->find($selector, 0);
-            if ($divToRemove ) {
+            if ($divToRemove) {
                 $divToRemove->remove();
             }
         }
-
-//        $this->html->save();
     }
 
-//    public function removeNode($selector)
-//    {
-//        foreach ($this->find($selector) as $node) {
-//            $node->outertext = '';
-//        }
-//
-//        $this->load($this->save());
-//    }
-
-    function getAvatar($html)
+    function saveImage($imageSrc, $dir = 'crawl')
     {
-//        $html = str_get_html($content);
-        $img = $html->find('img', 0);
-        $link = $img->src;
-//https://rongbaybizfly.mediacdn.vn//thumb_w/180/rb_up_new/2023/10/08/1804018/rongbay-4197e6ca46fb92a5cbea-pzdlvo-20231008142212.jpg
-        $pattern = '/(https:\/\/badova\.net\/[^ ]+\/\d{4}\/\d{2}\/)([^ ]+\.jpg)/';
+        $storagePath = storage_path("app/public/uploads/$dir/");
+        if (!is_dir($storagePath)) {
+            mkdir($storagePath, 0775, true);
+        }
 
-        $replacement = asset('storage/uploads/bds/$2');
+        if (strpos($imageSrc, 'no_images')) {
+            return '';
+        }
 
-        return preg_replace($pattern, $replacement, $link);
+        $path = parse_url($imageSrc, PHP_URL_PATH);
+        $filename = basename($path);
+
+        $param = ['name' => $filename, 'url' => "uploads/$dir/$filename"];
+        $fullPath = $storagePath . $filename;
+        if (strpos($filename, '.') && !file_exists($fullPath)) {
+            $imageData = curlGetContents($imageSrc);
+            if ($imageData) {
+                file_put_contents($fullPath, $imageData);
+                $file = Files::create($param);
+                return $file;
+            }
+        }
+
+        return Files::where('name', $filename)->first();
+    }
+
+    function saveGallery($post, $html)
+    {
+        $gallery = $html->find('.zoom-gallery', 0);
+        $imgs = $gallery->find('a');
+
+        $month = date('Y-m');
+        $dir = "{$month}/bds";
+        $fileIds = [];
+        foreach ($imgs as $img) {
+            $file = $this->saveImage($img->href, $dir);
+            $fileIds[] = $file->id;
+        }
+
+        if ($post && $fileIds) {
+            $post->files()->sync($fileIds);
+        }
+    }
+
+    public function crawlPost($url, $avatar)
+    {
+        $html = file_get_html($url, null, $this->context);
+
+        $html = $html->find('.detail_popup', 0);
+        $content = $html->find('.box_infor_ct', 0);
+        $description = $html->find('.info_text', 0);
+
+        $title = $this->getTitle($html);
+        $param = [
+            'name' => $title,
+            'code' => vn2code($title) . '-' . time(),
+            'content' => $content . $description,
+            'category_id' => 1,
+            'avatar_id' => $avatar->id,
+            'author_id' => 1,
+            'created_at' => Carbon::now(),
+            'source' => $url,
+//            'price' => 100000,
+//            'province_id' => 1,
+        ];
+
+        $obj = Post::where('source', $url)->first();
+        echo $param['name'];
+        if (!$obj) {
+            $obj = Post::create($param);
+            echo '<span style="color: green"> -------->insert success</span>';
+            $this->saveGallery($obj, $html);
+
+        } else {
+            echo '<span style="color: red"> -------->abort</span>';
+        }
+
+    }
+
+    function getTitle($html)
+    {
+        $tag = $html->find('h1', 0);
+        return str_replace(['&#8220;', '&#8221;'], '"', $tag->plaintext ?? '');
     }
 }
