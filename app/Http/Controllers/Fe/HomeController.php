@@ -18,7 +18,7 @@ class HomeController extends Controller
     {
         $categories = getCategories();// Category::with('avatar')->get() ;
 
-        $posts = Post::with('avatar')->with('category')->paginate(24);
+        $posts = Post::where('status', '=', 2)->with('avatar')->with('category')->orderBy('created_at', 'desc')->paginate(24);
 
         return view('pages/home', ['categories' => $categories, 'posts' => $posts]);
     }

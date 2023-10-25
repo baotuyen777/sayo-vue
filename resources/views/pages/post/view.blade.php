@@ -1,7 +1,9 @@
 @extends('layout.index')
 @php
     $location = array_filter([$obj->ward->name?? null ,$obj->district->name ?? null ,$obj->province->name?? null]);
-
+if($obj->address){
+    array_unshift($location,$obj->address);
+}
 @endphp
 @section('content')
     <main class="post-detail">

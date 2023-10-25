@@ -34,7 +34,7 @@ class Post extends Model
     ];
     public static array $attr = [
         'garret' => ['label' => 'Gác xép', 'type' => 'boolean'],
-        'acreage' => ['label' => 'Diện tích', 'type' => 's'],
+        'acreage' => ['label' => 'Diện tích', 'type' => 'square'],
         'deposit' => ['label' => 'Đặt cọc', 'type' => 'money'],
         'furniture' => [
             'label' => 'Nội thất ',
