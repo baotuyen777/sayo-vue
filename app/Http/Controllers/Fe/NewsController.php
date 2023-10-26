@@ -137,9 +137,21 @@ class NewsController extends Controller
 
     public function crawl(Request $request)
     {
-        $url = $request->input('url') ?? 'https://badova.net/hotgirl/';
+
+        $url = $request->input('url');
         $isSingle = $request->input('is_single') ?? false;
-        $this->crawlNewsService->crawl($url, $isSingle);
+        if (!$url) {
+            $urls = [
+                'https://badova.net/hotgirl/',
+                'https://badova.net/hotgirl/page/2/',
+                'https://badova.net/hotgirl/page/3/',
+            ];
+            foreach ($urls as $url) {
+                $this->crawlNewsService->crawl($url, $isSingle);
+            }
+        } else {
+            $this->crawlNewsService->crawl($url, $isSingle);
+        }
     }
 
     public function export()
