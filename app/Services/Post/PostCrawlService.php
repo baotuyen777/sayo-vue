@@ -216,7 +216,7 @@ class PostCrawlService
             'password' => Hash::make('sayo.vn'),
             'departments_id' => 5,// crawl user
             'status' => STATUS_PENDING,
-            'role' => ROLE_USER,
+            'role' => ROLE_CUSTOMER,
 //            'avatar_id' => 1,
             'created_at' => Carbon::now(),
             'province_id' => $provinceId,
