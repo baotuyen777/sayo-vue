@@ -3,15 +3,12 @@
 namespace App\Services\Post;
 
 use App\Models\Files;
-use App\Models\News;
 use App\Models\Pdw\District;
 use App\Models\Pdw\Province;
 use App\Models\Pdw\Ward;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
-use Faker\Core\File;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class PostCrawlService
@@ -24,29 +21,11 @@ class PostCrawlService
     public $districts = [];
     public $wards = [];
 
-    public function crawl($url, $isSingle = false)
+    public function crawl($url)
     {
-        $this->init();
-        $this->html = file_get_html($url, null, $this->context);
-        $this->removeNode(['.NaviPage', '.des_bottom']);
-
-//        if ($isSingle) {
-////            $img
-////            $this->saveImage($,$dir);
-////            $this->crawlPost($url);
-//            return;
-//        }
-
-        $this->html = $this->html->find('.list_content_bds', 0);
+        $this->init($url);
 
         $posts = $this->html->find('.subCateBDS ');
-//        $this->provinces = Province::all();
-
-        $this->provinces = Province::get()->keyBy('id');
-        $this->districts = District::get()->keyBy('id');
-        $this->wards = Ward::get()->keyBy('id');
-
-
         foreach ($posts as $i => $post) {
             $img = $post->find('img', 0);
             $imageSrc = $img->src;
@@ -81,9 +60,17 @@ class PostCrawlService
         });
     }
 
-    public function init()
+    public function init($url)
     {
         $this->context = stream_context_create(array("http" => array("header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36")));
+        $this->html = file_get_html($url, null, $this->context);
+        $this->removeNode(['.NaviPage', '.des_bottom']);
+
+        $this->html = $this->html->find('.list_content_bds', 0);
+
+        $this->provinces = Province::get()->keyBy('id');
+        $this->districts = District::get()->keyBy('id');
+        $this->wards = Ward::get()->keyBy('id');
     }
 
     function removeNode($selectors)

@@ -63,7 +63,7 @@
 
 
                     <div class="d-flex justify-content-center gap-10">
-                        <a class="btn btn-back" href="{{route('myPost')}}">Về danh sách</a>
+                        <a class="btn btn-back" href="{{route('post.index')}}">Về danh sách</a>
                         <button class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk btn-submit">
                             {{isset($obj['id']) ? 'Lưu thay đổi' : 'ĐĂNG TIN' }}
                         </button>

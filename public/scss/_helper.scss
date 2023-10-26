@@ -164,7 +164,7 @@
     flex-wrap: wrap;
 }
 
-.grid-2 > div {
+.grid-2 > * {
     flex: 1 0 calc(50% - 20px);
 
     //&:nth-child(even) {
@@ -174,21 +174,21 @@
     //padding: 10px;
 }
 
-.grid-3 > div {
+.grid-3 > * {
     flex: 1 0 calc(33% - 20px);
     padding: 10px;
 }
-.grid-4 > div {
+.grid-4 > * {
     flex: 1 0 calc(25% - 20px);
     padding: 10px;
 }
 
-.grid-5 > div {
+.grid-5 > * {
     flex: 0 0 calc(20% - 20px);
     padding: 10px;
 }
 
-.grid-6 > div {
+.grid-6 > * {
     flex: 0 0 calc(18.667% - 20px);
     padding: 10px;
 }

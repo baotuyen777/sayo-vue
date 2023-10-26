@@ -4,6 +4,10 @@ const STATUS_PENDING = 1;
 const  STATUS_ACTIVE = 2;
 const STATUS_DEACTIVATE = 3;
 
+const STATE_NEW = 1;
+const  STATE_UNDER_WARRANTY = 2;
+const STATE_OUT_OF_WARRANTY = 3;
+
 const ROLE_ADMIN = 1;
 const ROLE_STAFF = 2;
 const ROLE_CUSTOMER = 3;

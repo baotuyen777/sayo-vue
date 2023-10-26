@@ -46,10 +46,13 @@
             <div class="container ">
                 <div class="card">
                     <h2>Các từ khóa phổ biến</h2>
-                    <ul>
-                        <li><a href="#">Thanh lý quạt cũ</a></li>
-                        <li><a href="#">Thanh lý đèn led</a></li>
-                        <li><a href="#">Thanh lý nồi cơm điện</a></li>
+                    <ul class="grid-3 gap-10">
+                        <li><a href="#">Phòng trọ có gác xép</a></li>
+                        <li><a href="#">Phòng trọ dưới 3 triệu</a></li>
+                        <li><a href="#">Phòng trọ full đồ</a></li>
+                        <li><a href="#">Chung cư mini mỹ đình</a></li>
+                        <li><a href="#">Chung cư mini thanh xuân</a></li>
+                        <li><a href="#">mặt tiền kinh doanh</a></li>
                     </ul>
                 </div>
 

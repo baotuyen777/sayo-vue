@@ -6,11 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Pdws;
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Pdw\Province;
-use App\Models\Pdw\District;
-use App\Models\Pdw\Ward;
+
 
 class HomeController extends Controller
 {

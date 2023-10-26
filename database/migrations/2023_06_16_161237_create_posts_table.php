@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->string('name');
             $table->string('code')->unique();
             $table->text('content')->nullable();
-            $table->tinyInteger('state')->default(1)->comment('1: hang moi, 2: cu con bao hanh, 3: cu het bao hanh ');
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('state')->default(STATE_NEW)->comment('1: hang moi, 2: cu con bao hanh, 3: cu het bao hanh ');
+            $table->tinyInteger('status')->default(STATUS_PENDING);
             $table->bigInteger('price')->default(0)->nullable();
             $table->string('address')->nullable();
 

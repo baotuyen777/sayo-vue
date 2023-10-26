@@ -16,9 +16,9 @@
                 </section>
 
                 <section>
-                    <h5>Địa chỉ</h5>
+                    <h5>Địa chỉ   <a href="{{route('profile')}}">Cài đặt địa chỉ</a></h5>
                     {{--                    @include('component.form.select',['name'=> 'category_id', 'label' => 'Địa chỉ','options' => $address])--}}
-                    <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
+
                     @include('component.form.input',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)'])
                 </section>
                 <section>
