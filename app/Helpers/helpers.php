@@ -83,7 +83,7 @@ function vn2str($str)
 function vn2code($str)
 {
     $str = vn2str($str);
-    $str = str_replace(['-', ',', '.'], '', $str);
+    $str = str_replace(['-', ',', '.','/',':'], '', $str);
     $str = str_replace([' '], '-', $str);
     $str = str_replace(['--'], '-', $str);
     return strtolower($str);

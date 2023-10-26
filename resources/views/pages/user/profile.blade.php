@@ -17,7 +17,14 @@
 
                 <section>
                     <h5>Địa chỉ   <a href="{{route('profile')}}">Cài đặt địa chỉ</a></h5>
-                    {{--                    @include('component.form.select',['name'=> 'category_id', 'label' => 'Địa chỉ','options' => $address])--}}
+                    <div class="grid-3 gap-10">
+                        @include('component.form.selectAsync',['name'=> 'province_id', 'label' => 'Tỉnh/thành phố', 'options' => $provinces,
+'asyncUrl' =>route('getDistricts'), 'asyncField' =>'district_id', 'valueLabel'=>$obj['province_name'] ?? ''])
+                        @include('component.form.selectAsync',['name'=> 'district_id', 'label' => 'Quận/Huyện', 'options' => $districts,
+'asyncUrl' =>route('getWards'), 'asyncField' =>'ward_id','valueLabel'=>$obj['district_name'] ?? ''])
+                        @include('component.form.selectAsync',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards, 'valueLabel'=>$obj['ward_name']?? ''])
+                    </div>
+
 
                     @include('component.form.input',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)'])
                 </section>

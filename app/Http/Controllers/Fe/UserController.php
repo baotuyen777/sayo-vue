@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fe;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\Post\PostService;
+use App\Services\Post\UserService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function __construct(private User $userModel, private PostService $postService)
+    public function __construct(
+        private User        $userModel,
+        private PostService $postService,
+        private UserService $userService
+    )
     {
     }
 
@@ -57,11 +62,15 @@ class UserController extends Controller
 
     public function profile()
     {
-        $attrs = $this->userModel->getAttOptions();
+        $attrs = $this->userService->getAttrOptions();
         $userId = Auth::user()->id;
         $user = User::with('avatar')->with('province')
             ->with('district')
             ->with('ward')->find($userId);
+
+//        $user['province_name'] = $attrs['provinces']->get($user->province_id)->name ?? '';
+//        $user['district_name'] = $attrs['districts']->get($user->district_id)->name ?? '';
+//        $user['ward_name'] = $attrs['wards']->get($user->ward_id)->name ?? '';
 
         $attrs['obj'] = $user;
         $attrs['user'] = $user;
@@ -86,7 +95,8 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        if (!Auth::user() || Auth::user()->role > 1) {
+
+        if (!Auth::user() || (Auth::user()->role > ROLE_ADMIN && Auth::user()->id != $id)) {
             return view('pages/404');
         }
 

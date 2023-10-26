@@ -16,7 +16,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public array $gender = [0 => 'Nữ', 1 => 'Nam'];
+    public static array $gender = [0 => 'Nữ', 1 => 'Nam'];
 
 //    protected $guarded =[];
     /**
@@ -78,27 +78,27 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Ward::class);
     }
-    public function getAttOptions(): array
-    {
-//        $categories = Category::with('avatar')->get();
-//        $address = [
-//            ['id' => 1, 'name' => 'Phường Thanh Xuân Bắc, Quận Thanh Xuân, Hà Nội'],
-//            ['id' => 2, 'name' => 'Phường Thanh Xuân Trung, Quận Thanh Xuân, Hà Nội'],
-//        ];
-//        $provinces = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 1)->get();
-//        $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
-//        $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
+//    public function getAttOptions(): array
+//    {
+////        $categories = Category::with('avatar')->get();
+////        $address = [
+////            ['id' => 1, 'name' => 'Phường Thanh Xuân Bắc, Quận Thanh Xuân, Hà Nội'],
+////            ['id' => 2, 'name' => 'Phường Thanh Xuân Trung, Quận Thanh Xuân, Hà Nội'],
+////        ];
+////        $provinces = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 1)->get();
+////        $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
+////        $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
+////
+////        $postStates = Posts::$states;
+////
+////        $brands = ['Samsung', 'Apple'];
+////        $colors = ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác'];
+////        $storages = ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G'];
+////        $madeIns = ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác'];
+//        $genders = $this->gender;
 //
-//        $postStates = Posts::$states;
 //
-//        $brands = ['Samsung', 'Apple'];
-//        $colors = ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác'];
-//        $storages = ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G'];
-//        $madeIns = ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác'];
-        $genders = $this->gender;
-
-
-        return get_defined_vars();
-    }
+//        return get_defined_vars();
+//    }
 
 }

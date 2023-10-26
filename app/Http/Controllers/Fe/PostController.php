@@ -30,6 +30,7 @@ class PostController extends Controller
         }
 
         $request->merge($extraParam);
+//        ->where('status',STATUS_ACTIVE)
 
         $res = $this->postsService->getAll($request);
 
@@ -38,8 +39,13 @@ class PostController extends Controller
 
     public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
-        $extraParam = ['catCode' => $catCode, 'provinceCode' => $provinceCode, 'districtCode' => $districtCode, 'wardCode' => $wardCode];
-
+        $extraParam = [
+            'catCode' => $catCode,
+            'provinceCode' => $provinceCode,
+            'districtCode' => $districtCode,
+            'wardCode' => $wardCode,
+            'status' => STATUS_ACTIVE
+        ];
         $request->merge($extraParam);
         $res = $this->postsService->getAll($request);
         $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');

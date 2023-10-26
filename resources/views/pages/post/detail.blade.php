@@ -35,9 +35,6 @@
                             @include('component.form.selectAsync',['name'=> 'district_id', 'label' => 'Quận/Huyện', 'options' => $districts,
 'asyncUrl' =>route('getWards'), 'asyncField' =>'ward_id','valueLabel'=>$obj['district_name'] ?? ''])
                             @include('component.form.selectAsync',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards, 'valueLabel'=>$obj['ward_name']?? ''])
-                            {{--                            @include('component.form.select',['name'=> 'province_id', 'label' => 'Tỉnh/thành phố', 'options' => $provinces])--}}
-                            {{--                            @include('component.form.select',['name'=> 'district_id', 'label' => 'Huyện', 'options' => $districts])--}}
-                            {{--                            @include('component.form.select',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards])--}}
                         </div>
 
                         <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
@@ -63,7 +60,8 @@
 
 
                     <div class="d-flex justify-content-center gap-10">
-                        <a class="btn btn-back" href="{{route('post.index')}}">Về danh sách</a>
+                        <a class="btn btn-back" href="{{route('user.show',['user'=>Auth()->user()->username])}}">
+                            Về danh sách</a>
                         <button class="aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk btn-submit">
                             {{isset($obj['id']) ? 'Lưu thay đổi' : 'ĐĂNG TIN' }}
                         </button>

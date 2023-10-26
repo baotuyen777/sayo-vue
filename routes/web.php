@@ -34,7 +34,7 @@ Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 Route::post('/user/update-simple/{username}.htm', [UserController::class, 'updateSimple'])->name('userUpdateSimple');
 
 Route::get('/post/crawl', [PostController::class, 'crawl'])->name('postCrawl');
-Route::get('/post/me', [PostController::class, 'me'])->name('myPost');
+//Route::get('/post/me', [PostController::class, 'me'])->name('myPost');
 Route::get('/post/edit/{slug}.htm', [PostController::class, 'edit'])->name('postEdit');
 Route::post('/post/edit/{slug}.htm', [PostController::class, 'update'])->name('postUpdate');
 Route::post('/post/update-simple/{slug}.htm', [PostController::class, 'updateSimple'])->name('postUpdateSimple');
