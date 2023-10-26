@@ -22,6 +22,7 @@ return new class extends Migration {
 
             $table->json('attr')->nullable();
             $table->string('source')->nullable();
+            $table->string('sell_type')->default(POST_TYPE_PROFESSIONAL);
 
             $table->unsignedBigInteger('province_id')->nullable();
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
@@ -53,12 +54,12 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-             $table->dropForeign(['ward_id']);
-             $table->dropForeign(['district_id']);
-             $table->dropForeign(['province_id']);
-             $table->dropForeign(['avatar_id']);
-             $table->dropForeign(['category_id']);
-             $table->dropForeign(['author_id']);
+            $table->dropForeign(['ward_id']);
+            $table->dropForeign(['district_id']);
+            $table->dropForeign(['province_id']);
+            $table->dropForeign(['avatar_id']);
+            $table->dropForeign(['category_id']);
+            $table->dropForeign(['author_id']);
         });
         Schema::dropIfExists('posts');
     }

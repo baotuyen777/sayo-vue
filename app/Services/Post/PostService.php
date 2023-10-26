@@ -75,7 +75,7 @@ class PostService
         ];
 
 
-        $posts = Post::select('*')->with('avatar')->with('files')->with('category');
+        $posts = Post::select('*')->with('avatar')->with('files')->with('category')->where('status',STATUS_ACTIVE);
 
         if ($request->input('author_id')) {
             $posts->where('author_id', $request->input('author_id'));

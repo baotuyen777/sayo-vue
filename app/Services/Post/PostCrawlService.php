@@ -8,9 +8,11 @@ use App\Models\Pdw\District;
 use App\Models\Pdw\Province;
 use App\Models\Pdw\Ward;
 use App\Models\Post;
+use App\Models\User;
 use Carbon\Carbon;
 use Faker\Core\File;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class PostCrawlService
 {
@@ -106,7 +108,7 @@ class PostCrawlService
         }
 
         $path = parse_url($imageSrc, PHP_URL_PATH);
-        $filename =str_replace('rongbay','rba', basename($path));
+        $filename = str_replace('rongbay', 'rba', basename($path));
 
         $param = ['name' => $filename, 'url' => "uploads/$dir/$filename"];
         $fullPath = $storagePath . $filename;
@@ -164,6 +166,8 @@ class PostCrawlService
         $acreage = trim(strip_tags(str_replace(['m', '<sup>2</sup>'], '', ($acreage)))) ?? 0;
 
         [$provinceId, $districtId, $wardId, $address] = $this->getLocation($content);
+
+        $author = $this->getAuthor($html, [$provinceId, $districtId, $wardId, $address]);
         //TODO: save author
         $param = [
             'name' => $title,
@@ -180,7 +184,7 @@ class PostCrawlService
             'address' => $address,
             'attr' => json_encode(['acreage' => $acreage]),
             'status' => 2,
-//            'author_id' => 1,
+            'author_id' => $author->id ?? 1,
         ];
 
         $obj = Post::where('source', $url)->first();
@@ -193,6 +197,35 @@ class PostCrawlService
         } else {
             echo '<span style="color: red"> -------->abort</span>';
         }
+    }
+
+    function getAuthor($html, $location)
+    {
+        $phone = trim($html->find('.show_mobile', 0)->plaintext);
+        $name = $html->find('.name_store', 0)->plaintext;
+        $user = User::where('phone', '=', $phone)->first();
+        if ($user) {
+            return $user;
+        }
+        [$provinceId, $districtId, $wardId, $address] = $location;
+
+        $param = [
+            'name' => $name,
+            'phone' => $phone,
+            'username' => vn2code($name) . time(),
+            'password' => Hash::make('sayo.vn'),
+            'departments_id' => 5,// crawl user
+            'status' => STATUS_PENDING,
+            'role' => ROLE_USER,
+//            'avatar_id' => 1,
+            'created_at' => Carbon::now(),
+            'province_id' => $provinceId,
+            'district_id' => $districtId,
+            'ward_id' => $wardId,
+            'address' => $address,
+        ];
+        $user = User::create($param);
+        return $user;
     }
 
     function getLocation($html)

@@ -1,0 +1,12 @@
+<?php
+
+const STATUS_PENDING = 1;
+const  STATUS_ACTIVE = 2;
+const STATUS_DEACTIVATE = 3;
+
+const ROLE_ADMIN = 1;
+const ROLE_STAFF = 2;
+const ROLE_CUSTOMER = 3;
+
+const POST_TYPE_INDIVIDUAL = 1;
+const POST_TYPE_PROFESSIONAL = 2;

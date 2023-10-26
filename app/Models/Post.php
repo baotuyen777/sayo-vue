@@ -115,6 +115,12 @@ class Post extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public static function getAll()
+    {
+        $posts = Post::where('status', '=', 2)->with('avatar')->with('category')->orderBy('created_at', 'desc')->paginate(24);
+        return $posts;
+    }
+
 //    public function getAttOptions()
 //    {
 //        $categories = Category::with('avatar')->get();

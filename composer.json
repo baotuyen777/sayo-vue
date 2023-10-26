@@ -35,7 +35,8 @@
         },
         "files": [
             "app/Helpers/SimpleHtmlDom.php",
-            "app/Helpers/helpers.php"
+            "app/Helpers/helpers.php",
+            "app/Helpers/const.php"
         ]
     },
     "autoload-dev": {

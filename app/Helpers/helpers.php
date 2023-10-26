@@ -2,7 +2,6 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-
 function moneyFormat($number): string
 {
     if ($number < 1000000) {
@@ -84,7 +83,7 @@ function vn2str($str)
 function vn2code($str)
 {
     $str = vn2str($str);
-    $str = str_replace(['-',',','.'], '', $str);
+    $str = str_replace(['-', ',', '.'], '', $str);
     $str = str_replace([' '], '-', $str);
     $str = str_replace(['--'], '-', $str);
     return strtolower($str);
@@ -112,10 +111,10 @@ function getCategories()
 {
     return
         [
-            "bds" =>'Bất động sản',
+            "bds" => 'Bất động sản',
 //            "do-dien-tu"=>'Đồ điện tử',
-            "do-gia-dung"=>'Đồ gia dụng',
-            "dich-vu"=>'Dịch vụ',
+            "do-gia-dung" => 'Đồ gia dụng',
+            "dich-vu" => 'Dịch vụ',
 //            "me-va-be"=>'Mẹ và bé',
 //            "thu-cung"=>'Thú cưng',
 //            "do-an"=>'Đồ ăn',
@@ -123,7 +122,7 @@ function getCategories()
 //            "thoi-trang"=>'Thời trang',
 //            "van-phong"=>'Văn phòng',
 //            "cho-tang-mien-phi"=>'Cho tặng miễn phí',
-            "khac"=>'Khác'
+            "khac" => 'Khác'
         ];
 }
 

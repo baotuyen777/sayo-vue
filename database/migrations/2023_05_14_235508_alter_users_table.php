@@ -11,9 +11,10 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('departments_id')->nullable()->constrained('departments');
-            $table->integer('status')->default(1)->comment('1: init, 2: approved, 3: reject');
-            $table->integer('role')->default(3); // 1:admin, 2:staff, 3:customer
+//            $table->foreignId('departments_id')->nullable()->constrained('departments');
+            $table->integer('departments_id')->nullable();
+            $table->integer('status')->default(STATUS_PENDING)->comment('1: pending, 2: approved, 3: reject');
+            $table->integer('role')->default(ROLE_CUSTOMER); // 1:admin, 2:staff, 3:customer
             $table->string('phone');
             $table->text('bio')->nullable();
             $table->string('cccd')->nullable();
@@ -41,7 +42,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_departments_id_foreign');
+//            $table->dropForeign('users_departments_id_foreign');
             $table->dropForeign('users_avatar_id_foreign');
             $table->dropForeign('users_province_id_foreign');
             $table->dropForeign('users_district_id_foreign');
