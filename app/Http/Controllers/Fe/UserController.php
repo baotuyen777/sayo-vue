@@ -39,11 +39,6 @@ class UserController extends Controller
 
     public function show(Request $request, $userName)
     {
-        $userid = Auth::id();
-        if (!$userid) {
-            return redirect()->route('login');
-        }
-
         $user = User::where('username', $userName)
             ->with('province')
             ->with('district')
@@ -63,15 +58,13 @@ class UserController extends Controller
     public function profile()
     {
         $attrs = $this->userService->getAttrOptions();
-        $userId = Auth::user()->id;
+        $userId = Auth::id();
+        if (!$userId) {
+            return view('pages.auth.login');
+        }
         $user = User::with('avatar')->with('province')
             ->with('district')
             ->with('ward')->find($userId);
-
-//        $user['province_name'] = $attrs['provinces']->get($user->province_id)->name ?? '';
-//        $user['district_name'] = $attrs['districts']->get($user->district_id)->name ?? '';
-//        $user['ward_name'] = $attrs['wards']->get($user->ward_id)->name ?? '';
-
         $attrs['obj'] = $user;
         $attrs['user'] = $user;
         return view('pages/user/profile', $attrs);

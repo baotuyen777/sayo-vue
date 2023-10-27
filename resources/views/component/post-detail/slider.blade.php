@@ -7,14 +7,14 @@
 
                     </div>
                     <div class="lead-button-slide-wrapper">
-                        <a class=" lead-button-default " href="tel:123-456-7890"> <img
+                        <a class=" lead-button-default " href="tel:{{$obj->author->phone}}"> <img
                                 src="https://static.chotot.com/storage/chotot-icons/png/call-green.png"
                                 alt="call">Gọi điện</a>
-                        <a class=" lead-button-default " href="sms:+911234567890"><img
+                        <a class=" lead-button-default " href="sms:{{$obj->author->phone}}"><img
                                 src="https://static.chotot.com/storage/chotot-icons/png/sms.png"
                                 alt="sms">SMS</a>
                         <a class=" lead-button-default"
-                           href="https://chat.chotot.com/chatroom/join/MjU2ODExMjl8MTA5MDg2Njg4"
+                           href="https://zalo.me/{{$obj->author->phone}}"
                            target="_blank" rel="nofollow"><img
                                 src="https://static.chotot.com/storage/chotot-icons/png/chat.png"
                                 alt="chat">Chat</a>
@@ -37,13 +37,12 @@
                 type="button"><i></i></button>
         <button class="ad-image-button ad-image-next control_next" aria-label="Next" tabindex="0"
                 type="button"><i></i></button>
-        <ul class="slick-dots" style="display: block;">
-            <li class="slick-active">
-                <button>1</button>
-            </li>
-            <li>
-                <button>2</button>
-            </li>
+        <ul class="slick-dots">
+            @foreach($obj['files'] as $i => $img)
+                <li class="{{$i==0 ? 'slick-active' : ''}}" >
+                    <button>{{$i}}</button>
+                </li>
+            @endforeach
         </ul>
     </div>
     <div class="ad-image-caption">

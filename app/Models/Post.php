@@ -117,7 +117,12 @@ class Post extends Model
 
     public static function getAll()
     {
-        $posts = Post::where('status', '=', 2)->with('avatar')->with('category')->orderBy('created_at', 'desc')->paginate(24);
+        $posts = Post::where('status', '=', 2)
+            ->with('avatar')
+            ->with('category')
+            ->with('province')
+            ->orderBy('created_at', 'desc')
+            ->paginate(24);
         return $posts;
     }
 
