@@ -6,6 +6,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 //use Throwable;
 use Illuminate\Auth\AuthenticationException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -36,5 +37,18 @@ class Handler extends ExceptionHandler
                 );
             }
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException && $request->is('storage/uploads/*')) {
+            $headers = [
+                'Content-Type' => 'image/jpeg', // Set the appropriate MIME type for your image
+            ];
+            $imagePath = public_path('/img/sayo-default-vertical.webp');
+            return response()->file($imagePath, $headers);
+        }
+
+        return parent::render($request, $exception);
     }
 }
