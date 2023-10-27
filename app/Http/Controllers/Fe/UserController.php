@@ -62,6 +62,7 @@ class UserController extends Controller
         if (!$userId) {
             return view('pages.auth.login');
         }
+
         $user = User::with('avatar')->with('province')
             ->with('district')
             ->with('ward')->find($userId);
