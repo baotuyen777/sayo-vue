@@ -73,7 +73,7 @@ class UserController extends Controller
 
     public function updateSimple(Request $request, $useName)
     {
-        if (!Auth::user() || Auth::user()->role > 1) {
+        if (!Auth::user() || Auth::user()->role > ROLE_ADMIN) {
             return view('pages/404');
         }
         $post = User::where('code', $useName)->first();
@@ -89,9 +89,8 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-
         if (!Auth::user() || (Auth::user()->role > ROLE_ADMIN && Auth::user()->id != $id)) {
-            return view('pages/404');
+            return response()->json(['status' => false, 'message' => "Bạn thể sử dụng chức năng này"]);
         }
 
         if ($request->input('change_password')) {
