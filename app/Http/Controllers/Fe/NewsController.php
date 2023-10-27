@@ -141,11 +141,7 @@ class NewsController extends Controller
         $url = $request->input('url');
         $isSingle = $request->input('is_single') ?? false;
         if (!$url) {
-            $urls = [
-                'https://badova.net/hotgirl/',
-                'https://badova.net/hotgirl/page/2/',
-                'https://badova.net/hotgirl/page/3/',
-            ];
+            $urls = [];
             foreach ($urls as $url) {
                 $this->crawlNewsService->crawl($url, $isSingle);
             }

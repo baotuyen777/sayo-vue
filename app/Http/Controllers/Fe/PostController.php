@@ -181,7 +181,7 @@ class PostController extends Controller
 
     public function crawl(Request $request)
     {
-        $url = $request->input('url') ?? 'https://rongbay.com/Ha-Noi/Nha-rieng-nguyen-can-Cho-thue-nha-c272-t786-trang1.html?ft=1&md=';
+        $url = $request->input('url') ;
         $isSingle = $request->input('is_single') ?? false;
         $this->postCrawlService->crawl($url, $isSingle);
     }
