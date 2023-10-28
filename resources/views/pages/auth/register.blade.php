@@ -15,13 +15,16 @@
                 <p><a class="forgot-password-btn" href="forget-password">Quên mật khẩu?</a></p>
                 <button class="bns1dlc primary large w-bold i-left stretch">ĐĂNG KÝ</button>
                 @csrf
-                <div class=" a1k9ogns">
-                    <hr/>
-                    <span>Hoặc đăng nhập bằng</span>
-                    <hr/>
-                </div>
 
-                <div class="mocked-styled-15 g15384yj">
+            </form>
+            <div class=" a1k9ogns">
+                <hr/>
+                <span>Hoặc đăng nhập bằng</span>
+                <hr/>
+            </div>
+
+            <div class="mocked-styled-15 g15384yj">
+                <a href="{{url('auth/google')}}">
                     <button class="mocked-styled-18 b10u9umr">
                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
@@ -40,10 +43,11 @@
                         </svg>
                         Google
                     </button>
-                    <div id="google-login-btn"></div>
-                </div>
-                <p class="mocked-styled-33 rnv45ui">Đã có tài khoản? <a class="btn-back" href="login">Đăng nhập ngay</a></p>
-            </form>
+                </a>
+                <div id="google-login-btn"></div>
+            </div>
+            <p class="mocked-styled-33 rnv45ui">Đã có tài khoản? <a class="btn-back" href="login">Đăng nhập ngay</a>
+            </p>
 
 
         </div>

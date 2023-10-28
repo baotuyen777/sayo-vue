@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
+use Exception;
+use App\Const\CommonConst;
 
 class AuthController extends Controller
 {
@@ -77,5 +80,39 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
-
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    public function handleCallback()
+    {
+        try {
+            $user = Socialite::driver('google')->user();
+            $findUser = User::where(
+                [
+                    'google_id' => $user->id,
+                    'email' => $user->getEmail()
+                ]
+            )->first();
+            if ($findUser) {
+                Auth::login($findUser);
+                return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
+            } else {
+                $newUser = User::create([
+                    'username' => $user->getName(),
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'google_id'=> $user->getId(),
+                    'password' => encrypt(CommonConst::DEFAULT_PASSWORD),
+                    'phone' => CommonConst::DEFAULT_PHONE_NUMBER,
+                    'status' => CommonConst::APPROVED_STATUS,
+                    'role' => 3
+                ]);
+                Auth::login($newUser);
+                return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
+            }
+        } catch (Exception $e) {
+            dd($e);
+        }
+    }
 }
