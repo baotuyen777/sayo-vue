@@ -40,7 +40,7 @@
                 </td>
                 <td valign="top">
                     {{--                    <a href="{{route('user.edit',['user'=>$obj['code']])}}">{{$obj->name}}</a>--}}
-                    <span>{{$obj['name']}}</span>
+                    <a href="{{ route('user.edit', $obj->id) }}">{{$obj['name']}}</a>
                     <p>
 
                         <small>{{showHumanTime($obj->created_at)}}</small>

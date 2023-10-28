@@ -55,6 +55,20 @@ class UserController extends Controller
 
     }
 
+    public function edit($id) {
+        if (!Auth::user() || Auth::user()->role > 1) {
+            return view('pages/404');
+        }
+        $user = User::with(['avatar', 'district', 'ward', 'province'])->findOrFail($id);
+        $attrs = $this->userService->getAttrOptions($user);
+        $user->province_name = $attrs['provinces']->get($user->province_id)->name;
+        $user->district_name = $attrs['districts']->get($user->district_id)->name ?? "";
+        $user->ward_name = $attrs['wards']->get($user->ward_id)->name ?? "";
+
+        $attrs['obj'] = $user;
+        return view('pages.user.edit', $attrs);
+    }
+
     public function profile()
     {
         $attrs = $this->userService->getAttrOptions();
