@@ -14,7 +14,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Exception;
-use App\Const\CommonConst;
 
 class AuthController extends Controller
 {
@@ -103,16 +102,20 @@ class AuthController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'google_id'=> $user->getId(),
-                    'password' => encrypt(CommonConst::DEFAULT_PASSWORD),
-                    'phone' => CommonConst::DEFAULT_PHONE_NUMBER,
-                    'status' => CommonConst::APPROVED_STATUS,
-                    'role' => 3
+                    'password' => encrypt(DEFAULT_PASSWORD),
+                    'phone' => DEFAULT_PHONE_NUMBER,
+                    'status' => APPROVED_STATUS,
+                    'role' => ROLE_CUSTOMER
                 ]);
                 Auth::login($newUser);
                 return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
             }
         } catch (Exception $e) {
-            dd($e);
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Error in Login',
+                'error' => $e,
+            ]);
         }
     }
 }
