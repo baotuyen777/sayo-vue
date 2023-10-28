@@ -1,6 +1,5 @@
 @extends('layout.index')
-@php
-    $location = array_filter([$obj->ward->name?? null ,$obj->district->name ?? null ,$obj->province->name?? null]);
+@php    $location = array_filter([$obj->ward->name?? null ,$obj->district->name ?? null ,$obj->province->name?? null]);
 if($obj->address){
     array_unshift($location,$obj->address);
 }
@@ -14,7 +13,7 @@ if($obj->address){
                     <div class="col-md-8">
                         @include('component.post-detail.slider')
                         <div class="ad-image-wrapper">
-                            <h1 class="ad-title"> {{$obj['name']}}</h1>
+                            <h1 class="post-title"> {{$obj['name']}}</h1>
                             <div class="ad-price-wrapper">
                                 <div class="ad-adPrice" itemprop="price">
                                     {{moneyFormat($obj['price'])}}
