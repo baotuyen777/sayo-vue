@@ -104,7 +104,7 @@ class AuthController extends Controller
                     'google_id'=> $user->getId(),
                     'password' => encrypt(DEFAULT_PASSWORD),
                     'phone' => DEFAULT_PHONE_NUMBER,
-                    'status' => APPROVED_STATUS,
+                    'status' => STATUS_ACTIVE,
                     'role' => ROLE_CUSTOMER
                 ]);
                 Auth::login($newUser);
