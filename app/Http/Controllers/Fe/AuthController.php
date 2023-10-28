@@ -98,7 +98,7 @@ class AuthController extends Controller
                 return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
             } else {
                 $newUser = User::create([
-                    'username' => $user->getName(),
+                    'username' => vn2code($user->getName()),
                     'name' => $user->name,
                     'email' => $user->email,
                     'google_id'=> $user->getId(),
