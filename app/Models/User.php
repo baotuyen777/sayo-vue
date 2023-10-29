@@ -33,6 +33,7 @@ class User extends Authenticatable
         'status',
         'phone',
         'bio',
+        'address',
         'cccd','gender','birthday',
     ];
     /**
