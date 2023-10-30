@@ -10,7 +10,7 @@
                     <h5>Hồ sơ cá nhân</h5>
                     <div>
                         @include('component.form.input',['name'=> 'name', 'label' => 'Tên'])
-                        @include('component.form.textarea',['name'=> 'description', 'label' => 'Giới thiệu', 'placeholder'=> 'Viết vài dòng giới thiệu về bạn'])
+                        @include('component.form.textarea',['name'=> 'bio', 'label' => 'Giới thiệu', 'placeholder'=> 'Viết vài dòng giới thiệu về bạn'])
 
                     </div>
                 </section>
