@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Services\Post\PostService;
 use App\Services\Post\UserService;
 use Carbon\Carbon;
@@ -14,37 +15,25 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    private $userService;
     public function __construct(
         private User        $userModel,
         private PostService $postService,
-        private UserService $userService
+        UserService         $userService
     )
     {
+        $this->userService = $userService;
     }
 
     public function index(Request $request)
     {
-        $s = $request->input('s');
-        $pageSize = $request->input('page_size') ?? 24;
-        $rolesLabel = DB::raw('if(role < 3, "Staff", "Khách") as role_label');
-        $selectStatus = DB::raw('if(status = 1, "Hoạt động", "Tạm dừng") as status_label');
-
-        $objs = User::join('departments', 'users.departments_id', '=', 'departments.id')
-            ->select('users.*', $rolesLabel, $selectStatus)
-            ->where('users.name', 'like', "%{$s}%")
-            ->paginate($pageSize);
-
+        $objs = $this->userService->index($request);
         return view('pages/user/list', ['objs' => $objs]);
     }
 
     public function show(Request $request, $userName)
     {
-        $user = User::where('username', $userName)
-            ->with('province')
-            ->with('district')
-            ->with('ward')
-            ->first();
-
+        $user = $this->userService->showUser($userName);
         if ($user) {
             $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id]);
 
@@ -56,75 +45,38 @@ class UserController extends Controller
     }
 
     public function edit($id) {
-        if (!Auth::user() || Auth::user()->role > 1) {
+        $attrs = $this->userService->editUser($id);
+        if (!$attrs) {
             return view('pages/404');
         }
-        $user = User::with(['avatar', 'district', 'ward', 'province'])->findOrFail($id);
-        $attrs = $this->userService->getAttrOptions($user);
-        $user->province_name = $attrs['provinces']->get($user->province_id)->name;
-        $user->district_name = $attrs['districts']->get($user->district_id)->name ?? "";
-        $user->ward_name = $attrs['wards']->get($user->ward_id)->name ?? "";
-
-        $attrs['obj'] = $user;
         return view('pages.user.edit', $attrs);
     }
 
     public function profile()
     {
-        $attrs = $this->userService->getAttrOptions();
-        $userId = Auth::id();
-        if (!$userId) {
+        $attrs = $this->userService->profile();
+        if (!$attrs) {
             return view('pages.auth.login');
         }
-
-        $user = User::with('avatar')->with('province')
-            ->with('district')
-            ->with('ward')->find($userId);
-        $attrs['obj'] = $user;
-        $attrs['user'] = $user;
         return view('pages/user/profile', $attrs);
     }
 
     public function updateSimple(Request $request, $useName)
     {
-        if (!Auth::user() || Auth::user()->role > ROLE_ADMIN) {
-            return view('pages/404');
-        }
-        $post = User::where('code', $useName)->first();
-
-        $params = $request->all();
-        $res = $post->update($params);
-        if ($res) {
-            $post = User::where('username', $useName)->first();
-        }
-
-        return response()->json(['status' => $res, 'result' => $post]);
+        return $this->userService->updateSimple($request, $useName);
     }
 
     public function update(Request $request, $id)
     {
-        if (!Auth::user() || (Auth::user()->role > ROLE_ADMIN && Auth::user()->id != $id)) {
-            return response()->json(['status' => false, 'message' => "Bạn thể sử dụng chức năng này"]);
-        }
-
-        if ($request->input('change_password')) {
-            $request->merge([
-                'password' => Hash::make($request['password']),
-                'change_password_at' => Carbon::now()
-            ]);
-        }
-        User::find($id)->update($request->all());
-        $res = User::find($id);
-        return response()->json(['status' => true, 'result' => $res]);
+        return $this->userService->updateUser($request, $id);
     }
 
     public function destroy($userName)
     {
-        if (!Auth::user() || Auth::user()->role > 1) {
+        $data = $this->userService->destroy($userName);
+        if (!$data){
             return view('pages/404');
         }
-
-        $obj = User::where('username', $userName)->delete();
-        return response()->json(['status' => true, 'result' => $obj]);
+        return response()->json(['status' => true, 'result' => $data]);
     }
 }
