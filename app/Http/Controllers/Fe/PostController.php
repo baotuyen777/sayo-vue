@@ -177,9 +177,9 @@ class PostController extends Controller
         }
 
         try {
-            $idFile = $obj->files->pluck('id')->toArray();
+            $fileIds = $obj->files->pluck('id')->toArray();
             $obj->files()->detach();
-            Files::whereIn('id', $idFile)->delete();
+            Files::whereIn('id', $fileIds)->delete();
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
@@ -189,14 +189,12 @@ class PostController extends Controller
         }
 
         $obj->delete();
-
-
         return response()->json(['status' => true, 'result' => $obj]);
     }
 
     public function crawl(Request $request)
     {
-        $url = $request->input('url');
+        $url = $request->input('url') ;
         $isSingle = $request->input('is_single') ?? false;
         $this->postCrawlService->crawl($url, $isSingle);
     }
