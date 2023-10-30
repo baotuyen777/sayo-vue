@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
+use App\Models\Files;
 use App\Models\Post;
 use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
@@ -174,17 +175,28 @@ class PostController extends Controller
         if (!checkAuthor($obj->author_id)) {
             return view('pages/404');
         }
-        $idFile = $obj->files->pluck('id')->toArray();
-        $obj->files()->detach();
+
+        try {
+            $idFile = $obj->files->pluck('id')->toArray();
+            $obj->files()->detach();
+            Files::whereIn('id', $idFile)->delete();
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Bản tin đã xóa',
+                'error' => $e->getMessage(),
+            ]);
+        }
+
         $obj->delete();
-        Files::whereIn('id', $idFile)->delete();
+
 
         return response()->json(['status' => true, 'result' => $obj]);
     }
 
     public function crawl(Request $request)
     {
-        $url = $request->input('url') ;
+        $url = $request->input('url');
         $isSingle = $request->input('is_single') ?? false;
         $this->postCrawlService->crawl($url, $isSingle);
     }
