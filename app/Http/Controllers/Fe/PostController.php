@@ -174,8 +174,11 @@ class PostController extends Controller
         if (!checkAuthor($obj->author_id)) {
             return view('pages/404');
         }
-
+        $idFile = $obj->files->pluck('id')->toArray();
+        $obj->files()->detach();
         $obj->delete();
+        Files::whereIn('id', $idFile)->delete();
+
         return response()->json(['status' => true, 'result' => $obj]);
     }
 
