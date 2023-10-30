@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
+use App\Models\Files;
 use App\Models\Post;
 use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
@@ -174,8 +175,11 @@ class PostController extends Controller
         if (!checkAuthor($obj->author_id)) {
             return view('pages/404');
         }
-
+        $idFile = $obj->files->pluck('id')->toArray();
+        $obj->files()->detach();
         $obj->delete();
+        Files::whereIn('id', $idFile)->delete();
+
         return response()->json(['status' => true, 'result' => $obj]);
     }
 
