@@ -37,16 +37,16 @@ class UserService extends BaseService
         return $this->userRepository->getOne($userName);
     }
 
-    public function editUser($id)
+    public function editUser($username)
     {
         if
         (
             !Auth::user() || Auth::user()->role > 1) {
             return false;
         }
-        $user = $this->userRepository->getUserWith(['avatar', 'district', 'ward', 'province'])->findOrFail($id);
+        $user = $this->getOne($username);
         $attrs = $this->getAttrOptions($user);
-        $user->province_name = $attrs['provinces']->get($user->province_id)->name;
+        $user->province_name = $attrs['provinces']->get($user->province_id)->name ?? "";
         $user->district_name = $attrs['districts']->get($user->district_id)->name ?? "";
         $user->ward_name = $attrs['wards']->get($user->ward_id)->name ?? "";
 
@@ -57,11 +57,11 @@ class UserService extends BaseService
     public function profile()
     {
         $attrs = $this->getAttrOptions();
-        $userId = Auth::id();
-        if (!$userId) {
+        $userName = Auth::user()->username;
+        if (!$userName) {
             return false;
         }
-        $user = $this->userRepository->getUserWith(['avatar', 'district', 'ward', 'province'])->find($userId);
+        $user = $this->getOne($userName);
         $attrs['obj'] = $user;
         $attrs['user'] = $user;
         return $attrs;
@@ -89,9 +89,9 @@ class UserService extends BaseService
         return response()->json(['status' => $res, 'result' => $post]);
     }
 
-    public function updateUser($request, $id)
+    public function updateUser($request, $username)
     {
-        if (!Auth::user() || (Auth::user()->role > ROLE_ADMIN && Auth::user()->id != $id)) {
+        if (!Auth::user() || (Auth::user()->role > ROLE_ADMIN && Auth::user()->username != $username)) {
             return view('pages/404');
         }
 
@@ -101,8 +101,8 @@ class UserService extends BaseService
                 'change_password_at' => Carbon::now()
             ]);
         }
-        $this->userRepository->find(['id' => $id])->update($request->all());
-        $res = $this->userRepository->find(['id' => $id]);
+        $this->getOne($username)->update($request->all());
+        $res = $this->getOne($username);
         return response()->json(['status' => true, 'result' => $res]);
     }
     public function destroy($userName)

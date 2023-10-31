@@ -43,8 +43,8 @@ class UserController extends Controller
 
     }
 
-    public function edit($id) {
-        $attrs = $this->userService->editUser($id);
+    public function edit($username) {
+        $attrs = $this->userService->editUser($username);
         if (!$attrs) {
             return view('pages/404');
         }
@@ -65,9 +65,9 @@ class UserController extends Controller
         return $this->userService->updateSimple($request, $useName);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $username)
     {
-        return $this->userService->updateUser($request, $id);
+        return $this->userService->updateUser($request, $username);
     }
 
     public function destroy($userName)

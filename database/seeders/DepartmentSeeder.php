@@ -20,5 +20,8 @@ class DepartmentSeeder extends Seeder
         DB::table('departments')->insert([
             'name' => 'Nhân viên'
         ]);
+        DB::table('departments')->insert([
+            'name' => 'Khách hàng'
+        ]);
     }
 }

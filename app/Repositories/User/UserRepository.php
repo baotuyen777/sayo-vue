@@ -32,7 +32,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         ];
 
         return $this->model->from("$this->userTable as u")
-            ->join("$this->departmentTable as dpm", 'u.departments_id', '=', 'dpm.id')
+            ->leftJoin("$this->departmentTable as dpm", 'u.departments_id', '=', 'dpm.id')
             ->where('u.name', 'like', "%{$s}%")
             ->select($select)
             ->paginate($pageSize);

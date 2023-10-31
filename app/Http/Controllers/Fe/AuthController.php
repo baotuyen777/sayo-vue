@@ -105,7 +105,8 @@ class AuthController extends Controller
                     'password' => encrypt(DEFAULT_PASSWORD),
                     'phone' => DEFAULT_PHONE_NUMBER,
                     'status' => STATUS_ACTIVE,
-                    'role' => ROLE_CUSTOMER
+                    'role' => ROLE_CUSTOMER,
+                    'department_id' => DEPARTMENT_CUSTOMER
                 ]);
                 Auth::login($newUser);
                 return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
