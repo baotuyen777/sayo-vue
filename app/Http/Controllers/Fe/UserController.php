@@ -43,20 +43,25 @@ class UserController extends Controller
 
     }
 
-    public function edit($username) {
+    public function edit($username)
+    {
         $attrs = $this->userService->editUser($username);
-        if (!$attrs) {
-            return view('pages/404');
+        if ($attrs) {
+            return view('pages.user.edit', $attrs);
         }
-        return view('pages.user.edit', $attrs);
+        return view('pages/404');
     }
 
     public function profile()
     {
-        $attrs = $this->userService->profile();
-        if (!$attrs) {
+        $attrs = $this->userService->getAttrOptions();
+        $userName = Auth::user()->username;
+        if (!$userName) {
             return view('pages.auth.login');
         }
+        $user = $this->userService->getOne($userName);
+        $attrs['obj'] = $user;
+        $attrs['user'] = $user;
         return view('pages/user/profile', $attrs);
     }
 
@@ -72,7 +77,7 @@ class UserController extends Controller
     public function update(Request $request, $username)
     {
         $data = $this->userService->updateUser($request, $username);
-        if (!$data) {
+        if (!$data['status']) {
             return view('pages/404');
         }
         return $data;
@@ -80,10 +85,6 @@ class UserController extends Controller
 
     public function destroy($userName)
     {
-        $data = $this->userService->destroy($userName);
-        if (!$data){
-            return view('pages/404');
-        }
-        return response()->json(['status' => true, 'result' => $data]);
+        return $this->userService->destroy($userName);
     }
 }

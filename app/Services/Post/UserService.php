@@ -39,10 +39,8 @@ class UserService extends BaseService
 
     public function editUser($username)
     {
-        if
-        (
-            !Auth::user() || Auth::user()->role > 1) {
-            return false;
+        if (!Auth::user() || Auth::user()->role > 1) {
+            return response()->json(['status' => false, 'result' => null]);
         }
         $user = $this->getOne($username);
         $attrs = $this->getAttrOptions($user);
@@ -54,23 +52,10 @@ class UserService extends BaseService
         return $attrs;
     }
 
-    public function profile()
-    {
-        $attrs = $this->getAttrOptions();
-        $userName = Auth::user()->username;
-        if (!$userName) {
-            return false;
-        }
-        $user = $this->getOne($userName);
-        $attrs['obj'] = $user;
-        $attrs['user'] = $user;
-        return $attrs;
-    }
-
     public function updateSimple($request, $useName)
     {
         if (!Auth::user() || Auth::user()->role > 1) {
-            return false;
+            return response()->json(['status' => false, 'result' => null]);
         }
         $post = $this->userRepository->getDataWithConditions(
             '*',
@@ -92,7 +77,7 @@ class UserService extends BaseService
     public function updateUser($request, $username)
     {
         if (!Auth::user() || (Auth::user()->role > ROLE_ADMIN && Auth::user()->username != $username)) {
-            return false;
+            return response()->json(['status' => false, 'result' => null]);
         }
 
         if ($request->input('change_password')) {
@@ -108,7 +93,7 @@ class UserService extends BaseService
     public function destroy($userName)
     {
         if (!Auth::user() || Auth::user()->role > 1) {
-            return false;
+            return response()->json(['status' => false, 'result' => null]);
         }
 
         $obj = $this->userRepository->getDataWithConditions(
