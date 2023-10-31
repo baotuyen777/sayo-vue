@@ -92,7 +92,7 @@ class UserService extends BaseService
     public function updateUser($request, $username)
     {
         if (!Auth::user() || (Auth::user()->role > ROLE_ADMIN && Auth::user()->username != $username)) {
-            return view('pages/404');
+            return false;
         }
 
         if ($request->input('change_password')) {

@@ -71,7 +71,11 @@ class UserController extends Controller
 
     public function update(Request $request, $username)
     {
-        return $this->userService->updateUser($request, $username);
+        $data = $this->userService->updateUser($request, $username);
+        if (!$data) {
+            return view('pages/404');
+        }
+        return $data;
     }
 
     public function destroy($userName)
