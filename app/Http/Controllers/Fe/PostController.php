@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
+use App\Models\Files;
 use App\Models\Post;
 use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class PostController extends Controller
@@ -173,6 +175,28 @@ class PostController extends Controller
         $obj = Post::where('code', $code)->first();
         if (!checkAuthor($obj->author_id)) {
             return view('pages/404');
+        }
+
+        try {
+            $urlFiles = $obj->files->pluck('url')->toArray();
+            $urlStorages = array_map(function ($val) {
+                return str_replace(asset('storage'), 'public', $val);
+            }, $urlFiles);
+
+            foreach ($urlStorages as $urlStorage) {
+                if (Storage::exists($urlStorage)) {
+                    Storage::delete($urlStorage);
+                }
+            }
+            $fileIds = $obj->files->pluck('id')->toArray();
+            $obj->files()->detach();
+            Files::whereIn('id', $fileIds)->delete();
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Xóa tin thành công',
+                'error' => $e->getMessage(),
+            ]);
         }
 
         $obj->delete();
