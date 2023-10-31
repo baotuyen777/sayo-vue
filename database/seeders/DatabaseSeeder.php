@@ -24,25 +24,11 @@ class DatabaseSeeder extends Seeder
             CategoriesSeeder::class,
             SettingsSeeder::class,
             PostsSeeder::class,
+            ProductsSeeder::class,
 //            NewsSeeder::class,
 
 
         ]);
-
-        for ($i = 1; $i < 10; $i++) {
-            DB::table('products')->insert([
-                'name' => 'product ' . $i,
-                'code' => 'code ' . $i,
-                'content' => 'value ' . $i,
-                'category_id' => rand(1, 5),
-                'user_id' => 1,
-            ]);
-
-            DB::table('orders')->insert([
-                'user_id' => 1,
-            ]);
-        }
-
 
 //        DB::table('posts_files')->insert([
 //            'posts_id' => 1,
