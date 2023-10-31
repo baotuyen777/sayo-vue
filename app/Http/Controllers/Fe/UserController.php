@@ -18,7 +18,7 @@ class UserController extends Controller
     public function __construct(
         private User        $userModel,
         private PostService $postService,
-        private UserService  $userService,
+        private UserService $userService
     )
     {
 
