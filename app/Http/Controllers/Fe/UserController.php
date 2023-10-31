@@ -15,14 +15,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    private $userService;
     public function __construct(
         private User        $userModel,
         private PostService $postService,
-        UserService         $userService
+        private UserService  $userService,
     )
     {
-        $this->userService = $userService;
+
     }
 
     public function index(Request $request)
