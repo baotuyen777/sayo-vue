@@ -38,7 +38,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             ->paginate($pageSize);
     }
 
-    public function showUser($userName)
+    public function getOne($userName)
     {
         return $this->model->from("$this->userTable as u")
             ->where('u.username', $userName)

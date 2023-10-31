@@ -7,6 +7,6 @@ use App\Repositories\RepositoryInterface;
 interface UserRepositoryInterface extends RepositoryInterface
 {
     public function getUser($s, $pageSize, $rolesLabel, $selectStatus);
-    public function showUser($userName);
+    public function getOne($userName);
     public function getUserWith($arr);
 }

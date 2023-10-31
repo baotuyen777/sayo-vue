@@ -22,7 +22,7 @@ class UserService extends BaseService
         $this->userRepository = $userRepository;
     }
 
-    public function index($request)
+    public function getPagination($request)
     {
         $s = $request->input('s');
         $pageSize = $request->input('page_size') ?? 5;
@@ -32,9 +32,9 @@ class UserService extends BaseService
         return $user;
     }
 
-    public function showUser($userName)
+    public function getOne($userName)
     {
-        return $this->userRepository->showUser($userName);
+        return $this->userRepository->getOne($userName);
     }
 
     public function editUser($id)

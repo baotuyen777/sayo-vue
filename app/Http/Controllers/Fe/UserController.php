@@ -27,13 +27,13 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $objs = $this->userService->index($request);
+        $objs = $this->userService->getPagination($request);
         return view('pages/user/list', ['objs' => $objs]);
     }
 
     public function show(Request $request, $userName)
     {
-        $user = $this->userService->showUser($userName);
+        $user = $this->userService->getOne($userName);
         if ($user) {
             $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id]);
 
