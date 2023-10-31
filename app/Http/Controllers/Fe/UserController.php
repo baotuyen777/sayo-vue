@@ -62,7 +62,11 @@ class UserController extends Controller
 
     public function updateSimple(Request $request, $useName)
     {
-        return $this->userService->updateSimple($request, $useName);
+        $data = $this->userService->updateSimple($request, $useName);
+        if (!$data) {
+            return view('pages/404');
+        }
+        return $data;
     }
 
     public function update(Request $request, $username)

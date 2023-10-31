@@ -70,7 +70,7 @@ class UserService extends BaseService
     public function updateSimple($request, $useName)
     {
         if (!Auth::user() || Auth::user()->role > 1) {
-            return view('pages/404');
+            return false;
         }
         $post = $this->userRepository->getDataWithConditions(
             '*',
