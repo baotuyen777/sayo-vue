@@ -25,13 +25,13 @@ class PostController extends Controller
         if (!Auth::user()) {
             return view('pages/auth/login');
         }
-        $extraParam = ['catCode' => $catCode, 'provinceCode' => $provinceCode, 'districtCode' => $districtCode, 'wardCode' => $wardCode];
+        // $extraParam = ['catCode' => $catCode, 'provinceCode' => $provinceCode, 'districtCode' => $districtCode, 'wardCode' => $wardCode];
 
         if (Auth::user()->role > 1) {
             $extraParam['author_id'] = Auth::user()->id;
         }
 
-        $request->merge($extraParam);
+        // $request->merge($extraParam);
 //        ->where('status',STATUS_ACTIVE)
 
         $res = $this->postsService->getAll($request);

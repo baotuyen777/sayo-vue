@@ -16,20 +16,15 @@ class ProductController extends Controller
     {
     }
 
-    public function index(Request $request, $catCode = null)
+    public function index(Request $request)
     {
-
         if (!Auth::user()) {
             return view('pages/auth/login');
         }
-        $extraParam = ['catCode' => $catCode];
 
         if (Auth::user()->role > 1) {
             $extraParam['author_id'] = Auth::user()->id;
         }
-
-        $request->merge($extraParam);
-//        ->where('status',STATUS_ACTIVE)
 
         $res = $this->productsService->getAll($request);
 
