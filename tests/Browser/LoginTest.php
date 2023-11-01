@@ -15,11 +15,11 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
-                ->type('phone', '0394045475')
-                ->type('password', '123456')
-
+                ->typeSlowly('phone', '0394045475')
+                ->typeSlowly('password', '123456')
                 ->press('.btn-submit')
-                ->assertSee('.notify--success');
+                ->waitFor('.notify--success')
+                ->assertSee('Đăng nhập thành công');
         });
     }
 }
