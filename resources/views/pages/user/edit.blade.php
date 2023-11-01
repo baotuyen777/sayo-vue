@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card__body ">
             <form method="post" class="form-ajax" enctype="multipart/form-data"
-                  action="{{route('user.update', $obj['id'])}}" data-id={{$obj['id']}}>
+                  action="{{route('user.update', $obj['username'])}}" data-id={{$obj['username']}}>
 
                 <section>
                     <h5>Hồ sơ cá nhân</h5>

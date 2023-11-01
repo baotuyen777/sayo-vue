@@ -15,6 +15,8 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('local')){
             $this->app->register(DuskServiceProvider::class);
             $this->app->register(DebugBarServiceProvider::class);
+            $this->app->register(RepositoryServiceProvider::class);
+            $this->app->register(RouteServiceProvider::class);
         }
     }
 
