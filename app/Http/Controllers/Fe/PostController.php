@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostCommentRequest;
 use App\Http\Requests\PostRequest;
 use App\Models\Files;
 use App\Models\Post;
@@ -87,6 +88,7 @@ class PostController extends Controller
             ->with('files')
             ->with('category')
             ->with('author')
+            ->with('comments')
             ->where('code', $code)
             ->first();
         if (!$post) {
@@ -208,5 +210,25 @@ class PostController extends Controller
         $url = $request->input('url') ;
         $isSingle = $request->input('is_single') ?? false;
         $this->postCrawlService->crawl($url, $isSingle);
+    }
+
+    public function comment(PostCommentRequest $request)
+    {
+        $params = $request->validated();
+        $userId = Auth::id();
+
+        if (!$userId) {
+            return response()->json(['message' => 'Bạn cần đăng nhập để có thể bình luận','error' => 'Unauthorized'], 401);
+        }
+
+        try {
+            $params['user_id'] = $userId;
+            $postComment = PostComment::create($params);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Đã có lỗi xảy ra vui lòng thử lại','error' => 'Internal Server Error'], 500);
+        }
+
+
+        return response()->json(['status' => true, 'result' => $postComment]);
     }
 }

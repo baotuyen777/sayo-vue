@@ -115,6 +115,13 @@ class Post extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(PostComment::class, 'item_id', 'id')
+            ->with('user:id,name', 'children')
+            ->whereNull('parent_id')->limit(6);
+    }
+
     public static function getAll()
     {
         $posts = Post::where('status', '=', 2)
