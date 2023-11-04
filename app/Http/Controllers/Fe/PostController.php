@@ -173,6 +173,7 @@ class PostController extends Controller
     public function destroy($code)
     {
         $obj = Post::where('code', $code)->first();
+
         if (!checkAuthor($obj->author_id)) {
             return view('pages/404');
         }
@@ -188,7 +189,9 @@ class PostController extends Controller
                     Storage::delete($urlStorage);
                 }
             }
+
             $fileIds = $obj->files->pluck('id')->toArray();
+            Post::whereIn('avatar_id', $fileIds)->update(['avatar_id' => null]);
             $obj->files()->detach();
             Files::whereIn('id', $fileIds)->delete();
         } catch (\Exception $e) {

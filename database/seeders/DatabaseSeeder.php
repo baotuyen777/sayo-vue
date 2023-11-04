@@ -13,9 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        DB::table('files')->insert(['name' => 1, 'url' => 'uploads/2023-08-12/3f115d4b4d8285dcdc93.jpg']);
-//        DB::table('files')->insert(['name' => 2, 'url' => 'uploads/2023-08-12/33.jpg']);
-
         $this->call([
 //            PdwsSeeder::class,
             FilesSeeder::class,
@@ -27,16 +24,6 @@ class DatabaseSeeder extends Seeder
             ProductsSeeder::class,
 //            NewsSeeder::class,
 
-
         ]);
-
-//        DB::table('posts_files')->insert([
-//            'posts_id' => 1,
-//            'files_id' => 1,
-//        ]);
-//        DB::table('posts_files')->insert([
-//            'posts_id' => 1,
-//            'files_id' => 2,
-//        ]);
     }
 }

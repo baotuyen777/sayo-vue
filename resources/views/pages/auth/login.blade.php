@@ -1,6 +1,6 @@
 @extends('layout.index')
 @section('content')
-    <div id="__next">
+    <div id="login-page">
         <progress hidden=""></progress>
         <div class=" w1eil6in">
             <div class="b4hnkwj">

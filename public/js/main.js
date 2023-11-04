@@ -235,6 +235,13 @@ const showNotify = (text = 'Thành công', type = 'success') => {
     $('.notify').fadeIn();
     setTimeout(() => jQuery('.notify').fadeOut(), 5000)
 }
-
+//dusk test
+var url = new URL(window.location.href);
+var dusktext = url.searchParams.get("dtext");
+var dclass = url.searchParams.get("dstatus")==1 ?  "success" : "danger" ;
+let element=document.getElementById("dusktext");
+if(!dusktext) element.style.visibility = "hidden";
+element.innerHTML=dusktext;
+element.classList.add(dclass);
 
 

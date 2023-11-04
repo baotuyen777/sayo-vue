@@ -19,7 +19,7 @@ abstract class DuskTestCase extends BaseTestCase
      */
     public static function prepare(): void
     {
-        if (! static::runningInSail()) {
+        if (!static::runningInSail()) {
             static::startChromeDriver();
         }
     }
@@ -52,7 +52,7 @@ abstract class DuskTestCase extends BaseTestCase
     protected function hasHeadlessDisabled(): bool
     {
         return isset($_SERVER['DUSK_HEADLESS_DISABLED']) ||
-               isset($_ENV['DUSK_HEADLESS_DISABLED']);
+            isset($_ENV['DUSK_HEADLESS_DISABLED']);
     }
 
     /**
@@ -61,6 +61,17 @@ abstract class DuskTestCase extends BaseTestCase
     protected function shouldStartMaximized(): bool
     {
         return isset($_SERVER['DUSK_START_MAXIMIZED']) ||
-               isset($_ENV['DUSK_START_MAXIMIZED']);
+            isset($_ENV['DUSK_START_MAXIMIZED']);
+    }
+
+    public function login($browser, $role = ROLE_ADMIN, $dtext = '')
+    {
+        $phone = $role == ROLE_ADMIN ? '0394045475' : '0394045476';
+        $dtext = $dtext ?? "Login {$role}&dstatus=1";
+        $browser->visit("/login?dtext={$dtext}")->waitFor('#login-page')
+            ->typeSlowly('phone', $phone)
+            ->typeSlowly('password', '123456')->releaseMouse()->press('.btn-submit')
+            ->waitFor('.notify--success');
+        return $browser;
     }
 }
