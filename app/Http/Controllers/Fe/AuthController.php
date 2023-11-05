@@ -37,7 +37,6 @@ class AuthController extends Controller
 
     public function login()
     {
-//        dd(getBreadcrumb());
         return view('pages/auth/login');
     }
 
@@ -68,7 +67,6 @@ class AuthController extends Controller
 
         ]);
         return ['result' => $user, 'status' => true];
-//return $user
         return redirect()->route('login')->with('notify', 'Tạo tài khoản thành công');
     }
 
@@ -83,6 +81,7 @@ class AuthController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
+
     public function handleCallback()
     {
         try {
@@ -97,26 +96,24 @@ class AuthController extends Controller
                 Auth::login($findUser);
                 return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
             } else {
-                $newUser = User::create([
-                    'username' => vn2code($user->getName()),
+                $param = [
+                    'username' => vn2code($user->getName()) . '_' . time(),
                     'name' => $user->name,
                     'email' => $user->email,
-                    'google_id'=> $user->getId(),
+                    'google_id' => $user->getId(),
                     'password' => encrypt(DEFAULT_PASSWORD),
                     'phone' => DEFAULT_PHONE_NUMBER,
                     'status' => STATUS_ACTIVE,
                     'role' => ROLE_CUSTOMER,
                     'department_id' => DEPARTMENT_CUSTOMER
-                ]);
+                ];
+
+                $newUser = User::create($param);
                 Auth::login($newUser);
                 return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
             }
         } catch (Exception $e) {
-            return response()->json([
-                'status_code' => 500,
-                'message' => 'Error in Login',
-                'error' => $e,
-            ]);
+            return redirect()->route('home')->with('notify', 'Đăng nhập thất bại')->with('notify_type', 'error');
         }
     }
 }

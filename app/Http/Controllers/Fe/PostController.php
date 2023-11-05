@@ -174,8 +174,12 @@ class PostController extends Controller
     {
         $obj = Post::where('code', $code)->first();
 
-        if (!checkAuthor($obj->author_id)) {
-            return view('pages/404');
+        if (!$obj || !checkAuthor($obj->author_id)) {
+            return response()->json([
+                'status' => false,
+                'status_code' => ERR_404,
+                'message' => ERR_404 . " Có lỗi xảy ra! vui lòng liên hệ với admin",
+            ]);
         }
 
         try {
@@ -197,7 +201,7 @@ class PostController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'message' => 'Xóa tin thành công',
+                'message' => 'Có lỗi xảy ra! vui lòng liên hệ với admin ',
                 'error' => $e->getMessage(),
             ]);
         }
@@ -208,7 +212,7 @@ class PostController extends Controller
 
     public function crawl(Request $request)
     {
-        $url = $request->input('url') ;
+        $url = $request->input('url');
         $isSingle = $request->input('is_single') ?? false;
         $this->postCrawlService->crawl($url, $isSingle);
     }
