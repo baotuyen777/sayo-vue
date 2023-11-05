@@ -34,8 +34,9 @@ class User extends Authenticatable
         'phone',
         'bio',
         'address',
-        'cccd','gender','birthday',
+        'cccd', 'gender', 'birthday',
         'google_id',
+        'province_id', 'district_id', 'ward_id',
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -57,15 +58,16 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany(Post::class,'author_id');
+        return $this->hasMany(Post::class, 'author_id');
     }
 
     public function avatar()
     {
         return $this->belongsTo(Files::class)
             ->select(['files.*'])
-            ->selectRaw('CONCAT("' .  asset('storage') . '/", files.url) as url');
+            ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
     }
+
     public function province()
     {
         return $this->belongsTo(Province::class, 'province_id');
@@ -80,27 +82,30 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Ward::class);
     }
-//    public function getAttOptions(): array
-//    {
-////        $categories = Category::with('avatar')->get();
-////        $address = [
-////            ['id' => 1, 'name' => 'Phường Thanh Xuân Bắc, Quận Thanh Xuân, Hà Nội'],
-////            ['id' => 2, 'name' => 'Phường Thanh Xuân Trung, Quận Thanh Xuân, Hà Nội'],
-////        ];
-////        $provinces = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 1)->get();
-////        $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
-////        $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
-////
-////        $postStates = Posts::$states;
-////
-////        $brands = ['Samsung', 'Apple'];
-////        $colors = ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác'];
-////        $storages = ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G'];
-////        $madeIns = ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác'];
-//        $genders = $this->gender;
-//
-//
-//        return get_defined_vars();
-//    }
+
+    public static function getAll($request, $withRelated = false)
+    {
+        $s = $request->input('s');
+        $pageSize = $request->input('page_size') ?? 5;
+
+        $obj = User::where('name', 'like', "%{$s}%");
+        if ($withRelated) {
+            $obj->with('avatar');
+        }
+
+        return $obj->paginate($pageSize);
+    }
+
+    public static function getOne($userName, $withRelated = false)
+    {
+        $obj = User::where('username', $userName);
+        if ($withRelated) {
+            $obj->with('province')
+                ->with('district')
+                ->with('ward');
+        }
+
+        return $obj->first();
+    }
 
 }

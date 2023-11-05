@@ -34,7 +34,6 @@ Route::get('/auth/google/callback', [AuthController::class, 'handleCallback']);
 
 Route::resource('user', UserController::class);
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-Route::post('/user/update-simple/{username}.htm', [UserController::class, 'updateSimple'])->name('userUpdateSimple');
 
 Route::get('/post/crawl', [PostController::class, 'crawl'])->name('postCrawl');
 //Route::get('/post/me', [PostController::class, 'me'])->name('myPost');

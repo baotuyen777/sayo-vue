@@ -3,7 +3,9 @@
     @include('layout.common.breadcrumb')
     <div class="two-column">
         <div class="sidebar">
-            @include('layout.common.sidebar')
+            @if(Auth::user())
+                @include('layout.common.sidebar')
+            @endif
         </div>
         <div class="main">
             @yield('content')

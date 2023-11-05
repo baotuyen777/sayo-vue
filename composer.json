@@ -38,7 +38,8 @@
             "app/Helpers/SimpleHtmlDom.php",
             "app/Helpers/helpers.php",
             "app/Helpers/const.php",
-            "app/Helpers/ErrorCode.php"
+            "app/Helpers/ErrorCode.php",
+            "app/Helpers/QuickResult.php"
         ]
     },
     "autoload-dev": {

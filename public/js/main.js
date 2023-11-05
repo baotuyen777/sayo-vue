@@ -120,11 +120,12 @@ $('.btn-ajax').click(function () {
     const $this = $(this);
 
     const data = {_token: $('.csrf').html(), ...$this.data('param')}
-    const type = $this.data('method') || 'post'
+    const isPut =true;
     $.ajax({
         url: $this.data('url'),
-        type,
         data,
+        contentType: isPut ? 'application/x-www-form-urlencoded' : false,
+        type: isPut ? 'PUT' : 'POST',
         dataType: 'json',
         success: function (response) {
             if (response.status) {
