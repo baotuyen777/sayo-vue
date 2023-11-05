@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->date('birthday')->nullable();
             $table->tinyInteger('gender')->nullable();
             $table->string('address')->unique()->nullable();
+            $table->string('google_id')->nullable();
 
             $table->unsignedBigInteger('avatar_id')->nullable();
             $table->foreign('avatar_id')->references('id')->on('files');
