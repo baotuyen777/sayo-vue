@@ -31,14 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID'),
+//        'client_id' => env('GOOGLE_CLIENT_ID2'),
+        'client_id' => '623285679256-5coa0dtidcbp1t40cp0nem0cov1brou4.apps.googleusercontent.com',
         'client_secret' => env('GOOGLE_ClIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
-
-//    'google' => [
-//        'client_id' => '623285679256-5coa0dtidcbp1t40cp0nem0cov1brou4.apps.googleusercontent.com',
-//        'client_secret' => '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',
-//        'redirect' => 'https://sayo.vn/auth/google/callback',
-//    ],
 ];

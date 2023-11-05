@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService extends BaseService
 {
-    public function getOneWithAttrs($username)
+    public function getOneWithAttrs($userName)
     {
         if (!Auth::user()) {
             return ['status' => false, 'message' => 'Bạn chưa đăng nhập'];
         }
-        $user = User::getOne($username, true);
+        $user = User::getOne($userName, true);
         $attrs = $this->getAttrOptions($user);
 
         $user->province_name = $attrs['provinces']->get($user->province_id)->name ?? "";
@@ -28,13 +28,13 @@ class UserService extends BaseService
         return array_merge($attrs, ['obj' => $user]);
     }
 
-    public function update($request, $username)
+    public function update($request, $userName)
     {
-        if (!Auth::user() || (Auth::user()->role > ROLE_ADMIN && Auth::user()->username != $username)) {
+        if (!Auth::user() || (Auth::user()->role > ROLE_ADMIN && Auth::user()->username != $userName)) {
             return ['status' => false, 'result' => null];
         }
 
-        $obj = User::getOne($username);
+        $obj = User::getOne($userName);
 
         if (!$obj) {
             RETURN404;
@@ -52,7 +52,7 @@ class UserService extends BaseService
             return RETURN_SOMETHING_WENT_WRONG;
         }
 
-        $res = User::getOne($username, true);
+        $res = User::getOne($userName, true);
         return returnSuccess($res);
     }
 
@@ -62,7 +62,7 @@ class UserService extends BaseService
             return ['status' => false, 'result' => null];
         }
 
-        $obj = User::where('username', $userName)->first();
+        $obj = User::getOne($userName, true);
         if ($obj) {
             $obj->delete();
         }

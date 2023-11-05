@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('cccd')->nullable();
             $table->date('birthday')->nullable();
             $table->tinyInteger('gender')->nullable();
-//            $table->integer('verified_level')->default(0);
+            $table->string('address')->unique()->nullable();
 
             $table->unsignedBigInteger('avatar_id')->nullable();
             $table->foreign('avatar_id')->references('id')->on('files');
