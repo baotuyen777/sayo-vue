@@ -84,6 +84,10 @@ if($obj->address){
                     <div class="col-md-4">
                         @include('component.post-detail.sidebar')
                     </div>
+
+                    <div class="col-md-8">
+                        @include('component.comment.index')
+                    </div>
                 </div>
             </div>
         </div>
