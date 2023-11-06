@@ -10,6 +10,8 @@ use App\Models\Post;
 
 class PostService
 {
+    private array $res = [];
+
     function getAttrField($post = false, $filterNull = false)
     {
         $config = Post::$attr;
@@ -62,7 +64,7 @@ class PostService
 
         $catCode = $request->input('catCode');
         $category = Category::where('code', $catCode)->first();
-        $res = [
+        $this->res = [
             'category' => $category,
             'provinces' => Province::get(),
             'province' => $province,
@@ -76,65 +78,66 @@ class PostService
 
 
         $posts = Post::select('*')->with('avatar')->with('files')->with('category');
-//        ->where('status',STATUS_ACTIVE)
+        $posts = $this->filter($request, $posts, $category, $province);
 
-        if($request->input('status')){
-            $posts->where('status', $request->input('status'));
+        $this->res['objs'] = $posts->orderBy('status')->orderBy('created_at', 'desc')->paginate($pageSize, ['*'], 'page', $currentPage);
+        return $this->res;
+    }
+
+    private function filter($request, $objs, $category = null, $province = null)
+    {
+        if ($request->input('status')) {
+            $objs->where('status', $request->input('status'));
         }
-
 
         if ($request->input('author_id')) {
-            $posts->where('author_id', $request->input('author_id'));
+            $objs->where('author_id', $request->input('author_id'));
         }
 
-        if ($catCode && $category) {
-            $posts->where('category_id', $category->id);
+        if ($category) {
+            $objs->where('category_id', $category->id);
             //            ->whereHas('category', function ($query) use ($catSlug) {
 //                $query->where('code', $catSlug);
 //            })
         }
 
-        $price_from = $request->input('price_from');
-        if ($price_from) {
-            $posts->where('price', '>', $price_from);
+        $priceFrom = $request->input('price_from');
+        if ($priceFrom) {
+            $objs->where('price', '>', $priceFrom);
         }
 
-        $price_to = $request->input('price_to');
-        if ($price_to) {
-            $posts->where('price', '<', $price_to);
+        $priceTo = $request->input('price_to');
+        if ($priceTo) {
+            $objs->where('price', '<', $priceTo);
         }
 
         $s = $request->input('s');
         if ($s) {
-            $posts->where('name', 'like', "%{$s}%");
+            $objs->where('name', 'like', "%{$s}%");
         }
 
-        if ($provinceCode && $province) {
-            $posts->where('province_id', $province->id);
+        if ($province) {
+            $objs->where('province_id', $province->id);
 
-            $res['districts'] = District::whereProvinceId($province->id ?? 1)->get();
+            $this->res['districts'] = District::whereProvinceId($province->id ?? 1)->get();
             $districtCode = $request->input('districtCode');
             $district = District::where('code', $districtCode)->first();
-            $res['district'] = $district;
+            $this->res['district'] = $district;
 
             if ($districtCode && $district) {
-                $posts->where('district_id', $district->id);
-                $res['wards'] = Ward::whereDistrictId($district->id)->get();
+                $objs->where('district_id', $district->id);
+                $this->res['wards'] = Ward::whereDistrictId($district->id)->get();
                 $wardCode = $request->input('wardCode');
                 $ward = Ward::where('code', $wardCode)->first();
 
                 if ($ward) {
-                    $res['ward'] = $ward;
-                    $posts->where('ward_id', $ward->id);
+                    $this->res['ward'] = $ward;
+                    $objs->where('ward_id', $ward->id);
                 }
-
             }
-
         }
 
-        $res['objs'] = $posts->orderBy('status')->orderBy('created_at', 'desc')->paginate($pageSize, ['*'], 'page', $currentPage);
-
-        return $res;
+        return $objs;
     }
 
     function getAllSimple($request, $where = [])
@@ -151,7 +154,7 @@ class PostService
         foreach ($where as $k => $v) {
             $posts->where($k, $v);
         }
-//dd($currentPage);
+
         return $posts->orderBy('created_at', 'desc')
             ->paginate($pageSize, ['*'], 'page', $currentPage);
     }

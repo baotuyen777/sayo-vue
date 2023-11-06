@@ -17,24 +17,22 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    function __construct(private readonly PostService $postsService, private readonly PostCrawlService $postCrawlService)
+    function __construct(
+        private readonly PostService      $postsService,
+        private readonly PostCrawlService $postCrawlService
+    )
     {
     }
 
     public function index(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
-
         if (!Auth::user()) {
             return view('pages/auth/login');
         }
-        // $extraParam = ['catCode' => $catCode, 'provinceCode' => $provinceCode, 'districtCode' => $districtCode, 'wardCode' => $wardCode];
 
-        if (Auth::user()->role > 1) {
-            $extraParam['author_id'] = Auth::user()->id;
+        if (!isAdmin()) {
+            $request->merge(['author_id' => Auth::user()->id]);
         }
-
-        // $request->merge($extraParam);
-//        ->where('status',STATUS_ACTIVE)
 
         $res = $this->postsService->getAll($request);
 
@@ -50,6 +48,7 @@ class PostController extends Controller
             'wardCode' => $wardCode,
             'status' => STATUS_ACTIVE
         ];
+
         $request->merge($extraParam);
         $res = $this->postsService->getAll($request);
         $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');
