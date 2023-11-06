@@ -175,13 +175,12 @@ class PostController extends Controller
     public function destroy($code)
     {
         $obj = Post::where('code', $code)->first();
+        if (!$obj) {
+            return response()->json(RETURN404);
+        }
 
-        if (!$obj || !checkAuthor($obj->author_id)) {
-            return response()->json([
-                'status' => false,
-                'status_code' => ERR_404,
-                'message' => ERR_404 . " Có lỗi xảy ra! vui lòng liên hệ với admin",
-            ]);
+        if (!checkAuthor($obj->author_id) && Auth::user()->role != ROLE_ADMIN) {
+            return response()->json(RETURN_REQUIRED_ADMIN);
         }
 
         try {
@@ -203,7 +202,7 @@ class PostController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'message' => 'Có lỗi xảy ra! vui lòng liên hệ với admin ',
+                'message' => 'Có lỗi xảy ra! vui lòng liên hệ với admin',
                 'error' => $e->getMessage(),
             ]);
         }
@@ -225,14 +224,14 @@ class PostController extends Controller
         $userId = Auth::id();
 
         if (!$userId) {
-            return response()->json(['message' => 'Bạn cần đăng nhập để có thể bình luận','error' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Bạn cần đăng nhập để có thể bình luận', 'error' => 'Unauthorized'], 401);
         }
 
         try {
             $params['user_id'] = $userId;
             $postComment = PostComment::create($params);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Đã có lỗi xảy ra vui lòng thử lại','error' => 'Internal Server Error'], 500);
+            return response()->json(['message' => 'Đã có lỗi xảy ra vui lòng thử lại', 'error' => 'Internal Server Error'], 500);
         }
 
 

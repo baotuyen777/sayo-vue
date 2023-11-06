@@ -149,7 +149,11 @@ class PostCrawlService
         echo(str_replace(',', '.', $price));
         $price = intval(floatval(strip_tags(str_replace(',', '.', $price))) * 1000000);
         echo $price;
-        $acreage = $content->find('ul', 0)->find('li', 1)->find('span', 0);
+        $acreage = '';
+        if ($content->find('ul', 0) ) {
+           return;
+        }
+
         $acreage = trim(strip_tags(str_replace(['m', '<sup>2</sup>'], '', ($acreage)))) ?? 0;
 
         [$provinceId, $districtId, $wardId, $address] = $this->getLocation($content);

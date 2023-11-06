@@ -120,12 +120,12 @@ $('.btn-ajax').click(function () {
     const $this = $(this);
 
     const data = {_token: $('.csrf').html(), ...$this.data('param')}
-    const isPut =true;
+    const type = $this.data('method') || 'put'
     $.ajax({
         url: $this.data('url'),
         data,
-        contentType: isPut ? 'application/x-www-form-urlencoded' : false,
-        type: isPut ? 'PUT' : 'POST',
+        type,
+        // contentType: type == 'put' ? 'application/x-www-form-urlencoded' : false,
         dataType: 'json',
         success: function (response) {
             if (response.status) {
@@ -165,7 +165,7 @@ $('.clear').click(function () {
 
 $('a, .btn-submit').click(function (e) {
     $('.loader').show();
-    setTimeout(function(){
+    setTimeout(function () {
         $('.loader').hide()
     }, 3000)
 })
@@ -239,10 +239,10 @@ const showNotify = (text = 'Thành công', type = 'success') => {
 //dusk test
 var url = new URL(window.location.href);
 var dusktext = url.searchParams.get("dtext");
-var dclass = url.searchParams.get("dstatus")==1 ?  "success" : "danger" ;
-let element=document.getElementById("dusktext");
-if(!dusktext) element.style.visibility = "hidden";
-element.innerHTML=dusktext;
+var dclass = url.searchParams.get("dstatus") == 1 ? "success" : "danger";
+let element = document.getElementById("dusktext");
+if (!dusktext) element.style.visibility = "hidden";
+element.innerHTML = dusktext;
 element.classList.add(dclass);
 
 
