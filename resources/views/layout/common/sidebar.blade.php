@@ -16,7 +16,7 @@
                 <a href="#">Đang theo dõi: <b>0</b></a>
             </p>
             @if(isset($user['id']) && Auth::user()->id === $user['id'])
-                <button class="btn btn--primary full">Chỉnh sửa thông tin</button>
+                <a class="btn btn--primary full" href="{{route('profile')}}">Chỉnh sửa thông tin</a>
             @endif
             <br>
             <div class="label-icon">
@@ -91,6 +91,7 @@
         <section class="white-box p-10 box-radius">
             <h4>Quản lý</h4>
             <p><a href="{{route('post.index')}}">Quản lý bài đăng</a></p>
+            <p><a href="{{route('product.index')}}">Quản lý sản phẩm</a></p>
             <p><a href="{{route('user.index')}}">Quản lý user</a></p>
 
         </section>

@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\FileController;
+use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\PdwsController;
+use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\PostsController;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\RolesController;
-use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\FileController;
-use App\Http\Controllers\PdwsController;
 
 /*
 |--------------------------------------------------------------------------

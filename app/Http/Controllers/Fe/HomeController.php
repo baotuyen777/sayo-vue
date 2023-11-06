@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Fe;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Http\Controllers\Admin\Controller;
 use App\Models\Pdws;
 use App\Models\Post;
 

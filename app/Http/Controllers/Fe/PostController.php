@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Fe;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\PostCommentRequest;
 use App\Http\Requests\PostRequest;
 use App\Models\Files;
 use App\Models\Post;
+use App\Models\PostComment;
 use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
 use Illuminate\Http\Request;
@@ -80,10 +81,10 @@ class PostController extends Controller
         return view('pages/post/detail', $output);
     }
 
-    //Show the form for editing . $catCode dung tren url
+    //Show the form for view . $catCode dung tren url
     public function show($catCode, $code)
     {
-        $post = Post::select('*')
+        $obj = Post::select('*')
             ->with('avatar')
             ->with('files')
             ->with('category')
@@ -91,14 +92,15 @@ class PostController extends Controller
             ->with('comments')
             ->where('code', $code)
             ->first();
-        if (!$post) {
-            return view('pages/404');
+
+        if (!$obj) {
+            return view('pages.404');
         }
 
-        $post['attr'] = $this->postsService->getAttrField($post, true);
+        $obj['attr'] = $this->postsService->getAttrField($obj, true);
 //        $post['cat_code'] = $catCode;
 //        dd($post['attr']);
-        return view('pages/post/view', ['obj' => $post]);
+        return view('pages.post.view', ['obj' => $obj]);
     }
 
     public function store(PostRequest $request)

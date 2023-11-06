@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Fe;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Models\User;
 use App\Services\Post\PostService;
 use App\Services\Post\UserService;

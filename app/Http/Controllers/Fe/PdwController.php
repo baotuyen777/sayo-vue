@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Fe;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Models\Pdw\District;
 use App\Models\Pdw\Ward;
 

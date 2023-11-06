@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+
 function moneyFormat($number): string
 {
     if ($number < 1000000) {
@@ -83,7 +84,7 @@ function vn2str($str)
 function vn2code($str)
 {
     $str = vn2str($str);
-    $str = str_replace(['-', ',', '.','/',':'], '', $str);
+    $str = str_replace(['-', ',', '.', '/', ':'], '', $str);
     $str = str_replace([' '], '-', $str);
     $str = str_replace(['--'], '-', $str);
     return strtolower($str);
@@ -136,5 +137,10 @@ function curlGetContents($url)
     $data = curl_exec($ch);
     curl_close($ch);
     return $data;
+}
+
+function isAdmin()
+{
+    return Auth::user() && Auth::user()->role === ROLE_ADMIN;
 }
 

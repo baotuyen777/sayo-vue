@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Fe;
 
 use App\Exports\NewsExport;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\News;
 use App\Models\Post;
