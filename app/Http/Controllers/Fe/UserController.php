@@ -28,7 +28,7 @@ class UserController extends Controller
             return view('pages.404');
         }
 
-        $objs = User::getAll($request);
+        $objs = User::getAll($request, true);
         return view('pages.user.list', ['objs' => $objs]);
     }
 

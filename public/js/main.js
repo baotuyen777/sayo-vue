@@ -59,6 +59,8 @@ jQuery('.form-ajax').on('submit', function (event) {
 
     $(`.validate`).html('');
     $(`.form-control`).removeClass('error');
+    toggleLoading()
+    $form.find('.btn-submit').attr('disabled', true);
     $.ajax({
         url: jQuery('.form-ajax').attr('action'),
         data,
@@ -81,6 +83,8 @@ jQuery('.form-ajax').on('submit', function (event) {
             })
             showNotify(JSON.parse(jqXHR.responseText).message, 'error')
             console.log(errors)
+            toggleLoading()
+            $form.find('.btn-submit').attr('disabled', false);
         }
     });
 
@@ -95,6 +99,7 @@ $('#files').change(function () {
         form_data.append("files[]", document.getElementById('files').files[index]);
     }
     const formControl = $(this).parent();
+    toggleLoading();
     $.ajax({
         url: '/api/files',
         type: 'post',
@@ -111,6 +116,7 @@ $('#files').change(function () {
                     formControl.find('.preview').append(`<img src="${src}" alt="">`);
                 }
             }
+            toggleLoading();
         },
     });
 });
@@ -121,6 +127,9 @@ $('.btn-ajax').click(function () {
 
     const data = {_token: $('.csrf').html(), ...$this.data('param')}
     const type = $this.data('method') || 'put'
+
+    $this.attr('disabled', true)
+    toggleLoading()
     $.ajax({
         url: $this.data('url'),
         data,
@@ -131,13 +140,17 @@ $('.btn-ajax').click(function () {
             if (response.status) {
                 window.location.reload()
             }
+            $this.attr('disabled', false)
+            toggleLoading();
         },
     });
 })
+
 jQuery('.account-menu').click(function () {
     jQuery(this).find('.menu').toggle('show')
 });
 
+//form
 jQuery('.dropdown__button').click(function () {
 
     jQuery('.dropdown').removeClass('show')
@@ -147,29 +160,22 @@ jQuery('.dropdown__button').click(function () {
 $('.dropdown__close').click(function () {
     jQuery(this).parents('.dropdown').removeClass('show')
 })
-jQuery('.dropdown__button').blur(function () {
-    // jQuery(this).parent().find('.dropdown__content').removeClass('show')
-})
 
 $('.clear').click(function () {
     $(this).parents('.dropdown').find('input').val('');
     $(this).parents('form').submit();
 })
 
-// jQuery('.dropdown__content').find('a').click(function(){
-//     console.log(window.location.href);
-// })
-// jQuery('body').click(() => {
-//     jQuery('.account-menu').find('.menu').hide()
-// })
-
-$('a, .btn-submit').click(function (e) {
-    $('.loader').show();
-    setTimeout(function () {
-        $('.loader').hide()
-    }, 3000)
+$('a').click(function (e) {
+    toggleLoading();
 })
 
+function toggleLoading() {
+    $('.loader').toggle();
+    setTimeout(function () {
+        $('.loader').toggle()
+    }, 8000)
+}
 
 //form effect
 if (jQuery('.minput').val()) {
