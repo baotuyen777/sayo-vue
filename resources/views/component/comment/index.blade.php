@@ -14,7 +14,7 @@
                 <input type="hidden" name="item_id" value="{{$obj->id}}">
                 @include('component.comment.textarea',['name'=> 'content', 'placeholder' => 'Nhập nội dung bình luận (tiếng Việt có dấu)...'])
                 <div class="btn__comment">
-                    <button class="aw__b1358qut primary r-normal medium w-bold btn-right aw__h1gb9yk btn-submit">
+                    <button class="btn--primary primary r-normal medium w-bold btn-right aw__h1gb9yk btn-submit">
                         GỬI BÌNH LUẬN
                     </button>
                 </div>
