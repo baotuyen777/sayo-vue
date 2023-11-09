@@ -53,7 +53,7 @@
             </div>
             <div class="aw__r1fkdta0">
 
-                <a class="btn btn--primary btn--large aw__b1358qut primary r-normal medium w-bold i-left aw__h1gb9yk"
+                <a class="btn btn--primary btn--large primary r-normal medium w-bold i-left aw__h1gb9yk"
                    href="{{route('publicPost')}}" rel="nofollow">Đăng tin</a>
                 @include('layout.common.account-menu')
             </div>
