@@ -34,7 +34,7 @@ return new class extends Migration {
             $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
 
             $table->unsignedBigInteger('avatar_id')->nullable();
-            $table->foreign('avatar_id')->references('id')->on('files')->onDelete('cascade');
+            $table->foreign('avatar_id')->references('id')->on('files');
 
             $table->unsignedBigInteger('video_id')->nullable();
 

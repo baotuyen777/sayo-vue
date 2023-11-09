@@ -40,6 +40,11 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        Schema::table('post_comment', function ($table) {
+            $table->dropForeign(['item_id']);
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['parent_id']);
+        });
         Schema::dropIfExists('post_comment');
     }
 };

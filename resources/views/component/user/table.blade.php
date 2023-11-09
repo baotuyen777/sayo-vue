@@ -40,7 +40,7 @@
                 </td>
                 <td valign="top">
                     {{--                    <a href="{{route('user.edit',['user'=>$obj['code']])}}">{{$obj->name}}</a>--}}
-                    <a href="{{ route('user.edit', $obj->id) }}">{{$obj['name']}}</a>
+                    <a href="{{ route('user.edit', ['user'=>$obj['username']]) }}">{{$obj['name']}}</a>
                     <p>
 
                         <small>{{showHumanTime($obj->created_at)}}</small>
@@ -49,19 +49,19 @@
                 <td>
                     <div class="d-flex-wrap gap-10">
                         <button class="btn--small btn-ajax danger"
-                                data-url="{{route('user.destroy',['user'=>$obj['username']])}}"  data-method="delete">
+                                data-url="{{route('user.destroy',['user'=>$obj['username']])}}" data-method="delete">
                             Xóa
                         </button>
-                        @if($obj['status']!=2)
+                        @if($obj['status'] != STATUS_ACTIVE)
                             <button class="btn--small btn-ajax success"
-                                    data-url="{{route('userUpdateSimple',['username'=>$obj['username']])}}"
+                                    data-url="{{route('user.update',['user'=>$obj['username']])}}"
                                     data-param='{"status":2}'>
                                 Duyệt
                             </button>
                         @endif
-                        @if($obj['status'] !=3)
+                        @if($obj['status'] != STATUS_DEACTIVATE)
                             <button class="btn--small btn-ajax warning"
-                                    data-url="{{route('userUpdateSimple',['username'=>$obj['username']])}}"
+                                    data-url="{{route('user.update',['user'=>$obj['username']])}}"
                                     data-param='{"status":3}'>Từ chối
                             </button>
                         @endif

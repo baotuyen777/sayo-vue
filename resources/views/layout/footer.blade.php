@@ -5,7 +5,7 @@
         <a href="{{route('pageView',['code'=>'gioi-thieu'])}}" target="_blank">Chính sách bảo mật</a><span>•</span>
         <a href="{{route('pageView',['code'=>'gioi-thieu'])}}" target="_blank">Liên hệ hỗ trợ</a>
     </div>
-    </footer>
+</footer>
 <div class="notify {{session('notify_type') ?"notify--".session('notify_type'): ''}}"
      style="display: {{session('notify') ? 'block' : 'none'}}">
     <span class="content">{{ session('notify') }}</span>
@@ -20,48 +20,15 @@
     </button>
 </div>
 <div class="loader"></div>
+<div id="dusktext"></div>
 
 <script src='{{ env('APP_URL')}}/js/main.js'></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XRDH5DCMQM"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-XRDH5DCMQM');
-</script>
 @stack('js')
+@if(env('APP_ENV')=='production')
+    @include('layout.common.social')
+@endif
+
 </body>
 </html>
 
-<!-- Messenger Plugin chat Code -->
-<div id="fb-root"></div>
-
-<!-- Your Plugin chat code -->
-<div id="fb-customer-chat" class="fb-customerchat">
-</div>
-
-<script>
-    var chatbox = document.getElementById('fb-customer-chat');
-    chatbox.setAttribute("page_id", "122099681522009271");
-    chatbox.setAttribute("attribution", "biz_inbox");
-</script>
-
-<!-- Your SDK code -->
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            xfbml            : true,
-            version          : 'v18.0'
-        });
-    };
-
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>

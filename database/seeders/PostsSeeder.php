@@ -35,7 +35,7 @@ class PostsSeeder extends Seeder
 //                'created_at'=> Carbon::now(),
 //            ]);
 //        }
-        for ($i = 1; $i < 10; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             DB::table('posts')->insert([
                 'name' => 'Cho thuê phòng tuyệt đẹp, đầy đủ tiện nghi, thuận tiện giao thông, ngõ 116 Miếu Đầm',
                 'code' => time() . $i,
@@ -53,8 +53,11 @@ Ngoài ra có căn hộ 1 ngủ 1 khách diện tích 40m², full đồ giá là
                 'price' => rand(1000000, 5000000),
                 'attr' => json_encode(['acreage' => '35', 'garret' => '1', 'deposit' => 2000000, 'furniture' => 1]),
                 'created_at' => Carbon::now(),
+                'status' => STATUS_ACTIVE,
             ]);
 
+        }
+        for ($i = 1; $i <= 2; $i++) {
             DB::table('posts')->insert([
                 'name' => 'Cho thuê Căn hộ dịch vụ mini 25m siêu đẹp, mặt đường Nguyễn Đình Chiểu, đầy đủ đồ vào ở ngay. giá rẻ chỉ 5 triệu',
                 'code' => time() . '_2' . $i,
@@ -72,15 +75,9 @@ Cách công viên Thống nhất 100m, không khí thoáng mát, trong lành.',
                 'created_at' => Carbon::now(),
             ]);
         }
-        for ($i = 1; $i <= 4; $i++) {
-            DB::table('posts_files')->insert([
-                'post_id' => 1,
-                'files_id' => $i
-            ]);
-            DB::table('posts_files')->insert([
-                'post_id' => 2,
-                'files_id' => $i
-            ]);
+        for ($p = 1; $p <= 5; $p++) {
+            DB::table('posts_files')->insert(['post_id' => $p, 'files_id' => rand(1, 4)]);
+            DB::table('posts_files')->insert(['post_id' => $p, 'files_id' => rand(1, 4)]);
         }
 
 

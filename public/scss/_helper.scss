@@ -6,6 +6,7 @@
     padding: 15px 25px 15px 10px;
     border-radius: 4px;
     color: white;
+    z-index: 9999999;
 
     &--error {
         background: #d22b2b;
@@ -249,7 +250,19 @@
     background: salmon !important;
 }
 
-
+#dusktext{
+    position: fixed;
+    top: 125px;
+    left: 50px;
+    min-width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 300px;
+    opacity: 0.7;
+    z-index: 20;
+    color: white;
+    font-size: 30px;
+}
 
 @media (max-width: 991px) {
     .grid-2 > div {

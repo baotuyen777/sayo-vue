@@ -24,3 +24,4 @@ yarn-error.log
 */api-docs
 .user.ini
 *.log
+err.md

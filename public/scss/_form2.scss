@@ -52,13 +52,44 @@
     }
 
     &--primary {
-        background: $background-color_1;
-        color: white;
+        background: $primary--light;
+        color: $white;
         border: none;
+        cursor: pointer;
+        font-weight: 400;
+        text-decoration: none;
 
         &:hover {
-            background-color: $primary-dark;
-            border-color: $primary-dark;
+            background-color: $primary--light;
+            border-color: $primary--light;
+        }
+
+        &:active {
+            color: $white;
+            background-color: $primary--light;
+            border-color: $primary--light;
+        }
+
+        &.i-left {
+            > svg {
+                margin-right: .5em;
+                margin-left: 0;
+                font-size: 1rem;
+            }
+        }
+        
+        &.medium.i-left {
+            > svg {
+                font-size: 1rem;
+            }
+        }
+        
+        &.r-normal {
+            border-radius: 4px;
+        }
+        
+        &.w-bold {
+            font-weight: 700;
         }
     }
 
@@ -334,7 +365,7 @@ input {
         padding: 0;
         z-index: 2;
         border-radius: $border;
-        color: $text-disabled;
+        color: $color-disabled;
         display: none;
 
         &.show {
@@ -373,7 +404,6 @@ input {
         font-size: 0.8em;
     }
 }
-
 
 
 

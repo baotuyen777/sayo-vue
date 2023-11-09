@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Fe\HomeController;
 use \App\Http\Controllers\Fe\AuthController;
 use \App\Http\Controllers\Fe\PostController;
+use \App\Http\Controllers\Fe\ProductController;
 use \App\Http\Controllers\Fe\NewsController;
 use \App\Http\Controllers\Fe\UserController;
 use \App\Http\Controllers\Fe\PdwController;
@@ -33,7 +34,6 @@ Route::get('/auth/google/callback', [AuthController::class, 'handleCallback']);
 
 Route::resource('user', UserController::class);
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-Route::post('/user/update-simple/{username}.htm', [UserController::class, 'updateSimple'])->name('userUpdateSimple');
 
 Route::get('/post/crawl', [PostController::class, 'crawl'])->name('postCrawl');
 //Route::get('/post/me', [PostController::class, 'me'])->name('myPost');
@@ -44,7 +44,16 @@ Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
 Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');
 Route::get('/xem-tin-{catSlug?}/{slug}.htm', [PostController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
+Route::post('/post/comment', [PostController::class, 'comment'])->name('comment.store');
 Route::resource('post', PostController::class);
+
+Route::get('/dang-san-pham', [ProductController::class, 'create'])->name('createProduct');
+Route::post('/dang-san-pham', [ProductController::class, 'store'])->name('storeProduct');
+Route::get('/product/edit/{slug}.htm', [ProductController::class, 'edit'])->name('productEdit');
+Route::post('/product/edit/{slug}.htm', [ProductController::class, 'update'])->name('productUpdate');
+Route::post('/product/update-simple/{slug}.htm', [ProductController::class, 'updateSimple'])->name('productUpdateSimple');
+Route::get('/xem-san-pham-{catSlug?}/{slug}.htm', [ProductController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('productView');
+Route::resource('product', ProductController::class);
 
 //Route::resource('news', NewsController::class);
 //Route::get('/post/edit/{slug}.htm', [NewsController::class, 'edit'])->name('postEdit');

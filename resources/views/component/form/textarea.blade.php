@@ -1,4 +1,4 @@
-    <div class=" t1gt6axt form-control form-control-{{$name}}">
+    <div class=" form-textarea form-control form-control-{{$name}}">
         <div class="focus-capture"></div>
         <textarea class="required sodjbf4" inputmode="text"
                   id="field-{{$name}}" name="{{$name}}" placeholder="{{$placeholder}}">{{$obj[$name] ?? ''}}</textarea>

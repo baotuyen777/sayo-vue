@@ -23,7 +23,7 @@ return new class extends Migration {
 //            $table->integer('verified_level')->default(0);
 
             $table->unsignedBigInteger('avatar_id')->nullable();
-            $table->foreign('avatar_id')->references('id')->on('files')->onDelete('cascade');
+            $table->foreign('avatar_id')->references('id')->on('files');
 
             $table->unsignedBigInteger('province_id')->nullable();
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');

@@ -1,0 +1,8 @@
+<?php
+
+const ERR_404 = 404;
+
+const ERR_500 = 500;
+
+const ERR_REQUIRED_LOGIN = 600;
+const ERR_REQUIRED_ADMIN = 601;

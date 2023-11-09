@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostCommentRequest;
 use App\Http\Requests\PostRequest;
+use App\Models\Files;
 use App\Models\Post;
 use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class PostController extends Controller
@@ -23,13 +26,13 @@ class PostController extends Controller
         if (!Auth::user()) {
             return view('pages/auth/login');
         }
-        $extraParam = ['catCode' => $catCode, 'provinceCode' => $provinceCode, 'districtCode' => $districtCode, 'wardCode' => $wardCode];
+        // $extraParam = ['catCode' => $catCode, 'provinceCode' => $provinceCode, 'districtCode' => $districtCode, 'wardCode' => $wardCode];
 
         if (Auth::user()->role > 1) {
             $extraParam['author_id'] = Auth::user()->id;
         }
 
-        $request->merge($extraParam);
+        // $request->merge($extraParam);
 //        ->where('status',STATUS_ACTIVE)
 
         $res = $this->postsService->getAll($request);
@@ -85,6 +88,7 @@ class PostController extends Controller
             ->with('files')
             ->with('category')
             ->with('author')
+            ->with('comments')
             ->where('code', $code)
             ->first();
         if (!$post) {
@@ -171,8 +175,37 @@ class PostController extends Controller
     public function destroy($code)
     {
         $obj = Post::where('code', $code)->first();
-        if (!checkAuthor($obj->author_id)) {
-            return view('pages/404');
+
+        if (!$obj || !checkAuthor($obj->author_id)) {
+            return response()->json([
+                'status' => false,
+                'status_code' => ERR_404,
+                'message' => ERR_404 . " Có lỗi xảy ra! vui lòng liên hệ với admin",
+            ]);
+        }
+
+        try {
+            $urlFiles = $obj->files->pluck('url')->toArray();
+            $urlStorages = array_map(function ($val) {
+                return str_replace(asset('storage'), 'public', $val);
+            }, $urlFiles);
+
+            foreach ($urlStorages as $urlStorage) {
+                if (Storage::exists($urlStorage)) {
+                    Storage::delete($urlStorage);
+                }
+            }
+
+            $fileIds = $obj->files->pluck('id')->toArray();
+            Post::whereIn('avatar_id', $fileIds)->update(['avatar_id' => null]);
+            $obj->files()->detach();
+            Files::whereIn('id', $fileIds)->delete();
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Có lỗi xảy ra! vui lòng liên hệ với admin ',
+                'error' => $e->getMessage(),
+            ]);
         }
 
         $obj->delete();
@@ -181,8 +214,28 @@ class PostController extends Controller
 
     public function crawl(Request $request)
     {
-        $url = $request->input('url') ;
+        $url = $request->input('url');
         $isSingle = $request->input('is_single') ?? false;
         $this->postCrawlService->crawl($url, $isSingle);
+    }
+
+    public function comment(PostCommentRequest $request)
+    {
+        $params = $request->validated();
+        $userId = Auth::id();
+
+        if (!$userId) {
+            return response()->json(['message' => 'Bạn cần đăng nhập để có thể bình luận','error' => 'Unauthorized'], 401);
+        }
+
+        try {
+            $params['user_id'] = $userId;
+            $postComment = PostComment::create($params);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Đã có lỗi xảy ra vui lòng thử lại','error' => 'Internal Server Error'], 500);
+        }
+
+
+        return response()->json(['status' => true, 'result' => $postComment]);
     }
 }
