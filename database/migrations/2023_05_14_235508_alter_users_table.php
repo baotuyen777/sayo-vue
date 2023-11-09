@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('cccd')->nullable();
             $table->date('birthday')->nullable();
             $table->tinyInteger('gender')->nullable();
-            $table->string('address')->unique()->nullable();
+            $table->string('address')->nullable();
             $table->string('google_id')->nullable();
 
             $table->unsignedBigInteger('avatar_id')->nullable();

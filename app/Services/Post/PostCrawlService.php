@@ -30,22 +30,24 @@ class PostCrawlService
             $img = $post->find('img', 0);
             $imageSrc = $img->src;
             if (strpos($imageSrc, 'no_images')) {
+                echo $i . '. no_images <hr/>';
                 continue;
             }
 
             $month = date('Y-m');
             $dir = "{$month}/bds/thumb";
-            $file = $this->saveImage($imageSrc, $dir);
+            $avatar = $this->saveImage($imageSrc, $dir);
 
-            if (!$file) {
+            if (!$avatar) {
+                echo "$i.  $imageSrc  no_save_file  <hr/>";
                 continue;
             }
 
-            $avatarLink = asset("storage/{$file['url']}");
+            $avatarLink = asset("storage/{$avatar['url']}");
 
             $a = $post->find('.ad_item_id', 0);
             echo $i . '. ' . $avatarLink;
-            $this->crawlPost($a->href, $file);
+            $this->crawlPost($a->href, $avatar);
             echo '<hr/>';
 //            if ($i > 2) {
 //                break;
@@ -91,7 +93,7 @@ class PostCrawlService
         }
 
         if (strpos($imageSrc, 'no_images')) {
-            return '';
+            return false;
         }
 
         $path = parse_url($imageSrc, PHP_URL_PATH);
@@ -99,16 +101,32 @@ class PostCrawlService
 
         $param = ['name' => $filename, 'url' => "uploads/$dir/$filename"];
         $fullPath = $storagePath . $filename;
+
+        $file = Files::where('name', $filename)->first();
+
         if (strpos($filename, '.') && !file_exists($fullPath)) {
             $imageData = curlGetContents($imageSrc);
             if ($imageData) {
                 file_put_contents($fullPath, $imageData);
-                $file = Files::create($param);
-                return $file;
+                if (!getimagesize($fullPath)) {
+                    unlink($fullPath);
+                    return false;
+                }
+
+                return Files::create($param);
             }
         }
 
-        return Files::where('name', $filename)->first();
+
+        if (file_exists($fullPath) && !$file) {
+            $file = Files::create($param);
+        }
+
+        if (!file_exists($fullPath) || !$file) {
+            return false;
+        }
+
+        return $file;
     }
 
     function saveGallery($post, $html)
@@ -121,12 +139,16 @@ class PostCrawlService
         $fileIds = [];
         foreach ($imgs as $img) {
             $file = $this->saveImage($img->href, $dir);
-            $fileIds[] = $file->id;
+            if($file){
+                $fileIds[] = $file->id;
+            }
         }
 
         if ($post && $fileIds) {
-            $post->files()->sync($fileIds);
+            return $post->files()->sync($fileIds);
         }
+
+        return false;
     }
 
     public function crawlPost($url, $avatar)
@@ -142,6 +164,7 @@ class PostCrawlService
         $price = $content->find('ul', 0)->find('li', 0)->find('span', 0);
 
         if (strpos($price, 'Thoả thuận')) {
+            echo 'no_price ';
             return;
         }
         $price = str_replace(' Triệu/tháng', '', $price);
@@ -150,8 +173,9 @@ class PostCrawlService
         $price = intval(floatval(strip_tags(str_replace(',', '.', $price))) * 1000000);
         echo $price;
         $acreage = '';
-        if ($content->find('ul', 0) ) {
-           return;
+        if (!$content->find('ul', 0)) {
+            echo 'no_acreage ';
+            return;
         }
 
         $acreage = trim(strip_tags(str_replace(['m', '<sup>2</sup>'], '', ($acreage)))) ?? 0;
@@ -162,7 +186,7 @@ class PostCrawlService
         //TODO: save author
         $param = [
             'name' => $title,
-            'code' => vn2code($title) . '-' . time(),
+            'code' => vn2code($title) . '-' . time().rand(1, 9999),
             'content' => $content . $description,
             'category_id' => 1,
             'avatar_id' => $avatar->id,
@@ -178,6 +202,7 @@ class PostCrawlService
             'author_id' => $author->id ?? 1,
         ];
 
+//        $obj = Post::where('source', $url)->first();
         $obj = Post::where('source', $url)->first();
         echo $param['name'];
         if (!$obj) {
@@ -203,7 +228,7 @@ class PostCrawlService
         $param = [
             'name' => $name,
             'phone' => $phone,
-            'username' => vn2code($name) . time(),
+            'username' => vn2code($name) . time() . rand(1, 9999),
             'password' => Hash::make('sayo.vn'),
             'departments_id' => 5,// crawl user
             'status' => STATUS_PENDING,

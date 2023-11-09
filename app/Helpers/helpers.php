@@ -127,7 +127,7 @@ function getCategories()
         ];
 }
 
-function curlGetContents($url)
+function curlGetContents($url,$onlygetImage= false)
 {
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -135,6 +135,9 @@ function curlGetContents($url)
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     $data = curl_exec($ch);
+
+//    $contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+//    echo $contentType;
     curl_close($ch);
     return $data;
 }
