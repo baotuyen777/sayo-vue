@@ -23,15 +23,15 @@ return new class extends Migration {
             $table->string('source')->nullable();
 
             $table->unsignedBigInteger('avatar_id')->nullable();
-            $table->foreign('avatar_id')->references('id')->on('files')->onDelete('cascade');
+            $table->foreign('avatar_id')->references('id')->on('files')->onDelete('set null');
 
             $table->unsignedBigInteger('video_id')->nullable();
 
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
 
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('author_id')->nullable();
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
 
             $table->timestamps();
         });

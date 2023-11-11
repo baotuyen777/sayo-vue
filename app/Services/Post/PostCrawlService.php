@@ -139,7 +139,7 @@ class PostCrawlService
         $fileIds = [];
         foreach ($imgs as $img) {
             $file = $this->saveImage($img->href, $dir);
-            if($file){
+            if ($file) {
                 $fileIds[] = $file->id;
             }
         }
@@ -157,11 +157,11 @@ class PostCrawlService
 
         $html = $html->find('.detail_popup', 0);
         $content = $html->find('.box_infor_ct', 0);
-        $description = $html->find('.info_text', 0);
+        $description = $html->find('.info_text', 0)->plaintext ?? '';
 
         $title = $this->getTitle($html);
 
-        $price = $content->find('ul', 0)->find('li', 0)->find('span', 0);
+        $price = $content->find('ul', 0)->find('li', 0)->find('span', 0) ?? '';
 
         if (strpos($price, 'Thoả thuận')) {
             echo 'no_price ';
@@ -186,7 +186,7 @@ class PostCrawlService
         //TODO: save author
         $param = [
             'name' => $title,
-            'code' => vn2code($title) . '-' . time().rand(1, 9999),
+            'code' => vn2code($title) . '-' . time() . rand(1, 9999),
             'content' => $content . $description,
             'category_id' => 1,
             'avatar_id' => $avatar->id,

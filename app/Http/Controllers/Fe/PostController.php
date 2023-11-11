@@ -57,25 +57,26 @@ class PostController extends Controller
 
     public function edit($code)
     {
-        $post = Post::with('category')
+        $obj = Post::with('category')
             ->with('avatar')
             ->with('files')
             ->where('code', $code)
             ->first();
 
-        if (!checkAuthor($post->author_id)) {
-            return view('pages/404');
+        if (!$obj || (!isAuthor($obj) && !isAdmin())) {
+            return view('pages.404');
         }
-        $output = $this->postsService->getAttrOptions($post);
 
-        $post['province_name'] = $output['provinces']->get($post->province_id)->name ?? '';
-        $post['district_name'] = $output['districts']->get($post->district_id)->name ?? '';
-        $post['ward_name'] = $output['wards']->get($post->ward_id)->name ?? '';
+        $output = $this->postsService->getAttrOptions($obj);
 
-        $post['file_ids'] = $post['files']->pluck('id');
-        $post['attr'] = $this->postsService->getAttrField($post);
+        $obj['province_name'] = $output['provinces']->get($obj->province_id)->name ?? '';
+        $obj['district_name'] = $output['districts']->get($obj->district_id)->name ?? '';
+        $obj['ward_name'] = $output['wards']->get($obj->ward_id)->name ?? '';
 
-        $output['obj'] = $post;
+        $obj['file_ids'] = $obj['files']->pluck('id');
+        $obj['attr'] = $this->postsService->getAttrField($obj);
+
+        $output['obj'] = $obj;
 
         return view('pages/post/detail', $output);
     }
@@ -180,7 +181,7 @@ class PostController extends Controller
             return response()->json(RETURN404);
         }
 
-        if (!checkAuthor($obj->author_id) && Auth::user()->role != ROLE_ADMIN) {
+        if (!isAuthor($obj) && !isAdmin()) {
             return response()->json(RETURN_REQUIRED_ADMIN);
         }
 

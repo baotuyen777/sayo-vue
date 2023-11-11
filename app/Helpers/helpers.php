@@ -97,15 +97,17 @@ function vn2Province($str)
     return $str;
 }
 
-//function getStatusLabel($key){
-//
-//}
-function checkAuthor($authorId)
+function isAuthor($obj): bool
 {
-    if (!Auth::user() || Auth::user()->id != $authorId || Auth::user()->role > 1) {
+    if (!$obj) {
         return false;
     }
-    return true;
+
+    $authorId = $obj->author_id;
+    if (!Auth::user() || Auth::user()->id != $authorId || Auth::user()->role > 1) {
+        return true;
+    }
+    return false;
 }
 
 function getCategories()
@@ -127,7 +129,7 @@ function getCategories()
         ];
 }
 
-function curlGetContents($url,$onlygetImage= false)
+function curlGetContents($url, $onlygetImage = false)
 {
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

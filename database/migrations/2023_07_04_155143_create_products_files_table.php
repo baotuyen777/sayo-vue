@@ -13,12 +13,9 @@ return new class extends Migration {
         Schema::create('products_files', function (Blueprint $table) {
             $table->id();
 
-//            $table->foreignId('products_id')->constrained();
-//            $table->foreignId('files_id')->constrained();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('files_id');
-//
-//
+
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('files_id')->references('id')->on('files')->onDelete('cascade');
 

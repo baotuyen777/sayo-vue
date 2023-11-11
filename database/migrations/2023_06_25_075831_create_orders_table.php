@@ -13,9 +13,15 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('status')->default(1);
-            $table->unsignedBigInteger('user_id');
             $table->enum('state', ['init', 'processing', 'delivery', 'completed', 'refund', ' cancel'])->default('init');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+
+            // ko nên cascade để phục vụ báo cáo
+            $table->unsignedBigInteger('seller_id')->nullable();
+            $table->foreign('seller_id')->references('id')->on('users')->onDelete('set null');
+
             $table->timestamps();
         });
     }
