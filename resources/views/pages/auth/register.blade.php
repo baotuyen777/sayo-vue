@@ -1,8 +1,8 @@
 @extends('layout.index')
 @section('content')
 
-    <div class=" w1eil6in">
-        <div class="b4hnkwj">
+    <div class=" login-wrapper">
+        <div class="login-form">
             <h1>Đăng ký tài khoản</h1>
 
             <form method="post" class="form-ajax" action="{{route('doRegister')}}">
@@ -12,12 +12,11 @@
                 @include('component.form.input',['name'=> 'phone', 'label' => 'Số điện thoại', 'inputmode' =>'numeric', 'type' =>'tel'])
                 @include('component.form.input',['name'=> 'password', 'label' => 'Mật khẩu',  'type' =>'password'])
 
-                <p><a class="forgot-password-btn" href="forget-password">Quên mật khẩu?</a></p>
-                <button class="bns1dlc primary large w-bold i-left stretch">ĐĂNG KÝ</button>
+                <button class="btn btn--primary btn--large full btn-submit">ĐĂNG KÝ</button>
                 @csrf
 
             </form>
-            <div class=" a1k9ogns">
+            <div class=" title-line">
                 <hr/>
                 <span>Hoặc đăng nhập bằng</span>
                 <hr/>
@@ -25,7 +24,7 @@
 
             <div class="mocked-styled-15 g15384yj">
                 <a href="{{url('auth/google')}}">
-                    <button class="mocked-styled-18 b10u9umr">
+                    <button class="full white-box">
                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -46,7 +45,7 @@
                 </a>
                 <div id="google-login-btn"></div>
             </div>
-            <p class="mocked-styled-33 rnv45ui">Đã có tài khoản? <a class="btn-back" href="login">Đăng nhập ngay</a>
+            <p class="text-center">Đã có tài khoản? <a class="btn-back text-bold" href="login">Đăng nhập ngay</a>
             </p>
 
 
