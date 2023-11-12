@@ -89,6 +89,9 @@
   display: block;
 }
 
+.menu-items {
+  margin-bottom: 10px;
+}
 .menu-items > a {
   display: flex;
   height: 40px;
@@ -286,7 +289,7 @@
 .menu-mobile .content {
   position: fixed;
   top: 0px;
-  width: 210px;
+  width: 220px;
   height: 100vh;
   box-shadow: 0 0 10px #85888C;
   margin-left: -160px;
@@ -298,6 +301,7 @@
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 .menu-mobile input:checked ~ .content {
+  display: initial;
   transform: none;
 }
 
@@ -2994,6 +2998,9 @@ body {
 .container {
   max-width: 980px;
   margin: 0 auto;
+  padding: 0 10px;
+  width: 100%;
+  overflow: hidden;
 }
 
 section {
