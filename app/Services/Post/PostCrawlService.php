@@ -49,9 +49,9 @@ class PostCrawlService
             echo $i . '. ' . $avatarLink;
             $this->crawlPost($a->href, $avatar);
             echo '<hr/>';
-            if ($i > 1) {
-                break;
-            }
+//            if ($i > 1) {
+//                break;
+//            }
         }
     }
 
