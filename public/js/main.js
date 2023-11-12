@@ -171,10 +171,10 @@ $('a').click(function (e) {
 })
 
 function toggleLoading() {
-    $('.loader').toggle();
+    $('.overlay').toggle();
     setTimeout(function () {
-        $('.loader').toggle()
-    }, 8000)
+        $('.overlay').toggle()
+    }, 9000)
 }
 
 //form effect

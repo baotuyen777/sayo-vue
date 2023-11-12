@@ -21,6 +21,10 @@ class NewsService
             $this->crawlPost($url);
             return;
         }
+        if (!$html->find('.large-columns-1', 0)) {
+            echo $html;
+            return false;
+        }
 
         $tags = $html->find('.large-columns-1', 0)->find('.post-item');
         foreach ($tags as $tag) {
@@ -71,7 +75,7 @@ class NewsService
         foreach ($imgElements as $imgElement) {
 
             $src = preg_match('/\.(jpg|png|webp|jpeg)$/', $imgElement->src) ? $imgElement->src : $imgElement->getAttribute('data-lazy-src');
-            if($imgElement->src=='https://badova.net/wp-content/uploads/2019/08/logo-badova.png'){
+            if ($imgElement->src == 'https://badova.net/wp-content/uploads/2019/08/logo-badova.png') {
                 continue;
             }
 
@@ -82,7 +86,7 @@ class NewsService
                 }
             }
 
-            if(!$src){
+            if (!$src) {
                 dd($imgElement);
             }
             $imgElement->src = $src;
@@ -114,7 +118,6 @@ class NewsService
 
         $content = str_replace('badova.net', 'sayo.vn', $content);
         $content = str_replace('Badova', 'Sayo', $content);
-
 
 
         $param = [

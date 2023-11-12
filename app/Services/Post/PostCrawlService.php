@@ -160,18 +160,22 @@ class PostCrawlService
         $description = $html->find('.info_text', 0)->plaintext ?? '';
 
         $title = $this->getTitle($html);
+        if (strpos($title, 'Chính chủ nhờ')) {
+            echo "<br>remove chinh chu nho";
+            return;
+        }
 
         $price = $content->find('ul', 0)->find('li', 0)->find('span', 0) ?? '';
 
         if (strpos($price, 'Thoả thuận')) {
-            echo 'no_price ';
+            echo '<br>' . 'no_price ';
             return;
         }
         $price = str_replace(' Triệu/tháng', '', $price);
 
-        echo(str_replace(',', '.', $price));
+//        echo(str_replace(',', '.', $price));
         $price = intval(floatval(strip_tags(str_replace(',', '.', $price))) * 1000000);
-        echo $price;
+        echo '<br>' . $price;
         $acreage = '';
         if (!$content->find('ul', 0)) {
             echo 'no_acreage ';
@@ -204,7 +208,7 @@ class PostCrawlService
 
 //        $obj = Post::where('source', $url)->first();
         $obj = Post::where('source', $url)->first();
-        echo $param['name'];
+        echo '<br>' . $param['name'] . '<br>';
         if (!$obj) {
             $obj = Post::create($param);
             echo '<span style="color: green"> -------->insert success</span>';

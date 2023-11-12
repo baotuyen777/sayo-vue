@@ -19,7 +19,10 @@
         </svg>
     </button>
 </div>
-<div class="loader"></div>
+
+<div class="overlay">
+    <div class="loader"></div>
+</div>
 <div id="dusktext"></div>
 
 <script src='{{ env('APP_URL')}}/js/main.js'></script>
