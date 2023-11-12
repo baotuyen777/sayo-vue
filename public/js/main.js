@@ -1,13 +1,15 @@
 //1.slider
 jQuery(document).ready(function ($) {
-    // let screenWidth = $(window).width();
-    // if (screenWidth < 768) {
-    //     $('.slider ul li').css({width: screenWidth, height: 200});
-    // }
+    var slideWidth = 620;
+    let screenWidth = $(window).width();
+    if (screenWidth < 540) {
+        // $('.slider ul li').css({width: screenWidth, height: 200});
+        slideWidth = screenWidth
+    }
     const slide = jQuery('.post-slider .slick-track')
     const item = $('.post-slider .item')
     var slideCount = item.length;
-    var slideWidth = 620;
+
 
     var sliderUlWidth = slideCount * slideWidth;
     slide.css({width: sliderUlWidth, marginLeft: -slideWidth});

@@ -1,5 +1,4 @@
 <div class="post-slider">
-    <div class="slick-slider slick-initialized" dir="ltr">
         <div class="slick-track">
             <div data-index="0" class="slick-slide item">
                 <div class="ad-slider-image">
@@ -44,7 +43,6 @@
                 </li>
             @endforeach
         </ul>
-    </div>
     <div class="ad-image-caption">
         <span class="ad-image-caption-text">Tin cá nhân đăng {{showHumanTime($obj['created_at'])}}</span>
     </div>

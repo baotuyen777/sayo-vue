@@ -26,11 +26,11 @@
         padding: 10px;
     }
 
-    &__body{
+    &__body {
         padding: 10px;
     }
 
-    &__footer{
+    &__footer {
         margin: 5px 0;
     }
 
@@ -69,7 +69,6 @@
 }
 
 
-
 .product .product__feedback {
     position: absolute;
     right: 0px;
@@ -85,14 +84,17 @@
 .post-horizontal {
     position: relative;
     border-radius: 1px;
+
     .body {
         display: flex;
         background: white;
         margin: 10px;
-        .info{
+
+        .info {
             padding-left: 5px;
             flex: 1;
         }
+
         .img {
             cursor: pointer;
             width: 100px;
@@ -100,7 +102,8 @@
             background-size: cover
         }
     }
-    .product-label{
+
+    .product-label {
         position: absolute;
         top: 15px;
         left: 15px;
@@ -108,10 +111,12 @@
         color: white;
         padding: 2px;
         font-size: 0.8em;
-        &.danger{
+
+        &.danger {
             background: red;
         }
-        &.success{
+
+        &.success {
             background: green;
         }
     }

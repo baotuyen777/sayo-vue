@@ -169,6 +169,7 @@ $color_2: #000;
     background-size: 50% auto;
     background-image: url("https://sayo.vn/img/logo-white.png");
     height: 495px;
+    position: relative;
 
     .item {
         width: 620px;
@@ -239,8 +240,7 @@ $color_2: #000;
     top: 50%;
     z-index: 1;
     transform: translateY(-50%);
-    background: #000;
-    opacity: .3;
+    background: $black-transparent;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -739,4 +739,14 @@ $color_2: #000;
     overflow-y: hidden;
     white-space: nowrap;
     padding: 0;
+}
+
+@media (max-width: 540px) {
+    .post-slider {
+        height: 330px;
+        .item {
+            //width: 545px;
+            width: 100vw;
+        }
+    }
 }
