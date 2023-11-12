@@ -237,13 +237,6 @@
   background: green;
 }
 
-.main-menu {
-  display: none;
-}
-.main-menu.show {
-  display: block;
-}
-
 .menu-mobile {
   margin: 15px 10px;
 }
