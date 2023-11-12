@@ -1,0 +1,8 @@
+[
+    {
+        "id": "update-repo",
+        "execute-command": "./deploy.sh",
+        "command-working-directory": "./",
+        "response-message": "Webhook received. Executing deployment script."
+    }
+]
