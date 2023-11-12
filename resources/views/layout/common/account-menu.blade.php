@@ -1,7 +1,7 @@
 <div class="account-menu">
     <div class="avatar">
         <img class="aw__is4v2dl aw__i1408gg0 aw__uevk1au"
-        {{--             src="{{ asset('img/icon/default_user.png')}}" alt="Sayo">--}}
+             src="{{ asset('img/icon/default_user.png')}}" alt="Sayo">
         <span class="no-wrap">Tài khoản</span>
         <svg width="1rem" height="1rem" viewBox="0 0 16 16" fill="none"
              xmlns="http://www.w3.org/2000/svg" class="aw__dvoj89e">
@@ -11,84 +11,6 @@
         </svg>
     </div>
 
-    <div class="menu">
 
-        <div class="aw__ntc1674" style="--ntc1674-2: 72px;">
-            <span class="aw__nrouw61" style="--nrouw61-3: 48px;"></span>
-            @guest
-                <span class="aw__n171wcvy"><a href="{{ route('login') }}">Đăng nhập</a> / <a
-                        href="{{ route('register') }}">Đăng ký</a></span>
-            @endguest
-            @auth
-                <a href="{{route('user.show',['user'=>Auth()->user()->username])}}"><span class="aw__n171wcvy">{{ Auth::user()->name }}</span></a>
-            @endauth
-        </div>
-        @auth
-
-            {{--                    <div class="aw__l1txzw95">--}}
-            {{--                        <a class="aw__iys36jq"--}}
-            {{--                                                 href=""--}}
-            {{--                                                 target="_self" rel="noreferrer">--}}
-            {{--                            <div ><img class="aw__i13p2z3b"--}}
-            {{--                                                          src="https://static.chotot.com/storage/icons/svg/setting.svg"--}}
-            {{--                                                          alt="Cài đặt tài khoản"></div>--}}
-            {{--                            <div >Cài đặt tài khoản</div>--}}
-            {{--                        </a>--}}
-            {{--                    </div>--}}
-            {{--        <div class="aw__d15qd39x">Quản lí tin </div>--}}
-            {{--        <div class="aw__l1txzw95">--}}
-            {{--            <a class="aw__iys36jq" href="#">--}}
-            {{--                <img class="aw__i13p2z3b"--}}
-            {{--                     src="https://static.chotot.com/storage/chotot-icons/svg/escrow_buy_orders.svg"--}}
-            {{--                     alt="Lịch sử mua">--}}
-            {{--                <span>Quản lý đơn hàng</span>--}}
-
-            {{--            </a>--}}
-            {{--        </div>--}}
-            @if(isAdmin())
-                <div class="aw__l1txzw95">
-                    {{--            <a class="aw__iys36jq" href="{{route('user.show',['user'=>Auth()->user()->username])}}">--}}
-                    <a class="aw__iys36jq" href="{{route('post.index')}}">
-                        <img class="aw__i13p2z3b"
-                             src="https://static.chotot.com/storage/chotot-icons/svg/escrow_buy_orders.svg"
-                             alt="Lịch sử mua">
-                        <span>Quản lý bài đăng</span>
-                    </a></div>
-            @endif
-
-            {{--        <div class="aw__l1txzw95">--}}
-            {{--            <a class="aw__iys36jq" href="#">--}}
-            {{--                <img class="aw__i13p2z3b"--}}
-            {{--                     src="https://static.chotot.com/storage/chotot-icons/svg/escrow-orders.svg"--}}
-            {{--                     alt="Đơn bán">--}}
-            {{--                <span>Quản lý cửa hàng</span>--}}
-            {{--            </a></div>--}}
-            {{--        <div class="aw__l1txzw95">--}}
-            {{--            <a class="aw__iys36jq " href="#">--}}
-            {{--                <img class="aw__i13p2z3b"--}}
-            {{--                     src="https://static.chotot.com/storage/chotot-icons/svg/escrow.svg"--}}
-            {{--                     alt="Ví bán hàng">--}}
-            {{--                <span>0 VND</span>--}}
-            {{--            </a>--}}
-            {{--        </div>--}}
-
-            <div class="aw__d15qd39x">Tài khoản</div>
-            <div class="aw__l1txzw95">
-                <a class="aw__iys36jq " href="{{route('profile')}}">
-                    <img class="aw__i13p2z3b"
-                         src="https://static.chotot.com/storage/icons/svg/setting.svg"
-                         alt="Ví bán hàng">
-                    <span>Cài đặt tài khoản</span>
-                </a>
-            </div>
-            <div class="aw__l1txzw95">
-                <a class="aw__iys36jq " href="{{route('logout')}}">
-                    <img class="aw__i13p2z3b"
-                         src="https://static.chotot.com/storage/icons/svg/logout.svg"
-                         alt="Ví bán hàng">
-                    <span>Đăng xuất</span>
-                </a>
-            </div>
-        @endauth
-    </div>
+    @include('layout.common.account-menu-content')
 </div>

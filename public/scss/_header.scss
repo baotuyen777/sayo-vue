@@ -1,3 +1,4 @@
+
 .main-header {
     line-height: 1.5;
     //height: 56px;
@@ -11,68 +12,83 @@
     transition-property: height;
     transition-duration: .2s;
     padding-top: 10px;
-}
 
-.search-form-wrapper {
-    width: 100%;
-    padding: 10px;
-}
+    .logo {
+        margin: 7px 10px 0 0;
 
-.search-form {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    border-radius: 4px;
-    position: relative;
-    background: white;
+        img {
+            height: 45px;
+            min-width: 100px;
+        }
+    }
 
-    input {
-        height: 36px;
+    .search-form-wrapper {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .search-form {
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
         border-radius: 4px;
-        border: none;
-        outline: 0;
-        text-indent: 12px;
-        width: calc(100% - 40px);
+        position: relative;
+        background: white;
+
+        input {
+            height: 36px;
+            border-radius: 4px;
+            border: none;
+            outline: 0;
+            text-indent: 12px;
+            width: calc(100% - 40px);
+        }
+
+        button {
+            height: 28px;
+        }
     }
 
-    button {
-        height: 28px;
+    .nav-quick-button {
+
+        display: flex;
+        gap: 16px;
+
+        justify-content: center;
+        align-items: center;
+
+        > span {
+            z-index: 101;
+        }
     }
+
 }
 
-.aw__la2dsz4 {
-
-
-    text-align: center;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-right: 12px;
-}
-
-.aw__r1fkdta0 {
-
-    display: flex;
-    gap: 16px;
-
-    justify-content: center;
-    align-items: center;
-
-    > span {
-        z-index: 101;
-    }
-}
 
 //account
 .account-menu {
     position: relative;
     cursor: pointer;
 
-    .menu {
+    .avatar {
+        display: flex;
+        justify-items: center;
+        margin: 10px;
+        min-width: 120px;
+
+        img {
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+        }
+
+        svg {
+            height: 24px;
+        }
+    }
+
+    .menu-items {
         position: absolute;
         width: 300px;
         top: 50px;
@@ -94,105 +110,46 @@
     }
 }
 
-.aw__ntc1674 {
-    position: relative;
-    padding: 12px;
-    width: 100%;
-    height: var(--ntc1674-2);
-}
 
-.aw__d15qd39x {
-    height: 38px;
-    background-color: #f5f5f5;
-    padding: 10px 0 10px 12px;
-    font-weight: bold;
-}
-
-.aw__iys36jq {
-    display: flex;
-    align-items: center;
-    height: 40px;
-    width: 100%;
-    line-height: 24px;
-    text-decoration: none;
-    padding: 8px 12px;
-    gap: 10px;
-
-}
-
-.aw__ntc1674 {
-    position: relative;
-    padding: 12px;
-    width: 100%;
-    height: var(--ntc1674-2);
-
-    .aw__nrouw61 {
-        display: block;
-        background-image: url(https://static.chotot.com/storage/marketplace/common/png/default_user.png);
-        background-size: 100% 100%;
-        border-radius: 100%;
-        height: var(--nrouw61-3);
-        width: var(--nrouw61-3);
-        float: left;
-        position: relative;
-    }
-
-    .aw__n171wcvy {
-        float: left;
-        margin-left: 8px;
-        margin-top: 14px;
-        width: calc(100% - 100px);
-        line-height: 20px;
-        font-size: 1rem;
-        font-weight: 700;
+.menu-items {
+    > a {
+        display: flex;
+        //align-items: center;
+        height: 40px;
+        width: 100%;
+        line-height: 24px;
         text-decoration: none;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        padding: 8px 12px;
+        gap: 10px;
     }
-}
 
+    .menu-user {
+        position: relative;
+        padding: 12px;
+        width: 100%;
+        height: 72px;
 
-@media (min-width: 768px) {
-    .aw__n40viec {
-        color: $black !important;
-        display: flex;
-
-        align-items: center;
-
-    }
-}
-
-.main-header {
-    .avatar {
-        display: flex;
-        justify-items: center;
-        margin: 10px;
-
-        img {
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            margin-right: 5px;
+        h3{
+            padding: 0 10px;
+            display: inline-block;
         }
-
-        svg {
-            height: 24px;
+        .menu-avatar {
+            display: block;
+            background-image: url(http://sayo.vn/img/icon/default_user.png);
+            background-size: 100% 100%;
+            border-radius: 100%;
+            height: 48px;
+            width: 48px;
+            float: left;
+            position: relative;
         }
-    }
-}
-
-.logo {
-    img {
-        height: 45px;
-        min-width: 100px;
     }
 }
 
 @media (max-width: 600px) {
     .main-header {
         .avatar {
-            span, svg{
+            span, svg {
                 display: none;
             }
         }

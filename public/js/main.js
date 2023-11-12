@@ -149,7 +149,7 @@ $('.btn-ajax').click(function () {
 })
 
 jQuery('.account-menu').click(function () {
-    jQuery(this).find('.menu').toggle('show')
+    jQuery(this).find('.menu-items').toggle('show')
 });
 
 //form
@@ -176,7 +176,7 @@ function toggleLoading() {
     $('.overlay').toggle();
     setTimeout(function () {
         $('.overlay').toggle()
-    }, 9000)
+    }, 5000)
 }
 
 //form effect

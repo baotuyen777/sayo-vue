@@ -117,6 +117,7 @@
     }
 }
 
+
 .justify-content-center {
     justify-content: center;
 }
@@ -277,6 +278,10 @@
     font-size: 30px;
 }
 
+.hide-pc{
+    display: none !important;
+}
+
 @media (max-width: 991px) {
     .grid-2 > div {
         width: 30%;
@@ -293,6 +298,13 @@
     //
     .grid-6 > div {
         flex: 1 0 calc(30% - 20px);
+    }
+    .hide-xs{
+        display: none !important;
+    }
+
+    .hide-pc{
+        display: initial !important;
     }
 }
 

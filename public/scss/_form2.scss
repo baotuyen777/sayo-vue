@@ -78,24 +78,25 @@
             }
         }
 
-        &.medium.i-left {
-            > svg {
-                font-size: 1rem;
-            }
-        }
-
-        &.r-normal {
-            border-radius: 4px;
-        }
-
-        &.w-bold {
-            font-weight: 700;
-        }
+        //&.medium.i-left {
+        //    > svg {
+        //        font-size: 1rem;
+        //    }
+        //}
+        //
+        //&.r-normal {
+        //    border-radius: 4px;
+        //}
+        //
+        //&.w-bold {
+        //    font-weight: 700;
+        //}
     }
 
     &--large {
         padding: 8px 20px;
         text-transform: uppercase;
+        font-weight: bold;
     }
 
     &--small {
