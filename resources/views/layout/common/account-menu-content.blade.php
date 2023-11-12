@@ -1,8 +1,8 @@
 <div class="menu-items">
     <div class="menu-user">
-        <span class="menu-avatar"></span>
         @guest
-            <h3><a href="{{ route('login') }}">Đăng nhập</a> / <a
+            <span class="menu-avatar hide-xs"></span>
+            <h3><a href="{{ route('login') }}">Đăng nhập</a>  <span class="hide-xs">/</span> <a
                     href="{{ route('register') }}">Đăng ký</a></h3>
         @endguest
         @auth
