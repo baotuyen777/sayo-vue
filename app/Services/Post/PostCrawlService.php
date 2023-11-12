@@ -160,7 +160,7 @@ class PostCrawlService
         $description = $html->find('.info_text', 0)->plaintext ?? '';
 
         $title = $this->getTitle($html);
-        if (strpos($title, 'Chính chủ nhờ')) {
+        if (strpos($title, 'Chính chủ nhờ') !== false) {
             echo "<br>remove chinh chu nho";
             return;
         }
