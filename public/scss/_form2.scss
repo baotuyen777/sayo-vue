@@ -92,7 +92,14 @@
         //    font-weight: 700;
         //}
     }
-
+    &--oval {
+        border: 1px solid $secondary;
+        border-radius: 20px;
+        color: $secondary;
+        &:hover {
+            background-color: #e2e6ea
+        }
+    }
     &--large {
         padding: 8px 20px;
         text-transform: uppercase;

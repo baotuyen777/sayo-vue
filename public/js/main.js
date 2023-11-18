@@ -6,21 +6,7 @@ jQuery(document).ready(function ($) {
     var leftIncrement = ulWidth / liCount;
     var swipeSpeed = 300;
 
-    let sliderHeight = 450;
-    let screenWidth = $(window).width();
-    if (screenWidth < 540) {
-        sliderHeight = 300
-    }
-
     const $slider =$('.slider');
-    $('.slider .image-item').on('load', function () {
-        $('.slider').height(sliderHeight);
-        $('.group-slider').height(sliderHeight);
-    });
-    //TODO: handleresisize screen
-    // $(window).resize(function () {
-    //     $('.slider').css('height', sliderHeight);
-    // });
 
     $slider.find('.group-slider').width(ulWidth + '%');
     $slider.find('.slider-item').width(liWidth + '%');

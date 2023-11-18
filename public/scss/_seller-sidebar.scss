@@ -1,0 +1,266 @@
+
+.seller-profile {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: white;
+
+    .SellerProfile_inforItem__B3Pzq {
+        flex: 1 1
+    }
+
+    .SellerProfile_inforItem__B3Pzq:focus p, .SellerProfile_inforItem__B3Pzq:focus span, .SellerProfile_inforItem__B3Pzq:hover p, .SellerProfile_inforItem__B3Pzq:hover span {
+        outline: 0;
+        text-decoration: none
+    }
+
+    .SellerProfile_inforItem__B3Pzq > p {
+        font-size: 12px;
+        color: #9b9b9b;
+        margin-bottom: 5px
+    }
+
+    .SellerProfile_inforItem__B3Pzq > span {
+        color: #222;
+        font-weight: 600
+    }
+
+    .SellerProfile_inforItem__B3Pzq img {
+        margin-right: 0 !important
+    }
+
+    .SellerProfile_inforItem__B3Pzq .SellerProfile_inforValue__hK4rb {
+        color: #222;
+        font-weight: 600
+    }
+
+    .SellerProfile_inforWrapper__KXg71 {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 10px;
+        text-align: center;
+        align-items: center;
+        font-size: 12px;
+        color: #9b9b9b
+    }
+
+    .SellerProfile_inforWrapper__KXg71 > a {
+        flex: 1 1;
+        color: #9b9b9b
+    }
+
+    .SellerProfile_inforWrapper__KXg71 > a :hover {
+        color: transparent;
+        text-decoration: none;
+        text-decoration: initial
+    }
+
+    .SellerProfile_nameBounder__btDeS {
+        flex: 1 1;
+        padding-left: 8px;
+        width: 100%;
+        max-width: calc(100% - 50px)
+    }
+
+    .SellerProfile_flexDiv__IEgQl {
+        display: flex
+    }
+
+    .SellerProfile_nameDiv__sjPxP {
+        margin: 5px 5px 3px 0;
+        font-size: 13px;
+        flex: 1 1;
+        line-height: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2
+    }
+
+    .SellerProfile_statusOnlineDiv__iiwUQ {
+        font-size: 11px;
+        color: #9b9b9b;
+        display: flex
+    }
+
+    .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
+        font-size: 30px;
+        color: #589f39;
+        line-height: 21px;
+        margin-right: 5px
+    }
+
+    .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
+        color: #9b9b9b
+    }
+
+    .SellerProfile_seperateLine__H_bJa {
+        border-left: 1px solid #cacaca;
+        height: 20px;
+        width: 1px
+    }
+
+    .SellerProfile_inforText__D7tPA {
+        text-decoration: none
+    }
+
+    .SellerProfile_sellerWrapper__GlDwe {
+        display: flex;
+        color: #333
+    }
+
+    .SellerProfile_sellerWrapper__GlDwe:focus, .SellerProfile_sellerWrapper__GlDwe:hover {
+        color: #333;
+        outline: 0;
+        text-decoration: none
+    }
+
+    .SellerProfile_offlineBullet__by5mZ, .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
+        font-size: 30px;
+        color: #589f39;
+        line-height: 16px;
+        width: 13px;
+        text-align: center;
+        display: inline-block
+    }
+
+    .SellerProfile_offlineBullet__by5mZ {
+        color: #9b9b9b;
+        text-align: center
+    }
+}
+
+
+.LeadButton_wrapperLeadButtonDesktop__SVKE8 .LeadButton_buttonChatDesktop__gbYM9 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #589f39;
+    background-color: #fff;
+    font-weight: 700;
+    text-align: center
+}
+
+.LeadButton_wrapperLeadButtonDesktop__SVKE8 .LeadButton_buttonChatDesktop__gbYM9:hover {
+    background-color: #e6e6e6
+}
+
+.LeadButton_wrapperLeadButtonDesktop__SVKE8 .LeadButton_buttonChatDesktop__gbYM9 > img {
+    display: inline-block;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 10px
+}
+
+.LeadButton_wrapperLeadButtonDesktop__SVKE8 .LeadButton_showPhoneButton__1BIwH {
+    margin-bottom: 8px
+}
+
+.LeadButton_wrapperLeadButtonDesktop__SVKE8 .LeadButton_showPhoneButton__1BIwH span {
+    font-weight: 700;
+    font-size: 14px
+}
+
+.LeadButton_wrapperLeadButtonDesktop__SVKE8 .LeadButton_chatDesktopButton__HSQyg {
+    margin-bottom: 8px
+}
+
+.LeadButton_wrapperLeadButtonDesktop__SVKE8 .LeadButton_chatDesktopButton__HSQyg span {
+    font-weight: 700;
+    font-size: 14px
+}
+
+.SafeTips_SafeTipsWrapper___i5Fm {
+    background-color: #fff;
+    min-height: 108px;
+    padding: 3px;
+    margin-bottom: 10px
+}
+
+.SafeTips_SafeTipsWrapper___i5Fm img {
+    margin-right: 15px
+}
+
+.SafeTips_SafeTipsWrapper___i5Fm a {
+    font-size: 13px;
+    color: #fe9900;
+    margin-top: 5px;
+    text-align: left
+}
+
+.SafeTips_TipText__mMXwX {
+    font-size: 13px;
+    text-align: left;
+    font-style: italic;
+    padding-top: 20px
+}
+
+.Avatar_imageWrapper__6tGNZ {
+    display: inline-block;
+    border: 2px solid #e5e5e5;
+    padding: 0;
+    vertical-align: middle;
+    background: url(https://sayo.vn/img/icon/default-avatar.webp) no-repeat;
+    background-size: contain;
+    background-color: #fff
+}
+
+.Avatar_defaultSize__a_WTh {
+    height: 50px;
+    width: 50px;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+.ShowPhoneButton_wrapper__B627I {
+    width: 100%
+}
+
+.ShowPhoneButton_phoneButton__p5Cvt {
+    display: block;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 8px 10px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    font-size: 13px;
+    transition: background-color .2s ease-in-out;
+    height: 42px
+}
+
+.ShowPhoneButton_phoneNotClicked__dlQn_ {
+    color: #fff;
+    background-color: #33a837
+}
+
+.ShowPhoneButton_phoneNotClicked__dlQn_:hover {
+    background-color: #3b8122
+}
+
+.ShowPhoneButton_flexDiv__3qpNj {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.ShowPhoneButton_icon__wsnZ5 {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 10px
+}

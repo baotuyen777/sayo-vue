@@ -8,16 +8,12 @@
         <div class="slider-item">
             <div class="lead-button-slide-wrapper">
                 <a class=" lead-button-default " href="tel:{{$obj->author->phone}}"> <img
-                        src="https://static.chotot.com/storage/chotot-icons/png/call-green.png"
-                        alt="call">Gọi điện</a>
+                        src="{{asset('img/icon/call-green.png')}}" alt="call">Gọi điện</a>
                 <a class=" lead-button-default " href="sms:{{$obj->author->phone}}"><img
-                        src="https://static.chotot.com/storage/chotot-icons/png/sms.png"
-                        alt="sms">SMS</a>
+                        src="{{asset('img/icon/sms.png')}}" alt="sms">SMS</a>
                 <a class=" lead-button-default"
                    href="https://zalo.me/{{$obj->author->phone}}"
-                   target="_blank" rel="nofollow"><img
-                        src="https://static.chotot.com/storage/chotot-icons/png/chat.png"
-                        alt="chat">Chat</a>
+                   target="_blank" rel="nofollow"><img src="{{asset('img/icon/chat.png')}}" alt="chat">Chat</a>
             </div>
         </div>
     </div>

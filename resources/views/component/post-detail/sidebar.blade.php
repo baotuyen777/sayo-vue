@@ -57,7 +57,7 @@
             <div class="LeadButton_chatDesktopButton__HSQyg"><a
                     href="https://zalo.me/{{$obj->author->phone}}"
                     rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9" target="_blank">
-                    <img src="https://static.chotot.com/storage/chotot-icons/png/chat_green.png"
+                    <img src="{{asset('img/icon/call-green.png')}}"
                          alt="chat"><span>CHAT VỚI NGƯỜI BÁN</span></a></div>
             <div><a href="#" rel="nofollow" class="btn LeadButton_buttonChatDesktop__gbYM9">
                     <span>Mua ngay</span></a></div>
