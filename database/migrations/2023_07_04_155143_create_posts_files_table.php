@@ -13,8 +13,6 @@ return new class extends Migration {
         Schema::create('posts_files', function (Blueprint $table) {
             $table->id();
 
-//            $table->foreignId('posts_id')->constrained();
-//            $table->foreignId('files_id')->constrained();
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('files_id');
 //

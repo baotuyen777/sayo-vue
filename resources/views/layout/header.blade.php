@@ -33,11 +33,9 @@
 <header class="main-header">
     <div class="container">
         <nav class="main-nav">
-            <div class="aw__la2dsz4">
-                <div class="logo">
-                    <a href="{{ route('home')}}">
-                        <img src="{{ env('APP_URL') }}/img/logo-white.png" alt="sayo-logo"></a></div>
-            </div>
+            <div class="logo">
+                <a href="{{ route('home')}}">
+                    <img src="{{ env('APP_URL') }}/img/logo-white.png" alt="sayo-logo"></a></div>
             <div class="search-form-wrapper">
                 <form class="search-form" action="{{route('archive')}}">
                     <input autocomplete="off" name="s" placeholder="Tìm kiếm sản phẩm - Dịch vụ trên Sayo"
@@ -51,28 +49,36 @@
                     </button>
                 </form>
             </div>
-            <div class="aw__r1fkdta0">
-
-                <a class="btn btn--primary btn--large primary r-normal medium w-bold i-left aw__h1gb9yk"
+            <div class="nav-quick-button hide-xs">
+                <a class="btn btn--primary btn--large"
                    href="{{route('publicPost')}}" rel="nofollow">Đăng tin</a>
                 @include('layout.common.account-menu')
             </div>
+
+            <div class="menu-mobile hide-pc">
+                <input type="checkbox"/>
+                <span></span>
+                <span></span>
+                <span></span>
+                <div class="content">
+                    @include('layout.common.account-menu-content')
+                    <a class="btn btn--primary btn--large"
+                       href="{{route('publicPost')}}" rel="nofollow">Đăng tin</a>
+                </div>
+            </div>
         </nav>
-        <div class=" ">
-            <ul class="nav">
-                <li class="active">
-                    <a href="{{route('archive')}}"> DANH MỤC</a>
-                    <ul class="sub-menu">
-                        @foreach(getCategories() as $code=>$name)
-                            <li><a href="{{route('archive',['catCode'=>$code])}}">{{$name}}</a></li>
-                        @endforeach
-                    </ul>
 
-                </li>
-                <li><a href="{{route('hotgirl')}}">Hot girl</a></li>
-            </ul>
+        <ul class="nav hide-xs">
+            <li class="active">
+                <a href="{{route('archive')}}"> DANH MỤC</a>
+                <ul class="sub-menu">
+                    @foreach(getCategories() as $code=>$name)
+                        <li><a href="{{route('archive',['catCode'=>$code])}}">{{$name}}</a></li>
+                    @endforeach
+                </ul>
 
-
-        </div>
+            </li>
+            <li><a href="{{route('hotgirl')}}">Hot girl</a></li>
+        </ul>
     </div>
 </header>

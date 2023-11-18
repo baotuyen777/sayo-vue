@@ -13,25 +13,26 @@ return new class extends Migration {
         Schema::create('post_comment', function (Blueprint $table) {
             $table->id();
             $table->string('content');
-            $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('parent_id')->nullable();
-            $table->timestamps();
 
+            $table->unsignedBigInteger('item_id');
             $table->foreign('item_id')
                 ->references('id')
                 ->on('posts')
                 ->onDelete('cascade');
 
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')
                 ->references('id')
                 ->on('post_comment')
                 ->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 

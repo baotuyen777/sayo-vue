@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+
 function moneyFormat($number): string
 {
     if ($number < 1000000) {
@@ -83,7 +84,7 @@ function vn2str($str)
 function vn2code($str)
 {
     $str = vn2str($str);
-    $str = str_replace(['-', ',', '.','/',':'], '', $str);
+    $str = str_replace(['-', ',', '.', '/', ':'], '', $str);
     $str = str_replace([' '], '-', $str);
     $str = str_replace(['--'], '-', $str);
     return strtolower($str);
@@ -96,15 +97,17 @@ function vn2Province($str)
     return $str;
 }
 
-//function getStatusLabel($key){
-//
-//}
-function checkAuthor($authorId)
+function isAuthor($obj): bool
 {
-    if (!Auth::user() || Auth::user()->id != $authorId || Auth::user()->role > 1) {
+    if (!$obj) {
         return false;
     }
-    return true;
+
+    $authorId = $obj->author_id;
+    if (!Auth::user() || Auth::user()->id != $authorId || Auth::user()->role > 1) {
+        return true;
+    }
+    return false;
 }
 
 function getCategories()
@@ -126,7 +129,7 @@ function getCategories()
         ];
 }
 
-function curlGetContents($url)
+function curlGetContents($url, $onlygetImage = false)
 {
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -134,7 +137,15 @@ function curlGetContents($url)
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     $data = curl_exec($ch);
+
+//    $contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+//    echo $contentType;
     curl_close($ch);
     return $data;
+}
+
+function isAdmin()
+{
+    return Auth::user() && Auth::user()->role === ROLE_ADMIN;
 }
 

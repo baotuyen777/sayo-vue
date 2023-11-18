@@ -19,15 +19,18 @@
         </svg>
     </button>
 </div>
-<div class="loader"></div>
+
+<div class="overlay">
+    <div class="loader"></div>
+</div>
 <div id="dusktext"></div>
 
 <script src='{{ env('APP_URL')}}/js/main.js'></script>
 
 @stack('js')
-@if(env('APP_ENV')=='production')
-    @include('layout.common.social')
-@endif
+{{--@if(env('APP_ENV')=='production')--}}
+{{--    @include('layout.common.social')--}}
+{{--@endif--}}
 
 </body>
 </html>

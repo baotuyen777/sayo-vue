@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Fe;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use App\Services\Product\ProductService;
@@ -51,8 +51,8 @@ class ProductController extends Controller
             ->where('code', $code)
             ->first();
 
-        if (!checkAuthor($product->author_id)) {
-            return view('pages/404');
+        if (!isAuthor($product)) {
+            return view('pages.404');
         }
         $output = $this->productsService->getAttrOptions($product);
 
@@ -158,8 +158,8 @@ class ProductController extends Controller
     public function destroy($code)
     {
         $obj = Product::where('code', $code)->first();
-        if (!checkAuthor($obj->author_id)) {
-            return view('pages/404');
+        if (!isAuthor($obj)) {
+            return view('pages.404');
         }
 
         $obj->delete();

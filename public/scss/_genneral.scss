@@ -13,6 +13,8 @@ body {
 .container {
     max-width: 980px;
     margin: 0 auto;
+    padding: 0 10px;
+    width: 100%;
 }
 
 section {
@@ -41,7 +43,7 @@ table {
     overflow: scroll;
 
     thead {
-        background: #f63;
+        background: $primary;
         color: white;
 
         th {

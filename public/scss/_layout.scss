@@ -1,15 +1,17 @@
-html, body{
+html, body {
     height: 100%;
     //margin-bottom: -50px;
 }
-main{
+
+main {
     min-height: calc(100% - 142px);
 }
 
-.main-nav{
+.main-nav {
     display: flex;
     justify-content: space-between;
 }
+
 .sidebar {
     position: relative;
 
@@ -51,12 +53,13 @@ main{
     }
 }
 
-
 .two-column {
     display: flex;
+
     .sidebar {
         flex: 30%;
     }
+
     .main {
         flex: 70%;
         margin-right: 10px;
@@ -66,39 +69,41 @@ main{
 .breadcrumb {
     padding: 15px 0;
     margin-bottom: 0;
+
     li {
         font-size: 12px;
         display: inline;
 
-        > div {
-            display: inline;
-        }
+        //> div {
+        //    display: inline;
+        //}
 
-        > a {
-            color: $color_1;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-
-        span {
-            strong {
-                color: $primary--light;
-            }
-        }
+        //span {
+        //    strong {
+        //        color: $secondary;
+        //    }
+        //}
     }
 
     a {
         &:after {
-            color: $color_1;
+            color: $secondary;
             content: "»";
             padding: 0 5px;
         }
     }
 }
-footer{
+
+footer {
     margin-top: 30px;
     padding: 10px;
+}
+
+@media (max-width: 992px) {
+    .two-column {
+        .sidebar {
+            display: none;
+        }
+    }
 }
 

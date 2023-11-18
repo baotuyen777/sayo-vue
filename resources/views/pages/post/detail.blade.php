@@ -62,7 +62,7 @@
                     <div class="d-flex justify-content-center gap-10">
                         <a class="btn btn-back" href="{{route('user.show',['user'=>Auth()->user()->username])}}">
                             Về danh sách</a>
-                        <button class="btn--primary primary r-normal medium w-bold i-left aw__h1gb9yk btn-submit">
+                        <button class="btn--primary btn-submit">
                             {{isset($obj['id']) ? 'Lưu thay đổi' : 'ĐĂNG TIN' }}
                         </button>
                         @if(isset($obj))

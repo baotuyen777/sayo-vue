@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Fe;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\PostCommentRequest;
 use App\Http\Requests\PostRequest;
 use App\Models\Files;
 use App\Models\Post;
+use App\Models\PostComment;
 use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
 use Illuminate\Http\Request;
@@ -16,24 +17,22 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    function __construct(private readonly PostService $postsService, private readonly PostCrawlService $postCrawlService)
+    function __construct(
+        private readonly PostService      $postsService,
+        private readonly PostCrawlService $postCrawlService
+    )
     {
     }
 
     public function index(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
     {
-
         if (!Auth::user()) {
             return view('pages/auth/login');
         }
-        // $extraParam = ['catCode' => $catCode, 'provinceCode' => $provinceCode, 'districtCode' => $districtCode, 'wardCode' => $wardCode];
 
-        if (Auth::user()->role > 1) {
-            $extraParam['author_id'] = Auth::user()->id;
+        if (!isAdmin()) {
+            $request->merge(['author_id' => Auth::user()->id]);
         }
-
-        // $request->merge($extraParam);
-//        ->where('status',STATUS_ACTIVE)
 
         $res = $this->postsService->getAll($request);
 
@@ -49,6 +48,7 @@ class PostController extends Controller
             'wardCode' => $wardCode,
             'status' => STATUS_ACTIVE
         ];
+
         $request->merge($extraParam);
         $res = $this->postsService->getAll($request);
         $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');
@@ -57,33 +57,34 @@ class PostController extends Controller
 
     public function edit($code)
     {
-        $post = Post::with('category')
+        $obj = Post::with('category')
             ->with('avatar')
             ->with('files')
             ->where('code', $code)
             ->first();
 
-        if (!checkAuthor($post->author_id)) {
-            return view('pages/404');
+        if (!$obj || (!isAuthor($obj) && !isAdmin())) {
+            return view('pages.404');
         }
-        $output = $this->postsService->getAttrOptions($post);
 
-        $post['province_name'] = $output['provinces']->get($post->province_id)->name ?? '';
-        $post['district_name'] = $output['districts']->get($post->district_id)->name ?? '';
-        $post['ward_name'] = $output['wards']->get($post->ward_id)->name ?? '';
+        $output = $this->postsService->getAttrOptions($obj);
 
-        $post['file_ids'] = $post['files']->pluck('id');
-        $post['attr'] = $this->postsService->getAttrField($post);
+        $obj['province_name'] = $output['provinces']->get($obj->province_id)->name ?? '';
+        $obj['district_name'] = $output['districts']->get($obj->district_id)->name ?? '';
+        $obj['ward_name'] = $output['wards']->get($obj->ward_id)->name ?? '';
 
-        $output['obj'] = $post;
+        $obj['file_ids'] = $obj['files']->pluck('id');
+        $obj['attr'] = $this->postsService->getAttrField($obj);
+
+        $output['obj'] = $obj;
 
         return view('pages/post/detail', $output);
     }
 
-    //Show the form for editing . $catCode dung tren url
+    //Show the form for view . $catCode dung tren url
     public function show($catCode, $code)
     {
-        $post = Post::select('*')
+        $obj = Post::select('*')
             ->with('avatar')
             ->with('files')
             ->with('category')
@@ -91,14 +92,15 @@ class PostController extends Controller
             ->with('comments')
             ->where('code', $code)
             ->first();
-        if (!$post) {
-            return view('pages/404');
+
+        if (!$obj) {
+            return view('pages.404');
         }
 
-        $post['attr'] = $this->postsService->getAttrField($post, true);
+        $obj['attr'] = $this->postsService->getAttrField($obj, true);
 //        $post['cat_code'] = $catCode;
 //        dd($post['attr']);
-        return view('pages/post/view', ['obj' => $post]);
+        return view('pages.post.view', ['obj' => $obj]);
     }
 
     public function store(PostRequest $request)
@@ -175,13 +177,12 @@ class PostController extends Controller
     public function destroy($code)
     {
         $obj = Post::where('code', $code)->first();
+        if (!$obj) {
+            return response()->json(RETURN404);
+        }
 
-        if (!$obj || !checkAuthor($obj->author_id)) {
-            return response()->json([
-                'status' => false,
-                'status_code' => ERR_404,
-                'message' => ERR_404 . " Có lỗi xảy ra! vui lòng liên hệ với admin",
-            ]);
+        if (!isAuthor($obj) && !isAdmin()) {
+            return response()->json(RETURN_REQUIRED_ADMIN);
         }
 
         try {
@@ -203,7 +204,7 @@ class PostController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'message' => 'Có lỗi xảy ra! vui lòng liên hệ với admin ',
+                'message' => 'Có lỗi xảy ra! vui lòng liên hệ với admin',
                 'error' => $e->getMessage(),
             ]);
         }
@@ -225,14 +226,14 @@ class PostController extends Controller
         $userId = Auth::id();
 
         if (!$userId) {
-            return response()->json(['message' => 'Bạn cần đăng nhập để có thể bình luận','error' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Bạn cần đăng nhập để có thể bình luận', 'error' => 'Unauthorized'], 401);
         }
 
         try {
             $params['user_id'] = $userId;
             $postComment = PostComment::create($params);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Đã có lỗi xảy ra vui lòng thử lại','error' => 'Internal Server Error'], 500);
+            return response()->json(['message' => 'Đã có lỗi xảy ra vui lòng thử lại', 'error' => 'Internal Server Error'], 500);
         }
 
 

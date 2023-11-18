@@ -2,30 +2,32 @@
 @section('content')
     <div id="login-page">
         <progress hidden=""></progress>
-        <div class=" w1eil6in">
-            <div class="b4hnkwj">
-                <h1 class=" b13ldopu">Đăng Nhập</h1>
+        <div class=" login-wrapper">
+            <div class="login-form">
+                <h1 >Đăng Nhập</h1>
 
-                <form method="post" class="mocked-styled-13 fei2bp7" action="{{route('login')}}">
+                <form method="post" action="{{route('login')}}">
 
                     @include('component.form.input',['name'=> 'phone', 'label' => 'Số điện thoại', 'inputmode' =>'numeric', 'type' =>'tel'])
                     @include('component.form.input',['name'=> 'password', 'label' => 'Mật khẩu',  'type' =>'password'])
 
-                    <a class="forgot-password-btn" href="forget-password">Quên mật khẩu?</a>
-                    <button class="btn btn--primary bns1dlc  large w-bold i-left stretch btn-submit">ĐĂNG NHẬP</button>
+                    <p class="text-right">
+                        <a class="forgot-password-btn" href="forget-password">Quên mật khẩu?</a>
+                    </p>
+                    <button class="btn btn--primary btn--large full btn-submit">ĐĂNG NHẬP</button>
                     @csrf
                 </form>
 
-                <div class=" a1k9ogns">
+                <div class=" title-line">
                     <hr/>
                     <span>Hoặc đăng nhập bằng</span>
                     <hr/>
                 </div>
                 <div>
 
-                    <div class="mocked-styled-15 g15384yj">
+                    <div>
                         <a href="{{url('auth/google')}}">
-                            <button class="mocked-styled-18 b10u9umr">
+                            <button class="full white-box">
                                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -49,7 +51,7 @@
                     </div>
                 </div>
 
-                    <p class="mocked-styled-33 rnv45ui">Chưa có tài khoản? <a href="{{route('register')}}">Đăng ký ngay</a></p>
+                    <p class="text-center">Chưa có tài khoản? <a href="{{route('register')}}" class="text-bold">Đăng ký ngay</a></p>
 
             </div>
         </div>

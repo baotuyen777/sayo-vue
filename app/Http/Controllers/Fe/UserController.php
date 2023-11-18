@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Fe;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Models\User;
 use App\Services\Post\PostService;
 use App\Services\Post\UserService;
@@ -28,7 +28,7 @@ class UserController extends Controller
             return view('pages.404');
         }
 
-        $objs = User::getAll($request);
+        $objs = User::getAll($request, true);
         return view('pages.user.list', ['objs' => $objs]);
     }
 

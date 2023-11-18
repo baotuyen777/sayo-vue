@@ -18,10 +18,10 @@ return new class extends Migration {
             $table->unsignedBigInteger('category_id')->nullable();
             $table->string('avatar_link')->nullable();
             $table->unsignedBigInteger('avatar_id')->nullable();
-            $table->foreign('avatar_id')->references('id')->on('files')->onDelete('cascade');
+            $table->foreign('avatar_id')->references('id')->on('files');
 
             $table->unsignedBigInteger('author_id')->nullable();
-            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('author_id')->references('id')->on('users');
 
             $table->tinyInteger('state')->default(1)->comment('1: hang moi, 2: cu con bao hanh, 3: cu het bao hanh ');
             $table->tinyInteger('status')->default(1);

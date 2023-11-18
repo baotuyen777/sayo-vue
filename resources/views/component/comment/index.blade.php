@@ -14,7 +14,7 @@
                 <input type="hidden" name="item_id" value="{{$obj->id}}">
                 @include('component.comment.textarea',['name'=> 'content', 'placeholder' => 'Nhập nội dung bình luận (tiếng Việt có dấu)...'])
                 <div class="btn__comment">
-                    <button class="btn--primary primary r-normal medium w-bold btn-right aw__h1gb9yk btn-submit">
+                    <button class="btn--primary btn-submit">
                         GỬI BÌNH LUẬN
                     </button>
                 </div>
@@ -24,6 +24,8 @@
 
     <div class="col-md-12 bootstrap snippets">
         @empty($obj->comments)
+            <p>Tin đăng chưa có bình luận, bạn hãy trở thành người bình luận đầu tiên!</p>
+        @else
             <div class="panel">
                 <div class="panel-body">
                     @foreach($obj->comments as $comment)
@@ -49,7 +51,7 @@
                                     <button
                                         class="btn btn-sm btn-default btn-hover-primary"
                                         data-toggle="reply-form"
-                                        data-target="comment-{{$comment->id}}-reply-form">Bình luận
+                                        data-target="comment-{{$comment->id}}-reply-form">Trả lời
                                     </button>
                                     <!-- Reply form start -->
                                     @include('component.comment.reply',['id'=> $comment->id, 'parent_id' => $comment->id, 'item_id' => $obj->id])
@@ -97,8 +99,7 @@
                     @endforeach
                 </div>
             </div>
-        @else
-            <p>Tin đăng chưa có bình luận, bạn hãy trở thành người bình luận đầu tiên!</p>
+
         @endempty
     </div>
 </main>

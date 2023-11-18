@@ -20,19 +20,20 @@ return new class extends Migration {
             $table->string('cccd')->nullable();
             $table->date('birthday')->nullable();
             $table->tinyInteger('gender')->nullable();
-//            $table->integer('verified_level')->default(0);
+            $table->string('address')->nullable();
+            $table->string('google_id')->nullable();
 
             $table->unsignedBigInteger('avatar_id')->nullable();
-            $table->foreign('avatar_id')->references('id')->on('files');
+            $table->foreign('avatar_id')->references('id')->on('files')->onDelete('set null');
 
             $table->unsignedBigInteger('province_id')->nullable();
-            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
+            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('set null');
 
             $table->unsignedBigInteger('district_id')->nullable();
-            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('set null');
 
             $table->unsignedBigInteger('ward_id')->nullable();
-            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('cascade');
+            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('set null');
         });
     }
 

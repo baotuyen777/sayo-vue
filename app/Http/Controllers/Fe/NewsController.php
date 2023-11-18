@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Fe;
 
 use App\Exports\NewsExport;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\News;
 use App\Models\Post;
@@ -57,8 +57,8 @@ class NewsController extends Controller
             ->where('code', $code)
             ->first();
 
-        if (!checkAuthor($post->author_id)) {
-            return view('pages/404');
+        if (!isAuthor($post)) {
+            return view('pages.404');
         }
         $output = $this->postsService->getAttrOptions($post);
 
@@ -127,8 +127,8 @@ class NewsController extends Controller
     public function destroy($code)
     {
         $obj = Post::where('code', $code)->first();
-        if (!checkAuthor($obj->author_id)) {
-            return view('pages/404');
+        if (!isAuthor($obj)) {
+            return view('pages.404');
         }
 
         $obj->delete();

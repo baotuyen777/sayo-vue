@@ -168,8 +168,7 @@ $color_2: #000;
     background-color: #d0a707;
     background-size: 50% auto;
     background-image: url("https://sayo.vn/img/logo-white.png");
-    height: 495px;
-
+    // height: 385px;
     .item {
         width: 620px;
     }
@@ -239,8 +238,7 @@ $color_2: #000;
     top: 50%;
     z-index: 1;
     transform: translateY(-50%);
-    background: #000;
-    opacity: .3;
+    background: $black-transparent;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -274,7 +272,7 @@ $color_2: #000;
 }
 
 .post-slider .ad-image-button.ad-image-prev i {
-    background: url(https://static.chotot.com/storage/chotot-icons/svg/white-back.svg)
+    background: url(https://sayo.vn/img/icon/white-back.svg)
 }
 
 .post-slider .ad-image-button.ad-image-next {
@@ -284,7 +282,7 @@ $color_2: #000;
 }
 
 .post-slider .ad-image-button.ad-image-next i {
-    background: url(https://static.chotot.com/storage/chotot-icons/svg/white-next.svg)
+    background: url(https://sayo.vn/img/icon/white-next.svg)
 }
 
 .ad-image-wrapper {
@@ -739,4 +737,96 @@ $color_2: #000;
     overflow-y: hidden;
     white-space: nowrap;
     padding: 0;
+}
+
+@media (max-width: 540px) {
+    .post-slider {
+        height: 330px;
+        .item {
+            //width: 545px;
+            width: 100vw;
+        }
+    }
+}
+
+.slider {
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.slider .group-slider {
+    position: absolute;
+}
+
+.slider .silder-item {
+    float: left;
+    line-height: 0;
+    text-align: center;
+}
+
+.slider .silder-item .image-item {
+    cursor: zoom-in;
+    vertical-align: middle;
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+    background-color: #eee;
+    display: inline-block !important;
+    outline: 0;
+}
+
+.navigator {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.navigator span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background: #606161;
+    margin: 0 4px;
+    transition: 0.1s;
+    position: relative;
+    top: 0;
+}
+
+.navigator span.active {
+    background: rgb(255, 255, 255);
+    width: 10px;
+    height: 10px;
+}
+
+.slider>span {
+    position: absolute;
+    top: 40%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    padding: 6px 10px;
+    margin: -10px 0 0;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.prev {
+    left: 0;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+}
+
+.next {
+    right: -1px;
+    transform: rotate(-90deg);
+    transform-origin: 100% 0%;
+}
+
+.slider span {
+    transform: rotate(0deg);
 }
