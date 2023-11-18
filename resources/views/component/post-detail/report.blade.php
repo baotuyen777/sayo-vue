@@ -1,4 +1,4 @@
-<div class="IntersectBox col-xs-12 no-padding" style="min-height: 113px;">
+<div class="col-xs-12 no-padding" style="min-height: 113px;">
     <section class="text-small">
 
         <div class="align-center gap-10">
@@ -13,5 +13,5 @@
     <div class="gap-10 align-center">
         <button type="button" id="report-bad-ad-btn" class="btn btn-default btn-xs ">Báo tin không hợp lệ</button>
         <button type="button" class="btn btn-default btn-xs ">Báo tin đã bán</button>
-        <a href="#" class="btn btn--primary btn-xs">Đăng nhanh - Bán gọn</a></div>
+        </div>
 </div>
