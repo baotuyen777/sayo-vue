@@ -3,8 +3,7 @@
     <main class="post-detail">
         <div class="container">
             <div class="ct-detail adview">
-
-                <div class="row base">
+                <div class="row">
                     <div class="col-md-8">
                         @include('component.post-detail.slider')
                         <div class="ad-image-wrapper">

@@ -12,7 +12,7 @@
                     <div class="SellerProfile_flexDiv__IEgQl">
                         <div class="SellerProfile_nameDiv__sjPxP">
                             <b>{{$obj->author->name ?? "Khách"}} </b></div>
-                        <button type="button" class="SellerProfile_secondaryButton__qJNPr">
+                        <button type="button" class="btn--oval">
                             Xem trang
                         </button>
                     </div>

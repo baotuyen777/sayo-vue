@@ -80,11 +80,11 @@ jQuery(document).ready(function ($) {
     }
 
 
-    $('.control_prev').click(function () {
+    $('.ad-image-prev').click(function () {
         moveRight();
     });
 
-    $('.control_next').click(function () {
+    $('.ad-image-next').click(function () {
         moveLeft();
     });
 
