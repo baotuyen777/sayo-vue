@@ -1,0 +1,53 @@
+FROM php:8.1-fpm
+
+RUN apt-get update && apt-get install -y \
+        libzip-dev \
+        zip \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+        libzip-dev \
+        libcurl4-openssl-dev \
+        pkg-config \
+        libssl-dev \
+        libmagickwand-dev --no-install-recommends \
+    && docker-php-ext-install -j$(nproc) iconv \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick
+
+RUN docker-php-ext-install pdo_mysql pdo mysqli zip
+RUN pecl install -o -f redis \
+&&  rm -rf /tmp/pear \
+&&  docker-php-ext-enable redis
+
+RUN chown -R www-data:www-data /var/www
+
+RUN chmod -R 777 /var/www
+
+RUN usermod -a -G www-data root
+
+RUN #sudo apt-get install nodejs -y
+
+# Install composer
+ENV COMPOSER_HOME /composer
+ENV PATH ./vendor/bin:/composer/vendor/bin:$PATH
+ENV COMPOSER_ALLOW_SUPERUSER 1
+RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
+
+
+RUN apt-get install -y gnupg2
+# Removing /var/lib/apt/lists worked
+RUN rm -rf /var/lib/apt/lists/ && curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get install nodejs -y
+RUN #sudo npm install pm2 -g
+RUN cp /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+RUN apt-get install redis-tools -y
+
+RUN apt-get -y update && apt-get install -y libicu-dev && docker-php-ext-configure intl && docker-php-ext-install intl
+
+RUN docker-php-ext-install sockets
+RUN pecl install mailparse
+RUN docker-php-ext-enable mailparse
+

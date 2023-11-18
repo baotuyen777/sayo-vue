@@ -66,7 +66,7 @@ Ngoài ra có căn hộ 1 ngủ 1 khách diện tích 40m², full đồ giá là
 Cách công viên Thống nhất 100m, không khí thoáng mát, trong lành.',
                 'category_id' => 1,
                 'avatar_id' => 2,
-                'author_id' => 1,
+                'author_id' => 2,
                 'ward_id' => rand(1, 10),
                 'district_id' => 1,
                 'province_id' => 1,
