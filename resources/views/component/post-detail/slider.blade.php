@@ -23,8 +23,8 @@
         @endforeach
         <span data-id="n"></span>
     </div>
-    <button class="ad-image-button ad-image-prev" type="button"><i></i></button>
-    <button class="ad-image-button ad-image-next" type="button"><i></i></button>
+    <button class="slider__direction ad-image-prev" type="button"><i></i></button>
+    <button class="slider__direction ad-image-next" type="button"><i></i></button>
     <div class="ad-image-caption">
         <span class="ad-image-caption-text">Tin cá nhân đăng {{showHumanTime($obj['created_at'])}}</span>
     </div>

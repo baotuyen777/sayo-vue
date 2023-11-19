@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         @include('component.post-detail.slider')
-                        <div class="ad-image-wrapper">
+                        <div class="post-detail">
                             <h1 class="post-title"> {{$obj['name']}}</h1>
                             <div class="ad-price-wrapper">
                                 <div class="ad-adPrice" itemprop="price">
@@ -41,32 +41,7 @@
                             @endif
                         </section>
 
-                        <section class="col-xs-12 no-padding">
-                            <div class="IntersectBox " style="min-height: 100px;">
-                                <div class="ChatTemplate_chatTempWrapper__uAELZ">
-                                    <div class="chat-titleChatTemp">Hỏi người bán qua chat</div>
-                                    <div class="ChatTemplate_templateItemWrapper__AP8xV">
-                                        <ul class="chat_templateMessage">
-                                            <li class="chat-templateItem" role="menuitem">Sản phẩm này
-                                                còn không ạ?
-                                            </li>
-                                            <li class="chat-templateItem" role="menuitem">Bạn có ship
-                                                hàng không?
-                                            </li>
-                                            <li class="chat-templateItem" role="menuitem">Sản phẩm này có
-                                                còn bảo hành không?
-                                            </li>
-                                            <li class="chat-templateItem" role="menuitem">Chất liệu sản
-                                                phẩm là gì vậy ạ?
-                                            </li>
-                                            <li class="chat-templateItem" role="menuitem">Bạn có các sản
-                                                phẩm khác tương tự?
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+
                         @include('component.post-detail.report')
                     </div>
 

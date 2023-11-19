@@ -208,14 +208,19 @@
 }
 
 .row {
+    margin: 0 -10px;
+
     > div {
         float: left;
     }
 }
 
+.col-md-4, .col-md-8 {
+    padding: 0 10px;
+}
+
 .col-md-4 {
     width: 33.33333333%;
-
 }
 
 .col-md-8 {
@@ -230,12 +235,15 @@
     font-size: 10px;
     line-height: 16px;
 }
+
 .text-center {
     text-align: center;
 }
+
 .text-right {
     text-align: right;
 }
+
 .text-bold {
     font-weight: bold;
 }
@@ -286,8 +294,16 @@
     font-size: 30px;
 }
 
-.hide-pc{
+.hide-pc {
     display: none !important;
+}
+
+.no-padding {
+    padding: 0 !important
+}
+
+.img-circle {
+    border-radius: 50%
 }
 
 @media (max-width: 991px) {
@@ -307,11 +323,11 @@
     .grid-6 > div {
         flex: 1 0 calc(30% - 20px);
     }
-    .hide-xs{
+    .hide-xs {
         display: none !important;
     }
 
-    .hide-pc{
+    .hide-pc {
         display: initial !important;
     }
 }

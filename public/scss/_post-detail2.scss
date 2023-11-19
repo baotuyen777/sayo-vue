@@ -1,165 +1,135 @@
 .post-detail {
+    .slider {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: rgba(208, 167, 7, 0.44);
+        background-size: 50% auto;
+        background-image: url("https://sayo.vn/img/logo-white.png");
+
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+
+        height: 480px;
+
+        .group-slider {
+            position: absolute;
+            height: 480px;
+
+            .slider-item {
+                float: left;
+                line-height: 0;
+                text-align: center;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+
+                .image-item {
+                    cursor: zoom-in;
+                    vertical-align: middle;
+                    max-height: 100%;
+                    max-width: 100%;
+                    background-color: #eee;
+                    display: inline-block !important;
+                    outline: 0;
+                }
+            }
+        }
+
+        .navigator {
+            position: absolute;
+            bottom: 40px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .navigator span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background: #606161;
+            margin: 0 4px;
+            transition: 0.1s;
+            position: relative;
+            top: 0;
+        }
+
+        .navigator span.active {
+            background: rgb(255, 255, 255);
+            width: 10px;
+            height: 10px;
+        }
+
+        .ad-image-caption {
+            background: $black-transparent;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: right;
+            padding: 7px;
+
+            .ad-image-caption-text {
+                display: inline-block;
+                vertical-align: middle;
+                color: #f5f5f5;
+                margin-right: 4px;
+                font-size: 14px
+            }
+        }
+
+        &__direction {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: $black-transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            outline: 0;
+            box-shadow: none;
+            border: none;
+
+            &:active {
+                opacity: .7
+            }
+
+            i {
+                display: inline-block;
+                width: 10px;
+                height: 38px;
+                background-position: 50% !important;
+                background-repeat: no-repeat !important;
+                margin-top: -2px;
+            }
+
+            &.ad-image-prev {
+                padding: 0 13px 0 10px;
+
+                i {
+                    background: url(https://sayo.vn/img/icon/white-back.svg)
+                }
+            }
+
+            &.ad-image-next {
+                right: 0;
+                border-radius: 5px 0 0 5px;
+                padding: 0 10px 0 13px;
+
+                i {
+                    background: url(https://sayo.vn/img/icon/white-next.svg)
+                }
+            }
+        }
+    }
+
     &__content {
         p {
             margin: 0;
         }
     }
-}
-
-.post-sidebar {
-    padding-left: 10px;
-}
-
-.no-padding {
-    padding: 0 !important
-}
-
-.img-circle {
-    border-radius: 50%
-}
-
-
-.slider {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-color: rgba(208, 167, 7, 0.44);
-    background-size: 50% auto;
-    background-image: url("https://sayo.vn/img/logo-white.png");
-    height: 450px;
-
-    .item {
-        width: 620px;
-    }
-
-    .ad-image-caption {
-        background: #000;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        opacity: .8;
-        text-align: right;
-        padding: 7px
-    }
-
-    .ad-image-caption-text {
-        display: inline-block;
-        vertical-align: middle;
-        color: #f5f5f5;
-        margin-right: 4px;
-        font-size: 14px
-    }
-
-    .ad-image-button {
-        position: absolute;
-        top: 50%;
-        z-index: 1;
-        transform: translateY(-50%);
-        background: $black-transparent;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        outline: 0;
-        box-shadow: none;
-        border: none;
-
-        &:active {
-            opacity: .7
-        }
-
-        i {
-            display: inline-block;
-            width: 10px;
-            height: 38px;
-            background-position: 50% !important;
-            background-repeat: no-repeat !important;
-            margin-top: -2px;
-            cursor: pointer
-        }
-
-        &.ad-image-prev {
-            padding: 0 13px 0 10px;
-
-            i {
-                background: url(https://sayo.vn/img/icon/white-back.svg)
-            }
-        }
-
-        &.ad-image-next {
-            right: 0;
-            border-radius: 5px 0 0 5px;
-            padding: 0 10px 0 13px;
-
-            i {
-                background: url(https://sayo.vn/img/icon/white-next.svg)
-            }
-        }
-    }
-}
-
-.slider {
-    position: relative;
-    overflow: hidden;
-    transition: 0.3s;
-
-    .group-slider {
-        position: absolute;
-        height: 450px;
-
-        .slider-item {
-            float: left;
-            line-height: 0;
-            text-align: center;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-
-            .image-item {
-                cursor: zoom-in;
-                vertical-align: middle;
-                max-height: 100%;
-                max-width: 100%;
-                background-color: #eee;
-                display: inline-block !important;
-                outline: 0;
-            }
-        }
-    }
-
-    .navigator {
-        position: absolute;
-        bottom: 40px;
-        width: 100%;
-        text-align: center;
-    }
-
-    .navigator span {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
-        background: #606161;
-        margin: 0 4px;
-        transition: 0.1s;
-        position: relative;
-        top: 0;
-    }
-
-    .navigator span.active {
-        background: rgb(255, 255, 255);
-        width: 10px;
-        height: 10px;
-    }
-
-}
-
-.ad-image-wrapper {
-    margin-top: 10px;
-
     .post-title {
-        font-size: 16px;
-        font-weight: 700;
-        margin-top: 20px;
-        margin-bottom: 10px
+
     }
 
     .ad-price-wrapper {
@@ -219,6 +189,7 @@
         align-items: center;
         margin: 7px 0;
         min-width: 130px;
+
         img {
             height: 25px;
             margin: 0 5px
@@ -226,42 +197,30 @@
     }
 }
 
-
-
-
-//chat
-.chat-titleChatTemp {
-    padding: 5px 5px 5px 0;
-    margin: 0 !important;
-    border-bottom: 1px solid #cacaca;
-    color: #777;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.ChatTemplate_sent__bouS1, .chat-templateItem {
-    border: 1px solid #fe9900;
-    padding: 5px 10px;
-    border-radius: 20px;
-    margin: 10px;
-    display: inline-block;
-    font-size: 13px;
-    color: #222;
-    background-color: #fff;
-    cursor: pointer;
-}
-
-.chat_templateMessage {
-    margin: 0 10px;
+.chat-template {
     overflow-y: hidden;
     white-space: nowrap;
-    padding: 0;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+
+    li {
+        border: 1px solid #fe9900;
+        padding: 5px 10px;
+        border-radius: 20px;
+        margin-right: 10px;
+        display: inline-block;
+        font-size: 13px;
+        color: #222;
+        background-color: #fff;
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 540px) {
     .slider {
         height: 300px;
-        .group-slider{
+
+        .group-slider {
             height: 300px;
         }
     }

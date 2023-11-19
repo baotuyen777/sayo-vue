@@ -1,4 +1,20 @@
 @charset "UTF-8";
+h1 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.h4 {
+  padding: 5px 5px 5px 0;
+  margin: 0 !important;
+  border-bottom: 1px solid #cacaca;
+  color: #777;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .main-header {
   line-height: 1.5;
   background: linear-gradient(-180deg, #f53d2d, #f63);
@@ -298,99 +314,22 @@
   transform: none;
 }
 
-.post-detail__content p {
-  margin: 0;
-}
-
-.post-sidebar {
-  padding-left: 10px;
-}
-
-.no-padding {
-  padding: 0 !important;
-}
-
-.img-circle {
-  border-radius: 50%;
-}
-
-.slider {
+.post-detail .slider {
   background-position: center center;
   background-repeat: no-repeat;
   background-color: rgba(208, 167, 7, 0.44);
   background-size: 50% auto;
   background-image: url("https://sayo.vn/img/logo-white.png");
-  height: 450px;
-}
-.slider .item {
-  width: 620px;
-}
-.slider .ad-image-caption {
-  background: #000;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  opacity: 0.8;
-  text-align: right;
-  padding: 7px;
-}
-.slider .ad-image-caption-text {
-  display: inline-block;
-  vertical-align: middle;
-  color: #f5f5f5;
-  margin-right: 4px;
-  font-size: 14px;
-}
-.slider .ad-image-button {
-  position: absolute;
-  top: 50%;
-  z-index: 1;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5019607843);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  outline: 0;
-  box-shadow: none;
-  border: none;
-}
-.slider .ad-image-button:active {
-  opacity: 0.7;
-}
-.slider .ad-image-button i {
-  display: inline-block;
-  width: 10px;
-  height: 38px;
-  background-position: 50% !important;
-  background-repeat: no-repeat !important;
-  margin-top: -2px;
-  cursor: pointer;
-}
-.slider .ad-image-button.ad-image-prev {
-  padding: 0 13px 0 10px;
-}
-.slider .ad-image-button.ad-image-prev i {
-  background: url(https://sayo.vn/img/icon/white-back.svg);
-}
-.slider .ad-image-button.ad-image-next {
-  right: 0;
-  border-radius: 5px 0 0 5px;
-  padding: 0 10px 0 13px;
-}
-.slider .ad-image-button.ad-image-next i {
-  background: url(https://sayo.vn/img/icon/white-next.svg);
-}
-
-.slider {
   position: relative;
   overflow: hidden;
   transition: 0.3s;
+  height: 480px;
 }
-.slider .group-slider {
+.post-detail .slider .group-slider {
   position: absolute;
-  height: 450px;
+  height: 480px;
 }
-.slider .group-slider .slider-item {
+.post-detail .slider .group-slider .slider-item {
   float: left;
   line-height: 0;
   text-align: center;
@@ -398,7 +337,7 @@
   display: flex;
   justify-content: center;
 }
-.slider .group-slider .slider-item .image-item {
+.post-detail .slider .group-slider .slider-item .image-item {
   cursor: zoom-in;
   vertical-align: middle;
   max-height: 100%;
@@ -407,13 +346,13 @@
   display: inline-block !important;
   outline: 0;
 }
-.slider .navigator {
+.post-detail .slider .navigator {
   position: absolute;
   bottom: 40px;
   width: 100%;
   text-align: center;
 }
-.slider .navigator span {
+.post-detail .slider .navigator span {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -424,22 +363,67 @@
   position: relative;
   top: 0;
 }
-.slider .navigator span.active {
+.post-detail .slider .navigator span.active {
   background: rgb(255, 255, 255);
   width: 10px;
   height: 10px;
 }
-
-.ad-image-wrapper {
-  margin-top: 10px;
+.post-detail .slider .ad-image-caption {
+  background: rgba(0, 0, 0, 0.5019607843);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
+  padding: 7px;
 }
-.ad-image-wrapper .post-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-top: 20px;
-  margin-bottom: 10px;
+.post-detail .slider .ad-image-caption .ad-image-caption-text {
+  display: inline-block;
+  vertical-align: middle;
+  color: #f5f5f5;
+  margin-right: 4px;
+  font-size: 14px;
 }
-.ad-image-wrapper .ad-price-wrapper {
+.post-detail .slider__direction {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5019607843);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 0;
+  box-shadow: none;
+  border: none;
+}
+.post-detail .slider__direction:active {
+  opacity: 0.7;
+}
+.post-detail .slider__direction i {
+  display: inline-block;
+  width: 10px;
+  height: 38px;
+  background-position: 50% !important;
+  background-repeat: no-repeat !important;
+  margin-top: -2px;
+}
+.post-detail .slider__direction.ad-image-prev {
+  padding: 0 13px 0 10px;
+}
+.post-detail .slider__direction.ad-image-prev i {
+  background: url(https://sayo.vn/img/icon/white-back.svg);
+}
+.post-detail .slider__direction.ad-image-next {
+  right: 0;
+  border-radius: 5px 0 0 5px;
+  padding: 0 10px 0 13px;
+}
+.post-detail .slider__direction.ad-image-next i {
+  background: url(https://sayo.vn/img/icon/white-next.svg);
+}
+.post-detail__content p {
+  margin: 0;
+}
+.post-detail .ad-price-wrapper {
   background-color: transparent;
   text-overflow: ellipsis;
   padding: 0;
@@ -448,26 +432,26 @@
   justify-content: space-between;
   align-items: center;
 }
-.ad-image-wrapper .ad-price-wrapper .ad-save-ad {
+.post-detail .ad-price-wrapper .ad-save-ad {
   right: auto;
   bottom: auto;
   position: relative;
 }
-.ad-image-wrapper .ad-price-wrapper .ad-price {
+.post-detail .ad-price-wrapper .ad-price {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.ad-image-wrapper .ad-price-wrapper .ad-price > img {
+.post-detail .ad-price-wrapper .ad-price > img {
   margin: 4px 0;
 }
-.ad-image-wrapper .ad-price-wrapper .ad-adPrice {
+.post-detail .ad-price-wrapper .ad-adPrice {
   font-size: 16px;
   color: #c90927;
   font-weight: 700;
 }
-.ad-image-wrapper .ad-body {
+.post-detail .ad-body {
   padding-top: 10px;
   text-align: justify;
   margin-bottom: 10px;
@@ -495,32 +479,22 @@
   margin: 0 5px;
 }
 
-.chat-titleChatTemp {
-  padding: 5px 5px 5px 0;
-  margin: 0 !important;
-  border-bottom: 1px solid #cacaca;
-  color: #777;
-  font-size: 14px;
-  font-weight: 700;
+.chat-template {
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
 }
-
-.ChatTemplate_sent__bouS1, .chat-templateItem {
+.chat-template li {
   border: 1px solid #fe9900;
   padding: 5px 10px;
   border-radius: 20px;
-  margin: 10px;
+  margin-right: 10px;
   display: inline-block;
   font-size: 13px;
   color: #222;
   background-color: #fff;
   cursor: pointer;
-}
-
-.chat_templateMessage {
-  margin: 0 10px;
-  overflow-y: hidden;
-  white-space: nowrap;
-  padding: 0;
 }
 
 @media (max-width: 540px) {
@@ -836,8 +810,15 @@
   padding: 10px;
 }
 
+.row {
+  margin: 0 -10px;
+}
 .row > div {
   float: left;
+}
+
+.col-md-4, .col-md-8 {
+  padding: 0 10px;
 }
 
 .col-md-4 {
@@ -917,6 +898,14 @@
 
 .hide-pc {
   display: none !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.img-circle {
+  border-radius: 50%;
 }
 
 @media (max-width: 991px) {
@@ -1822,6 +1811,9 @@ footer {
   resize: none;
   background-color: #fff;
 }
+.comment__action {
+  margin-bottom: 10px;
+}
 
 .pad-ver .btn:focus, .pad-ver button:focus {
   outline: none;
@@ -1859,29 +1851,16 @@ footer {
   border-top-right-radius: 0;
 }
 
-.panel-body {
-  padding: 25px 20px;
-}
-
-.media-block .media-left {
+.comment-show .comment__avatar {
   display: block;
   float: left;
 }
-
-.media-block .media-right {
+.comment-show .media-right {
   float: right;
 }
-
-.media-block .media-body {
-  display: block;
+.comment-show .media-body {
   overflow: hidden;
-  width: auto;
-}
-
-.middle .media-left,
-.middle .media-right,
-.middle .media-body {
-  vertical-align: middle;
+  padding-left: 10px;
 }
 
 .text-muted, a.text-muted:hover, a.text-muted:focus {
@@ -1904,6 +1883,18 @@ footer {
 .rely-content:focus-visible {
   outline: none;
   border-color: #3c8dbc;
+}
+
+.reply-form {
+  position: relative;
+}
+.reply-form textarea {
+  width: 100%;
+}
+.reply-form .btn-submit {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
 }
 
 .seller-profile {
