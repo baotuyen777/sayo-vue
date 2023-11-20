@@ -21,7 +21,7 @@ h1 {
   position: sticky;
   top: 0;
   font-size: 0.875rem;
-  z-index: 2;
+  z-index: 9;
   -webkit-transition-property: height;
   transition-property: height;
   transition-duration: 0.2s;
@@ -498,10 +498,10 @@ h1 {
 }
 
 @media (max-width: 540px) {
-  .slider {
+  .post-detail .slider {
     height: 300px;
   }
-  .slider .group-slider {
+  .post-detail .slider .group-slider {
     height: 300px;
   }
 }

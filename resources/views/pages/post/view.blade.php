@@ -46,11 +46,7 @@ if($obj->address){
                         <i class="location"></i><strong>Khu Vực:</strong>
                         <span>{{$location ? implode(', ',$location) : ''}}</span>
                     </section>
-
-
-
                     @include('component.post-detail.report')
-
                     @include('component.comment.index')
                 </div>
 

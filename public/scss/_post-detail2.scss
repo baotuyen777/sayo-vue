@@ -128,9 +128,6 @@
             margin: 0;
         }
     }
-    .post-title {
-
-    }
 
     .ad-price-wrapper {
         background-color: transparent;
@@ -217,11 +214,13 @@
 }
 
 @media (max-width: 540px) {
-    .slider {
-        height: 300px;
-
-        .group-slider {
+    .post-detail {
+        .slider {
             height: 300px;
+
+            .group-slider {
+                height: 300px;
+            }
         }
     }
 }
