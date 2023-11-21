@@ -26,7 +26,7 @@
                 <div class="SellerProfile_inforItem__B3Pzq">
                     <div class="SellerProfile_inforText__D7tPA"><p>Cá nhân</p><span
                             class="SellerProfile_inforValue__hK4rb"><img
-                                src="https://static.chotot.com/storage/chotot-icons/png/private-grey-icon.png"
+                                src="{{ asset('img/icon/default_user.png')}}"
                                 alt="icon-canhan"
                                 height="20px"></span>
                     </div>

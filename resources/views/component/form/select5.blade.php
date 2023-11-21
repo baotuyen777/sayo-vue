@@ -11,7 +11,6 @@
 {{--                <ul>--}}
 {{--                    <li><a href="{{route('archive',['catCode' =>$obj['code']])}}"--}}
 {{--                           data-id="0"><span>{{$first?? 'Tất cả'}}</span><img--}}
-{{--                                src="https://static.chotot.com/storage/chotot-icons/svg/grey-next.svg"></a></li>--}}
 {{--                    @foreach($options as $i=>$option)--}}
 
 {{--                        <li>--}}

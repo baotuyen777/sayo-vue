@@ -31,9 +31,6 @@
         <div><span class="card__price">{{moneyFormat($obj['price'])}}</span></div>
     </div>
     <div class="card__footer text-small text-gray">
-        {{--        <img height="16"--}}
-        {{--             src="https://static.chotot.com/storage/chotot-icons/svg/user.svg"--}}
-        {{--             alt="{{$obj['author']['name'] ?? 'sayo'}}">   --}}
         <img class="author-avatar" src="{{asset('/img/icon/default_user.png')}}"
              alt="{{$obj['author']['name'] ?? 'sayo'}}">
         <span>{{str_replace(['Thành phố ','Tỉnh '],'',$obj->province->name ?? '')
