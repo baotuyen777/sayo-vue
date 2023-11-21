@@ -239,4 +239,37 @@ class PostController extends Controller
 
         return response()->json(['status' => true, 'result' => $postComment]);
     }
+
+    public function commentList(Request $request)
+    {
+        if (!Auth::user()) {
+            return view('pages.auth.login');
+        }
+
+        if (Auth::user()->role != ROLE_ADMIN) {
+            return view('pages.404');
+        }
+
+        $objs = PostComment::getAll();
+        return view('pages.post.list_comment', ['objs' => $objs]);
+    }
+
+    public function updateStatusComment(Request $request, $id)
+    {
+        PostComment::find($id)->update($request->all());
+        $res = PostComment::find($id);
+        return response()->json(['status' => true, 'result' => $res]);
+    }
+
+    public function deleteComment($id)
+    {
+        $obj = PostComment::find($id);
+        if (!isAuthor($obj)) {
+            return view('pages.404');
+        }
+
+        $obj->delete();
+
+        return response()->json(['status' => true, 'result' => $obj]);
+    }
 }
