@@ -45,6 +45,9 @@ Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');
 Route::get('/xem-tin-{catSlug?}/{slug}.htm', [PostController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
 Route::post('/post/comment', [PostController::class, 'comment'])->name('comment.store');
+Route::get('/post/comment/list', [PostController::class, 'commentList'])->name('comment.list');
+Route::put('/update/comment/{id}', [PostController::class, 'updateStatusComment'])->name('comment.update');
+Route::delete('/delete/comment/{id}', [PostController::class, 'deleteComment'])->name('comment.delete');
 Route::resource('post', PostController::class);
 
 Route::get('/dang-san-pham', [ProductController::class, 'create'])->name('createProduct');

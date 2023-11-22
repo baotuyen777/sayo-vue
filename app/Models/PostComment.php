@@ -14,11 +14,15 @@ class PostComment extends Model
 
 //    protected $guarded = 'id';
 
-    protected $fillable = ['content', 'item_id', 'user_id', 'parent_id'];
+    protected $fillable = ['content', 'item_id', 'user_id', 'parent_id', 'status'];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function post() {
+        return $this->belongsTo(Post::class, 'item_id', 'id');
     }
 
     public function children()
@@ -30,5 +34,11 @@ class PostComment extends Model
     {
         $createdAt = Carbon::parse($this->created_at);
         return $createdAt->diffForHumans();
+    }
+
+    public static function getAll()
+    {
+        $postComment = self::with('user:id,name', 'post');
+        return $postComment->paginate(24);
     }
 }
