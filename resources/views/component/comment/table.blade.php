@@ -50,7 +50,7 @@
                 <td>
                     <div class="d-flex-wrap gap-10">
                    <button class="btn--small btn-ajax danger"
-                                data-url="{{ route('comment.delete', $obj->id) }}" data-method="delete">
+                                data-url="{{ route('comment.destroy', $obj->id) }}" data-method="delete">
                             Xóa
                         </button>
                         @if($obj['status'] != STATUS_ACTIVE)
