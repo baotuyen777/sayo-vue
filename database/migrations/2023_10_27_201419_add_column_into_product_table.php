@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::table($this->tableName, function (Blueprint $table) {
             if (!Schema::hasColumn($this->tableName, 'price')) {
-                $table->string('price')->nullable();
+                $table->bigInteger('price')->nullable();
             }
         });
     }
