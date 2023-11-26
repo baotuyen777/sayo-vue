@@ -8,7 +8,7 @@
                         <div id="review" class="tab-pane show">
                             <div class="container">
                                 <div class="review-body">
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <h2 class="h3">{{ $obj->reviews->count() ?? 0 }} {{ __('Đánh giá') }}</h2>
                                         <h3>Đánh giá trung bình</h3>
                                         <span class="d-inline-block align-middle"
@@ -26,7 +26,7 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         @php
                                             $rate_count = $obj->reviews->count();
                                             $progressbar_color = ['#f34770', '#fea569', '#ffda75', '#a7e453', '#42d697'];
@@ -58,11 +58,10 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <div class="col-3"></div>
                                 </div>
                                 <hr style="margin-bottom: 40px;">
                                 <div class="form-review" style="margin-bottom: 40px;">
-                                    <form action="{{ route('review.store') }}" class="form-ajax" method="POST">
+                                    <form action="{{ route('review.store') }}" class="form-ajax" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ data_get($obj, 'id') }}">
                                         <tr style="height: 50px;" class="review-sp">
@@ -85,7 +84,9 @@
                                             <td colspan="3">
                                         <textarea name="content" rows="5" style="width: 100%;"
                                                   placeholder="Đánh giá ..."></textarea>
-                                                <button type="submit" class="btn btn-sm btn-primary pull-left">Đánh giá</button>
+                                                <label for="review_file"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                                                <input type="file" name="files[]" id="review_file">
+                                                <button type="submit" class="btn btn-yellow">Đánh giá</button>
                                             </td>
                                         </tr>
                                     </form>
@@ -124,6 +125,12 @@
                                                     </div>
                                                     <p class="fs-md mb-2"
                                                        style="margin-top: 10px;">{{ $rating->content }}</p>
+                                                    @php $files = json_decode($rating->images) ?? []; @endphp
+                                                    <div class="review-img">
+                                                        @foreach($files as $file)
+                                                            <img src="{{asset('storage/'.$file)}}" alt="">
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             @endforeach
                                         @endif

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('product_id')->nullable();
+            $table->json('images')->nullable();
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')

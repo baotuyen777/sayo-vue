@@ -6,12 +6,19 @@ use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\ReviewRequest;
 use App\Models\Product;
 use App\Models\Review;
+use App\Services\Review\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
+
+    private UploadService $uploadService;
+    public function __construct(UploadService $uploadService)
+    {
+        $this->uploadService = $uploadService;
+    }
 
     public function store(ReviewRequest $request)
     {
@@ -29,6 +36,8 @@ class ReviewController extends Controller
                 401
             );
         }
+        $files = $this->uploadService->uploadFile($request);
+        $reviewData['images'] = json_encode($files);
 
         try {
             $newReview = Review::create($reviewData);

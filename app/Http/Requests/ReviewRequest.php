@@ -23,8 +23,9 @@ class ReviewRequest extends FormRequest
     {
         return [
             'rating' => 'required',
-            'content' => 'required|string',
-            'product_id' => 'nullable',
+            'content' => 'required|string|max:2000',
+            'product_id' => 'required',
+            'files' => 'nullable',
         ];
     }
 }
