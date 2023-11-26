@@ -25,6 +25,7 @@
             <th>STT</th>
             <th>Avatar</th>
             <th>Tên</th>
+            <th>Số lượt xem</th>
             <th>Hành động</th>
         </tr>
         </thead>
@@ -44,6 +45,9 @@
                         <small>{{showHumanTime($obj->created_at)}}</small>
                         <span class="price">{{moneyFormat($obj->price)}}</span>
                     </p>
+                </td>
+                <td valign="top" style="text-align:center">
+                   {{$obj->viewed_quantity}}
                 </td>
                 <td>
                     <div class="d-flex-wrap gap-10">

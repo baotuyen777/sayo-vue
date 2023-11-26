@@ -12,6 +12,7 @@ use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -95,6 +96,15 @@ class PostController extends Controller
 
         if (!$obj) {
             return view('pages.404');
+        }
+
+        $postKey = 'posts_' . $code;
+
+        // Kiểm tra Session của bài viết có tồn tại hay không.
+        // Nếu không tồn tại, sẽ tự động tăng trường viewed_quantity lên 1 đồng thời tạo session lưu trữ key bài viết.
+        if (!Session::has($postKey)) {
+            Post::where('code', $code)->increment('viewed_quantity');
+            Session::put($postKey, 1);
         }
 
         $obj['attr'] = $this->postsService->getAttrField($obj, true);
