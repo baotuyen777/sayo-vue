@@ -43,6 +43,7 @@
 
 
                         @include('component.post-detail.report')
+                        @include('component.review.index')
                     </div>
 
                     <div class="col-md-4">

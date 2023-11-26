@@ -106,6 +106,11 @@ class Product extends Model
         return $products;
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'product_id', 'id')->with('user:id,username');
+    }
+
 //    public function getAttOptions()
 //    {
 //        $categories = Category::with('avatar')->get();
