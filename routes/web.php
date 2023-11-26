@@ -10,6 +10,7 @@ use \App\Http\Controllers\Fe\UserController;
 use \App\Http\Controllers\Fe\PdwController;
 use App\Http\Controllers\Fe\CommentController;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Fe\PasswordResetController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,10 @@ Route::post('/register', [AuthController::class, 'store'])->name('doRegister');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [AuthController::class, 'handleCallback']);
+Route::get('/forgot-password', [PasswordResetController::class, 'forgotPassword'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'doForgotPassword'])->name('password.email');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
+Route::post('/change-password/{token}', [PasswordResetController::class, 'doResetPassword'])->name('password.doReset');
 
 Route::resource('user', UserController::class);
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
