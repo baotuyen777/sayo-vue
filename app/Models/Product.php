@@ -108,7 +108,7 @@ class Product extends Model
 
     public function reviews()
     {
-        return $this->hasMany(Review::class, 'product_id', 'id')->with('user:id,username');
+        return $this->hasMany(Review::class, 'product_id', 'id')->with('user:id,username')->with('files:id,url');
     }
 
 //    public function getAttOptions()

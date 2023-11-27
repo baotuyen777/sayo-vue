@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->double('rating')->default(5.0);
             $table->text('content')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->unsignedBigInteger('product_id')->nullable();
-            $table->json('images')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')
+            $table->foreign('author_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
@@ -36,7 +35,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('product_review', function ($table) {
-            $table->dropForeign(['user_id']);
+            $table->dropForeign(['author_id']);
             $table->dropForeign(['product_id']);
         });
         Schema::dropIfExists('product_review');

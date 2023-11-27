@@ -11,15 +11,22 @@ class Review extends Model
 
     protected $table = 'product_review';
 
-    protected $fillable = ['rating', 'content', 'user_id', 'product_id', 'images'];
+    protected $fillable = ['rating', 'content', 'author_id', 'product_id'];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
+
+    public function files()
+    {
+        return $this->belongsToMany(Files::class, 'review_file')
+            ->select(['files.*'])
+            ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
     }
 }

@@ -11,6 +11,7 @@ use \App\Http\Controllers\Fe\PdwController;
 use App\Http\Controllers\Fe\CommentController;
 use App\Http\Controllers\Fe\ReviewController;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Fe\PasswordResetController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,10 @@ Route::post('/register', [AuthController::class, 'store'])->name('doRegister');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [AuthController::class, 'handleCallback']);
+Route::get('/forgot-password', [PasswordResetController::class, 'forgotPassword'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'doForgotPassword'])->name('password.email');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
+Route::post('/change-password/{token}', [PasswordResetController::class, 'doResetPassword'])->name('password.doReset');
 
 Route::resource('user', UserController::class);
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
@@ -56,7 +61,7 @@ Route::post('/product/edit/{slug}.htm', [ProductController::class, 'update'])->n
 Route::put('/product/update-simple/{slug}.htm', [ProductController::class, 'updateSimple'])->name('productUpdateSimple');
 Route::get('/xem-san-pham-{catSlug?}/{slug}.htm', [ProductController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('productView');
 Route::resource('product', ProductController::class);
-Route::post('/review', [ReviewController::class, 'store'])->name('review.store');
+Route::resource('/review', ReviewController::class);
 
 //Route::resource('news', NewsController::class);
 //Route::get('/post/edit/{slug}.htm', [NewsController::class, 'edit'])->name('postEdit');

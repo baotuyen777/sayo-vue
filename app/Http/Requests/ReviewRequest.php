@@ -25,7 +25,6 @@ class ReviewRequest extends FormRequest
             'rating' => 'required',
             'content' => 'required|string|max:2000',
             'product_id' => 'required',
-            'files' => 'nullable',
         ];
     }
 }

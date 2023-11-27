@@ -12,7 +12,7 @@
                     @include('component.form.input',['name'=> 'password', 'label' => 'Mật khẩu',  'type' =>'password'])
 
                     <p class="text-right">
-                        <a class="forgot-password-btn" href="forget-password">Quên mật khẩu?</a>
+                        <a class="forgot-password-btn" href="forgot-password">Quên mật khẩu?</a>
                     </p>
                     <button class="btn btn--primary btn--large full btn-submit">ĐĂNG NHẬP</button>
                     @csrf

@@ -148,22 +148,3 @@ function isAdmin()
 {
     return Auth::user() && Auth::user()->role === ROLE_ADMIN;
 }
-
-if (!function_exists('rating_star')) {
-    function rating_star($avg_rate): string
-    {
-        $star = '';
-        foreach (range(1, 5) as $rate) {
-            if ($avg_rate >= $rate) {
-                $star .= ' <i class="fa fa-star"></i>';
-            } elseif ($avg_rate == $rate - 0.5) {
-                $star .= ' <i class="fa fa-star-half-o" aria-hidden="true"></i>';
-            } else {
-                $star .= ' <i class="fa fa-star-o" aria-hidden="true"></i>';
-            }
-        }
-
-        return $star;
-    }
-}
-

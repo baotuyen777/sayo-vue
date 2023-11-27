@@ -78,6 +78,10 @@
     float: right;
 }
 
+.form-review textarea {
+    width: 100%;
+}
+
 #review_file {
     display: none;
 }
@@ -86,6 +90,45 @@
     width: 50px;
     height: 50px;
     object-fit: cover;
+}
+
+.product-review .info {
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+
+}
+
+.customer-info {
+    display: flex;
+    justify-items: center;
+}
+
+.review-sp {
+    height: 50px;
+}
+
+.separate {
+    margin-bottom: 40px;
+}
+
+.w-80 {
+    width: 80%;
+}
+
+.me-3 {
+    margin: 0 4px;
+}
+
+.avg-rate {
+    color: red;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.username {
+    margin-left: 4px;
 }
 
 @keyframes jump {
