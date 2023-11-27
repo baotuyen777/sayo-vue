@@ -57,6 +57,16 @@
                             {{--                            @include('component.form.input',['name'=> 'attr["acreage"]', 'label' => 'Diện tích', 'attr'=>'acreage'])--}}
                         </div>
                     </section>
+                    <section>
+                        <div>
+                            <h5>ReCaptcha: </h5>
+                            <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                            @error('g-recaptcha-response')
+                            <p>{{ $message }}</p>
+                            @enderror
+                            <p class="validate validate-g-recaptcha-response"></p>
+                        </div>
+                    </section>
 
 
                     <div class="d-flex justify-content-center gap-10">
@@ -79,3 +89,6 @@
     </main>
 
 @endsection
+@push('js')
+<script src='https://www.google.com/recaptcha/api.js'></script>
+@endpush

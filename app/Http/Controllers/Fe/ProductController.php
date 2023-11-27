@@ -72,6 +72,7 @@ class ProductController extends Controller
             ->with('files')
             ->with('category')
             ->with('author')
+            ->with('reviews')
             ->where('code', $code)
             ->first();
         if (!$product) {

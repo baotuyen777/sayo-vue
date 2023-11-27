@@ -1122,7 +1122,7 @@ h1 {
   align-items: center;
   gap: 5px;
   background-color: #f4f4f4;
-  border: 1px solid hsla(0deg, 0%, 61%, 0.7);
+  border: 1px solid hsla(0, 0%, 61%, 0.7);
   white-space: nowrap;
   border-radius: 4px;
   cursor: pointer;
@@ -2138,6 +2138,147 @@ footer {
   width: 24px;
   vertical-align: middle;
   margin-right: 10px;
+}
+
+.progress {
+  height: 8px;
+  margin: 0;
+  border-radius: 4px;
+  background-color: #ccc;
+}
+
+.progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #337ab7;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
+
+.review-body {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.col-2 {
+  width: 50%;
+}
+
+.col-3 {
+  width: 33.3333333333%;
+}
+
+.text-yellow {
+  color: #efb140;
+}
+
+.review__progress {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.star-rating {
+  white-space: nowrap;
+}
+
+.star-rating [type=radio] {
+  appearance: none;
+}
+
+.star-rating i {
+  font-size: 1.2em;
+  transition: 0.3s;
+}
+
+.star-rating label:is(:hover, :has(~ :hover)) i {
+  transform: scale(1.35);
+  color: #fffdba;
+  animation: jump 0.5s calc(0.3s + (var(--i) - 1) * 0.15s) alternate infinite;
+}
+
+.star-rating label:has(~ :checked) i {
+  color: #faec1b;
+  text-shadow: 0 0 2px #ffffff, 0 0 10px #ffee58;
+}
+
+.btn-yellow {
+  background-color: #f80;
+}
+
+.form-review .btn {
+  float: right;
+}
+
+.form-review textarea {
+  width: 100%;
+}
+
+#review_file {
+  display: none;
+}
+
+.review-img img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.product-review .info {
+  width: 100%;
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+.customer-info {
+  display: flex;
+  justify-items: center;
+}
+
+.review-sp {
+  height: 50px;
+}
+
+.separate {
+  margin-bottom: 40px;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.me-3 {
+  margin: 0 4px;
+}
+
+.avg-rate {
+  color: red;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.username {
+  margin-left: 4px;
+}
+
+@keyframes jump {
+  0%, 50% {
+    transform: translatey(0) scale(1.35);
+  }
+  100% {
+    transform: translatey(-15%) scale(1.35);
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

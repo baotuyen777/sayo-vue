@@ -148,4 +148,3 @@ function isAdmin()
 {
     return Auth::user() && Auth::user()->role === ROLE_ADMIN;
 }
-
