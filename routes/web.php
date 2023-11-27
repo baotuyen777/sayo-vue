@@ -9,6 +9,7 @@ use \App\Http\Controllers\Fe\NewsController;
 use \App\Http\Controllers\Fe\UserController;
 use \App\Http\Controllers\Fe\PdwController;
 use App\Http\Controllers\Fe\CommentController;
+use App\Http\Controllers\Fe\ReviewController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Fe\PasswordResetController;
 /*
@@ -60,6 +61,7 @@ Route::post('/product/edit/{slug}.htm', [ProductController::class, 'update'])->n
 Route::put('/product/update-simple/{slug}.htm', [ProductController::class, 'updateSimple'])->name('productUpdateSimple');
 Route::get('/xem-san-pham-{catSlug?}/{slug}.htm', [ProductController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('productView');
 Route::resource('product', ProductController::class);
+Route::resource('/review', ReviewController::class);
 
 //Route::resource('news', NewsController::class);
 //Route::get('/post/edit/{slug}.htm', [NewsController::class, 'edit'])->name('postEdit');
