@@ -1,5 +1,12 @@
 @extends('layout.index')
 @section('content')
+<?php 
+    if (Request::route()->getName() == 'login') {
+        session()->put('url_redirect', url()->previous());
+    } else {
+        session()->put('url_redirect', url()->current());
+    }
+?>
     <div id="login-page">
         <progress hidden=""></progress>
         <div class=" login-wrapper">
