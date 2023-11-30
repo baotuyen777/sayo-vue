@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique()->index();
             $table->tinyInteger('status')->default(1);
             $table->enum('state', ['init', 'processing', 'delivery', 'completed', 'refund', ' cancel'])->default('init');
 

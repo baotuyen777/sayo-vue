@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code')->unique();
+            $table->string('code')->unique()->index();
             $table->text('content')->nullable();
             $table->tinyInteger('state')->default(STATE_NEW)->comment('1: hang moi, 2: cu con bao hanh, 3: cu het bao hanh ');
             $table->tinyInteger('status')->default(STATUS_PENDING);

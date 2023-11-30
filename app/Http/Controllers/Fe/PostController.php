@@ -85,14 +85,7 @@ class PostController extends Controller
     //Show the form for view . $catCode dung tren url
     public function show($catCode, $code)
     {
-        $obj = Post::select('*')
-            ->with('avatar')
-            ->with('files')
-            ->with('category')
-            ->with('author')
-            ->with('comments')
-            ->where('code', $code)
-            ->first();
+        $obj = Post::getOne($code);
 
         if (!$obj) {
             return view('pages.404');

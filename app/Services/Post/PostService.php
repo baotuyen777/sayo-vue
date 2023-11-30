@@ -7,6 +7,7 @@ use App\Models\Pdw\District;
 use App\Models\Pdw\Province;
 use App\Models\Pdw\Ward;
 use App\Models\Post;
+use Illuminate\Support\Facades\Cache;
 
 class PostService
 {
@@ -56,89 +57,94 @@ class PostService
 
     public function getAll($request)
     {
-        $currentPage = $request->input('current');
-        $pageSize = $request->input('page_size') ?? 24;
+        $this->res = [
+            'provinces' => [],
+            'province' => null,
+            'districts' => [],
+            'district' => null,
+            'wards' => [],
+            'ward' => null,
+            'objs' => [],
+            'categories' => [],
+            'category' => null
+        ];
+        $catCode = $request->input('catCode');
+        $this->res['categories'] = Category::getAll();
+        $this->res['category'] = $this->res['categories']->firstWhere('code', $catCode);
 
         $provinceCode = $request->input('provinceCode');
-        $province = Province::where('code', $provinceCode)->first();
 
-        $catCode = $request->input('catCode');
-        $category = Category::where('code', $catCode)->first();
-        $this->res = [
-            'category' => $category,
-            'provinces' => Province::get(),
-            'province' => $province,
-            'district' => [],
-            'districts' => [],
-            'wards' => [],
-            'ward' => [],
-            'objs' => [],
-            'categories' => Category::with('avatar')->get()
-        ];
-
-
-        $posts = Post::select('*')->with('avatar')->with('files')->with('category');
-        $posts = $this->filter($request, $posts, $category, $province);
-
-        $this->res['objs'] = $posts->orderBy('status')->orderBy('created_at', 'desc')->paginate($pageSize, ['*'], 'page', $currentPage);
-        return $this->res;
-    }
-
-    private function filter($request, $objs, $category = null, $province = null)
-    {
-        if ($request->input('status')) {
-            $objs->where('status', $request->input('status'));
-        }
-
-        if ($request->input('author_id')) {
-            $objs->where('author_id', $request->input('author_id'));
-        }
-
-        if ($category) {
-            $objs->where('category_id', $category->id);
-            //            ->whereHas('category', function ($query) use ($catSlug) {
-//                $query->where('code', $catSlug);
-//            })
-        }
-
-        $priceFrom = $request->input('price_from');
-        if ($priceFrom) {
-            $objs->where('price', '>', $priceFrom);
-        }
-
-        $priceTo = $request->input('price_to');
-        if ($priceTo) {
-            $objs->where('price', '<', $priceTo);
-        }
-
-        $s = $request->input('s');
-        if ($s) {
-            $objs->where('name', 'like', "%{$s}%");
-        }
-
+        $this->res['provinces'] = Province::getAll();
+        $province = $this->res['provinces']->firstWhere('code', $provinceCode);
         if ($province) {
-            $objs->where('province_id', $province->id);
-
-            $this->res['districts'] = District::whereProvinceId($province->id ?? 1)->get();
-            $districtCode = $request->input('districtCode');
-            $district = District::where('code', $districtCode)->first();
-            $this->res['district'] = $district;
-
-            if ($districtCode && $district) {
-                $objs->where('district_id', $district->id);
-                $this->res['wards'] = Ward::whereDistrictId($district->id)->get();
-                $wardCode = $request->input('wardCode');
-                $ward = Ward::where('code', $wardCode)->first();
-
-                if ($ward) {
-                    $this->res['ward'] = $ward;
-                    $objs->where('ward_id', $ward->id);
-                }
+            $this->res['districts'] = District::getAll()->where('province_id', $province->id);
+            $district = $this->res['districts']->firstWhere('code', $request->input('districtCode'));
+            if ($district) {
+                $this->res['wards'] = Ward::getAll()->where('district_id', $district->id);
+                $this->res['ward'] = $this->res['wards']->firstWhere('code', $request->input('wardCode'));
             }
         }
 
-        return $objs;
+        $this->res['objs'] = Post::getAll($request);
+
+        return $this->res;
     }
+
+//    private function filter($request, $objs, $category = null, $province = null)
+//    {
+//        if ($request->input('status')) {
+//            $objs->where('status', $request->input('status'));
+//        }
+//
+//        if ($request->input('author_id')) {
+//            $objs->where('author_id', $request->input('author_id'));
+//        }
+//
+//        if ($category) {
+//            $objs->where('category_id', $category->id);
+//            //            ->whereHas('category', function ($query) use ($catSlug) {
+////                $query->where('code', $catSlug);
+////            })
+//        }
+//
+//        $priceFrom = $request->input('price_from');
+//        if ($priceFrom) {
+//            $objs->where('price', '>', $priceFrom);
+//        }
+//
+//        $priceTo = $request->input('price_to');
+//        if ($priceTo) {
+//            $objs->where('price', '<', $priceTo);
+//        }
+//
+//        $s = $request->input('s');
+//        if ($s) {
+//            $objs->where('name', 'like', "%{$s}%");
+//        }
+//
+//        if ($province) {
+//            $objs->where('province_id', $province->id);
+//
+//            $this->res['districts'] = District::whereProvinceId($province->id ?? 1)->get();
+//            $districtCode = $request->input('districtCode');
+//            $district = District::where('code', $districtCode)->first();
+//            $this->res['district'] = $district;
+//
+//            if ($districtCode && $district) {
+//                $objs->where('district_id', $district->id);
+//                $this->res['wards'] = Ward::whereDistrictId($district->id)->get();
+//                $wardCode = $request->input('wardCode');
+//                $ward = Ward::where('code', $wardCode)->first();
+//
+//                if ($ward) {
+//                    $this->res['ward'] = $ward;
+//                    $objs->where('ward_id', $ward->id);
+//                }
+//            }
+//        }
+//
+//        return $objs;
+//    }
 
     function getAllSimple($request, $where = [])
     {

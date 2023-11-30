@@ -7,7 +7,7 @@ use App\Models\Pdw\Province;
 use App\Models\Pdw\Ward;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class Post extends Model
 {
@@ -122,40 +122,103 @@ class Post extends Model
             ->whereNull('parent_id')->limit(6);
     }
 
-    public static function getAll()
+    public static function getAll($request)
     {
-        $posts = Post::where('status', '=', 2)
-            ->with('avatar')
-            ->with('category')
-            ->with('province')
-            ->orderBy('created_at', 'desc')
-            ->paginate(24);
-        return $posts;
+        $cacheKey = convertArr2Code($request->all());
+
+        $objs = Cache::remember('posts_' . $cacheKey, 60 * 24, function () use ($request) {
+            $query = Post::where('status', '=', STATUS_ACTIVE)
+                ->with('avatar')
+                ->with('category')
+                ->with('province')
+                ->with('author')
+                ->with('province')
+                ->orderBy('status')->orderBy('created_at', 'desc');
+
+            if ($request) {
+                $query = self::buildFilterQuery($request, $query);
+                $query = self::buildFilterLocation($request, $query);
+            }
+
+            $currentPage = $request->input('current');
+            $pageSize = $request->input('page_size') ?? 24;
+            return $query->paginate($pageSize, ['*'], 'page', $currentPage);
+        });
+
+        return $objs;
     }
 
-//    public function getAttOptions()
-//    {
-//        $categories = Category::with('avatar')->get();
-//        $address = [
-//            ['id' => 1, 'name' => 'Phường Thanh Xuân Bắc, Quận Thanh Xuân, Hà Nội'],
-//            ['id' => 2, 'name' => 'Phường Thanh Xuân Trung, Quận Thanh Xuân, Hà Nội'],
-//        ];
-////        $provinces = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 1)->get();
-////        $districts = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 2)->get();
-////        $wards = DB::table('pdws')->select('id as value', 'name as label')->where('level', '=', 3)->get();
-//        $provinces = Province::get();
-//        $districts = District::whereProvinceId(50)->get();
-//        $wards = Ward::whereDistrictId(552)->get();
-//
-//        $postStates = Posts::$states;
-//
-//        $brands = ['Samsung', 'Apple'];
-//        $colors = ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác'];
-//        $storages = ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G'];
-//        $madeIns = ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác'];
-//
-//
-//        return get_defined_vars();
-//    }
+    public static function getOne($code)
+    {
+        $objs = Cache::remember('posts' . $code, 60 * 24, function () use ($code) {
+            return Post::select('*')
+                ->with('avatar')
+                ->with('files')
+                ->with('category')
+                ->with('author')
+                ->with('comments')
+                ->with('province')
+                ->with('district')
+                ->with('ward')
+                ->where('code', $code)
+                ->first();
+        });
+
+        return $objs;
+    }
+
+    private static function buildFilterQuery($request, $query)
+    {
+        if ($request->input('status')) {
+            $query->where('status', $request->input('status'));
+        }
+
+        if ($request->input('author_id')) {
+            $query->where('author_id', $request->input('author_id'));
+        }
+
+        if ($request->input('category_id')) {
+            $query->where('category_id', $request->input('category_id'));
+        }
+
+        $priceFrom = $request->input('price_from');
+        if ($priceFrom) {
+            $query->where('price', '>', $priceFrom);
+        }
+
+        $priceTo = $request->input('price_to');
+        if ($priceTo) {
+            $query->where('price', '<', $priceTo);
+        }
+
+        $s = $request->input('s');
+        if ($s) {
+            $query->where('name', 'like', "%{$s}%");
+        }
+        return $query;
+    }
+
+    public static function buildFilterLocation($request, $query)
+    {
+        if ($request->input('provinceCode')) {
+            $province = Province::getAll()->firstWhere('code', $request->input('provinceCode'));
+            $query->where('province_id', $province->id);
+            $districtCode = $request->input('districtCode');
+
+            $district = District::getAll()->firstWhere('code', $districtCode);
+
+            if ($district) {
+                $query->where('district_id', $district->id);
+                $wardCode = $request->input('wardCode');
+
+                $ward = Ward::getAll()->firstWhere('code', $wardCode);
+                if ($ward) {
+                    $query->where('ward_id', $ward->id);
+                }
+            }
+        }
+
+        return $query;
+    }
 
 }

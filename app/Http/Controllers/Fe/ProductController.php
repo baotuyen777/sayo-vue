@@ -51,7 +51,7 @@ class ProductController extends Controller
             ->where('code', $code)
             ->first();
 
-        if (!isAuthor($product)) {
+        if (!isAuthor($product) && !isAdmin()) {
             return view('pages.404');
         }
         $output = $this->productsService->getAttrOptions($product);

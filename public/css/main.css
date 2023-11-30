@@ -1122,7 +1122,7 @@ h1 {
   align-items: center;
   gap: 5px;
   background-color: #f4f4f4;
-  border: 1px solid hsla(0, 0%, 61%, 0.7);
+  border: 1px solid hsla(0deg, 0%, 61%, 0.7);
   white-space: nowrap;
   border-radius: 4px;
   cursor: pointer;
