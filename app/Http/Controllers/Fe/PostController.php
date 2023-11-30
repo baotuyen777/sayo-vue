@@ -12,6 +12,7 @@ use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -85,7 +86,7 @@ class PostController extends Controller
     //Show the form for view . $catCode dung tren url
     public function show($catCode, $code)
     {
-        $obj = Post::getOne($code);
+        $obj = Post::getOne($code, true);
 
         if (!$obj) {
             return view('pages.404');
@@ -172,48 +173,13 @@ class PostController extends Controller
         }
 
         $res = $post->update($params);
-
+        Cache::forget(Post::CACHE_KEY . $code);
         return response()->json(['status' => true, 'result' => $res]);
     }
 
-
-    public function destroy($code)
+    public function destroy($code): \Illuminate\Http\JsonResponse
     {
-        $obj = Post::where('code', $code)->first();
-        if (!$obj) {
-            return response()->json(RETURN404);
-        }
-
-        if (!isAuthor($obj) && !isAdmin()) {
-            return response()->json(RETURN_REQUIRED_ADMIN);
-        }
-
-        try {
-            $urlFiles = $obj->files->pluck('url')->toArray();
-            $urlStorages = array_map(function ($val) {
-                return str_replace(asset('storage'), 'public', $val);
-            }, $urlFiles);
-
-            foreach ($urlStorages as $urlStorage) {
-                if (Storage::exists($urlStorage)) {
-                    Storage::delete($urlStorage);
-                }
-            }
-
-            $fileIds = $obj->files->pluck('id')->toArray();
-            Post::whereIn('avatar_id', $fileIds)->update(['avatar_id' => null]);
-            $obj->files()->detach();
-            Files::whereIn('id', $fileIds)->delete();
-        } catch (\Exception $e) {
-            return response()->json([
-                'status_code' => 500,
-                'message' => 'Có lỗi xảy ra! vui lòng liên hệ với admin',
-                'error' => $e->getMessage(),
-            ]);
-        }
-
-        $obj->delete();
-        return response()->json(['status' => true, 'result' => $obj]);
+        return response()->json($this->postsService->destroy($code));
     }
 
     public function crawl(Request $request)

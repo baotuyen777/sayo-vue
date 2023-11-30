@@ -13,6 +13,7 @@ class Post extends Model
 {
     use HasFactory;
 
+    const CACHE_KEY = 'posts';
     public static array $status = [
         1 => 'Chờ duyệt',
         2 => 'Đã duyệt',
@@ -126,7 +127,7 @@ class Post extends Model
     {
         $cacheKey = convertArr2Code($request->all());
 
-        $objs = Cache::remember('posts_' . $cacheKey, 60 * 24, function () use ($request) {
+        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, 60 * 24, function () use ($request) {
             $query = Post::where('status', '=', STATUS_ACTIVE)
                 ->with('avatar')
                 ->with('category')
@@ -148,20 +149,23 @@ class Post extends Model
         return $objs;
     }
 
-    public static function getOne($code)
+    public static function getOne($code, $isFull = false)
     {
-        $objs = Cache::remember('posts' . $code, 60 * 24, function () use ($code) {
-            return Post::select('*')
-                ->with('avatar')
-                ->with('files')
-                ->with('category')
-                ->with('author')
-                ->with('comments')
-                ->with('province')
-                ->with('district')
-                ->with('ward')
-                ->where('code', $code)
-                ->first();
+        $objs = Cache::remember(self::CACHE_KEY . $code, 60 * 24, function () use ($code, $isFull) {
+            $query = Post::select('*')->where('code', $code);
+            if ($isFull) {
+                $query->with('avatar')
+                    ->with('files')
+                    ->with('category')
+                    ->with('author')
+                    ->with('comments')
+                    ->with('province')
+                    ->with('district')
+                    ->with('ward');
+            }
+            return $query->first();
+
+
         });
 
         return $objs;

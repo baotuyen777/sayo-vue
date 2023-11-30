@@ -3,11 +3,13 @@
 namespace App\Services\Post;
 
 use App\Models\Category;
+use App\Models\Files;
 use App\Models\Pdw\District;
 use App\Models\Pdw\Province;
 use App\Models\Pdw\Ward;
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class PostService
 {
@@ -90,62 +92,6 @@ class PostService
         return $this->res;
     }
 
-//    private function filter($request, $objs, $category = null, $province = null)
-//    {
-//        if ($request->input('status')) {
-//            $objs->where('status', $request->input('status'));
-//        }
-//
-//        if ($request->input('author_id')) {
-//            $objs->where('author_id', $request->input('author_id'));
-//        }
-//
-//        if ($category) {
-//            $objs->where('category_id', $category->id);
-//            //            ->whereHas('category', function ($query) use ($catSlug) {
-////                $query->where('code', $catSlug);
-////            })
-//        }
-//
-//        $priceFrom = $request->input('price_from');
-//        if ($priceFrom) {
-//            $objs->where('price', '>', $priceFrom);
-//        }
-//
-//        $priceTo = $request->input('price_to');
-//        if ($priceTo) {
-//            $objs->where('price', '<', $priceTo);
-//        }
-//
-//        $s = $request->input('s');
-//        if ($s) {
-//            $objs->where('name', 'like', "%{$s}%");
-//        }
-//
-//        if ($province) {
-//            $objs->where('province_id', $province->id);
-//
-//            $this->res['districts'] = District::whereProvinceId($province->id ?? 1)->get();
-//            $districtCode = $request->input('districtCode');
-//            $district = District::where('code', $districtCode)->first();
-//            $this->res['district'] = $district;
-//
-//            if ($districtCode && $district) {
-//                $objs->where('district_id', $district->id);
-//                $this->res['wards'] = Ward::whereDistrictId($district->id)->get();
-//                $wardCode = $request->input('wardCode');
-//                $ward = Ward::where('code', $wardCode)->first();
-//
-//                if ($ward) {
-//                    $this->res['ward'] = $ward;
-//                    $objs->where('ward_id', $ward->id);
-//                }
-//            }
-//        }
-//
-//        return $objs;
-//    }
-
     function getAllSimple($request, $where = [])
     {
         $s = $request->input('s');
@@ -165,4 +111,39 @@ class PostService
             ->paginate($pageSize, ['*'], 'page', $currentPage);
     }
 
+    public function destroy($code)
+    {
+        $obj = Post::getOne($code);
+        if (!$obj) {
+            return RETURN404;
+        }
+
+        if (!isAuthor($obj) && !isAdmin()) {
+            return RETURN_REQUIRED_ADMIN;
+        }
+
+        try {
+            $urlFiles = $obj->files->pluck('url')->toArray();
+            $urlStorages = array_map(function ($val) {
+                return str_replace(asset('storage'), 'public', $val);
+            }, $urlFiles);
+
+            foreach ($urlStorages as $urlStorage) {
+                if (Storage::exists($urlStorage)) {
+                    Storage::delete($urlStorage);
+                }
+            }
+
+            $fileIds = $obj->files->pluck('id')->toArray();
+            Post::whereIn('avatar_id', $fileIds)->update(['avatar_id' => null]);
+            $obj->files()->detach();
+            Files::whereIn('id', $fileIds)->delete();
+            $obj->delete();
+            Cache::flush();
+        } catch (\Exception $e) {
+            return RETURN_SOMETHING_WENT_WRONG;
+        }
+
+        return returnSuccess();
+    }
 }
