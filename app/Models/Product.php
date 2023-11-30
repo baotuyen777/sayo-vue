@@ -61,7 +61,7 @@ class Product extends Model
 //    protected $table ='products';
     protected $fillable = [
         'name', 'code', 'content', 'category_id', 'status', 'author_id', 'price',
-        'address', 'attr', 'ward_id', 'district_id', 'province_id', 'avatar_id', 'video_id', 'source'
+        'address', 'attr', 'ward_id', 'district_id', 'province_id', 'avatar_id', 'video_id', 'source', 'avg_rate'
     ];
     protected $appends = ['category_name'];
     protected $primaryKey = 'id';
