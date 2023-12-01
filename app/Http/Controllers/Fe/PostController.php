@@ -102,8 +102,7 @@ class PostController extends Controller
         }
 
         $obj['attr'] = $this->postsService->getAttrField($obj, true);
-//        $post['cat_code'] = $catCode;
-//        dd($post['attr']);
+
         return view('pages.post.view', ['obj' => $obj]);
     }
 

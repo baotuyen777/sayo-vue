@@ -78,17 +78,19 @@ class PostService
 
         $this->res['provinces'] = Province::getAll();
         $province = $this->res['provinces']->firstWhere('code', $provinceCode);
+
         if ($province) {
+            $this->res['province'] = $province;
             $this->res['districts'] = District::getAll()->where('province_id', $province->id);
             $district = $this->res['districts']->firstWhere('code', $request->input('districtCode'));
             if ($district) {
+                $this->res['district'] = $district;
                 $this->res['wards'] = Ward::getAll()->where('district_id', $district->id);
                 $this->res['ward'] = $this->res['wards']->firstWhere('code', $request->input('wardCode'));
             }
         }
 
         $this->res['objs'] = Post::getAll($request);
-
         return $this->res;
     }
 

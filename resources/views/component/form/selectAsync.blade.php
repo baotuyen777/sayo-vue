@@ -15,8 +15,7 @@
                  viewBox="0 0 12 12" width="1em"
                  height="1em" fill="none">
                 <g fill="none" fill-rule="evenodd">
-                    <circle fill="#8C8C8C" cx="6" cy="6"
-                            r="6"></circle>
+                    <circle fill="#8C8C8C" cx="6" cy="6" r="6"></circle>
                     <path
                         d="M3.863 3.863l4.275 4.275m-.001-4.275L3.862 8.138"
                         stroke="#FFF"

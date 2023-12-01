@@ -127,7 +127,7 @@ class Post extends Model
     {
         $cacheKey = convertArr2Code($request->all());
 
-        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, 60 * 24, function () use ($request) {
+        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, env('APP_ENV') == 'production' ? 60 * 24 : 0, function () use ($request) {
             $query = Post::where('status', '=', STATUS_ACTIVE)
                 ->with('avatar')
                 ->with('category')
@@ -181,8 +181,13 @@ class Post extends Model
             $query->where('author_id', $request->input('author_id'));
         }
 
-        if ($request->input('category_id')) {
-            $query->where('category_id', $request->input('category_id'));
+
+        if ($request->input('catCode')) {
+
+            $category = Category::getAll()->firstWhere('code', $request->input('catCode'));
+            if ($category) {
+                $query->where('category_id', $category->id);
+            }
         }
 
         $priceFrom = $request->input('price_from');
