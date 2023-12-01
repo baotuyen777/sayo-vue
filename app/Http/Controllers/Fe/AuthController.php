@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
@@ -22,7 +23,11 @@ class AuthController extends Controller
     public function doLogin(Request $request)
     {
         $res = $this->authService->login($request);
+
         if ($res['status_code'] == 200) {
+            if (session()->get('url_redirect')) {
+                return redirect()->away(session()->get('url_redirect'));
+            }
             return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
         }
 
@@ -69,6 +74,7 @@ class AuthController extends Controller
 
     public function logout()
     {
+        session()->forget('url_redirect');
 //        $this->authService->logout();
         Auth::guard('web')->logout();
         return redirect()->route('login');

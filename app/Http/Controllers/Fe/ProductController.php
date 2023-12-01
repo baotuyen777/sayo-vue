@@ -9,7 +9,6 @@ use App\Services\Product\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class ProductController extends Controller
 {
     function __construct(private readonly ProductService $productsService)
