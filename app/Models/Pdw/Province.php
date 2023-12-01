@@ -3,6 +3,7 @@
 namespace App\Models\Pdw;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Kjmtrue\VietnamZone\Models\Province
@@ -42,5 +43,11 @@ class Province extends Model
     public function districts()
     {
         return $this->hasMany(District::class,  'province_id');
+    }
+
+    public static function getAll(){
+        return Cache::remember('provinces',60*24*365,function(){
+            return self::get();
+        });
     }
 }

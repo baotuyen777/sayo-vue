@@ -119,7 +119,7 @@ $('.clear').click(function () {
     $(this).parents('form').submit();
 })
 
-$('a').click(function (e) {
+$('body').find('a').click(function (e) {
     toggleLoading();
 })
 
@@ -127,7 +127,7 @@ function toggleLoading() {
     $('.overlay').toggle();
     setTimeout(function () {
         $('.overlay').toggle()
-    }, 3000)
+    }, 5000)
 }
 
 //form effect

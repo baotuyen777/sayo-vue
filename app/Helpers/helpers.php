@@ -148,3 +148,15 @@ function isAdmin()
 {
     return Auth::user() && Auth::user()->role === ROLE_ADMIN;
 }
+
+function convertArr2Code($arr)
+{
+    $items = [];
+    foreach ($arr as $k => $v) {
+        if (!$v) {
+            continue;
+        }
+        $items[] = "{$k}_{$v}";
+    }
+    return implode('_', $items);
+}

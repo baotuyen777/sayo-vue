@@ -8,7 +8,8 @@ const RETURN404 = [
 
 const RETURN_SOMETHING_WENT_WRONG = [
     'status' => false,
-    'message' => 'Có lỗi xảy ra'
+    'err_code' => ERR_500,
+    'message' => 'Có lỗi xảy ra! vui lòng liên hệ với admin'
 ];
 
 const RETURN_REQUIRED_ADMIN = [
@@ -17,7 +18,7 @@ const RETURN_REQUIRED_ADMIN = [
     'message' => ERR_REQUIRED_ADMIN . ' Bạn cần có quyền admin'
 ];
 
-function returnSuccess($res)
+function returnSuccess($res = '')
 {
     return ['status' => true, 'result' => $res];
 }
