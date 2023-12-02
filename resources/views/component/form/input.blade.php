@@ -1,6 +1,6 @@
 <div class="form-control form-control-{{$name}} @error($name) error @enderror">
     <input class="minput  " name="{{$name}}" type="{{$type ?? 'text'}}" placeholder="{{$placeholder ??''}}"
-           inputmode="{{$inputmode ?? 'text'}}" value="{{ $obj[$name] ?? old($name, $address ?? '') }}" maxlength="{{$maxleng ??'' }}">
+           inputmode="{{$inputmode ?? 'text'}}" value="{{ $obj[$name] ?? old($name) }}" maxlength="{{$maxleng ??'' }}">
     <label for="{{$name}}">{{$label}}</label>
     @if(!isset($type) || in_array($type,['text']))
         <button tabindex="-1" type="button" class="btn-close">

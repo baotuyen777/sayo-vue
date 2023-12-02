@@ -30,16 +30,15 @@
                     <section>
                         <h5>Địa chỉ</h5>
                         <div class="grid-3 gap-10">
-                            @php $address = optional(auth()->user()) @endphp
                             @include('component.form.selectAsync',['name'=> 'province_id', 'label' => 'Tỉnh/thành phố', 'options' => $provinces,
-'asyncUrl' =>route('getDistricts'), 'asyncField' =>'district_id', 'valueLabel'=>$obj['province_name'] ?? $address->province->name, 'id' => $address->district_id ])
+'asyncUrl' =>route('getDistricts'), 'asyncField' =>'district_id', 'valueLabel'=>$obj['province_name'] ?? ''])
                             @include('component.form.selectAsync',['name'=> 'district_id', 'label' => 'Quận/Huyện', 'options' => $districts,
-'asyncUrl' =>route('getWards'), 'asyncField' =>'ward_id','valueLabel'=> $obj['district_name'] ?? $address->district->name, 'id' => $address->district_id])
-                            @include('component.form.selectAsync',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards, 'valueLabel'=>$obj['ward_name']?? $address->ward->name, 'id' => $address->ward_id])
+'asyncUrl' =>route('getWards'), 'asyncField' =>'ward_id','valueLabel'=>$obj['district_name'] ?? ''])
+                            @include('component.form.selectAsync',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards, 'valueLabel'=>$obj['ward_name']?? ''])
                         </div>
 
                         <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
-                        @include('component.form.input',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)', 'address' => $address->address])
+                        @include('component.form.input',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)'])
                     </section>
 
                     <section>
@@ -76,7 +75,7 @@
                         <button class="btn--primary btn-submit">
                             {{isset($obj['id']) ? 'Lưu thay đổi' : 'ĐĂNG TIN' }}
                         </button>
-                        @if(isset($obj))
+                        @if(isset($obj['id']))
                             <a class="btn"
                                href="{{route('postView',['catSlug'=>$obj['category']['code'],'slug'=>$obj['code']])}}"
                                target="_blank">Xem trước</a>

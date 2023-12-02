@@ -156,7 +156,18 @@ class PostController extends Controller
             return view('pages/auth/login');
         }
 
-        $options = $this->postsService->getAttrOptions();
+        $user = Auth::user();
+        $options = $this->postsService->getAttrOptions($user);
+        $obj = [
+            'province_name' => $options['provinces']->get($user->province_id)->name ?? '',
+            'province_id' => $options['provinces']->get($user->province_id)->id ?? '',
+            'district_name' => $options['districts']->get($user->district_id)->name ?? '',
+            'district_id' => $options['districts']->get($user->district_id)->id ?? '',
+            'ward_name' => $options['wards']->get($user->ward_id)->name ?? '',
+            'ward_id' => $options['wards']->get($user->ward_id)->id ?? '',
+            'address' => $user->address ?? '',
+        ];
+        $options['obj'] = $obj;
 
         return view('pages/post/detail', array_merge(Post::$attr, $options));
     }
