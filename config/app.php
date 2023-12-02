@@ -188,5 +188,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ])->toArray(),
 
-    'enable_cache' => env('ENABLE_CACHE', 'false')
+    'enable_cache' => env('ENABLE_CACHE', 'false'),
+    'google_recaptcha_key' => env('GOOGLE_RECAPTCHA_KEY', ''),
+    'google_recaptcha_secret' => env('GOOGLE_RECAPTCHA_SECRET', ''),
 ];

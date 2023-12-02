@@ -609,6 +609,7 @@ h1 {
   top: -1px;
   right: 12px;
   pointer-events: none;
+  position: absolute;
 }
 
 .title-line {

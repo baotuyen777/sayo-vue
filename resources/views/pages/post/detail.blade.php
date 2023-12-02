@@ -60,7 +60,7 @@
                     <section>
                         <div>
                             <h5>ReCaptcha: </h5>
-                            <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                            <div class="g-recaptcha" data-sitekey="{{ config('app.google_recaptcha_key') }}"></div>
                             @error('g-recaptcha-response')
                             <p>{{ $message }}</p>
                             @enderror
