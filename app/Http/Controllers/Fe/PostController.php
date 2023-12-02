@@ -8,6 +8,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\Files;
 use App\Models\Post;
 use App\Models\PostComment;
+use App\Models\User;
 use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
 use Illuminate\Http\Request;
@@ -128,6 +129,23 @@ class PostController extends Controller
             $obj->files()->sync($files);
         }
 
+        $author = User::find($userid)
+            ->whereNull('address')
+            ->orWhereNull('province_id')
+            ->orWhereNull('district_id')
+            ->orWhereNull('ward_id')
+            ->first();
+
+        if($author) {
+            $address = [
+                'province_id' => $params['province_id'],
+                'district_id' => $params['district_id'],
+                'ward_id' => $params['ward_id'],
+                'address' => $params['address']
+            ];
+            $author->update($address);
+        }
+
         return ['status' => true, 'result' => $obj];
     }
 
@@ -137,7 +155,18 @@ class PostController extends Controller
             return view('pages/auth/login');
         }
 
-        $options = $this->postsService->getAttrOptions();
+        $user = Auth::user();
+        $options = $this->postsService->getAttrOptions($user);
+        $obj = [
+            'province_name' => $options['provinces']->get($user->province_id)->name ?? '',
+            'province_id' => $options['provinces']->get($user->province_id)->id ?? '',
+            'district_name' => $options['districts']->get($user->district_id)->name ?? '',
+            'district_id' => $options['districts']->get($user->district_id)->id ?? '',
+            'ward_name' => $options['wards']->get($user->ward_id)->name ?? '',
+            'ward_id' => $options['wards']->get($user->ward_id)->id ?? '',
+            'address' => $user->address ?? '',
+        ];
+        $options['obj'] = $obj;
 
         return view('pages/post/detail', array_merge(Post::$attr, $options));
     }
