@@ -127,7 +127,8 @@ class Post extends Model
     {
         $cacheKey = convertArr2Code($request->all());
 
-        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, env('APP_ENV') == 'production' ? 60 * 24 : 0, function () use ($request) {
+        $time = config('app.enable_cache') ? 60 * 24 : 0;
+        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, $time, function () use ($request) {
             $query = Post::where('status', '=', STATUS_ACTIVE)
                 ->with('avatar')
                 ->with('category')

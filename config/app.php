@@ -188,4 +188,5 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ])->toArray(),
 
+    'enable_cache' => env('ENABLE_CACHE', 'false')
 ];
