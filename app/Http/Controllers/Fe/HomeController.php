@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\Controller;
 use App\Models\Pdws;
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -25,4 +25,12 @@ class HomeController extends Controller
         return view('pages/page', ['obj' => $obj]);
     }
 
+    public function testEmail()
+    {
+        $name = 'abcd';
+        Mail::send('pages.auth.mail_success', compact('name'), function ($email) {
+            $email->subject('sayo test');
+            $email->to('baotuyen111@gmail.com', 'abcde');
+        });
+    }
 }

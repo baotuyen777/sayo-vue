@@ -40,7 +40,7 @@ class PasswordResetController extends Controller
             return redirect()->back()->withErrors(['to_send_password_change' => "Tài khoản này chưa có email vui lòng liên hệ với admin: $phoneAdmin"]);
         }
 
-        return redirect()->back()->withErrors(['to_send_password_change' => 'Không có Email, Số điện thoại, Username nào khớp']);
+        return redirect()->back()->withErrors(['to_send_password_change' => 'Tài khoản không tồn tại']);
     }
 
     public function resetPassword($token)

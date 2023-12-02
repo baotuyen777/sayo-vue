@@ -24,6 +24,7 @@ use App\Http\Controllers\Fe\PasswordResetController;
 */
 //Route::view("/","home")->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/test-email', [HomeController::class, 'testEmail'])->name('testEmail');
 
 Route::get('/page/{code}.htm', [HomeController::class, 'page'])->name('pageView');
 
