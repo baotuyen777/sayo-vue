@@ -75,7 +75,7 @@
                         <button class="btn--primary btn-submit">
                             {{isset($obj['id']) ? 'Lưu thay đổi' : 'ĐĂNG TIN' }}
                         </button>
-                        @if(isset($obj))
+                        @if(isset($obj['id']))
                             <a class="btn"
                                href="{{route('postView',['catSlug'=>$obj['category']['code'],'slug'=>$obj['code']])}}"
                                target="_blank">Xem trước</a>
