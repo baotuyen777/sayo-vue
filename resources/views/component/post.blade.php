@@ -1,5 +1,5 @@
 @php
-    $detailLink =  route('postView',['catSlug'=>$obj['category']['code'],'slug'=>$obj['code']]);
+    $detailLink =  route('postView',['catCode'=>$obj['category']['code'],'code'=>$obj['code']]);
     $bg= $obj['avatar']['url'] ?? asset('img/sayo-default-vertical.webp');
 @endphp
 

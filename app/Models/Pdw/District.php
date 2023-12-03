@@ -56,7 +56,7 @@ class District extends Model
 
     public static function getAll(){
         return Cache::remember('districts',60*24*365,function(){
-            return self::get();
+            return self::get()->keyBy('id');
         });
     }
 }

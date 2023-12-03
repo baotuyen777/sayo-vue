@@ -8,43 +8,53 @@ use App\Models\Pdw\District;
 use App\Models\Pdw\Province;
 use App\Models\Pdw\Ward;
 use App\Models\Post;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class PostService
 {
     private array $res = [];
 
-    function getAttrField($post = false, $filterNull = false)
+    public function store($request)
     {
-        $config = Post::$attr;
+        $userid = Auth::id();
 
-        $attrs = json_decode(str_replace('%22', '', $post->attr));
-        $res = [];
-        foreach ($config as $k => $item) {
-            if (isset($attrs->$k)) {
-                $rawValue = $attrs->$k;
-                $item['value'] = $rawValue;
-                $item['valueLabel'] = $item['options'][$rawValue] ?? $rawValue;
-                if (isset($item['type'])) {
-                    if ($item['type'] == 'boolean') {
-                        $item['valueLabel'] = $rawValue ? 'Có' : 'Không';
-                    }
-                    if ($item['type'] == 'money') {
-                        $item['valueLabel'] = moneyFormat($rawValue);
-                    }
-                    if ($item['type'] == 's') {
-                        $item['valueLabel'] = $rawValue . 'm2';
-                    }
-                }
-            } else if ($filterNull) {
-                continue;
-            }
-
-            $res[$k] = $item;
+        $request->merge([
+            'code' => time() . '-' . $userid,
+            'author_id' => $userid,
+            'attr' => str_replace(['\"', '%22'], '', json_encode($request->input('attr'))),
+        ]);
+        $files = $request->input('file_ids');
+        if ($files) {
+            $request->merge(['avatar_id' => $files[0]]);
         }
 
-        return $res;
+        $obj = Post::query()->create($request->all());
+        if ($obj && $files) {
+            $obj->files()->sync($files);
+        }
+
+        $author = User::find($userid)
+            ->whereNull('address')
+            ->orWhereNull('province_id')
+            ->orWhereNull('district_id')
+            ->orWhereNull('ward_id')
+            ->first();
+
+        if ($author) {
+            $address = [
+                'province_id' => $request->input('province_id'),
+                'district_id' => $request->input('district_id'),
+                'ward_id' => $request->input('ward_id'),
+                'address' => $request->input('address')
+            ];
+            $author->update($address);
+        }
+
+        return ['status' => true, 'result' => $obj];
     }
 
     public function getAttrOptions($post = null)
@@ -70,6 +80,9 @@ class PostService
             'categories' => [],
             'category' => null
         ];
+        $routeParams = request()->route()->parameters();
+        $request->merge($routeParams);
+
         $catCode = $request->input('catCode');
         $this->res['categories'] = Category::getAll();
         $this->res['category'] = $this->res['categories']->firstWhere('code', $catCode);
@@ -147,5 +160,32 @@ class PostService
         }
 
         return returnSuccess();
+    }
+
+    public function incrementViewNumber($code)
+    {
+        $postKey = 'posts_' . $code;
+// Kiểm tra Session của bài viết có tồn tại hay không.
+        // Nếu không tồn tại, sẽ tự động tăng trường viewed_quantity lên 1 đồng thời tạo session lưu trữ key bài viết.
+        if (!Session::has($postKey)) {
+            Post::where('code', $code)->increment('viewed_quantity');
+            Session::put($postKey, 1);
+        }
+    }
+
+    public function populateSellerAddress($user, $obj = [])
+    {
+        $province = Province::getAll()->get($user->province_id);
+        $district = District::getAll()->get($user->district_id);
+        $ward = Ward::getAll()->get($user->ward_id);
+        return array_merge([
+            'province_name' => $province->name ?? '',
+            'province_id' => $province->id ?? '',
+            'district_name' => $district->name ?? '',
+            'district_id' => $district->id ?? '',
+            'ward_name' => $ward->name ?? '',
+            'ward_id' => $ward->id ?? '',
+            'address' => $user->address ?? '',
+        ], $obj);
     }
 }

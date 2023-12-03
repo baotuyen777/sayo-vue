@@ -47,7 +47,7 @@ class Province extends Model
 
     public static function getAll(){
         return Cache::remember('provinces',60*24*365,function(){
-            return self::get();
+            return self::get()->keyBy('id');
         });
     }
 }

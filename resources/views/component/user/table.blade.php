@@ -76,4 +76,4 @@
     <span class="csrf hide">{{csrf_token()}}</span>
     @include('component.list.pagination')
 </div>
-{{--<form action="{{route('postEdit',['slug'=>$post['code']])}}"></form>--}}
+{{--<form action="{{route('postEdit',['code'=>$post['code']])}}"></form>--}}

@@ -46,9 +46,10 @@ class Ward extends Model
         return $this->belongsTo(District::class, 'district_id');
     }
 
-    public static function getAll(){
-        return Cache::remember('wards',60*24*365,function(){
-            return self::get();
+    public static function getAll()
+    {
+        return Cache::remember('wards', 60 * 24 * 365, function () {
+            return self::get()->keyBy('id');
         });
     }
 }

@@ -27,7 +27,11 @@ class PostController extends Controller
     {
     }
 
-    public function index(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
+    /**
+     * Manage post
+     * @param Request $request
+     */
+    public function index(Request $request)
     {
         if (!Auth::user()) {
             return view('pages/auth/login');
@@ -37,22 +41,18 @@ class PostController extends Controller
             $request->merge(['author_id' => Auth::user()->id]);
         }
 
+        $request->merge(['status' => 'all']);
         $res = $this->postsService->getAll($request);
 
         return view('pages/post/list', $res);
     }
 
-    public function archive(Request $request, $catCode = null, $provinceCode = null, $districtCode = null, $wardCode = null)
+    /**
+     * Show all active posts
+     * @param Request $request
+     */
+    public function archive(Request $request)
     {
-        $extraParam = [
-            'catCode' => $catCode,
-            'provinceCode' => $provinceCode,
-            'districtCode' => $districtCode,
-            'wardCode' => $wardCode,
-            'status' => STATUS_ACTIVE
-        ];
-
-        $request->merge($extraParam);
         $res = $this->postsService->getAll($request);
         $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');
         return view('pages/post/archive', $res);
@@ -60,93 +60,38 @@ class PostController extends Controller
 
     public function edit($code)
     {
-        $obj = Post::with('category')
-            ->with('avatar')
-            ->with('files')
-            ->where('code', $code)
-            ->first();
-
+        $obj = Post::getOne($code, true, true);
         if (!$obj || (!isAuthor($obj) && !isAdmin())) {
-            return view('pages.404');
+            return view('pages/404');
         }
 
         $output = $this->postsService->getAttrOptions($obj);
-
-        $obj['province_name'] = $output['provinces']->get($obj->province_id)->name ?? '';
-        $obj['district_name'] = $output['districts']->get($obj->district_id)->name ?? '';
-        $obj['ward_name'] = $output['wards']->get($obj->ward_id)->name ?? '';
-
-        $obj['file_ids'] = $obj['files']->pluck('id');
-        $obj['attr'] = $this->postsService->getAttrField($obj);
-
         $output['obj'] = $obj;
 
         return view('pages/post/detail', $output);
     }
 
-    //Show the form for view . $catCode dung tren url
-    public function show($catCode, $code)
+    //View post has slider .
+    public function show()
     {
-        $obj = Post::getOne($code, true);
+        $code = request()->route()->parameter('code');
+        $obj = Post::getOne($code, true, true);
 
         if (!$obj) {
-            return view('pages.404');
+            return view('pages/404');
         }
 
-        $postKey = 'posts_' . $code;
-
-        // Kiểm tra Session của bài viết có tồn tại hay không.
-        // Nếu không tồn tại, sẽ tự động tăng trường viewed_quantity lên 1 đồng thời tạo session lưu trữ key bài viết.
-        if (!Session::has($postKey)) {
-            Post::where('code', $code)->increment('viewed_quantity');
-            Session::put($postKey, 1);
-        }
-
-        $obj['attr'] = $this->postsService->getAttrField($obj, true);
-
-        return view('pages.post.view', ['obj' => $obj]);
+        $this->postsService->incrementViewNumber($code);
+        return view('pages/post/view', ['obj' => $obj]);
     }
 
     public function store(PostRequest $request)
     {
-        $params = $request->all();
-        $userid = Auth::id();
-
-        if (!$userid) {
+        if (!Auth::check()) {
             return redirect()->route('login');
         }
-        $files = $request->input('file_ids');
-        if ($files) {
-            $params['avatar_id'] = $files[0];
-        }
 
-        $params['code'] = time() . '-' . $userid;
-        $params['author_id'] = $userid;
-        $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
-
-        $obj = Post::create($params);
-        if ($obj && $files) {
-            $obj->files()->sync($files);
-        }
-
-        $author = User::find($userid)
-            ->whereNull('address')
-            ->orWhereNull('province_id')
-            ->orWhereNull('district_id')
-            ->orWhereNull('ward_id')
-            ->first();
-
-        if($author) {
-            $address = [
-                'province_id' => $params['province_id'],
-                'district_id' => $params['district_id'],
-                'ward_id' => $params['ward_id'],
-                'address' => $params['address']
-            ];
-            $author->update($address);
-        }
-
-        return ['status' => true, 'result' => $obj];
+        return response()->json($this->postsService->store($request));
     }
 
     public function create()
@@ -157,15 +102,7 @@ class PostController extends Controller
 
         $user = Auth::user();
         $options = $this->postsService->getAttrOptions($user);
-        $obj = [
-            'province_name' => $options['provinces']->get($user->province_id)->name ?? '',
-            'province_id' => $options['provinces']->get($user->province_id)->id ?? '',
-            'district_name' => $options['districts']->get($user->district_id)->name ?? '',
-            'district_id' => $options['districts']->get($user->district_id)->id ?? '',
-            'ward_name' => $options['wards']->get($user->ward_id)->name ?? '',
-            'ward_id' => $options['wards']->get($user->ward_id)->id ?? '',
-            'address' => $user->address ?? '',
-        ];
+        $obj = $this->postsService->populateSellerAddress($user);
         $options['obj'] = $obj;
 
         return view('pages/post/detail', array_merge(Post::$attr, $options));

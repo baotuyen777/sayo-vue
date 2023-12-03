@@ -129,7 +129,7 @@ class Post extends Model
 
         $time = config('app.enable_cache') ? 60 * 24 : 0;
         $objs = Cache::remember(self::CACHE_KEY . $cacheKey, $time, function () use ($request) {
-            $query = Post::where('status', '=', STATUS_ACTIVE)
+            $query = Post::query()
                 ->with('avatar')
                 ->with('category')
                 ->with('province')
@@ -150,9 +150,10 @@ class Post extends Model
         return $objs;
     }
 
-    public static function getOne($code, $isFull = false)
+    public static function getOne($code, $isFull = false, $populateExtendField = false)
     {
-        $objs = Cache::remember(self::CACHE_KEY . $code, 60 * 24, function () use ($code, $isFull) {
+        $time = config('app.enable_cache') ? 60 * 24 : 0;
+        $obj = Cache::remember(self::CACHE_KEY . $code, $time, function () use ($code, $isFull, $populateExtendField) {
             $query = Post::select('*')->where('code', $code);
             if ($isFull) {
                 $query->with('avatar')
@@ -164,18 +165,68 @@ class Post extends Model
                     ->with('district')
                     ->with('ward');
             }
-            return $query->first();
 
+            $obj = $query->first();
+            if ($populateExtendField) {
+                $obj = self::populateExtendField($obj);
+            }
 
+            return $obj;
         });
 
-        return $objs;
+        return $obj;
+    }
+
+    private static function populateExtendField($obj)
+    {
+        $obj['province_name'] = Province::getAll()->get($obj->province_id)->name ?? '';
+        $obj['district_name'] = District::getAll()->get($obj->district_id)->name ?? '';
+        $obj['ward_name'] = Ward::getAll()->get($obj->ward_id)->name ?? '';
+
+        $obj['file_ids'] = $obj['files']->pluck('id');
+        $obj['attr'] = self::getAttrField($obj,true);
+
+        return $obj;
+    }
+
+    public static function getAttrField($post = false, $filterNull = false)
+    {
+        $config = Post::$attr;
+
+        $attrs = json_decode(str_replace('%22', '', $post->attr));
+
+        $res = [];
+        foreach ($config as $k => $item) {
+
+            if (isset($attrs->$k) && $attrs->$k) {
+                $rawValue = $attrs->$k;
+                $item['value'] = $rawValue;
+                $item['valueLabel'] = $item['options'][$rawValue] ?? $rawValue;
+                if (isset($item['type'])) {
+                    if ($item['type'] == 'boolean') {
+                        $item['valueLabel'] = $rawValue ? 'Có' : 'Không';
+                    }
+                    if ($item['type'] == 'money') {
+                        $item['valueLabel'] = moneyFormat($rawValue);
+                    }
+                    if ($item['type'] == 's') {
+                        $item['valueLabel'] = $rawValue . 'm2';
+                    }
+                }
+            } else if ($filterNull) {
+                continue;
+            }
+
+            $res[$k] = $item;
+        }
+
+        return $res;
     }
 
     private static function buildFilterQuery($request, $query)
     {
-        if ($request->input('status')) {
-            $query->where('status', $request->input('status'));
+        if ($request->input('status') != 'all') {
+            $query->where('status', STATUS_ACTIVE);
         }
 
         if ($request->input('author_id')) {

@@ -74,8 +74,8 @@ class ProductService
 
         if ($catCode && $category) {
             $products->where('category_id', $category->id);
-            //            ->whereHas('category', function ($query) use ($catSlug) {
-//                $query->where('code', $catSlug);
+            //            ->whereHas('category', function ($query) use ($catCode) {
+//                $query->where('code', $catCode);
 //            })
         }
 

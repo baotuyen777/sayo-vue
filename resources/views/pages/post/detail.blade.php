@@ -77,7 +77,7 @@
                         </button>
                         @if(isset($obj['id']))
                             <a class="btn"
-                               href="{{route('postView',['catSlug'=>$obj['category']['code'],'slug'=>$obj['code']])}}"
+                               href="{{route('postView',['catCode'=>$obj['category']['code'],'code'=>$obj['code']])}}"
                                target="_blank">Xem trước</a>
                         @endif
                     </div>

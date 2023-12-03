@@ -31,7 +31,7 @@
                     </div>
                 </td>
                 <td valign="top">
-                    <a href="{{route('productEdit',['slug'=>$obj['code']])}}">{{$obj->name}}</a>
+                    <a href="{{route('productEdit',['code'=>$obj['code']])}}">{{$obj->name}}</a>
                     <p>
                         <small>{{showHumanTime($obj->created_at)}}</small>
                         <span class="price">{{moneyFormat($obj->price)}}</span>
@@ -45,7 +45,7 @@
                         </button>
                         @if(Auth::user()->role===4)
                             <button class="btn--small btn-ajax danger"
-                                    data-url="{{route('productUpdateSimple',['slug'=>$obj['code']])}}"
+                                    data-url="{{route('productUpdateSimple',['code'=>$obj['code']])}}"
                                     data-param='{"status":4}'>
                                 Ẩn
                             </button>
@@ -54,14 +54,14 @@
 
                             @if($obj['status']!=2)
                                 <button class="btn--small btn-ajax success"
-                                        data-url="{{route('productUpdateSimple',['slug'=>$obj['code']])}}"
+                                        data-url="{{route('productUpdateSimple',['code'=>$obj['code']])}}"
                                         data-param='{"status":2}'>
                                     Duyệt
                                 </button>
                             @endif
                             @if($obj['status'] !=3)
                                 <button class="btn--small btn-ajax warning"
-                                        data-url="{{route('productUpdateSimple',['slug'=>$obj['code']])}}"
+                                        data-url="{{route('productUpdateSimple',['code'=>$obj['code']])}}"
                                         data-param='{"status":3}'>Từ chối
                                 </button>
                             @endif
@@ -75,4 +75,4 @@
     </table>
     <span class="csrf hide">{{csrf_token()}}</span>
 </div>
-{{--<form action="{{route('productEdit',['slug'=>$product['code']])}}"></form>--}}
+{{--<form action="{{route('productEdit',['code'=>$product['code']])}}"></form>--}}

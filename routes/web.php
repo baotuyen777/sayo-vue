@@ -45,33 +45,33 @@ Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/post/crawl', [PostController::class, 'crawl'])->name('postCrawl');
 //Route::get('/post/me', [PostController::class, 'me'])->name('myPost');
-Route::get('/post/edit/{slug}.htm', [PostController::class, 'edit'])->name('postEdit');
-Route::post('/post/edit/{slug}.htm', [PostController::class, 'update'])->name('postUpdate');
-Route::put('/post/update-simple/{slug}.htm', [PostController::class, 'updateSimple'])->name('postUpdateSimple');
+Route::get('/post/edit/{code}.htm', [PostController::class, 'edit'])->name('postEdit');
+Route::post('/post/edit/{code}.htm', [PostController::class, 'update'])->name('postUpdate');
+Route::put('/post/update-simple/{code}.htm', [PostController::class, 'updateSimple'])->name('postUpdateSimple');
 Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
 Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');
-Route::get('/xem-tin-{catSlug?}/{slug}.htm', [PostController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('postView');
+Route::get('/xem-tin-{catCode?}/{code}.htm', [PostController::class, 'show'])->where('catcode', '[A-Za-z0-9-]+')->name('postView');
 Route::resource('post', PostController::class);
 Route::resource('comment', CommentController::class);
 
 Route::get('/dang-san-pham', [ProductController::class, 'create'])->name('createProduct');
 Route::post('/dang-san-pham', [ProductController::class, 'store'])->name('storeProduct');
-Route::get('/product/edit/{slug}.htm', [ProductController::class, 'edit'])->name('productEdit');
-Route::post('/product/edit/{slug}.htm', [ProductController::class, 'update'])->name('productUpdate');
-Route::put('/product/update-simple/{slug}.htm', [ProductController::class, 'updateSimple'])->name('productUpdateSimple');
-Route::get('/xem-san-pham-{catSlug?}/{slug}.htm', [ProductController::class, 'show'])->where('catSlug', '[A-Za-z0-9-]+')->name('productView');
+Route::get('/product/edit/{code}.htm', [ProductController::class, 'edit'])->name('productEdit');
+Route::post('/product/edit/{code}.htm', [ProductController::class, 'update'])->name('productUpdate');
+Route::put('/product/update-simple/{code}.htm', [ProductController::class, 'updateSimple'])->name('productUpdateSimple');
+Route::get('/xem-san-pham-{catcode?}/{code}.htm', [ProductController::class, 'show'])->where('catcode', '[A-Za-z0-9-]+')->name('productView');
 Route::resource('product', ProductController::class);
 Route::resource('/review', ReviewController::class);
 
 //Route::resource('news', NewsController::class);
-//Route::get('/post/edit/{slug}.htm', [NewsController::class, 'edit'])->name('postEdit');
-//Route::post('/post/edit/{slug}.htm', [NewsController::class, 'update'])->name('postUpdate');
-//Route::post('/post/update-simple/{slug}.htm', [NewsController::class, 'updateSimple'])->name('postUpdateSimple');
+//Route::get('/post/edit/{code}.htm', [NewsController::class, 'edit'])->name('postEdit');
+//Route::post('/post/edit/{code}.htm', [NewsController::class, 'update'])->name('postUpdate');
+//Route::post('/post/update-simple/{code}.htm', [NewsController::class, 'updateSimple'])->name('postUpdateSimple');
 //Route::get('/dang-tin', [NewsController::class, 'create'])->name('publicPost');
 //Route::post('/dang-tin', [NewsController::class, 'store'])->name('storePost');
 Route::get('/tin-tuc/hotgirl', [NewsController::class, 'archive'])->name('hotgirl');
-Route::get('/tin-tuc/hotgirl/{slug}.htm', [NewsController::class, 'show'])->name('newsView');
+Route::get('/tin-tuc/hotgirl/{code}.htm', [NewsController::class, 'show'])->name('newsView');
 Route::get('/news/crawl', [NewsController::class, 'crawl'])->name('newsCrawl');
 Route::get('/news/export', [NewsController::class, 'export'])->name('newsExport');
 

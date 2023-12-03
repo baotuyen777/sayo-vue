@@ -53,7 +53,7 @@
                         </button>
                         @if(isset($obj))
                             <a class="btn"
-                            href="{{route('productView',['catSlug'=>$obj['category']['code'],'slug'=>$obj['code']])}}"
+                            href="{{route('productView',['catCode'=>$obj['category']['code'],'code'=>$obj['code']])}}"
                                target="_blank">Xem trước</a>
                         @endif
                     </div>
