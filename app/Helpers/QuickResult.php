@@ -18,6 +18,12 @@ const RETURN_REQUIRED_ADMIN = [
     'message' => ERR_REQUIRED_ADMIN . ' Bạn cần có quyền admin'
 ];
 
+const RETURN_REQUIRED_AUTHOR = [
+    'status' => false,
+    'err_code' => ERR_REQUIRED_AUTHOR,
+    'message' => ERR_REQUIRED_AUTHOR . ' Yêu cầu quyền tác giả '
+];
+
 function returnSuccess($res = '')
 {
     return ['status' => true, 'result' => $res];

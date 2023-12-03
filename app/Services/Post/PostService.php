@@ -57,6 +57,29 @@ class PostService
         return ['status' => true, 'result' => $obj];
     }
 
+    public function update($request, $code)
+    {
+        $obj = Post::where('code', $code)->first();
+        if(!isAdmin() && !isAuthor($obj)){
+            return RETURN_REQUIRED_AUTHOR;
+        }
+        $files = $request->input('file_ids');
+
+        if ($files) {
+            $obj->files()->sync($files);
+        }
+
+        $params = $request->all();
+
+        if (isset($params['attr'])) {
+            $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
+        }
+
+        $res = $obj->update($params);
+        Cache::forget(Post::CACHE_KEY . $code);
+        return ['status' => true, 'result' => $res];
+    }
+
     public function getAttrOptions($post = null)
     {
         $categories = Category::with('avatar')->get();
@@ -90,9 +113,10 @@ class PostService
         $provinceCode = $request->input('provinceCode');
 
         $this->res['provinces'] = Province::getAll();
-        $province = $this->res['provinces']->firstWhere('code', $provinceCode);
 
-        if ($province) {
+        $province = $this->res['provinces']->firstWhere('code', $provinceCode);
+//        dd($provinceCode, $province);
+        if ($provinceCode && $province ) {
             $this->res['province'] = $province;
             $this->res['districts'] = District::getAll()->where('province_id', $province->id);
             $district = $this->res['districts']->firstWhere('code', $request->input('districtCode'));

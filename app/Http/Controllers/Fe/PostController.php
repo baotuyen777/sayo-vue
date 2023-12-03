@@ -108,6 +108,12 @@ class PostController extends Controller
         return view('pages/post/detail', array_merge(Post::$attr, $options));
     }
 
+    /**
+     * Update some field, not apply validate
+     * @param Request $request
+     * @param $code
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function updateSimple(Request $request, $code)
     {
         $post = Post::where('code', $code)->first();
@@ -123,23 +129,7 @@ class PostController extends Controller
 
     public function update(PostRequest $request, $code)
     {
-//        $this->baseService->validate($request, $this->module,  ['code' => 'required']);
-        $post = Post::where('code', $code)->first();
-        $files = $request->input('file_ids');
-
-        if ($files) {
-            $post->files()->sync($files);
-        }
-
-        $params = $request->all();
-
-        if (isset($params['attr'])) {
-            $params['attr'] = str_replace(['\"', '%22'], '', json_encode($params['attr']));
-        }
-
-        $res = $post->update($params);
-        Cache::forget(Post::CACHE_KEY . $code);
-        return response()->json(['status' => true, 'result' => $res]);
+        return response()->json($this->postsService->update($request, $code));
     }
 
     public function destroy($code): \Illuminate\Http\JsonResponse

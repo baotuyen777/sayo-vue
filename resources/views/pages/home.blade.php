@@ -31,7 +31,7 @@
                     <h2>Tin đăng dành cho bạn</h2>
                     <div class="d-flex-wrap grid-6">
                         @foreach($posts as $post)
-                            @include('component.post',['obj'=> $post])
+                            @include('component.post.post_card',['obj'=> $post])
                         @endforeach
                     </div>
                 </div>
