@@ -31,7 +31,7 @@ class PostRequest extends FormRequest
 //            'address' => 'required',
             'price' => 'required|integer',
 
-//            'g-recaptcha-response' => ['required', new ReCaptcha]
+           'g-recaptcha-response' => ['required', new ReCaptcha]
         ];
     }
 
