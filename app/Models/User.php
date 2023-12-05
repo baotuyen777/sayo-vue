@@ -108,4 +108,9 @@ class User extends Authenticatable
         return $obj->first();
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Orders::class, 'author_id', 'id');
+    }
+
 }

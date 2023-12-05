@@ -94,6 +94,7 @@
             <p><a href="{{route('product.index')}}">Quản lý sản phẩm</a></p>
             <p><a href="{{route('user.index')}}">Quản lý user</a></p>
             <p><a href="{{route('comment.index')}}">Quản lý comment</a></p>
+            <p><a href="{{route('order.index')}}">Quản lý đơn hàng</a></p>
 
         </section>
     @endif

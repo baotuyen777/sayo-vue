@@ -12,6 +12,7 @@ use App\Http\Controllers\Fe\CommentController;
 use App\Http\Controllers\Fe\ReviewController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Fe\PasswordResetController;
+use App\Http\Controllers\Fe\OrdersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,6 +64,11 @@ Route::put('/product/update-simple/{code}.htm', [ProductController::class, 'upda
 Route::get('/xem-san-pham-{catcode?}/{code}.htm', [ProductController::class, 'show'])->where('catcode', '[A-Za-z0-9-]+')->name('productView');
 Route::resource('product', ProductController::class);
 Route::resource('/review', ReviewController::class);
+
+Route::get('complete-order', [OrdersController::class, 'completeOrder'])->name('order.complete');
+Route::put('order-update/{id}', [OrdersController::class, 'updateSimple'])->name('order.updateSimple');
+
+Route::resource('order', OrdersController::class);
 
 //Route::resource('news', NewsController::class);
 //Route::get('/post/edit/{code}.htm', [NewsController::class, 'edit'])->name('postEdit');

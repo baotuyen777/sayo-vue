@@ -18,7 +18,8 @@ return new class extends Migration {
 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-
+            $table->unsignedBigInteger('product_id')->after('author_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
             // ko nên cascade để phục vụ báo cáo
             $table->unsignedBigInteger('seller_id')->nullable();
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('set null');
