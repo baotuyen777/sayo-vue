@@ -2,6 +2,7 @@
 jQuery('.form-ajax').on('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();
+    tinymce.triggerSave();
 
     var $form = $(this);
     const isPut = $(this).data('id');

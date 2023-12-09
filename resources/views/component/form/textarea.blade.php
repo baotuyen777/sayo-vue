@@ -1,6 +1,6 @@
     <div class=" form-textarea form-control form-control-{{$name}}">
         <div class="focus-capture"></div>
-        <textarea class="required sodjbf4" inputmode="text"
+        <textarea class="required sodjbf4 tinymce" inputmode="text"
                   id="field-{{$name}}" name="{{$name}}" placeholder="{{$placeholder}}">{{$obj[$name] ?? ''}}</textarea>
         <label for="field-{{$name}}">Mô tả chi tiết</label>
         <p class="validate validate-{{$name}}"></p>

@@ -91,4 +91,13 @@
 @endsection
 @push('js')
 <script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="{{ env('PRODUCTION') ? 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.1/tinymce.min.js' : asset('js/libs/tinymce.min.js') }}"></script>
+<script>
+  tinymce.init({
+    promotion: false,
+    selector: 'textarea.tinymce', // Replace this CSS selector to match the placeholder element for TinyMCE
+    plugins: 'code table lists',
+    toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+  });
+</script>
 @endpush
