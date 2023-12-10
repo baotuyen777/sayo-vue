@@ -14,8 +14,11 @@ return new class extends Migration {
             if (!Schema::hasColumn('orders', 'product_id')) {
                 $table->unsignedBigInteger('product_id')->nullable();
             }
+            if (!Schema::hasColumn('orders', 'price')) {
+                $table->bigInteger('price')->default(0)->nullable();
+            }
 
-            if (!Schema::hasColumn('orders', 'user_id')) {
+            if (Schema::hasColumn('orders', 'user_id')) {
                 $table->renameColumn('user_id', 'author_id');
             }
         });

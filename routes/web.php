@@ -61,11 +61,11 @@ Route::post('/dang-san-pham', [ProductController::class, 'store'])->name('storeP
 Route::get('/product/edit/{code}.htm', [ProductController::class, 'edit'])->name('productEdit');
 Route::post('/product/edit/{code}.htm', [ProductController::class, 'update'])->name('productUpdate');
 Route::put('/product/update-simple/{code}.htm', [ProductController::class, 'updateSimple'])->name('productUpdateSimple');
-Route::get('/xem-san-pham-{catcode?}/{code}.htm', [ProductController::class, 'show'])->where('catcode', '[A-Za-z0-9-]+')->name('productView');
+Route::get('/xem-san-pham-{catCode?}/{code}.htm', [ProductController::class, 'show'])->where('catCode', '[A-Za-z0-9-]+')->name('productView');
 Route::resource('product', ProductController::class);
 Route::resource('/review', ReviewController::class);
 
-Route::get('complete-order', [OrdersController::class, 'completeOrder'])->name('order.complete');
+Route::get('me', [OrdersController::class, 'me'])->name('order.me');
 Route::put('order-update/{id}', [OrdersController::class, 'updateSimple'])->name('order.updateSimple');
 
 Route::resource('order', OrdersController::class);

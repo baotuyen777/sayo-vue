@@ -4,17 +4,14 @@ namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Admin\Controller;
 use App\Models\Orders;
-use App\Models\User;
 use App\Services\Order\OrderSevice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
     public function __construct(protected OrderSevice $orderSevice)
     {
-
     }
 
     /**
@@ -22,6 +19,28 @@ class OrdersController extends Controller
      */
     public function index(Request $request)
     {
+        if (!isLoged()) {
+            return view('pages/auth/login');
+        }
+
+        if (!isAdmin()) {
+            $request->merge(['seller_id' => Auth::user()->id]);
+        }
+
+        $order = $this->orderSevice->list($request);
+
+        return view('pages.order.list', $order);
+    }
+    public function me(Request $request)
+    {
+        if (!isLoged()) {
+            return view('pages/auth/login');
+        }
+
+        if (!isAdmin()) {
+            $request->merge(['author_id' => Auth::user()->id]);
+        }
+
         $order = $this->orderSevice->list($request);
 
         return view('pages.order.list', $order);
@@ -40,19 +59,28 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        $order = $this->orderSevice->orderStore($request);
-        if ($order) {
-            return redirect()->route('order.complete');
+        if (!isLoged()) {
+            return view('pages/auth/login');
         }
-        return redirect()->back()->with('notify', 'Đặt hàng không thành công')->with('notify_type', 'error');
+
+        $obj = $this->orderSevice->store($request);
+        if ($obj) {
+            return returnSuccess($obj, route('order.show', ['order' => $obj->code]));
+        }
+
+        return RETURN_SOMETHING_WENT_WRONG;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $code)
     {
-        //
+        $obj = Orders::query()->where('code', $code)->first();
+        if (!$obj) {
+            return view('pages/404');
+        }
+        return view('pages/order/show', ['obj' => $obj]);
     }
 
     /**
@@ -90,12 +118,5 @@ class OrdersController extends Controller
         }
 
         return response()->json(['status' => $res, 'result' => $order]);
-    }
-
-    public function completeOrder()
-    {
-        $product = User::with('orders')->find(Auth::user()->id);
-
-        return view('pages.order.thank_you', ['objs' => $product]);
     }
 }

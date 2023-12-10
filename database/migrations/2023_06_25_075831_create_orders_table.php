@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('code')->unique()->index();
             $table->tinyInteger('status')->default(1);
             $table->enum('state', ['init', 'processing', 'delivery', 'completed', 'refund', ' cancel'])->default('init');
+            $table->bigInteger('price')->default(0)->nullable();
 
             $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');

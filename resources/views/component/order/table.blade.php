@@ -5,23 +5,21 @@
     <form action="{{url()->current()}}">
         <div class="flex-row">
             @include('component.form.filter.selectCategory', ['options' => $categories,'route'=>$route])
-            @include('component.form.filter.rangePrice')
             @include('component.form.filter.keyword')
-            <a class="btn btn--primary" href="{{route('createProduct')}}" rel="nofollow">Add Product</a>
+            <a class="btn btn--primary" href="{{route('order.create')}}" rel="nofollow">Lên đơn</a>
         </div>
     </form>
     <div style="float: right">
-        <p style="color: red">Doanh thu: {{ $totalPrice }}</p>
+        <p style="color: red">Doanh thu: {{ moneyFormat($totalPrice) }}</p>
     </div>
     <table>
         <thead>
         <tr>
             <th>STT</th>
-            <th>Tên khách hàng</th>
-            <th>Email</th>
-            <th>Số điện thoại</th>
+            <th>Mã đơn</th>
+            <th>Khách hàng</th>
             <th>Tên sản phẩm</th>
-            <th>Dơn giá</th>
+            <th>Đơn giá</th>
             <th>Hành động</th>
         </tr>
         </thead>
@@ -29,24 +27,22 @@
         @foreach($objs as $obj)
             <tr>
                 <td>{{$loop->index+1}}</td>
+                <td><a href="{{route('order.show',['order'=>$obj->code])}}">#{{$obj->code}}</a></td>
                 <td>
                     {{ $obj->author->name }}
-                    <div class="post-avatar">
-                        <label
-                            class="{{$obj['status']==STATUS_COMPLETED ?'success':''}}" {{\App\Models\Orders::$statusOrder[$obj['status']]}}>{{\App\Models\Orders::$statusOrder[$obj['status']]}}</label>
-                    </div>
+                    {{--                    <div class="post-avatar">--}}
+                    {{--                        <label--}}
+                    {{--                            class="{{$obj['status']==STATUS_COMPLETED ?'success':''}}" {{\App\Models\Orders::$statusOrder[$obj['status']]}}>{{\App\Models\Orders::$statusOrder[$obj['status']]}}</label>--}}
+                    {{--                    </div>--}}
+                    <div>{{ $obj->author->email }}</div>
+                    <div>{{ $obj->author->phone }}</div>
                 </td>
-                <td>
-                    {{ $obj->author->email }}
-                </td>
-                <td>
-                    {{ $obj->author->phone }}
-                </td>
+
                 <td valign="top">
                     {{ $obj->product->name }}
                 </td>
                 <td valign="top">
-                    {{ $obj->product->price }}
+                    {{ moneyFormat($obj->price) }}
                 </td>
                 <td>
                     <div class="d-flex-wrap gap-10">
@@ -57,12 +53,13 @@
                             @if($obj['status'] != STATUS_ORDERED)
                                 <button class="btn--small btn-ajax warning"
                                         data-url="{{route('order.updateSimple', $obj['id'])}}"
-                                        data-param='{"status":{{ STATUS_PROCESSING }}}' >Đã đặt hàng
+                                        data-param='{"status":{{ STATUS_PROCESSING }}}'>Đã đặt hàng
                                 </button>
                             @endif
                             @if($obj['status'] != STATUS_PROCESSING)
                                 <button class="btn--small btn-ajax"
-                                        data-url="{{route('order.updateSimple', $obj['id'])}}" data-param='{"status":{{ STATUS_PROCESSING }}}'>
+                                        data-url="{{route('order.updateSimple', $obj['id'])}}"
+                                        data-param='{"status":{{ STATUS_PROCESSING }}}'>
                                     Đang xử lý
                                 </button>
                             @endif

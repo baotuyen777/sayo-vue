@@ -24,8 +24,7 @@ class UserController extends Controller
         $selectStatus = DB::raw('if(status = 1, "Hoạt động", "Tạm dừng") as status_label');
 
         $user = User::join('departments', 'users.departments_id', '=', 'departments.id')
-
-            ->select('users.*', 'departments.name as departments_name', 'users_status.name as users_status_name', $rolesLabel,$selectStatus)
+            ->select('users.*', 'departments.name as departments_name', 'users_status.name as users_status_name', $rolesLabel, $selectStatus)
             ->where('users.name', 'like', "%{$s}%")
             ->paginate($pageSize);
         return response()->json($user);

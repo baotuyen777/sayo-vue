@@ -2,7 +2,11 @@
 jQuery('.form-ajax').on('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();
-    tinymce.triggerSave();
+    // tinymce.triggerSave();
+    const confirmText = $(this).data('confirm');
+    if (confirmText && !confirm(confirmText) == true) {
+        return;
+    }
 
     var $form = $(this);
     const isPut = $(this).data('id');
@@ -27,7 +31,12 @@ jQuery('.form-ajax').on('submit', function (event) {
                 if ($form.find(".btn-back")[0]) {
                     setTimeout(() => $form.find(".btn-back")[0].click(), 2000)
                 }
+
+                if(res?.redirectUrl){
+                    window.location.href=res?.redirectUrl
+                }
             }
+            toggleLoading()
         },
         error: (jqXHR) => {
             grecaptcha.reset();

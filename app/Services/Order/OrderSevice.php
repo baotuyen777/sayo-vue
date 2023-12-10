@@ -15,34 +15,28 @@ class OrderSevice
     /**
      * Display a listing of the resource.
      */
-    public function orderStore($request)
+    public function store($request)
     {
-        if (!Auth::check()) {
-            return view('pages/auth/login');
-        }
-        $obj = [];
-        $product = Product::find($request->product_id);
-        $order = Orders::where('code', $product->code)->exists();
-        if (!$order) {
+        $product = Product::getOne($request->product_code);
+        if ($product) {
+            $userid = Auth::user()->id;
             $request->merge([
-                'author_id' => Auth::user()->id,
+                'author_id' => $userid,
                 'product_id' => $product->id,
                 'seller_id' => $product->author_id,
-                'code' => $product->code,
+                'code' => Auth::user()->username . '-' . time(),
+                'price' => $product->price,
             ]);
 
-            $obj = Orders::create($request->all());
+            return Orders::query()->create($request->all());
         }
 
-        return $obj;;
+        return false;;
     }
 
     public function list($request)
     {
 
-        if (!Auth::user()) {
-            return view('pages/auth/login');
-        }
 
         $currentPage = $request->input('current');
         $pageSize = $request->input('page_size') ?? 24;

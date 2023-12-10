@@ -3,7 +3,7 @@
         <span class="menu-avatar hide-xs"></span>
         @guest
 
-            <h3><a href="{{ route('login') }}">Đăng nhập</a>  <span class="hide-xs">/</span> <a
+            <h3><a href="{{ route('login') }}">Đăng nhập</a> <span class="hide-xs">/</span> <a
                     href="{{ route('register') }}">Đăng ký</a></h3>
         @endguest
         @auth
@@ -11,9 +11,9 @@
         @endauth
     </div>
     @auth
-        <a href="#">
-            <img src="{{asset('img/icon/icon_bag.svg')}}" alt="Lịch sử mua">
-            <span>Quản lý đơn hàng</span>
+        <a href="{{route('order.me')}}">
+            <img src="{{asset('img/icon/icon_bag.svg')}}" alt="Lịch sử mua hàng">
+            <span>Lịch sử mua hàng</span>
         </a>
         @if(isAdmin())
             {{--            <a href="{{route('user.show',['user'=>Auth()->user()->username])}}">--}}

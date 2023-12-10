@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Product extends Model
 {
     use HasFactory;
 
+    const CACHE_KEY = 'product';
     public static array $status = [
         1 => 'Chờ duyệt',
         2 => 'Đã duyệt',
@@ -135,5 +137,63 @@ class Product extends Model
 //
 //        return get_defined_vars();
 //    }
+    public static function getInstance()
+    {
+        if (self::$instance) {
+            return self::$instance;
+        }
+        return new static;
+    }
 
+//    public static function getAll($request)
+//    {
+//        $cacheKey = convertArr2Code($request->all());
+//
+//        $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
+//        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, $time, function () use ($request) {
+//            $query = Post::query()
+//                ->with('avatar')
+//                ->with('category')
+//                ->with('province')
+//                ->with('author')
+//                ->with('province')
+//                ->orderBy('status')->orderBy('created_at', 'desc');
+//
+//            if ($request) {
+//                $query = self::buildFilterQuery($request, $query);
+//                $query = self::buildFilterLocation($request, $query);
+//            }
+//
+//            $currentPage = $request->input('current');
+//            $pageSize = $request->input('page_size') ?? 24;
+//            return $query->paginate($pageSize, ['*'], 'page', $currentPage);
+//        });
+//
+//        return $objs;
+//    }
+
+    public static function getOne($code, $isFull = false, $populateExtendField = false)
+    {
+        $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
+        $obj = Cache::remember(self::CACHE_KEY . $code, $time, function () use ($code, $isFull, $populateExtendField) {
+            $query = self::query()->select('*')->where('code', $code);
+            if ($isFull) {
+                $query->with('avatar')
+                    ->with('files')
+                    ->with('category');
+//                    ->with('author')
+//                    ->with('comments')
+
+            }
+
+            $obj = $query->first();
+//            if ($populateExtendField) {
+//                $obj = self::populateExtendField($obj);
+//            }
+
+            return $obj;
+        });
+
+        return $obj;
+    }
 }

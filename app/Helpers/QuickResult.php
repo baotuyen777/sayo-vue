@@ -24,7 +24,12 @@ const RETURN_REQUIRED_AUTHOR = [
     'message' => ERR_REQUIRED_AUTHOR . ' Yêu cầu quyền tác giả '
 ];
 
-function returnSuccess($res = '')
+function returnSuccess($result = '', $redirectUrl = '', $notify = ' '): array
 {
-    return ['status' => true, 'result' => $res];
+    $res = ['status' => true, 'result' => $result];
+
+    if ($redirectUrl) {
+        $res['redirectUrl'] = $redirectUrl;
+    }
+    return $res;
 }

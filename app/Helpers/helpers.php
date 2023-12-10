@@ -97,18 +97,7 @@ function vn2Province($str)
     return $str;
 }
 
-function isAuthor($obj): bool
-{
-    if (!$obj) {
-        return false;
-    }
 
-    $authorId = $obj->author_id;
-    if (!Auth::user() || Auth::user()->id != $authorId || Auth::user()->role > 1) {
-        return true;
-    }
-    return false;
-}
 
 function getCategories()
 {
@@ -144,9 +133,25 @@ function curlGetContents($url, $onlygetImage = false)
     return $data;
 }
 
+function isLoged(){
+    return Auth::check();
+}
+
 function isAdmin()
 {
     return Auth::user() && Auth::user()->role === ROLE_ADMIN;
+}
+function isAuthor($obj): bool
+{
+    if (!$obj) {
+        return false;
+    }
+
+    $authorId = $obj->author_id;
+    if (!Auth::user() || Auth::user()->id != $authorId || Auth::user()->role > 1) {
+        return true;
+    }
+    return false;
 }
 
 function convertArr2Code($arr)
