@@ -10,12 +10,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (!Schema::hasColumn('orders', 'product_id')) {
-            Schema::table('orders', function (Blueprint $table) {
-                $table->unsignedBigInteger('product_id')->after('author_id')->nullable();
-            });
-        }
+        Schema::table('orders', function (Blueprint $table) {
+            if (!Schema::hasColumn('orders', 'product_id')) {
+                $table->unsignedBigInteger('product_id')->nullable();
+            }
 
+            if (!Schema::hasColumn('orders', 'user_id')) {
+                $table->renameColumn('user_id', 'author_id');
+            }
+        });
     }
 
     /**
