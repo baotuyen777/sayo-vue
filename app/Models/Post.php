@@ -71,6 +71,8 @@ class Post extends Model
     protected $appends = ['category_name'];
     protected $primaryKey = 'id';
 
+    private static Post $instance;
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -83,7 +85,6 @@ class Post extends Model
 
     public function avatar()
     {
-
         return $this->belongsTo(Files::class)
             ->select(['files.*'])
             ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
@@ -123,11 +124,19 @@ class Post extends Model
             ->whereNull('parent_id')->limit(6);
     }
 
+    public static function getInstance()
+    {
+        if (self::$instance) {
+            return self::$instance;
+        }
+        return new static;
+    }
+
     public static function getAll($request)
     {
         $cacheKey = convertArr2Code($request->all());
 
-        $time = config('app.enable_cache') ? 60 * 24 : 0;
+        $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
         $objs = Cache::remember(self::CACHE_KEY . $cacheKey, $time, function () use ($request) {
             $query = Post::query()
                 ->with('avatar')
@@ -152,7 +161,7 @@ class Post extends Model
 
     public static function getOne($code, $isFull = false, $populateExtendField = false)
     {
-        $time = config('app.enable_cache') ? 60 * 24 : 0;
+        $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
         $obj = Cache::remember(self::CACHE_KEY . $code, $time, function () use ($code, $isFull, $populateExtendField) {
             $query = Post::select('*')->where('code', $code);
             if ($isFull) {
@@ -184,7 +193,7 @@ class Post extends Model
         $obj['ward_name'] = Ward::getAll()->get($obj->ward_id)->name ?? '';
 
         $obj['file_ids'] = $obj['files']->pluck('id');
-        $obj['attr'] = self::getAttrField($obj,true);
+        $obj['attr'] = self::getAttrField($obj, true);
 
         return $obj;
     }

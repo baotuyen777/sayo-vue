@@ -3,19 +3,12 @@
 namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Admin\Controller;
-use App\Http\Requests\PostCommentRequest;
 use App\Http\Requests\PostRequest;
-use App\Models\Files;
 use App\Models\Post;
-use App\Models\PostComment;
-use App\Models\User;
 use App\Services\Post\PostCrawlService;
 use App\Services\Post\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 
 
 class PostController extends Controller
@@ -60,6 +53,7 @@ class PostController extends Controller
 
     public function edit($code)
     {
+//        $obj =Post::getInstance()->abc();
         $obj = Post::getOne($code, true, true);
         if (!$obj || (!isAuthor($obj) && !isAdmin())) {
             return view('pages/404');
@@ -116,7 +110,7 @@ class PostController extends Controller
      */
     public function updateSimple(Request $request, $code)
     {
-        $post = Post::where('code', $code)->first();
+        $post = Post::query()->where('code', $code)->first();
 
         $params = $request->all();
         $res = $post->update($params);
