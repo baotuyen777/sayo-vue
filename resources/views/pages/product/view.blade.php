@@ -19,6 +19,11 @@
                                 </div>
                                 <button type="button" class="btn--oval">Lưu tin
                                     <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like"></button>
+                                <form onsubmit=" return confirm('Bạn có chắc chắn muốn đặt hàng không');" action="{{ route('order.store',['product_id' => $obj['id']]) }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn--oval">Đặt hàng
+                                        <img height="20" src="{{asset('/img/icon/cart.svg')}}" alt="cart"></button>
+                                </form>
                             </div>
 
                             <div class="post-detail__content" itemprop="description">{!! $obj['content'] !!}</div>
