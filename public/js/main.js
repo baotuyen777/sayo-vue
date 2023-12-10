@@ -29,6 +29,7 @@ jQuery('.form-ajax').on('submit', function (event) {
             }
         },
         error: (jqXHR) => {
+            grecaptcha.reset();
             const errors = JSON.parse(jqXHR.responseText).errors;
             Object.keys(errors).forEach(field => {
                 $(`.validate-${field}`).html(errors[field][0])
