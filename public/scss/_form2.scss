@@ -199,6 +199,11 @@ input {
     font-weight: 700
 }
 
+label.selection__label {
+    transform: scale(.7143) translateY(-10px);
+    font-weight: 700
+}
+
 .upload-files {
     display: flex;
     gap: 10px;
@@ -399,6 +404,17 @@ input {
     //}
 }
 
+.form-textarea svg{
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+}
+
+.tox-split-button__chevron svg {
+    position: relative;
+    top: 13px;
+    left: 3px;
+}
 
 
 
