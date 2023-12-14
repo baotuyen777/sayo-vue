@@ -31,7 +31,7 @@
                         <a href="#">Đang theo dõi: <b>0</b></a>
                     </p>
                     <div class="edit-profile">
-                        @if (isset($user['id']) && Auth::user()->id === $user['id'])
+                        @if (isset($user['id']) && isset(Auth::user()->id) === $user['id'])
                             <a class="btn btn--primary " href="{{ route('profile') }}">Chỉnh sửa</a>
                         @endif
                     </div>
@@ -95,6 +95,29 @@
                 </div>
             </div>
         </div>
+        @if (Request::routeIs('user.show'))
+            <section class="portfolio__tab">
+                <div
+                    class="children_menu activelink"
+                    title="Features"
+                    data-tab="page1">
+                    <span>Bài đã đăng</span>
+                </div>
+                <div
+                    class="children_menu"
+                    title="Delivery Contents"
+                    data-tab="page2">
+                    <span>Đánh giá</span>
+                </div>
+                <div
+                    class="children_menu"
+                    title="Shipping"
+                    data-tab="page3">
+                    <span>Sản phẩm</span>
+                </div>
+            </section>
+        @endif
+        
     </div>
 </div>
 
