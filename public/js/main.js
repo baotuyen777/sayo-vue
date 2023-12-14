@@ -2,7 +2,10 @@
 jQuery('.form-ajax').on('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();
-    // tinymce.triggerSave();
+    if ($(this).find('.tinymce')) {
+        tinymce.triggerSave();
+    }
+
     const confirmText = $(this).data('confirm');
     if (confirmText && !confirm(confirmText) == true) {
         return;
@@ -32,8 +35,8 @@ jQuery('.form-ajax').on('submit', function (event) {
                     setTimeout(() => $form.find(".btn-back")[0].click(), 2000)
                 }
 
-                if(res?.redirectUrl){
-                    window.location.href=res?.redirectUrl
+                if (res?.redirectUrl) {
+                    window.location.href = res?.redirectUrl
                 }
             }
             toggleLoading()

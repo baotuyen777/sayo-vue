@@ -75,7 +75,7 @@ footer {
     -ms-flex-pack: justify !important;
     justify-content: space-between !important;
     padding-bottom: 20px;
-    
+
     .group__infor{
         display: flex;
         .avatar {
@@ -104,6 +104,9 @@ footer {
             }
             .icon-vertify-account.not-vertify {
                 color: #787879;
+            }
+            .btn{
+
             }
         }
     }
@@ -141,7 +144,7 @@ footer {
             top: 3px;
         }
     }
-}   
+}
 @media (max-width: 900px) {
     .header__profile {
         flex-direction: column;
@@ -172,10 +175,10 @@ footer {
             }
         }
 
-        .edit-profile {
-            width: 70%;
-            margin: auto;
-        }
+        //.edit-profile {
+        //    width: 70%;
+        //    margin: auto;
+        //}
 
         .detail-infor {
             padding-bottom: 15px;
@@ -188,13 +191,13 @@ footer {
     }
 }
 
-@media (max-width: 500px) {
-    .header__profile {
-        .edit-profile {
-            width: 100%;
-        }
-    }
-}
+//@media (max-width: 500px) {
+//    .header__profile {
+//        .edit-profile {
+//            width: 100%;
+//        }
+//    }
+//}
 
 @media (max-width: 992px) {
     .two-column {

@@ -32,7 +32,7 @@
                     </p>
                     <div class="edit-profile">
                         @if (isset($user['id']) && Auth::user()->id === $user['id'])
-                            <a class="btn btn--primary full" href="{{ route('profile') }}">Chỉnh sửa thông tin</a>
+                            <a class="btn btn--primary " href="{{ route('profile') }}">Chỉnh sửa</a>
                         @endif
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                         <span>Địa chỉ: </span>
                     </div>
                     <div>
-                        {{ $user['address'] ?? '' }} 
+                        {{ $user['address'] ?? '' }}
                         {{ $user['ward']['name'] ?? '' }}
                         {{ $user['district']['name'] ?? '' }}
                         {{ $user['province']['name'] ?? '' }}

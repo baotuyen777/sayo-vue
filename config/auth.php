@@ -39,12 +39,14 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+            'lifetime' => 60*24*30, // Set the session expiration time in minutes
         ],
         'api' => [
             'driver' => 'sanctum',
+
             'provider' => 'users',
             'hash' => false,
-        ],
+            ],
     ],
 
     /*

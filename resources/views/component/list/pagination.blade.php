@@ -2,7 +2,7 @@
     @if ($objs->onFirstPage())
         <span class="pagination__link pagination__link--prev pagination__link--disabled">Trang đầu</span>
     @else
-        <a href="{{ $objs->previousPageUrl() }}" class="pagination__link pagination__link--prev">Trang cuối</a>
+        <a href="{{ $objs->previousPageUrl() }}" class="pagination__link pagination__link--prev">Trang đầu</a>
     @endif
 
     @foreach ($objs->getUrlRange(1, $objs->lastPage()) as $page => $url)
@@ -14,8 +14,8 @@
     @endforeach
 
     @if ($objs->hasMorePages())
-        <a href="{{ $objs->nextPageUrl() }}" class="pagination__link pagination__link--next">Next</a>
+        <a href="{{ $objs->nextPageUrl() }}" class="pagination__link pagination__link--next">Trang kế</a>
     @else
-        <span class="pagination__link pagination__link--next pagination__link--disabled">Next</span>
+        <span class="pagination__link pagination__link--next pagination__link--disabled">Trang kế</span>
     @endif
 </div>
