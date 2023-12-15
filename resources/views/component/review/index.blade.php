@@ -97,11 +97,56 @@
                                     </div>
                                 </div>
                                 <p class="content-rated">{{ $review->content }}</p>
-                                @php $files = $review->files ?? []; @endphp
-                                <div class="review-img">
+                                @php
+                                    $files = $review->files ?? [];
+                                @endphp
+                                <div class="review-img open">
                                     @foreach($files as $file)
                                         <img src="{{asset('storage/'.$file['url'])}}" alt="">
                                     @endforeach
+                                </div>
+                            </div>
+                            <div id="blackout"></div>
+                            <div id="popup">
+                                <span class="close"></span>
+                                <h1 class="title">Đánh giá sản phẩm</h1>
+                                <div class="slider">
+                                    <div class="group-slider">
+                                        @foreach($files as $i => $img)
+                                            <div class="slider-item" data-image-index="{{$i}}">
+                                                <img alt="" class="image-item" src="{{asset('storage/'.$img['url'])}}">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="navigator">
+                                        @foreach($files as $i => $img)
+                                            <span data-id="{{$i}}" @class(['active'=>$i==0])></span>
+                                        @endforeach
+                                        <span data-id="n"></span>
+                                    </div>
+                                    <button class="slider__direction ad-image-prev" type="button"><i></i></button>
+                                    <button class="slider__direction ad-image-next" type="button"><i></i></button>
+                                </div>
+                                <br>
+                                <div class="review-content">
+                                    <form action="{{ route('review.update', ['review' => $review->id]) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="product_id" value="{{ data_get($obj, 'id') }}">
+                                        <p>Rating:
+                                            <span class="star-rating">
+                                                @foreach(range(1, 5) as $star)
+                                                    <label for="rate-{{ $star }}" style="--i:{{ $star }}"><i class="fa fa-star"></i></label>
+                                                    <input type="radio" name="rating" id="rate-{{ $star }}" value="{{ $star }}" {{ ($star === 5) ? 'checked' : '' }}>
+                                                @endforeach
+                                            </span>
+                                        </p>
+                                        <label for="#review-content">Nội dung đánh giá: </label>
+                                        <textarea name="content" id="review-content" cols="8" rows="5">{{ $review->content }}</textarea>
+                                        @if(auth()->user()->id == $review->user->id)
+                                            <button type="submit">Cập nhật</button>
+                                        @endif
+                                    </form>
                                 </div>
                             </div>
                         @endforeach
@@ -113,5 +158,7 @@
         </div>
     </div>
 </div>
+
+
 
 

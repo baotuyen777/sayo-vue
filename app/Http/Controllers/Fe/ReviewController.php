@@ -44,4 +44,17 @@ class ReviewController extends Controller
 
         return response()->json(['status' => true, 'result' => $obj]);
     }
+
+    public function update(ReviewRequest $request, $review)
+    {
+        $author_id = Auth::user()->id;
+        $reviewData = $request->validated();
+        $review = Review::query()->whereId($review)->whereAuthorId($author_id)->first();
+
+        if($review) {
+            $review->update($reviewData);
+        }
+
+        return back();
+    }
 }
