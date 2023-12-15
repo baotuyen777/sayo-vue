@@ -98,7 +98,6 @@ function vn2Province($str)
 }
 
 
-
 function getCategories()
 {
     return
@@ -133,7 +132,8 @@ function curlGetContents($url, $onlygetImage = false)
     return $data;
 }
 
-function isLoged(){
+function isLoged()
+{
     return Auth::check();
 }
 
@@ -141,6 +141,7 @@ function isAdmin()
 {
     return Auth::user() && Auth::user()->role === ROLE_ADMIN;
 }
+
 function isAuthor($obj): bool
 {
     if (!$obj) {
@@ -164,4 +165,10 @@ function convertArr2Code($arr)
         $items[] = "{$k}_{$v}";
     }
     return implode('_', $items);
+}
+
+function getFullAddress($obj): string
+{
+    $arr = [$obj['address'], $obj['ward']['name'] ?? '', $obj['district']['name'] ?? '', $obj['province']['name'] ?? ''];
+    return implode(', ', array_filter($arr));
 }
