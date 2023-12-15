@@ -71,10 +71,9 @@ footer {
 }
 .header__profile {
     display: flex;
-    -webkit-box-pack: justify !important;
-    -ms-flex-pack: justify !important;
     justify-content: space-between !important;
-    padding-bottom: 20px;
+    //padding-bottom: 20px;
+    margin-top: -50px;
 
     .group__infor{
         display: flex;
@@ -85,7 +84,7 @@ footer {
                 height: 140px;
                 border-radius: 100px;
                 position: relative;
-                bottom: 60px;
+                bottom: 30px;
                 left: 20px;
                 img {
                     border: 3px solid #ffffff;
@@ -133,11 +132,11 @@ footer {
     }
     .label-address {
         line-height: 30px;
+        background: #0000008c;
+        color: white;
+        padding: 0 10px;
         div:first-child {
             white-space: nowrap;
-        }
-        div:last-child {
-            width: 200px;
         }
         svg {
             position: relative;

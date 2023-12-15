@@ -1719,10 +1719,8 @@ footer {
 
 .header__profile {
   display: flex;
-  -webkit-box-pack: justify !important;
-  -ms-flex-pack: justify !important;
   justify-content: space-between !important;
-  padding-bottom: 20px;
+  margin-top: -50px;
 }
 .header__profile .group__infor {
   display: flex;
@@ -1733,7 +1731,7 @@ footer {
   height: 140px;
   border-radius: 100px;
   position: relative;
-  bottom: 60px;
+  bottom: 30px;
   left: 20px;
 }
 .header__profile .group__infor .avatar .border-avatar img {
@@ -1774,12 +1772,12 @@ footer {
 }
 .detail-infor .label-address {
   line-height: 30px;
+  background: rgba(0, 0, 0, 0.5490196078);
+  color: white;
+  padding: 0 10px;
 }
 .detail-infor .label-address div:first-child {
   white-space: nowrap;
-}
-.detail-infor .label-address div:last-child {
-  width: 200px;
 }
 .detail-infor .label-address svg {
   position: relative;
