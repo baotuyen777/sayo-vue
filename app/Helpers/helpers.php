@@ -117,6 +117,25 @@ function getCategories()
         ];
 }
 
+function getCategoryCode($catId): string
+{
+    $cats = [
+        1 => "bds",
+        2 => "do-dien-tu",
+        3 => "do-gia-dung",
+        4 => "dich-vu",
+        5 => "me-va-be",
+        6 => "thu-cung",
+        7 => "do-an",
+        8 => "dien-lanh",
+        9 => "thoi-trang",
+        10 => "van-phong",
+        11 => "cho-tang-mien-phi",
+        12 => "khac"
+    ];
+    return $cats[$catId] ?? 'khac';
+}
+
 function curlGetContents($url, $onlygetImage = false)
 {
     $ch = curl_init($url);
@@ -169,6 +188,9 @@ function convertArr2Code($arr)
 
 function getFullAddress($obj): string
 {
+    if(!$obj){
+        return  '';
+    }
     $arr = [$obj['address'], $obj['ward']['name'] ?? '', $obj['district']['name'] ?? '', $obj['province']['name'] ?? ''];
     return implode(', ', array_filter($arr));
 }

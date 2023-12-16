@@ -49,6 +49,7 @@ Route::get('/post/crawl', [PostController::class, 'crawl'])->name('postCrawl');
 Route::get('/post/edit/{code}.htm', [PostController::class, 'edit'])->name('postEdit');
 Route::post('/post/edit/{code}.htm', [PostController::class, 'update'])->name('postUpdate');
 Route::put('/post/update-simple/{code}.htm', [PostController::class, 'updateSimple'])->name('postUpdateSimple');
+Route::get('/get-attrs/{catCode?}', [PostController::class, 'getAttrs'])->name('getPostAttrs');
 Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
 Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');

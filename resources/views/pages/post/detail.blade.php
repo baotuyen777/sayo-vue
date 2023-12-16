@@ -6,7 +6,6 @@
             <h2>Đăng tin mới</h2>
             <div class="card__body ">
                 <form method="post" class="form-ajax" enctype="multipart/form-data">
-
                     <section>
                         <h5>Thông tin bắt buộc</h5>
                         <div>
@@ -43,12 +42,13 @@
 
                     <section>
                         <h5>Thông tin thêm <small>(càng chi tiết càng dễ bán hơn)</small></h5>
-                        <div class="d-flex-wrap grid-2 gap-10">
+                        <div class="d-flex-wrap grid-2 gap-10 extra-attrs">
+                            @include('pages/post/attrs')
                             {{--                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])--}}
-                            @include('component.form.select',['name' => 'state', 'label' => 'Tình trạng','isAttr' => 1])
-                            @include('component.form.select',['name' => 'color', 'label' => 'Màu sắc','isAttr' => 1])
-                            @include('component.form.select',['name' => 'guarantee', 'label' => 'Bảo hành','isAttr'=> 1])
-                            @include('component.form.select',['name' => 'made_in', 'label' => 'Xuất xứ','isAttr'=> 1])
+{{--                            @include('component.form.select',['name' => 'state', 'label' => 'Tình trạng','isAttr' => 1])--}}
+{{--                            @include('component.form.select',['name' => 'color', 'label' => 'Màu sắc','isAttr' => 1])--}}
+{{--                            @include('component.form.select',['name' => 'guarantee', 'label' => 'Bảo hành','isAttr'=> 1])--}}
+{{--                            @include('component.form.select',['name' => 'made_in', 'label' => 'Xuất xứ','isAttr'=> 1])--}}
                             {{--                            @include('component.form.select',['name'=> 'attr["brand"]', 'label' => 'Hãng/ Thương hiệu', 'options' => $brands,'attr'=>'brand'])--}}
                             {{--                            @include('component.form.select',['name'=> 'attr["color"]', 'label' => 'Màu sắc', 'options' => $colors,'attr'=>'color'])--}}
                             {{--                            @include('component.form.select',['name'=> 'attr["storage"]', 'label' => 'Dung lượng', 'options' => $storages,'attr'=>'storage'])--}}
@@ -90,14 +90,26 @@
 
 @endsection
 @push('js')
-<script src='https://www.google.com/recaptcha/api.js'></script>
-<script src="{{ env('PRODUCTION') ? 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.1/tinymce.min.js' : asset('js/libs/tinymce.min.js') }}"></script>
-<script>
-  tinymce.init({
-    promotion: false,
-    selector: 'textarea.tinymce', // Replace this CSS selector to match the placeholder element for TinyMCE
-    plugins: 'code table lists',
-    toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
-  });
-</script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script
+        src="{{ env('PRODUCTION') ? 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.1/tinymce.min.js' : asset('js/libs/tinymce.min.js') }}"></script>
+    <script>
+        tinymce.init({
+            promotion: false,
+            selector: 'textarea.tinymce', // Replace this CSS selector to match the placeholder element for TinyMCE
+            plugins: 'code table lists',
+            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+        });
+
+
+        $('.form-control-category_id').on('change', 'select', function () {
+            const val = $(this).val();
+            $.ajax({
+                url: '{{route('getPostAttrs')}}/' + val,
+                success: function (response) {
+                    $('.extra-attrs').html(response)
+                },
+            });
+        })
+    </script>
 @endpush

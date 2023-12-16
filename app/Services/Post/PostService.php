@@ -20,6 +20,10 @@ class PostService
 
     public function store($request)
     {
+        if (!isLoged()) {
+            return redirect()->route('login');
+        }
+
         $userid = Auth::id();
 
         $request->merge([
@@ -60,7 +64,7 @@ class PostService
     public function update($request, $code)
     {
         $obj = Post::where('code', $code)->first();
-        if(!isAdmin() && !isAuthor($obj)){
+        if (!isAdmin() && !isAuthor($obj)) {
             return RETURN_REQUIRED_AUTHOR;
         }
         $files = $request->input('file_ids');
@@ -86,6 +90,12 @@ class PostService
         $provinces = Province::get()->keyBy('id');
         $districts = $post ? District::whereProvinceId($post->province_id)->get()->keyBy('id') : [];
         $wards = $post ? Ward::whereDistrictId($post->district_id)->get()->keyBy('id') : [];
+
+        $categoryFields = Post::$categoryFields;
+        $catCode = getCategoryCode($post->category_id);
+
+        $fields = $categoryFields[$catCode] ?? [];
+        $attrs = Post::$attr;
 
         return get_defined_vars();
     }
@@ -116,7 +126,7 @@ class PostService
 
         $province = $this->res['provinces']->firstWhere('code', $provinceCode);
 //        dd($provinceCode, $province);
-        if ($provinceCode && $province ) {
+        if ($provinceCode && $province) {
             $this->res['province'] = $province;
             $this->res['districts'] = District::getAll()->where('province_id', $province->id);
             $district = $this->res['districts']->firstWhere('code', $request->input('districtCode'));

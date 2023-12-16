@@ -81,10 +81,6 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
         return response()->json($this->postsService->store($request));
     }
 
@@ -103,7 +99,7 @@ class PostController extends Controller
     }
 
     /**
-     * Update some field, not apply validate
+     * Update some field, not apply post validate
      * @param Request $request
      * @param $code
      * @return \Illuminate\Http\JsonResponse
@@ -136,5 +132,20 @@ class PostController extends Controller
         $url = $request->input('url');
         $isSingle = $request->input('is_single') ?? false;
         $this->postCrawlService->crawl($url, $isSingle);
+    }
+
+    public function getAttrs($catId)
+    {
+        $categoryFields = Post::$categoryFields;
+        $catCode = getCategoryCode($catId);
+
+        $fields = $categoryFields[$catCode] ?? [];
+
+        if ($fields) {
+            $output = ['fields' => $fields, 'attrs' => Post::$attr];
+            return view('pages/post/attrs', $output);
+        }
+
+        return "";
     }
 }

@@ -63,6 +63,14 @@ class Post extends Model
         ]],
 
     ];
+
+    public static array $categoryFields = [
+        'bds' => ['garret', 'acreage', 'deposit', 'furniture'],
+        'do-gia-dung' => ['material', 'color', 'branch', 'made_in', 'storage', 'state', 'guarantee'],
+        'dich-vu' => [],
+        'khac' => [],
+    ];
+
 //    protected $table ='posts';
     protected $fillable = [
         'name', 'code', 'content', 'category_id', 'status', 'author_id', 'price',
