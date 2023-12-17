@@ -29,10 +29,11 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        if (Schema::hasColumn('orders', 'product_id')) {
-            Schema::table('orders', function (Blueprint $table) {
-                $table->dropColumn('product_id');
-            });
-        }
+//        if (Schema::hasColumn('orders', 'product_id')) {
+//            Schema::table('orders', function (Blueprint $table) {
+//                $table->dropForeign(['product_id']);
+//                $table->dropColumn('product_id');
+//            });
+//        }
     }
 };

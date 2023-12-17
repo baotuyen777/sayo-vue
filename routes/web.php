@@ -66,7 +66,7 @@ Route::get('/xem-san-pham-{catCode?}/{code}.htm', [ProductController::class, 'sh
 Route::resource('product', ProductController::class);
 Route::resource('/review', ReviewController::class);
 
-Route::get('me', [OrdersController::class, 'me'])->name('order.me');
+Route::get('order/me', [OrdersController::class, 'me'])->name('order.me');
 Route::put('order-update/{id}', [OrdersController::class, 'updateSimple'])->name('order.updateSimple');
 
 Route::resource('order', OrdersController::class);

@@ -59,6 +59,7 @@
                     </section>
                     <section>
                         <div>
+                            <br>
                             <h5>ReCaptcha: </h5>
                             <div class="g-recaptcha" data-sitekey="{{ config('app.google_recaptcha_key') }}"></div>
                             @error('g-recaptcha-response')

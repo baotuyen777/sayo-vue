@@ -1,6 +1,6 @@
 <div class="form-control1 ">
     <div class="dropdown">
-        <button class="dropdown__button" type="button">
+        <button class="btn dropdown__button" type="button">
             <i class="label-dollar"></i>
             @if(request()->get('price_from'))
                 <span>{{'Từ '.moneyFormat(request()->get('price_from'))}}</span>

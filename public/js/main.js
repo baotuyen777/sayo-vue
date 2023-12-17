@@ -144,12 +144,18 @@ function toggleLoading() {
     }, 5000)
 }
 
-//form effect
-if (jQuery('.minput').val()) {
-    jQuery('.minput').addClass('hasValue')
-} else {
-    jQuery('.minput').removeClass('hasValue')
-}
+$(document).ready(function(){
+    //form effect
+    $('.minput').each(function (){
+        if ($(this).val()) {
+            $(this).addClass('hasValue')
+        } else {
+            $(this).removeClass('hasValue')
+        }
+    })
+    })
+
+
 jQuery('.minput').keyup(function () {
     if (jQuery(this).val()) {
         jQuery(this).addClass('hasValue')

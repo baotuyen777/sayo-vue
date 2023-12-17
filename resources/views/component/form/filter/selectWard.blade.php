@@ -11,7 +11,7 @@
 @endphp
 <div class="form-control1 ">
     <div class="dropdown">
-        <button class="dropdown__button" type="button">
+        <button class="btn dropdown__button" type="button">
             <i class="location"></i>
             <span>{{$ward['name'] ?? 'Tất cả phường'}}</span>
         </button>

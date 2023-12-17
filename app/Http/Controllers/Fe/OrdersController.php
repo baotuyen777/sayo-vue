@@ -29,21 +29,20 @@ class OrdersController extends Controller
 
         $order = $this->orderSevice->list($request);
 
-        return view('pages.order.list', $order);
+        return view('pages/order/list', $order);
     }
+
     public function me(Request $request)
     {
         if (!isLoged()) {
             return view('pages/auth/login');
         }
 
-        if (!isAdmin()) {
-            $request->merge(['author_id' => Auth::user()->id]);
-        }
+        $request->merge(['author_id' => Auth::user()->id]);
 
         $order = $this->orderSevice->list($request);
 
-        return view('pages.order.list', $order);
+        return view('pages/order/list', $order);
     }
 
     /**

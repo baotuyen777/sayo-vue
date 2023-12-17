@@ -14,7 +14,7 @@
 @endphp
 
 <div class="dropdown">
-    <button class="dropdown__button" type="button">
+    <button class="btn dropdown__button" type="button">
         <i class="sitemap"></i>
         <span>{{$category['name'] ?? 'Tất cả danh mục'}}</span>
         @if(isset($category['name']))

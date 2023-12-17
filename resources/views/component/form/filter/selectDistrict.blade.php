@@ -12,7 +12,7 @@
 @endphp
 <div class="form-control1 ">
     <div class="dropdown">
-        <button class="dropdown__button" type="button">
+        <button class="btn dropdown__button" type="button">
             <i class="location"></i>
             <span>{{$district['name'] ?? 'Tất cả huyện'}}</span>
         </button>
