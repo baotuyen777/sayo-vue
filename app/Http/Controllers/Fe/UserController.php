@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Admin\Controller;
+use App\Models\PostComment;
 use App\Models\User;
 use App\Services\Post\PostService;
 use App\Services\Post\UserService;
+use App\Services\Product\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +15,8 @@ class UserController extends Controller
 {
     public function __construct(
         private PostService $postService,
-        private UserService $userService
+        private UserService $userService,
+        private ProductService $productService
     )
     {
     }
@@ -39,9 +42,16 @@ class UserController extends Controller
             return view('pages.404');
         }
 
-        $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id]);
+        $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id, 'status' => 2]);
+        $products = $this->productService->getAllSimple($request, ['author_id' => $user->id, 'status' => 2]);
+        $ratings = PostComment::getAll();
 
-        return view('pages.user.dashboard', ['posts' => $posts, 'user' => $user]);
+        return view('pages.user.dashboard', [
+            'posts' => $posts,
+            'user' => $user,
+            'products' => $products,
+            'ratings' => $ratings
+        ]);
     }
 
     public function edit($username)

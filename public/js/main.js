@@ -218,4 +218,14 @@ if (!dusktext) element.style.visibility = "hidden";
 element.innerHTML = dusktext;
 element.classList.add(dclass);
 
+$(document).ready(function(){
+    $('.portfolio__tab .children_menu').click(function(){
+        $('.portfolio__tab .children_menu').removeClass('activelink');
+        $(this).addClass('activelink');
+        var tabid = $(this).data('tab');
+        $('.list-data').removeClass('active-tab').addClass('hide-tab');
+        $('#'+tabid).addClass('active-tab').removeClass('hide-tab');
+    });
+});
+
 
