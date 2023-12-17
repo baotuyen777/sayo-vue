@@ -34,29 +34,30 @@ class Post extends Model
         3 => 'Đã sử dụng(đã sửa chữa)',
     ];
     public static array $attr = [
-        'garret' => ['label' => 'Gác xép', 'type' => 'boolean'],
+        'garret' => ['label' => 'Gác xép', 'type' => 'checkbox'],
         'acreage' => ['label' => 'Diện tích', 'type' => 'square'],
         'deposit' => ['label' => 'Đặt cọc', 'type' => 'money'],
         'furniture' => [
             'label' => 'Nội thất ',
+            'type' => 'select',
             'options' => [
                 1 => 'Đầy đủ',
                 2 => 'Cơ bản',
                 3 => 'Phòng trống'
             ]
         ],
-        'material' => ['label' => 'Chất liệu'],
-        'color' => ['label' => 'Màu sắc', 'options' => ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác']],
-        'branch' => ['label' => 'Thương hiệu', 'options' => ['Samsung', 'Apple']],
-        'made_in' => ['label' => 'Xuất xứ', 'options' => ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác']],
-        'storage' => ['label' => 'Dung lượng', 'options' => ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G']],
+        'material' => ['label' => 'Chất liệu', 'type' => 'select', 'options' => ['Nhựa', 'Sắt', 'Inox', 'Gỗ', 'Đá', 'Kính', 'Vải', 'Khác']],
+        'color' => ['label' => 'Màu sắc', 'type' => 'select', 'options' => ['Bạc', 'Đen', 'Đỏ', 'Hồng', 'Trắng', 'Vàng', 'Xám', 'Xanh dương', 'Xanh lá', 'Màu khác']],
+        'branch' => ['label' => 'Thương hiệu', 'type' => 'select', 'options' => ['Samsung', 'Apple']],
+        'made_in' => ['label' => 'Xuất xứ', 'type' => 'select', 'options' => ['Việt Nam', 'Trung Quốc', 'Châu Âu', 'Mỹ', 'Nhật', 'Thái Lan', 'Hàn Quốc', 'Khác']],
+        'storage' => ['label' => 'Dung lượng', 'type' => 'select', 'options' => ['<8G', '8G', '16G', '32G', '64G', '128G', '256G', '>256G']],
 
-        'state' => ['label' => 'Tình trạng', 'options' => [
+        'state' => ['label' => 'Tình trạng', 'type' => 'select', 'options' => [
             1 => 'Mới',
             2 => 'Đã sử dụng(chưa sửa chữa)',
             3 => 'Đã sử dụng(đã sửa chữa)',
         ]],
-        'guarantee' => ['label' => 'Bảo hành', 'options' => [
+        'guarantee' => ['label' => 'Bảo hành', 'type' => 'select', 'options' => [
             1 => 'Hết bảo hành',
             2 => 'Còn bảo hành',
             3 => 'Còn bảo hành trên 6 tháng',

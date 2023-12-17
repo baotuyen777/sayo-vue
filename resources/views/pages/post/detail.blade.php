@@ -11,8 +11,8 @@
                         <div>
                             @include('component.form.select',['name'=> 'category_id', 'label' => 'Danh mục','options' => $categories])
                             <div class="d-flex-wrap grid-2 gap-10">
-                                @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
-                                @include('component.form.input',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
+                                @include('component.form.text',['name'=> 'name', 'label' => 'Tiêu đề'])
+                                @include('component.form.text',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
                             </div>
                             @include('component.form.textarea',['name'=> 'content', 'label' => 'Mô tả chi tiết' ,'placeholder' => '
 - Thời gian sử dụng
@@ -37,7 +37,7 @@
                         </div>
 
                         <a href="{{route('profile')}}">Cài đặt địa chỉ</a>
-                        @include('component.form.input',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)'])
+                        @include('component.form.text',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)'])
                     </section>
 
                     <section>
@@ -45,10 +45,10 @@
                         <div class="d-flex-wrap grid-2 gap-10 extra-attrs">
                             @include('pages/post/attrs')
                             {{--                            @include('component.form.radio',['name'=> 'attr["guarantee"]', 'label' => 'Bảo hành', 'options' => [1=>'Còn bảo hành',2=>'Hết bảo hành']])--}}
-{{--                            @include('component.form.select',['name' => 'state', 'label' => 'Tình trạng','isAttr' => 1])--}}
-{{--                            @include('component.form.select',['name' => 'color', 'label' => 'Màu sắc','isAttr' => 1])--}}
-{{--                            @include('component.form.select',['name' => 'guarantee', 'label' => 'Bảo hành','isAttr'=> 1])--}}
-{{--                            @include('component.form.select',['name' => 'made_in', 'label' => 'Xuất xứ','isAttr'=> 1])--}}
+                            {{--                            @include('component.form.select',['name' => 'state', 'label' => 'Tình trạng','isAttr' => 1])--}}
+                            {{--                            @include('component.form.select',['name' => 'color', 'label' => 'Màu sắc','isAttr' => 1])--}}
+                            {{--                            @include('component.form.select',['name' => 'guarantee', 'label' => 'Bảo hành','isAttr'=> 1])--}}
+                            {{--                            @include('component.form.select',['name' => 'made_in', 'label' => 'Xuất xứ','isAttr'=> 1])--}}
                             {{--                            @include('component.form.select',['name'=> 'attr["brand"]', 'label' => 'Hãng/ Thương hiệu', 'options' => $brands,'attr'=>'brand'])--}}
                             {{--                            @include('component.form.select',['name'=> 'attr["color"]', 'label' => 'Màu sắc', 'options' => $colors,'attr'=>'color'])--}}
                             {{--                            @include('component.form.select',['name'=> 'attr["storage"]', 'label' => 'Dung lượng', 'options' => $storages,'attr'=>'storage'])--}}

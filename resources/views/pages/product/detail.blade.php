@@ -12,8 +12,8 @@
                         <div>
                             @include('component.form.select',['name'=> 'category_id', 'label' => 'Danh mục','options' => $categories])
                             <div class="d-flex-wrap grid-2 gap-10">
-                                @include('component.form.input',['name'=> 'name', 'label' => 'Tiêu đề'])
-                                @include('component.form.input',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
+                                @include('component.form.text',['name'=> 'name', 'label' => 'Tiêu đề'])
+                                @include('component.form.text',['name'=> 'price','inputmode'=>"decimal", 'label' => 'Giá bán'])
                             </div>
                             @include('component.form.textarea',['name'=> 'content', 'label' => 'Mô tả chi tiết' ,'placeholder' => '
 - Thời gian sử dụng
@@ -53,7 +53,7 @@
                         </button>
                         @if(isset($obj))
                             <a class="btn"
-                            href="{{route('productView',['catCode'=>$obj['category']['code'],'code'=>$obj['code']])}}"
+                               href="{{route('productView',['catCode'=>$obj['category']['code'],'code'=>$obj['code']])}}"
                                target="_blank">Xem trước</a>
                         @endif
                     </div>

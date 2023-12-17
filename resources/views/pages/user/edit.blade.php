@@ -9,7 +9,7 @@
                 <section>
                     <h5>Hồ sơ cá nhân</h5>
                     <div>
-                        @include('component.form.input',['name'=> 'name', 'label' => 'Tên'])
+                        @include('component.form.text',['name'=> 'name', 'label' => 'Tên'])
                         @include('component.form.textarea',['name'=> 'bio', 'label' => 'Giới thiệu', 'placeholder'=> 'Viết vài dòng giới thiệu về bạn'])
 
                     </div>
@@ -25,13 +25,13 @@
 'asyncUrl' =>route('getWards'), 'asyncField' =>'ward_id','valueLabel'=>$obj['district_name'] ?? ''])
                         @include('component.form.selectAsync',['name'=> 'ward_id', 'label' => 'Xã/phường', 'options' => $wards, 'valueLabel'=>$obj['ward_name']?? ''])
                     </div>
-                    @include('component.form.input',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)'])
+                    @include('component.form.text',['name'=> 'address', 'label' => 'Địa chỉ chi tiết (Tên đường, Số nhà...)'])
                 </section>
                 <section>
                     <h5>Thông tin bảo mật</h5>
-                    @include('component.form.input',['name'=> 'email', 'label' => 'Email'])
-                    @include('component.form.input',['name'=> 'cccd', 'label' => 'Căn cước công dân','maxlength' => 12])
-                    @include('component.form.input',['name'=> 'birthday', 'label' => 'Ngày sinh','type'=>'date'])
+                    @include('component.form.text',['name'=> 'email', 'label' => 'Email'])
+                    @include('component.form.text',['name'=> 'cccd', 'label' => 'Căn cước công dân','maxlength' => 12])
+                    @include('component.form.text',['name'=> 'birthday', 'label' => 'Ngày sinh','type'=>'date'])
                     @include('component.form.select',['name'=> 'gender', 'label' => 'Giới tính','options'=>$genders])
                 </section>
 

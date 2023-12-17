@@ -163,12 +163,13 @@ function isAdmin()
 
 function isAuthor($obj): bool
 {
-    if (!$obj) {
+    if (!$obj || !isLoged()) {
         return false;
     }
 
     $authorId = $obj->author_id;
-    if (!Auth::user() || Auth::user()->id != $authorId || Auth::user()->role > 1) {
+
+    if (Auth::user()->id != $authorId || Auth::user()->role > 1) {
         return true;
     }
     return false;

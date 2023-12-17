@@ -53,6 +53,9 @@ class PostController extends Controller
 
     public function edit($code)
     {
+        if (!isLoged()) {
+            return view('pages/auth/login');
+        }
 //        $obj =Post::getInstance()->abc();
         $obj = Post::getOne($code, true, true);
         if (!$obj || (!isAuthor($obj) && !isAdmin())) {
@@ -86,7 +89,7 @@ class PostController extends Controller
 
     public function create()
     {
-        if (!Auth::check()) {
+        if (!isLoged()) {
             return view('pages/auth/login');
         }
 

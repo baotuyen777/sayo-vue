@@ -1435,6 +1435,42 @@ label.selection__label {
   background-color: #e8e8e8;
 }
 
+.s-checkbox {
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-top: 2px;
+}
+.s-checkbox > input {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.s-checkbox:not(.disabled) > input:not(:checked) + span {
+  background-color: #f4f4f4;
+  border-color: silver;
+}
+
+.s-checkbox.primary > span {
+  color: #f80;
+}
+
+.s-checkbox > .checkbox {
+  border-radius: 4px;
+}
+
+.s-checkbox > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: currentColor;
+  border: 1px solid;
+}
+
 @media (max-width: 767px) {
   .dropdown__content {
     position: fixed;
