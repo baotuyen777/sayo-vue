@@ -39,12 +39,8 @@
                     <div>{{ $obj->author->phone }}</div>
                 </td>
 
-                <td>
-                    {{ $obj->product->name }}
-                </td>
-                <td>
-                    {{ moneyFormat($obj->price) }}
-                </td>
+                <td>{{ $obj->product->name }}</td>
+                <td>{{ moneyFormat($obj->price) }}</td>
                 <td>{{ App\Models\Orders::$status[$obj->status] }}</td>
                 <td>
                     <div class="d-flex-wrap gap-10">
