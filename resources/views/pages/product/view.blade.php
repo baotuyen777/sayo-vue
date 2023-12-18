@@ -69,7 +69,7 @@
 @push('js')
     <script>
         $( document ).ready(function() {
-            $( ".open" ).click(function() {
+            $( ".open-popup" ).click(function() {
                 $( "#blackout" ).addClass( "visable" );
                 $( "#popup" ).addClass( "visable" );
             });

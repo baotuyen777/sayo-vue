@@ -141,7 +141,7 @@
     }
 }
 
-#blackout {
+.blackout {
     position: fixed;
     top: 0;
     left: 0;
@@ -153,7 +153,7 @@
     transition: z-index 500ms, visibility 800ms, opacity 1000ms;
 }
 
-#blackout.visable {
+.blackout.visable {
     position: fixed;
     opacity: 1;
     top: 0;
@@ -162,7 +162,7 @@
     visibility: visible;
 }
 
-#popup {
+.popup {
     opacity: 0;
     width: 600px;
     padding: 15px;
@@ -172,36 +172,36 @@
     transition: top 550ms, opacity 500ms, z-index 500ms;
 }
 
-#popup h1.title {
+.popup h1.title {
     margin: 12px 0;
 }
 
-#popup.visable {
+.popup.visable {
     top: 5%;
     left: 33%;
     opacity: 1;
     z-index: 9;
 }
 
-#popup > .title {
+.popup > .title {
     margin: 0;
     color: rgb(57, 57, 57);
 }
 
-#popup > .subtitle {
+.popup > .subtitle {
     font-size: 20px;
     margin: 0 0 0 15px;
     color: rgb(157, 157, 157);
 }
 
-#popup > hr {
+.popup > hr {
     border: 0;
     height: 1px;
     margin: 10px -15px;
     background: rgb(208, 208, 208);
 }
 
-#popup .close {
+.popup .close {
     top: -10px;
     width: 30px;
     height: 30px;
@@ -210,12 +210,22 @@
     position: absolute;
     border-radius: 15px;
     background: rgb(255, 255, 255);
-    background-image: url(http://imgh.us/close_1.svg);
     background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#popup .close:hover {
-    background-image: url(http://imgh.us/close_hover.svg);
+.popup .close i{
+}
+
+.popup .close:hover {
+    background-color: #ccc;
+}
+
+.popup i.close:before,.popup i.close:after {
+    top: 10px;
+    left: 14px;
 }
 
 .open {
@@ -223,9 +233,14 @@
     padding: 15px;
 }
 
-#review-content {
+.review-content textarea[name="content"]{
     padding: 6px 12px;
     width: 100%;
     outline: none;
     margin: 12px 0;
+}
+
+.popup .group-slider, .popup .slider {
+    height: 280px !important;
+
 }

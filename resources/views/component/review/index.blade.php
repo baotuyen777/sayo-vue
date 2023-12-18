@@ -71,7 +71,9 @@
                             </td>
                             <td colspan="3">
                                 <textarea name="content" rows="5" placeholder="Đánh giá ..."></textarea>
-                                @include('component.form.uploadFiles', ['obj' => null])
+                                <div id="upload_images">
+                                    @include('component.form.uploadFiles', ['obj' => null])
+                                </div>
                                 <button type="submit" class="btn btn-yellow">Đánh giá</button>
                             </td>
                         </tr>
@@ -100,15 +102,15 @@
                                 @php
                                     $files = $review->files ?? [];
                                 @endphp
-                                <div class="review-img open">
+                                <div class="review-img open-popup">
                                     @foreach($files as $file)
                                         <img src="{{asset('storage/'.$file['url'])}}" alt="">
                                     @endforeach
                                 </div>
                             </div>
-                            <div id="blackout"></div>
-                            <div id="popup">
-                                <span class="close"></span>
+                            <div id="blackout" class="blackout"></div>
+                            <div id="popup" class="popup">
+                                <i class="fa fa-times close" aria-hidden="true"></i>
                                 <h1 class="title">Đánh giá sản phẩm</h1>
                                 <div class="slider">
                                     <div class="group-slider">
@@ -136,14 +138,15 @@
                                         <p>Rating:
                                             <span class="star-rating">
                                                 @foreach(range(1, 5) as $star)
-                                                    <label for="rate-{{ $star }}" style="--i:{{ $star }}"><i class="fa fa-star"></i></label>
-                                                    <input type="radio" name="rating" id="rate-{{ $star }}" value="{{ $star }}" {{ ($star === 5) ? 'checked' : '' }}>
+                                                    <label for="rate-edit-{{ $star }}" style="--i:{{ $star }}"><i class="fa fa-star"></i></label>
+                                                    <input type="radio" name="rating" id="rate-edit-{{ $star }}" value="{{ $star }}" {{ ($star === 5) ? 'checked' : '' }}>
                                                 @endforeach
                                             </span>
                                         </p>
                                         <label for="#review-content">Nội dung đánh giá: </label>
                                         <textarea name="content" id="review-content" cols="8" rows="5">{{ $review->content }}</textarea>
-                                        @if(auth()->user()->id == $review->user->id)
+                                        @include('component.form.uploadFiles', ['obj' => null])
+                                        @if(optional(auth()->user())->id == $review->user->id)
                                             <button type="submit">Cập nhật</button>
                                         @endif
                                     </form>
