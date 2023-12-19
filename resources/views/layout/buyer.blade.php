@@ -8,7 +8,7 @@
             @if (isLoged())
                 @include('layout.common.sidebar')
             @endif
-            @if(Auth::user()->id ===$user->id || isAdmin())
+            @if((Auth::check() && Auth::user()->id === $user->id) || isAdmin())
                 <section class="white-box p-10 box-radius">
                     <h4>Hồ sơ xin việc</h4>
                     <p>Chưa tạo hồ sơ xin việc nào!</p>

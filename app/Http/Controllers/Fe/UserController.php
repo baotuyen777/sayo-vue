@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Fe;
 use App\Http\Controllers\Admin\Controller;
 use App\Models\PostComment;
 use App\Models\User;
+use App\Models\UserLike;
 use App\Services\Post\PostService;
 use App\Services\Post\UserService;
 use App\Services\Product\ProductService;
@@ -45,12 +46,14 @@ class UserController extends Controller
         $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id, 'status' => 2]);
         $products = $this->productService->getAllSimple($request, ['author_id' => $user->id, 'status' => 2]);
         $ratings = PostComment::getAll();
+        $likePage = Auth::check() ? UserLike::where('author_id', Auth::user()->id)->where('seller_id', $user->id)->first() : false;
 
         return view('pages.user.dashboard', [
             'posts' => $posts,
             'user' => $user,
             'products' => $products,
-            'ratings' => $ratings
+            'ratings' => $ratings,
+            'isLike' => !!$likePage
         ]);
     }
 

@@ -234,4 +234,8 @@ $(document).ready(function(){
     });
 });
 
+$('.btn-like-page').on('click', function(e){
+    e.preventDefault()
+    $('#formLikePage').submit()
+})
 
