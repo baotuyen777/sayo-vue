@@ -39,12 +39,12 @@
                 </td>
                 <td>
                     <div class="d-flex-wrap gap-10">
-                        <button class="btn--small btn-ajax danger"
+                        <button class="btn btn--small btn-ajax danger"
                                 data-url="{{route('product.destroy',['product'=>$obj['code']])}}" data-method="delete">
                             Xóa
                         </button>
                         @if(Auth::user()->role===4)
-                            <button class="btn--small btn-ajax danger"
+                            <button class="btn btn--small btn-ajax danger"
                                     data-url="{{route('productUpdateSimple',['code'=>$obj['code']])}}"
                                     data-param='{"status":4}'>
                                 Ẩn
@@ -60,7 +60,7 @@
                                 </button>
                             @endif
                             @if($obj['status'] !=3)
-                                <button class="btn--small btn-ajax warning"
+                                <button class="btn btn--small btn-ajax warning"
                                         data-url="{{route('productUpdateSimple',['code'=>$obj['code']])}}"
                                         data-param='{"status":3}'>Từ chối
                                 </button>

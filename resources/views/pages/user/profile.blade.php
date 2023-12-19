@@ -1,4 +1,4 @@
-@extends('layout.manager')
+@extends('layout.seller')
 
 @section('content')
     <div class="card">

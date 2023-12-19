@@ -54,14 +54,14 @@
                             Xóa
                         </button>
                         @if($obj['status'] != STATUS_ACTIVE)
-                            <button class="btn--small btn-ajax success"
+                            <button class="btn btn--small btn-ajax success"
                                     data-url="{{ route('comment.update', $obj->id) }}"
                                     data-param='{"status":2}'>
                                 Duyệt
                             </button>
                         @endif
                         @if($obj['status'] != STATUS_DEACTIVATE)
-                            <button class="btn--small btn-ajax warning"
+                            <button class="btn btn--small btn-ajax warning"
                                     data-url="{{ route('comment.update', $obj->id) }}"
                                     data-param='{"status":3}'>Từ chối
                             </button>

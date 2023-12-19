@@ -1,4 +1,4 @@
-@extends('layout.manager')
+@extends('layout.buyer')
 @section('top-header')
     <div class="header">
         <div class="container">

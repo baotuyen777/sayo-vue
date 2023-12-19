@@ -1052,12 +1052,12 @@ h1 {
   align-items: center;
   gap: 5px;
   background-color: #f4f4f4;
-  border: 1px solid hsla(0deg, 0%, 61%, 0.7);
   white-space: nowrap;
   border-radius: 4px;
   cursor: pointer;
   padding: 8px;
   outline: none;
+  border: none;
 }
 .btn:hover {
   background: silver;
@@ -1121,6 +1121,9 @@ h1 {
 }
 .btn--small {
   padding: 4px 8px;
+}
+.btn.danger {
+  color: white;
 }
 
 i {

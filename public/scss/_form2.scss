@@ -5,12 +5,13 @@
     gap: 5px;
 
     background-color: #f4f4f4;
-    border: 1px solid hsla(0, 0%, 61%, 0.7);
+    //border: 1px solid hsla(0, 0%, 61%, 0.7);
     white-space: nowrap;
     border-radius: 4px;
     cursor: pointer;
     padding: 8px;
     outline: none;
+    border: none;
 
     &:hover {
         background: silver;
@@ -94,6 +95,10 @@
 
     &--small {
         padding: 4px 8px;
+    }
+
+    &.danger{
+        color: white;
     }
 
 }
