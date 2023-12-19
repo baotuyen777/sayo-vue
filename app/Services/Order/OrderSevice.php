@@ -36,16 +36,20 @@ class OrderSevice
 
     public function list($request)
     {
-
-
+        $orders = Orders::with('author', 'product');
+        if ($request->date_from) {
+            $orders->where('created_at', '>=', $request->date_from);
+        }
+        if ($request->date_to) {
+            $orders->where('created_at', '<=', $request->date_to);
+        }
         $currentPage = $request->input('current');
         $pageSize = $request->input('page_size') ?? 24;
         $res['categories'] = Category::with('avatar')->get();
-        $res['objs'] = Orders::with('author', 'product')
-            ->paginate($pageSize, ['*'], 'page', $currentPage);
-        $res['totalPrice'] = Product::whereIn('id', Orders::all()->pluck('product_id')->toArray())
+        $res['totalPrice'] = Product::whereIn('id', $orders->get()->pluck('product_id')->toArray())
             ->get()->sum('price');
 
+        $res['objs'] = $orders->paginate($pageSize, ['*'], 'page', $currentPage);
         return $res;
     }
 
