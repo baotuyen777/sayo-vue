@@ -116,7 +116,7 @@ class PostService
         $routeParams = request()->route()->parameters();
         $request->merge($routeParams);
 
-        $catCode = $request->input('catCode');
+        $catCode = $request->input('catCode')?? 'tat-ca';
         $this->res['categories'] = Category::getAll();
         $this->res['category'] = $this->res['categories']->firstWhere('code', $catCode);
 

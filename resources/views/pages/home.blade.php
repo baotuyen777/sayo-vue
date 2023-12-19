@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="p-10">
-                    <a class="view-more" href="{{route('archive')}}">Xem thêm <i id="arrowIcon" class="fa fa-angle-down"></i></a>
+                    <a class="view-more" href="{{route('archive',['catCode'=>'tat-ca'])}}">Xem thêm <i id="arrowIcon" class="fa fa-angle-down"></i></a>
                 </div>
 
             </div>

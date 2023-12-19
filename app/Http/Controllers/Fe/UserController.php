@@ -42,8 +42,8 @@ class UserController extends Controller
             return view('pages.404');
         }
 
-        $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id, 'status' => 2]);
-        $products = $this->productService->getAllSimple($request, ['author_id' => $user->id, 'status' => 2]);
+        $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id, 'status' => STATUS_ACTIVE]);
+        $products = $this->productService->getAllSimple($request, ['author_id' => $user->id, 'status' => STATUS_ACTIVE]);
         $ratings = PostComment::getAll();
 
         return view('pages.user.dashboard', [

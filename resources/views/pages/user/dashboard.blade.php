@@ -169,7 +169,7 @@
     </div>
     <div class="d-flex-wrap grid-2 list-data hide-tab" id="page3">
         @foreach($products as $product)
-            @include('component.post.post-horizontal',['product' => $product])
+            @include('component.product.product-horizontal',['product' => $product])
         @endforeach
     </div>
 
