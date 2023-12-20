@@ -7,6 +7,7 @@
         <div class="flex-row">
             @include('component.form.filter.selectCategory', ['options' => $categories,'route'=>$route])
             @include('component.form.filter.keyword')
+            @include('component.form.filter.rangeDate')
             <a class="btn btn--primary" href="{{route('order.create')}}" rel="nofollow">Lên đơn</a>
         </div>
     </form>

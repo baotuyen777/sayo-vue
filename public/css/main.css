@@ -1138,6 +1138,9 @@ i.location {
 i.label-dollar {
   background-image: url("/img/icon/price2.svg");
 }
+i.label-time {
+  background-image: url("/img/icon/time.svg");
+}
 i.search {
   background-image: url("/img/icon/search-black.svg");
 }
