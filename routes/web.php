@@ -13,6 +13,8 @@ use App\Http\Controllers\Fe\ReviewController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Fe\PasswordResetController;
 use App\Http\Controllers\Fe\OrdersController;
+use App\Http\Controllers\Fe\UserLikeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,3 +97,4 @@ Route::get('/storage-link', function () {
 
 Route::view("/admin/{any}", "app")->where("any", ".*");
 
+Route::resource('user-like', UserLikeController::class);
