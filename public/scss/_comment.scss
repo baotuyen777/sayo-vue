@@ -2,7 +2,7 @@
     margin-bottom: 10px;
     width: 100%;
     border-radius: 4px;
-    border: 1px solid silver;
+    border: 1px solid $gray;
     height: 72px;
 
     &__content {
@@ -15,7 +15,7 @@
         line-height: 20px;
         height: calc(100% - 30px);
         resize: none;
-        background-color: #fff;
+        background-color: $white;
     }
     &__action{
         margin-bottom: 10px;
@@ -46,7 +46,7 @@
 }
 
 .panel {
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.075);
+    box-shadow: 0 2px 0 $black;
     border-radius: 0;
     border: 0;
     margin-bottom: 15px;
@@ -90,7 +90,7 @@
 //}
 
 .text-muted, a.text-muted:hover, a.text-muted:focus {
-    color: #acacac;
+    color: $gray;
 }
 
 .text-sm {
@@ -98,17 +98,13 @@
     line-height: 1.25;
 }
 
-.btn-sm, .btn-group-sm > .btn, .btn-icon.btn-sm {
-    padding: 5px 10px !important;
-}
-
 .rely-content {
-    border: 1px solid #ccc;
+    border: 1px solid $gray-light;
 }
 
 .rely-content:focus-visible {
     outline: none;
-    border-color: #3c8dbc;
+    border-color: $info;
 }
 
 .reply-form {

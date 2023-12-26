@@ -1,6 +1,6 @@
 .card {
-    background: white;
-    border-bottom: 1px solid #ccc;
+    background: $white;
+    border-bottom: 1px solid $gray-light;
     //padding: 10px;
 
     &--product {
@@ -22,7 +22,7 @@
     }
 
     h2 {
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid $gray-light;
         padding: 10px;
     }
 
@@ -35,7 +35,7 @@
     }
 
     &__price {
-        color: #d0021b;
+        color: $danger;
         display: inline-block;
         font-size: 15px;
         font-weight: 700;
@@ -73,7 +73,7 @@
     position: absolute;
     right: 0px;
     top: 0px;
-    background-color: rgb(255, 255, 255);
+    background-color: $white;
 }
 
 .product .product__caption {
@@ -87,7 +87,7 @@
 
     .body {
         display: flex;
-        background: white;
+        background: $white;
         margin: 10px;
 
         .info {
@@ -107,17 +107,17 @@
         position: absolute;
         top: 15px;
         left: 15px;
-        background: gray;
-        color: white;
+        background: $gray;
+        color: $white;
         padding: 2px;
         font-size: 0.8em;
 
         &.danger {
-            background: red;
+            background: $danger;
         }
 
         &.success {
-            background: green;
+            background: $success;
         }
     }
 }

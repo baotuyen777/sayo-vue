@@ -2,7 +2,7 @@
     height: 8px;
     margin: 0;
     border-radius: 4px;
-    background-color: #ccc;
+    background-color: $gray;
 }
 
 .progress-bar {
@@ -11,11 +11,11 @@
     height: 100%;
     font-size: 12px;
     line-height: 20px;
-    color: #fff;
+    color: $white;
     text-align: center;
-    background-color: #337ab7;
-    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
-    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+    background-color: $info;
+    -webkit-box-shadow: inset 0 -1px 0 $black;
+    box-shadow: inset 0 -1px 0 $black;
     -webkit-transition: width .6s ease;
     -o-transition: width .6s ease;
     transition: width .6s ease;
@@ -37,7 +37,7 @@
 }
 
 .text-yellow {
-    color: #efb140;
+    color: $warning;
 }
 
 .review__progress {
@@ -75,12 +75,12 @@
 }
 
 .star-rating label:has(~ :checked) i {
-    color: #faec1b;
-    text-shadow: 0 0 2px #ffffff, 0 0 10px #ffee58;
+    color: $warning;
+    text-shadow: 0 0 2px $white, 0 0 10px $warning;
 }
 
 .btn-yellow {
-    background-color: #f80;
+    background-color: $primary;
 }
 
 .form-review .btn {
@@ -135,7 +135,7 @@
 }
 
 .avg-rate {
-    color: red;
+    color: $danger;
     font-size: 30px;
     font-weight: 700;
 }
@@ -162,7 +162,7 @@
     bottom: 0;
     opacity: 0;
     visibility: hidden;
-    background: rgba(0, 0, 0, 0.8);
+    background: $black;
     transition: z-index 500ms, visibility 800ms, opacity 1000ms;
 }
 
@@ -181,7 +181,7 @@
     padding: 15px;
     position: fixed;
     border-radius: 5px;
-    background: rgb(248, 248, 248);
+    background: $white;
     transition: top 550ms, opacity 500ms, z-index 500ms;
 }
 
@@ -198,20 +198,20 @@
 
 .modal > .title {
     margin: 0;
-    color: rgb(57, 57, 57);
+    color: $black-light;
 }
 
 .modal > .subtitle {
     font-size: 20px;
     margin: 0 0 0 15px;
-    color: rgb(157, 157, 157);
+    color:$gray;
 }
 
 .modal > hr {
     border: 0;
     height: 1px;
     margin: 10px -15px;
-    background: rgb(208, 208, 208);
+    background: $gray-light;
 }
 
 .modal .close {
@@ -222,7 +222,7 @@
     cursor: pointer;
     position: absolute;
     border-radius: 15px;
-    background: rgb(255, 255, 255);
+    background: $white;
     background-size: contain;
     display: flex;
     justify-content: center;
@@ -232,8 +232,8 @@
 .modal .close i {
 }
 
-.modal .close:hover {
-    background-color: #ccc;
+.popup .close:hover {
+    background-color: $gray-light;
 }
 
 .modal i.close:before, .modal i.close:after {

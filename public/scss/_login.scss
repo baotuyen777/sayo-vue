@@ -19,9 +19,9 @@
     .login-form {
         width: 440px;
         border-radius: 8px;
-        background-color: #fff;
+        background-color: $white;
         padding: 32px 40px;
-        box-shadow: 0 0 8px rgba(30, 40, 60, .1);
+        box-shadow: 0 0 8px $black-light;
         min-height: var(--login-form-0)
     }
     .login-form .logo {
@@ -37,12 +37,12 @@
 
     > hr {
         width: 100%;
-        color: #8c8c8c
+        color: $gray-light;
     }
 
     > span {
         white-space: nowrap;
-        color: #595959;
+        color: $gray;
         margin: 0 12px
     }
 }

@@ -29,7 +29,7 @@
                     vertical-align: middle;
                     max-height: 100%;
                     max-width: 100%;
-                    background-color: #eee;
+                    background-color: $white;
                     display: inline-block !important;
                     outline: 0;
                 }
@@ -48,7 +48,7 @@
             width: 10px;
             height: 10px;
             border-radius: 5px;
-            background: #606161;
+            background: $gray;
             margin: 0 4px;
             transition: 0.1s;
             position: relative;
@@ -56,7 +56,7 @@
         }
 
         .navigator span.active {
-            background: rgb(255, 255, 255);
+            background: $white;
             width: 10px;
             height: 10px;
         }
@@ -72,7 +72,7 @@
             .ad-image-caption-text {
                 display: inline-block;
                 vertical-align: middle;
-                color: #f5f5f5;
+                color: $white;
                 margin-right: 4px;
                 font-size: 14px
             }
@@ -159,7 +159,7 @@
 
     .ad-price-wrapper .ad-adPrice {
         font-size: 16px;
-        color: #c90927;
+        color: $danger;
         font-weight: 700
     }
 
@@ -180,7 +180,7 @@
     justify-content: center;
 
     .lead-button-default {
-        background-color: #fff;
+        background-color: $white;
         border-radius: 25px;
         padding: 10px 20px;
         display: flex;
@@ -199,17 +199,17 @@
     overflow-y: hidden;
     white-space: nowrap;
     padding: 10px 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid $gray;
 
     li {
-        border: 1px solid #fe9900;
+        border: 1px solid $primary;
         padding: 5px 10px;
         border-radius: 20px;
         margin-right: 10px;
         display: inline-block;
         font-size: 13px;
-        color: #222;
-        background-color: #fff;
+        color: $black-light;
+        background-color: $white;
         cursor: pointer;
     }
 }

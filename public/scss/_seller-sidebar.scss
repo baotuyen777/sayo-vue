@@ -2,7 +2,7 @@
 .seller-profile {
     margin-bottom: 10px;
     padding: 10px;
-    background: white;
+    background: $white;
 
     .SellerProfile_inforItem__B3Pzq {
         flex: 1 1
@@ -15,12 +15,12 @@
 
     .SellerProfile_inforItem__B3Pzq > p {
         font-size: 12px;
-        color: #9b9b9b;
+        color: $gray;
         margin-bottom: 5px
     }
 
     .SellerProfile_inforItem__B3Pzq > span {
-        color: #222;
+        color: $black-light;
         font-weight: 600
     }
 
@@ -29,7 +29,7 @@
     }
 
     .SellerProfile_inforItem__B3Pzq .SellerProfile_inforValue__hK4rb {
-        color: #222;
+        color: $black-light;
         font-weight: 600
     }
 
@@ -40,12 +40,12 @@
         text-align: center;
         align-items: center;
         font-size: 12px;
-        color: #9b9b9b
+        color: $gray
     }
 
     .SellerProfile_inforWrapper__KXg71 > a {
         flex: 1 1;
-        color: #9b9b9b
+        color: $gray
     }
 
     .SellerProfile_inforWrapper__KXg71 > a :hover {
@@ -79,23 +79,23 @@
 
     .SellerProfile_statusOnlineDiv__iiwUQ {
         font-size: 11px;
-        color: #9b9b9b;
+        color: $black-light;
         display: flex
     }
 
     .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
         font-size: 30px;
-        color: #589f39;
+        color: $success;
         line-height: 21px;
         margin-right: 5px
     }
 
     .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
-        color: #9b9b9b
+        color: $black-light
     }
 
     .SellerProfile_seperateLine__H_bJa {
-        border-left: 1px solid #cacaca;
+        border-left: 1px solid $gray-light;
         height: 20px;
         width: 1px
     }
@@ -106,18 +106,18 @@
 
     .SellerProfile_sellerWrapper__GlDwe {
         display: flex;
-        color: #333
+        color: $black-light
     }
 
     .SellerProfile_sellerWrapper__GlDwe:focus, .SellerProfile_sellerWrapper__GlDwe:hover {
-        color: #333;
+        color: $black-light;
         outline: 0;
         text-decoration: none
     }
 
     .SellerProfile_offlineBullet__by5mZ, .SellerProfile_statusOnlineDiv__iiwUQ .SellerProfile_offlineBullet__by5mZ {
         font-size: 30px;
-        color: #589f39;
+        color: $success;
         line-height: 16px;
         width: 13px;
         text-align: center;
@@ -125,7 +125,7 @@
     }
 
     .SellerProfile_offlineBullet__by5mZ {
-        color: #9b9b9b;
+        color: $black-light;
         text-align: center
     }
 }
@@ -136,18 +136,18 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    border: 1px solid #ccc;
+    border: 1px solid $gray-light;
     padding: 8px 10px;
     border-radius: 4px;
     font-size: 16px;
-    color: #589f39;
-    background-color: #fff;
+    color: $success;
+    background-color: $white;
     font-weight: 700;
     text-align: center
 }
 
 .LeadButton_wrapperLeadButtonDesktop__SVKE8 .LeadButton_buttonChatDesktop__gbYM9:hover {
-    background-color: #e6e6e6
+    background-color: $gray-light
 }
 
 .LeadButton_wrapperLeadButtonDesktop__SVKE8 .LeadButton_buttonChatDesktop__gbYM9 > img {
@@ -176,7 +176,7 @@
 }
 
 .SafeTips_SafeTipsWrapper___i5Fm {
-    background-color: #fff;
+    background-color: $white;
     min-height: 108px;
     padding: 3px;
     margin-bottom: 10px
@@ -188,7 +188,7 @@
 
 .SafeTips_SafeTipsWrapper___i5Fm a {
     font-size: 13px;
-    color: #fe9900;
+    color: $primary;
     margin-top: 5px;
     text-align: left
 }
@@ -202,12 +202,12 @@
 
 .Avatar_imageWrapper__6tGNZ {
     display: inline-block;
-    border: 2px solid #e5e5e5;
+    border: 2px solid $gray-light;
     padding: 0;
     vertical-align: middle;
     background: url(https://sayo.vn/img/icon/default-avatar.webp) no-repeat;
     background-size: contain;
-    background-color: #fff
+    background-color: $white
 }
 
 .Avatar_defaultSize__a_WTh {
@@ -243,12 +243,12 @@
 }
 
 .ShowPhoneButton_phoneNotClicked__dlQn_ {
-    color: #fff;
-    background-color: #33a837
+    color: $white;
+    background-color: $success
 }
 
 .ShowPhoneButton_phoneNotClicked__dlQn_:hover {
-    background-color: #3b8122
+    background-color: $success
 }
 
 .ShowPhoneButton_flexDiv__3qpNj {

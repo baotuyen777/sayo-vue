@@ -18,7 +18,7 @@
         height: 2px;
         margin-bottom: 8px;
         position: relative;
-        background: #ffffff;
+        background: $white;
         border-radius: 3px;
         z-index: 1;
         transform-origin: 5px 0px;
@@ -38,7 +38,7 @@
     input:checked ~ span {
         opacity: 1;
         transform: rotate(45deg) translate(-3px, -1px);
-        background: #36383F;
+        background: $black-light;
     }
 
     input:checked ~ span:nth-last-child(3) {
@@ -55,10 +55,10 @@
         top: 0px;
         width: 220px;
         height: 100vh;
-        box-shadow: 0 0 10px #85888C;
+        box-shadow: 0 0 10px $gray;
         margin-left: -160px;
         padding: 50px 5px;
-        background-color: #F5F6FA;
+        background-color: $white;
         -webkit-font-smoothing: antialiased;
         transform-origin: 0% 0%;
         transform: translate(100%, 0);

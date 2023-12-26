@@ -1,6 +1,6 @@
 .main-header {
     line-height: 1.5;
-    background: linear-gradient(-180deg, #f53d2d, #f63);
+    background: linear-gradient(-180deg, $primary-dark, $primary);
     position: sticky;
     top: 0;
     font-size: .875rem;
@@ -30,7 +30,7 @@
         margin: 0 auto;
         border-radius: 4px;
         position: relative;
-        background: white;
+        background: $white;
 
         input {
             height: 36px;
@@ -89,13 +89,13 @@
         position: absolute;
         width: 300px;
         top: 50px;
-        border: 1px solid rgba(0, 0, 0, 0.15);
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid $black-light;
+        box-shadow: 0px 4px 8px $black-light;
         border-top: none;
         width: 290px;
 
         right: 0px;
-        background: #FFFFFF;
+        background: $white;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
         padding: 4px 0px;
