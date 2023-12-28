@@ -1,4 +1,5 @@
 // 2. form ajax
+console.log(12312)
 jQuery('.form-ajax').on('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();

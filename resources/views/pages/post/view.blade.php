@@ -68,3 +68,6 @@ if($obj->address){
         </div>
     </main>
 @endsection
+@push('js')
+    <script src='{{ env('APP_URL')}}/js/slider.js'></script>
+@endpush

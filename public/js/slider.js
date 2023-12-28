@@ -71,6 +71,7 @@ jQuery(document).ready(function ($) {
     });
 
     $('.ad-image-next').click(function () {
+        console.log(1111);
         moveLeft();
     });
 

@@ -38,7 +38,6 @@
 </div>
 
 @push('js')
-    <script src='{{ env('APP_URL')}}/js/slider.js'></script>
     <script src='{{ env('APP_URL')}}/js/comment.js'></script>
 
 @endpush
