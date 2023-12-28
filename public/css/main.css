@@ -421,6 +421,9 @@ h1 {
 .post-detail .slider__direction.ad-image-next i {
   background: url(https://sayo.vn/img/icon/white-next.svg);
 }
+.post-detail__content {
+  padding: 20px 0;
+}
 .post-detail__content p {
   margin: 0;
 }
@@ -713,16 +716,16 @@ h1 {
 }
 
 .grid-2 > * {
-  flex: 1 0 calc(50% - 20px);
+  flex: 0.25 0 calc(50% - 20px);
 }
 
 .grid-3 > * {
-  flex: 1 0 calc(33% - 20px);
+  flex: 0.25 0 calc(33% - 20px);
   padding: 10px;
 }
 
 .grid-4 > * {
-  flex: 1 0 calc(25% - 20px);
+  flex: 0.25 0 calc(25% - 20px);
   padding: 10px;
 }
 
@@ -1050,6 +1053,10 @@ h1 {
   background-color: #fff;
 }
 
+button {
+  cursor: pointer;
+}
+
 .btn {
   display: flex;
   justify-content: center;
@@ -1180,9 +1187,6 @@ i.location {
 }
 i.label-dollar {
   background-image: url("/img/icon/price2.svg");
-}
-i.label-time {
-  background-image: url("/img/icon/time.svg");
 }
 i.search {
   background-image: url("/img/icon/search-black.svg");
@@ -2428,6 +2432,13 @@ footer {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+}
+.review__progress .number {
+  display: inline-block;
+  margin-left: 5px;
+}
+.review__progress i {
+  margin-left: 5px;
 }
 
 .star-rating {

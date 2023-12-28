@@ -44,6 +44,15 @@
     display: flex;
     align-items: center;
     margin-bottom: 8px;
+
+    .number {
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+    i {
+        margin-left: 5px;
+    }
 }
 
 .star-rating {

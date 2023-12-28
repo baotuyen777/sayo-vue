@@ -48,7 +48,7 @@ class UserController extends Controller
         $ratings = PostComment::getAll();
         $likePage = Auth::check() ? UserLike::where('author_id', Auth::user()->id)->where('seller_id', $user->id)->first() : false;
 
-        return view('pages.user.dashboard', [
+        return view('pages.user.portfolio', [
             'posts' => $posts,
             'user' => $user,
             'products' => $products,

@@ -47,7 +47,7 @@
                                              aria-valuemax="100"></div>
                                     </div>
                                 </div>
-                                <span class="ms-3">{{ $rate_one_count }}</span>
+                                <span class="number">{{ $rate_one_count }}</span>
                             </div>
                         @endforeach
                     </div>

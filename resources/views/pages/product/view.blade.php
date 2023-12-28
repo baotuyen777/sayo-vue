@@ -17,12 +17,12 @@
                                 <div class="ad-adPrice" itemprop="price">
                                     {{moneyFormat($obj['price'])}}
                                 </div>
-                                <button type="button" class="btn--oval">Lưu tin
+                                <button type="button" class="btn btn--gray">Lưu tin
                                     <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like"></button>
                                 <form @class('form-ajax') data-confirm="Bạn có chắc chắn muốn đặt hàng"
                                       action="{{ route('order.store',['product_code' => $obj['code']]) }}" method="post">
                                     @csrf
-                                    <button type="submit" class="btn--oval">Đặt hàng
+                                    <button type="submit" class="btn btn--primary">Đặt hàng
                                         <img height="20" src="{{asset('/img/icon/cart.svg')}}" alt="cart"></button>
                                 </form>
                             </div>

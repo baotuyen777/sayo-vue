@@ -178,7 +178,7 @@
 }
 
 .grid-2 > * {
-    flex: 1 0 calc(50% - 20px);
+    flex: 0.25 0 calc(50% - 20px);
 
     //&:nth-child(even) {
     //    flex: 1;
@@ -188,12 +188,12 @@
 }
 
 .grid-3 > * {
-    flex: 1 0 calc(33% - 20px);
+    flex: 0.25 0 calc(33% - 20px);
     padding: 10px;
 }
 
 .grid-4 > * {
-    flex: 1 0 calc(25% - 20px);
+    flex: 0.25 0 calc(25% - 20px);
     padding: 10px;
 }
 
