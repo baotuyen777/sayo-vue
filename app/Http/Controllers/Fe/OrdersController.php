@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Fe;
 
 use App\Http\Controllers\Admin\Controller;
+use App\Http\Requests\SellerRequest;
 use App\Models\Orders;
+use App\Models\Product;
 use App\Services\Order\OrderSevice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +52,26 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        //
+        if (!isLoged()) {
+            return view('pages/auth/login');
+        }
+        $obj = Product::getAll()->where('author_id', Auth::user()->id);
+
+        return view('pages/order/create', ['product' => $obj]);
+    }
+
+    public function sellerStore(SellerRequest $request)
+    {
+        if (!isLoged()) {
+            return view('pages/auth/login');
+        }
+        $product = Product::find($request->product_id);
+        $obj = $this->orderSevice->store($request->merge(['product_code' => $product->code]));
+        if ($obj) {
+            return returnSuccess($obj, route('order.index'));
+        }
+
+        return RETURN_SOMETHING_WENT_WRONG;
     }
 
     /**
