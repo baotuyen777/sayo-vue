@@ -5,6 +5,11 @@ const RETURN404 = [
     'err_code' => ERR_404,
     'message' => ERR_404 . ' Dữ liệu không tồn tại'
 ];
+const RETURN412 = [
+    'status' => false,
+    'err_code' => ERR_412,
+    'message' => ERR_412 . ' Lỗi logic'
+];
 
 const RETURN_SOMETHING_WENT_WRONG = [
     'status' => false,

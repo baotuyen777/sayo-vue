@@ -24,7 +24,7 @@ jQuery('.form-ajax').on('submit', function (event) {
     toggleLoading()
     $form.find('.btn-submit').attr('disabled', true);
     $.ajax({
-        url: jQuery('.form-ajax').attr('action'),
+        url: $form.attr('action'),
         data,
         processData: false,
         contentType: isPut ? 'application/x-www-form-urlencoded' : false,
@@ -36,9 +36,9 @@ jQuery('.form-ajax').on('submit', function (event) {
                     setTimeout(() => $form.find(".btn-back")[0].click(), 2000)
                 }
 
-                if (res?.redirectUrl) {
-                    window.location.href = res?.redirectUrl
-                }
+                // if (res?.redirectUrl) {
+                //     window.location.href = res?.redirectUrl
+                // }
             }
             toggleLoading()
         },

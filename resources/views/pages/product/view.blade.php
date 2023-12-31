@@ -19,7 +19,7 @@
                                 </div>
                                 <button type="button" class="btn btn--gray">Lưu tin
                                     <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like"></button>
-                                <form @class('form-ajax') data-confirm="Bạn có chắc chắn muốn đặt hàng"
+                                <form @class('form-ajax') data-confirm="Bạn có chắc chắn muốn đặt hàng" id="order"
                                       action="{{ route('order.store',['product_code' => $obj['code']]) }}" method="post">
                                     @csrf
                                     <button type="submit" class="btn btn--primary">Đặt hàng
@@ -54,7 +54,9 @@
 
 
                         @include('component.post-detail.report')
+
                         @include('component.review.index')
+
                     </div>
 
                     <div class="col-md-4">
