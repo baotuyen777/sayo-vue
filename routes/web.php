@@ -72,6 +72,7 @@ Route::get('order/me', [OrdersController::class, 'me'])->name('order.me');
 Route::put('order-update/{id}', [OrdersController::class, 'updateSimple'])->name('order.updateSimple');
 
 Route::resource('order', OrdersController::class);
+Route::post('seller-order', [OrdersController::class, 'sellerStore'])->name('sellerStore');
 
 //Route::resource('news', NewsController::class);
 //Route::get('/post/edit/{code}.htm', [NewsController::class, 'edit'])->name('postEdit');
