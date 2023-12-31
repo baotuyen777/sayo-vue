@@ -156,6 +156,16 @@ function isLoged()
     return Auth::check();
 }
 
+function isValidEmail($value) {
+    return filter_var($value,FILTER_VALIDATE_EMAIL);
+}
+
+function isValidPhoneNumber($phoneNumber) {
+    $phoneNumber = trim($phoneNumber, " \t\n\r\0\x0B-");
+    $pattern = '/^\d{9,10}$/';
+    return preg_match($pattern, $phoneNumber) === 1;
+}
+
 function isAdmin()
 {
     return Auth::user() && Auth::user()->role === ROLE_ADMIN;

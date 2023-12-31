@@ -45,4 +45,37 @@ class ReviewController extends Controller
 
         return response()->json(['status' => true, 'result' => $obj]);
     }
+
+    public function update(ReviewRequest $request, $review)
+    {
+        $author_id = Auth::user()->id;
+        $reviewData = $request->validated();
+        $files = $request->input('file_ids');
+        $review = Review::query()->whereId($review)->whereAuthorId($author_id)->first();
+
+        if(!isAuthor($review) || !isAdmin()) {
+            return response()->json(['message' => 'Không có quyền đánh giá sản phẩm', 'error' => 'Unauthorized'], 401);
+        }
+
+        if(!$review) {
+            return response()->json(['message' => 'Không tìm thấy đánh giá nào như vậy', 'error' => 'Not Found'], 404);
+        }
+
+        try {
+            if ($files) {
+                $review->files()->sync($files);
+            }
+            $avgRate = round($review->product->reviews()->avg('rating'), 1);
+            $review->product->update(['avg_rate' => $avgRate]);
+            $review->update($reviewData);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Có lỗi xảy ra! vui lòng liên hệ với admin',
+                'error' => $e->getMessage(),
+            ]);
+        }
+
+        return back();
+    }
 }

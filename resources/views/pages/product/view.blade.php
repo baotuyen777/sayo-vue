@@ -67,6 +67,19 @@
         </div>
     </main>
 @endsection
+
 @push('js')
     <script src='{{ env('APP_URL')}}/js/slider.js'></script>
+    <script>
+        $( document ).ready(function() {
+            $( ".open-popup" ).click(function() {
+                $( "#blackout" ).addClass( "visable" );
+                $( "#popup" ).addClass( "visable" );
+            });
+            $( "#blackout, .close" ).click(function() {
+                $( "#blackout" ).removeClass( "visable" );
+                $( "#popup" ).removeClass( "visable" );
+            });
+        });
+    </script>
 @endpush
