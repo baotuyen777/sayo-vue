@@ -101,11 +101,15 @@
     object-fit: cover;
 }
 
-.product-review .info {
-    width: 100%;
-    display: flex;
-    justify-items: center;
-    justify-content: space-between;
+.product-review {
+    position: relative;
+    .info {
+        width: 100%;
+        display: flex;
+        justify-items: center;
+        justify-content: space-between;
+
+    }
 
 }
 
@@ -171,7 +175,7 @@
     visibility: visible;
 }
 
-.popup {
+.modal {
     opacity: 0;
     width: 600px;
     padding: 15px;
@@ -181,36 +185,36 @@
     transition: top 550ms, opacity 500ms, z-index 500ms;
 }
 
-.popup h1.title {
+.modal h1.title {
     margin: 12px 0;
 }
 
-.popup.visable {
+.modal.visable {
     top: 5%;
     left: 33%;
     opacity: 1;
     z-index: 9;
 }
 
-.popup > .title {
+.modal > .title {
     margin: 0;
     color: rgb(57, 57, 57);
 }
 
-.popup > .subtitle {
+.modal > .subtitle {
     font-size: 20px;
     margin: 0 0 0 15px;
     color: rgb(157, 157, 157);
 }
 
-.popup > hr {
+.modal > hr {
     border: 0;
     height: 1px;
     margin: 10px -15px;
     background: rgb(208, 208, 208);
 }
 
-.popup .close {
+.modal .close {
     top: -10px;
     width: 30px;
     height: 30px;
@@ -225,14 +229,14 @@
     align-items: center;
 }
 
-.popup .close i{
+.modal .close i {
 }
 
-.popup .close:hover {
+.modal .close:hover {
     background-color: #ccc;
 }
 
-.popup i.close:before,.popup i.close:after {
+.modal i.close:before, .modal i.close:after {
     top: 10px;
     left: 14px;
 }
@@ -242,14 +246,14 @@
     padding: 15px;
 }
 
-.review-content textarea[name="content"]{
+.review-content textarea[name="content"] {
     padding: 6px 12px;
     width: 100%;
     outline: none;
     margin: 12px 0;
 }
 
-.popup .group-slider, .popup .slider {
+.modal .group-slider, .modal .slider {
     height: 280px !important;
 
 }

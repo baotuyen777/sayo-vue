@@ -23,6 +23,8 @@
 <div class="overlay">
     <div class="loader"></div>
 </div>
+<div id="blackout" class="blackout"></div>
+
 <div id="dusktext"></div>
 
 <script src='{{ env('APP_URL')}}/js/main.js'></script>

@@ -38,3 +38,13 @@ function returnSuccess($result = '', $redirectUrl = '', $notify = ' '): array
     }
     return $res;
 }
+
+function returnErr($message = '', $redirectUrl = '',): array
+{
+    $res = ['status' => false, 'message' => ERR_412 . ' ' . $message, 'err_code' => ERR_412,];
+
+    if ($redirectUrl) {
+        $res['redirectUrl'] = $redirectUrl;
+    }
+    return $res;
+}

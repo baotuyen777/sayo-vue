@@ -6,7 +6,7 @@ jQuery(document).ready(function ($) {
     var leftIncrement = ulWidth / liCount;
     var swipeSpeed = 300;
 
-    const $slider =$('.slider');
+    const $slider = $('.slider');
 
     $slider.find('.group-slider').width(ulWidth + '%');
     $slider.find('.slider-item').width(liWidth + '%');
@@ -19,23 +19,26 @@ jQuery(document).ready(function ($) {
         $('.autoPlay').css('display', 'none');
     }
 
-    function moveLeft() {
-        $('.slider .group-slider').animate(
+    function moveLeft($this) {
+        const $sliderWrapper = $this.parent();
+        const $slider = $sliderWrapper.find('.group-slider');
+        const $navigator = $sliderWrapper.find('.navigator');
+
+        $slider.animate(
             {
                 left: -leftIncrement + '%',
             },
             swipeSpeed,
             function () {
-                $('.slider .group-slider .slider-item:first-child').appendTo('.slider .group-slider');
-                $('.slider .group-slider').css('left', '');
-
-                if ($('.navigator span').hasClass('active')) {
-                    if ($('.navigator span.active').is(':last-child')) {
-                        $('span.active').removeClass('active');
-                        $('.navigator span:first-child').addClass('active');
+                $slider.find('.slider-item:first-child').appendTo('.slider .group-slider');
+                $slider.css('left', '');
+                if ($navigator.find('span').hasClass('active')) {
+                    if ($navigator.find('span.active').is(':last-child')) {
+                        $navigator.find('span.active').removeClass('active');
+                        $navigator.find('span:first-child').addClass('active');
                     } else {
-                        $('span.active').next().addClass('active');
-                        $('span.active').prev().removeClass('active');
+                        $navigator.find('span.active').next().addClass('active');
+                        $navigator.find('span.active').prev().removeClass('active');
                     }
                 }
             }
@@ -71,8 +74,7 @@ jQuery(document).ready(function ($) {
     });
 
     $('.ad-image-next').click(function () {
-        console.log(1111);
-        moveLeft();
+        moveLeft($(this));
     });
 
     var touchstartX = 0;

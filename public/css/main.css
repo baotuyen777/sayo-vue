@@ -6,13 +6,8 @@ h1 {
   margin-bottom: 10px;
 }
 
-.h4 {
-  padding: 5px 5px 5px 0;
-  margin: 0 !important;
-  border-bottom: 1px solid #cacaca;
-  color: #777;
-  font-size: 14px;
-  font-weight: 700;
+h4 {
+  margin-bottom: 10px;
 }
 
 .main-header {
@@ -1050,6 +1045,35 @@ h1 {
   height: calc(100% - 30px);
   resize: none;
   background-color: #fff;
+}
+
+.setting-dropdown {
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-align: right;
+}
+.setting-dropdown .btn-3dot {
+  background-image: url(http://sayo.vn/img/icon/sayo-setting.svg);
+  background-position: right;
+  background-repeat: no-repeat;
+  height: 15px;
+  width: 30px;
+  border: none;
+  background-color: transparent;
+}
+.setting-dropdown .dropdown {
+  margin: 0;
+  visibility: hidden;
+}
+.setting-dropdown .dropdown--open {
+  visibility: visible;
+}
+.setting-dropdown .dropdown li {
+  border: 1px solid #e4e6ea;
+  display: block;
+  padding: 5px;
+  cursor: pointer;
 }
 
 button {
@@ -2486,6 +2510,9 @@ footer {
   object-fit: cover;
 }
 
+.product-review {
+  position: relative;
+}
 .product-review .info {
   width: 100%;
   display: flex;
@@ -2531,6 +2558,105 @@ footer {
   100% {
     transform: translatey(-15%) scale(1.35);
   }
+}
+.blackout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.8);
+  transition: z-index 500ms, visibility 800ms, opacity 1000ms;
+}
+
+.blackout.visable {
+  position: fixed;
+  opacity: 1;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  visibility: visible;
+}
+
+.modal {
+  opacity: 0;
+  width: 600px;
+  padding: 15px;
+  position: fixed;
+  border-radius: 5px;
+  background: rgb(248, 248, 248);
+  transition: top 550ms, opacity 500ms, z-index 500ms;
+}
+
+.modal h1.title {
+  margin: 12px 0;
+}
+
+.modal.visable {
+  top: 5%;
+  left: 33%;
+  opacity: 1;
+  z-index: 9;
+}
+
+.modal > .title {
+  margin: 0;
+  color: rgb(57, 57, 57);
+}
+
+.modal > .subtitle {
+  font-size: 20px;
+  margin: 0 0 0 15px;
+  color: rgb(157, 157, 157);
+}
+
+.modal > hr {
+  border: 0;
+  height: 1px;
+  margin: 10px -15px;
+  background: rgb(208, 208, 208);
+}
+
+.modal .close {
+  top: -10px;
+  width: 30px;
+  height: 30px;
+  right: -10px;
+  cursor: pointer;
+  position: absolute;
+  border-radius: 15px;
+  background: rgb(255, 255, 255);
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal .close:hover {
+  background-color: #ccc;
+}
+
+.modal i.close:before, .modal i.close:after {
+  top: 10px;
+  left: 14px;
+}
+
+.open {
+  margin: 10px;
+  padding: 15px;
+}
+
+.review-content textarea[name=content] {
+  padding: 6px 12px;
+  width: 100%;
+  outline: none;
+  margin: 12px 0;
+}
+
+.modal .group-slider, .modal .slider {
+  height: 280px !important;
 }
 
 /*# sourceMappingURL=main.css.map */

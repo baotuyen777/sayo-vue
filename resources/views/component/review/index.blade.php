@@ -53,33 +53,8 @@
                     </div>
                 </div>
                 <hr class="separate">
-                <div class="form-review separate">
-                    <form action="{{ route('review.store') }}" class="form-ajax" method="POST"
-                          enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ data_get($obj, 'id') }}">
-                        <tr class="review-sp">
-                            <td>
-                                <p>Rating:
-                                    <span class="star-rating">
-                                        @foreach(range(1, 5) as $star)
-                                            <label for="rate-{{ $star }}" style="--i:{{ $star }}"><i class="fa fa-star"></i></label>
-                                            <input type="radio" name="rating" id="rate-{{ $star }}" value="{{ $star }}" {{ ($star === 5) ? 'checked' : '' }}>
-                                        @endforeach
-                                    </span>
-                                </p>
-                            </td>
-                            <td colspan="3">
-                                <textarea name="content" rows="5" placeholder="Đánh giá ..."></textarea>
-                                <div id="upload_images">
-                                    @include('component.form.uploadFiles', ['obj' => null])
-                                </div>
-                                <button type="submit" class="btn btn-yellow">Đánh giá</button>
-                            </td>
-                        </tr>
-                    </form>
-                </div>
-{{--                @include('component.review.form')--}}
+
+                @include('component.review.form')
                 <hr>
                 <div class="col-md-12 col-lg-12">
                     <?php
@@ -92,71 +67,50 @@
                                         <img src="{{asset('img/icon/default_user.png')}}"
                                              class="img-circle img-sm" alt="Profile Picture">
                                         <div class="view">
-                                            <h6 class="username">{{ $review->user->username }}</h6>
+                                            <h4 class="username">{{ $review->user->username }}</h4>
                                             <div class="star-rating text-yellow">
                                                 @include('component.review.rating_star', ['rating' => $review->rating])
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="content-rated">{{ $review->content }}</p>
+                                <p class="product-review__content">
+                                    {{ $review->content }}
+
+                                </p>
                                 @php
                                     $files = $review->files ?? [];
                                 @endphp
-                                <div class="review-img open-popup">
+                                <div class="review-img btn-modal" data-modal-id="modal-view-image-{{$review->id}}">
                                     @foreach($files as $file)
                                         <img src="{{asset('storage/'.$file['url'])}}" alt="">
                                     @endforeach
                                 </div>
-                            </div>
-                            <div id="blackout" class="blackout"></div>
-                            <div id="popup" class="popup">
-                                <i class="fa fa-times close" aria-hidden="true"></i>
-                                <h1 class="title">Đánh giá sản phẩm</h1>
-                                <div class="slider">
-                                    <div class="group-slider">
-                                        @foreach($files as $i => $img)
-                                            <div class="slider-item" data-image-index="{{$i}}">
-                                                <img alt="" class="image-item" src="{{asset('storage/'.$img['url'])}}">
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <div class="navigator">
-                                        @foreach($files as $i => $img)
-                                            <span data-id="{{$i}}" @class(['active'=>$i==0])></span>
-                                        @endforeach
-                                        <span data-id="n"></span>
-                                    </div>
-                                    <button class="slider__direction ad-image-prev" type="button"><i></i></button>
-                                    <button class="slider__direction ad-image-next" type="button"><i></i></button>
-                                </div>
-                                <br>
-                                <div class="review-content">
-                                    <form action="{{ route('review.update', ['review' => $review->id]) }}" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="hidden" name="product_id" value="{{ data_get($obj, 'id') }}">
-                                        <p>Rating:
-                                            <span class="star-rating">
-                                                @foreach(range(1, 5) as $star)
-                                                    <label for="rate-edit-{{ $star }}" style="--i:{{ $star }}"><i class="fa fa-star"></i></label>
-                                                    <input type="radio" name="rating" id="rate-edit-{{ $star }}" value="{{ $star }}" {{ ($star === 5) ? 'checked' : '' }}>
-                                                @endforeach
-                                            </span>
-                                        </p>
-                                        <label for="#review-content">Nội dung đánh giá: </label>
-                                        <textarea name="content" id="review-content" cols="8" rows="5">{{ $review->content }}</textarea>
-                                        @include('component.form.uploadFiles', ['obj' => null])
-                                        @if(optional(auth()->user())->id == $review->user->id)
-                                            <button type="submit">Cập nhật</button>
+                                <div class="setting-dropdown">
+                                    <button class="btn-3dot"></button>
+                                    <ul class="dropdown">
+                                        @if(Auth::id()=== $review->author_id)
+                                            <li><span href="#" class="btn-modal" data-modal-id="modal-edit-review-{{$review->id}}">Sửa</span></li>
+                                            <li><span href="#">Xóa</span></li>
                                         @endif
-                                    </form>
+                                        <li><span href="#">Báo cáo vi phạm</span></li>
+                                    </ul>
                                 </div>
+
+                            </div>
+
+                            <div id="modal-view-image-{{$review->id}}" class="modal">
+                                <i class="fa fa-times close" aria-hidden="true"></i>
+                                <h1 class="title">Ảnh đánh giá</h1>
+                                @include('component.post-detail.slider',['obj'=>$review])
+                            </div>
+                            <div id="modal-edit-review-{{$review->id}}" class="modal">
+                                <i class="fa fa-times close" aria-hidden="true"></i>
+                                <h1 class="title">Sửa đánh giá</h1>
+                                @include('component.review.form')
                             </div>
                         @endforeach
                     @endif
-                    <div class="text-center">
-                    </div>
                 </div>
             </div>
         </div>

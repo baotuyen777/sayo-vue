@@ -177,3 +177,38 @@
     resize: none;
     background-color: #fff
 }
+
+.setting-dropdown {
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+
+    .btn-3dot {
+        background-image: url(http://sayo.vn/img/icon/sayo-setting.svg);
+        background-position: right;
+        background-repeat: no-repeat;
+        height: 15px;
+        width: 30px;
+        border: none;
+        background-color: transparent;
+    }
+
+    .dropdown {
+        margin: 0;
+        visibility: hidden;
+
+        &--open {
+            visibility: visible;
+        }
+
+        li {
+            border: 1px solid $white-gray;
+            display: block;
+            padding: 5px;
+            cursor: pointer;
+        }
+    }
+
+
+}

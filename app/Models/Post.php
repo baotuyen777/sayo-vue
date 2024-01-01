@@ -117,8 +117,8 @@ class Post extends Model
     public function files()
     {
         return $this->belongsToMany(Files::class, 'posts_files')
-            ->select(['files.*'])
-            ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
+            ->select(['files.*']);
+//            ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
     }
 
     public function author()

@@ -114,6 +114,25 @@ $('.btn-ajax').click(function () {
     });
 })
 
+//5.modal
+$(document).ready(function () {
+    $(".btn-modal").click(function () {
+        $("#blackout").addClass("visable");
+        $("#" + $(this).data('modal-id')).addClass("visable");
+
+    });
+    $("#blackout, .close").click(function () {
+        $("#blackout").removeClass("visable");
+        $(".modal").removeClass("visable");
+    });
+});
+//6. setting-dropdown
+$('.btn-3dot').click(function () {
+    $(this).parent().find('.dropdown').toggleClass('dropdown--open')
+})
+$('.btn-3dot').blur(function () {
+    setTimeout(()=>$(this).parent().find('.dropdown').removeClass('dropdown--open'),200)
+})
 jQuery('.account-menu').click(function () {
     jQuery(this).find('.menu-items').toggle('show')
 });
@@ -145,16 +164,16 @@ function toggleLoading() {
     }, 5000)
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
     //form effect
-    $('.minput').each(function (){
+    $('.minput').each(function () {
         if ($(this).val()) {
             $(this).addClass('hasValue')
         } else {
             $(this).removeClass('hasValue')
         }
     })
-    })
+})
 
 
 jQuery('.minput').keyup(function () {
@@ -225,17 +244,17 @@ if (!dusktext) element.style.visibility = "hidden";
 element.innerHTML = dusktext;
 element.classList.add(dclass);
 
-$(document).ready(function(){
-    $('.portfolio__tab .children_menu').click(function(){
+$(document).ready(function () {
+    $('.portfolio__tab .children_menu').click(function () {
         $('.portfolio__tab .children_menu').removeClass('activelink');
         $(this).addClass('activelink');
         var tabid = $(this).data('tab');
         $('.list-data').removeClass('active-tab').addClass('hide-tab');
-        $('#'+tabid).addClass('active-tab').removeClass('hide-tab');
+        $('#' + tabid).addClass('active-tab').removeClass('hide-tab');
     });
 });
 
-$('.btn-like-page').on('click', function(e){
+$('.btn-like-page').on('click', function (e) {
     e.preventDefault()
     $('#formLikePage').submit()
 })

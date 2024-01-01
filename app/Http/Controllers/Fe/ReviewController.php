@@ -24,8 +24,7 @@ class ReviewController extends Controller
         $files = $request->input('file_ids');
         $review = Review::whereProductId($reviewData['product_id'])->whereAuthorId($reviewData['author_id'])->first();
         if ($review) {
-            return RETURN412;
-            return response()->json(['message' => 'Bạn chỉ được đánh giá sản phẩm này 1 lần', 'error' => 'Unauthorized'], 401);
+            return returnErr('Bạn chỉ được đánh giá sản phẩm này 1 lần');
         }
 
         try {

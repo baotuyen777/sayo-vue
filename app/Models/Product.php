@@ -89,8 +89,8 @@ class Product extends Model
     public function files()
     {
         return $this->belongsToMany(Files::class, 'products_files')
-            ->select(['files.*'])
-            ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
+            ->select(['files.*']);
+//            ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
     }
 
     public function author()

@@ -63,7 +63,7 @@ class ProductController extends Controller
         return view('pages/product/detail', $output);
     }
 
-    //Show the form for editing . $catCode dung tren url
+    //view for everyone . $catCode dung tren url
     public function show($catCode, $code)
     {
         $product = Product::select('*')
@@ -74,6 +74,7 @@ class ProductController extends Controller
             ->with('reviews')
             ->where('code', $code)
             ->first();
+
         if (!$product) {
             return view('pages/404');
         }
