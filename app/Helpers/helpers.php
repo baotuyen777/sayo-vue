@@ -156,11 +156,13 @@ function isLoged()
     return Auth::check();
 }
 
-function isValidEmail($value) {
-    return filter_var($value,FILTER_VALIDATE_EMAIL);
+function isValidEmail($value)
+{
+    return filter_var($value, FILTER_VALIDATE_EMAIL);
 }
 
-function isValidPhoneNumber($phoneNumber) {
+function isValidPhoneNumber($phoneNumber)
+{
     $phoneNumber = trim($phoneNumber, " \t\n\r\0\x0B-");
     $pattern = '/^\d{9,10}$/';
     return preg_match($pattern, $phoneNumber) === 1;
@@ -179,7 +181,7 @@ function isAuthor($obj): bool
 
     $authorId = $obj->author_id;
 
-    if (Auth::user()->id != $authorId || Auth::user()->role > 1) {
+    if (Auth::user()->id == $authorId) {
         return true;
     }
     return false;
@@ -199,8 +201,8 @@ function convertArr2Code($arr)
 
 function getFullAddress($obj): string
 {
-    if(!$obj){
-        return  '';
+    if (!$obj) {
+        return '';
     }
     $arr = [$obj['address'], $obj['ward']['name'] ?? '', $obj['district']['name'] ?? '', $obj['province']['name'] ?? ''];
     return implode(', ', array_filter($arr));

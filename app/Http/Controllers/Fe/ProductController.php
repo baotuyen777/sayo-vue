@@ -80,6 +80,7 @@ class ProductController extends Controller
         }
 
         $product['attr'] = $this->productsService->getAttrField($product, true);
+//        dd($product);
 //        $product['cat_code'] = $catCode;
 //        dd($product['attr']);
         return view('pages/product/view', ['obj' => $product]);

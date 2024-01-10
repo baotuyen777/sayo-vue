@@ -14,9 +14,18 @@ jQuery('.form-ajax').on('submit', function (event) {
 
     var $form = $(this);
     const isPut = $(this).data('id');
-    let data = isPut ? $(this).serialize() : new FormData(this);
+    // let data = isPut ? $(this).serialize() : new FormData(this);
+    let formData = new FormData(this);
+
     if (state?.file_ids?.length) {
-        state.file_ids.forEach((item) => data.append("file_ids[]", item))
+        // console.log(state?.file_ids,2221)
+        console.log(state?.file_ids);
+        state.file_ids.forEach((item) => formData.append("file_ids[]", item))
+    }
+    // console.log(formData.file_ids);
+    if (isPut) {
+        formData = new URLSearchParams(formData).toString();
+        console.log(formData,2323);
     }
 
     $(`.validate`).html('');
@@ -25,7 +34,7 @@ jQuery('.form-ajax').on('submit', function (event) {
     $form.find('.btn-submit').attr('disabled', true);
     $.ajax({
         url: $form.attr('action'),
-        data,
+        data: formData,
         processData: false,
         contentType: isPut ? 'application/x-www-form-urlencoded' : false,
         type: isPut ? 'PUT' : 'POST',
@@ -36,14 +45,16 @@ jQuery('.form-ajax').on('submit', function (event) {
                     setTimeout(() => $form.find(".btn-back")[0].click(), 2000)
                 }
 
-                // if (res?.redirectUrl) {
-                //     window.location.href = res?.redirectUrl
-                // }
+                if (res?.redirectUrl) {
+                    window.location.href = res?.redirectUrl
+                }
             }
             toggleLoading()
         },
         error: (jqXHR) => {
-            grecaptcha.reset();
+            if (grecaptcha) {
+                grecaptcha.reset();
+            }
             const errors = JSON.parse(jqXHR.responseText).errors;
             Object.keys(errors).forEach(field => {
                 $(`.validate-${field}`).html(errors[field][0])
@@ -59,35 +70,74 @@ jQuery('.form-ajax').on('submit', function (event) {
 });
 
 //3. upload
-$('#files').change(function () {
-    var form_data = new FormData();
-    // Read selected files
-    var totalfiles = document.getElementById('files').files.length;
-    for (var index = 0; index < totalfiles; index++) {
-        form_data.append("files[]", document.getElementById('files').files[index]);
-    }
-    const formControl = $(this).parent();
-    toggleLoading();
-    $.ajax({
-        url: '/api/files',
-        type: 'post',
-        data: form_data,
-        dataType: 'json',
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            if (response.status) {
-                state.file_ids = state.file_ids.concat(response.ids);
-                for (let index = 0; index < response.result.length; index++) {
-                    var src = response.result[index].url_full;
-                    // Add img element in <div id='preview'>
-                    formControl.find('.preview').append(`<img src="${src}" alt="">`);
+const inputFiles = document.getElementsByClassName('input-files');
+for (const inputFile of inputFiles) {
+    inputFile.addEventListener('change', function () {
+        const totalFiles = this?.files?.length || 0;
+        // console.log(totalFiles)
+        const form_data = new FormData();
+        for (var index = 0; index < totalFiles; index++) {
+            // form_data.append("files[]", document.getElementById('files').files[index]);
+            form_data.append("files[]", this.files[index]);
+        }
+        const formControl = $(this).parent();
+        toggleLoading();
+        $.ajax({
+            url: '/api/files',
+            type: 'post',
+            data: form_data,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.status) {
+                    state.file_ids = state.file_ids.concat(response.ids);
+                    for (let index = 0; index < response.result.length; index++) {
+                        var src = response.result[index].url_full;
+                        // Add img element in <div id='preview'>
+                        formControl.find('.preview').append(`<img src="${src}" alt="">`);
+                    }
                 }
-            }
-            toggleLoading();
-        },
-    });
-});
+                toggleLoading();
+            },
+        });
+    })
+    // console.log(inputFile);
+}
+
+// $('.input-files1').change(function () {
+//     console.log(1231)
+//     var form_data = new FormData();
+//     // Read selected files
+//     // var totalfiles = document.getElementsByClassName('files').files.length;
+//     // console.log($(this).val());
+//     // var totalfiles = $(this).files.length
+//     for (var index = 0; index < totalfiles; index++) {
+//         // form_data.append("files[]", document.getElementById('files').files[index]);
+//         form_data.append("files[]", document.getElementById('files').files[index]);
+//     }
+//     const formControl = $(this).parent();
+//     toggleLoading();
+//     $.ajax({
+//         url: '/api/files',
+//         type: 'post',
+//         data: form_data,
+//         dataType: 'json',
+//         contentType: false,
+//         processData: false,
+//         success: function (response) {
+//             if (response.status) {
+//                 state.file_ids = state.file_ids.concat(response.ids);
+//                 for (let index = 0; index < response.result.length; index++) {
+//                     var src = response.result[index].url_full;
+//                     // Add img element in <div id='preview'>
+//                     formControl.find('.preview').append(`<img src="${src}" alt="">`);
+//                 }
+//             }
+//             toggleLoading();
+//         },
+//     });
+// });
 
 //4. button confirm api
 $('.btn-ajax').click(function () {
@@ -131,7 +181,7 @@ $('.btn-3dot').click(function () {
     $(this).parent().find('.dropdown').toggleClass('dropdown--open')
 })
 $('.btn-3dot').blur(function () {
-    setTimeout(()=>$(this).parent().find('.dropdown').removeClass('dropdown--open'),200)
+    setTimeout(() => $(this).parent().find('.dropdown').removeClass('dropdown--open'), 300)
 })
 jQuery('.account-menu').click(function () {
     jQuery(this).find('.menu-items').toggle('show')
@@ -193,7 +243,7 @@ $('.btn-close').click(function () {
 
 jQuery('.btn_addfile').click(function (e) {
     e.preventDefault();
-    $('#files').click();
+    $(this).parent().find('.input-files').click();
 });
 
 //selection

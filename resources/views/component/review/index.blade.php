@@ -54,7 +54,7 @@
                 </div>
                 <hr class="separate">
 
-                @include('component.review.form')
+                @include('component.review.form',['obj'=>null,'productId'=> $obj->id])
                 <hr>
                 <div class="col-md-12 col-lg-12">
                     <?php
@@ -74,10 +74,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="product-review__content">
-                                    {{ $review->content }}
-
-                                </p>
+                                <p class="product-review__content">{{ $review->content }}</p>
                                 @php
                                     $files = $review->files ?? [];
                                 @endphp
@@ -90,7 +87,8 @@
                                     <button class="btn-3dot"></button>
                                     <ul class="dropdown">
                                         @if(Auth::id()=== $review->author_id)
-                                            <li><span href="#" class="btn-modal" data-modal-id="modal-edit-review-{{$review->id}}">Sửa</span></li>
+                                            <li><span href="#" class="btn-modal"
+                                                      data-modal-id="modal-edit-review-{{$review->id}}">Sửa</span></li>
                                             <li><span href="#">Xóa</span></li>
                                         @endif
                                         <li><span href="#">Báo cáo vi phạm</span></li>
@@ -107,7 +105,7 @@
                             <div id="modal-edit-review-{{$review->id}}" class="modal">
                                 <i class="fa fa-times close" aria-hidden="true"></i>
                                 <h1 class="title">Sửa đánh giá</h1>
-                                @include('component.review.form')
+                                @include('component.review.form', ['obj'=>$review])
                             </div>
                         @endforeach
                     @endif

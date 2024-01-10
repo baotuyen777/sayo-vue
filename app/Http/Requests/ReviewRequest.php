@@ -21,10 +21,14 @@ class ReviewRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'rating' => 'required',
             'content' => 'required|string|max:2000',
-            'product_id' => 'required',
         ];
+        if ($this->isMethod('post')) {
+            $rules['product_id'] = 'required';
+        }
+        return $rules;
+
     }
 }

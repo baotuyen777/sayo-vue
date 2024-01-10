@@ -1,10 +1,23 @@
+{{--@php--}}
+{{--    $fileIds =[];--}}
+{{--        if(isset($obj['files'])){--}}
+{{--            $fileIds =  $obj['files']->pluck('id')->toArray();--}}
+{{--        }--}}
+{{--@endphp--}}
 <div class="upload-files">
-    <input type="file" name="files[]" id="files" accept="image/*" multiple class="hide"/>
+    <input type="file" name="files[]" class="input-files hide" accept="image/*" multiple/>
+    <div class="field-id-wrap">
+        @if(isset($obj['files']))
+            @foreach($obj['files'] as $file)
+                <input type="hidden" name="file_ids[]" value="{{($file['id'])}}"/>
+            @endforeach
+        @endif
+    </div>
 
     <div class="preview">
         @if(isset($obj['files']))
             @foreach($obj['files'] as $file)
-                <img src="{{$file['url']}}">
+                <img src="{{asset('storage/'.$file['url'])}}">
             @endforeach
 
         @endif

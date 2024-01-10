@@ -52,13 +52,14 @@ class ReviewController extends Controller
         $files = $request->input('file_ids');
         $review = Review::query()->whereId($review)->whereAuthorId($author_id)->first();
 
-        if(!isAuthor($review) || !isAdmin()) {
-            return response()->json(['message' => 'Không có quyền đánh giá sản phẩm', 'error' => 'Unauthorized'], 401);
-        }
-
         if(!$review) {
             return response()->json(['message' => 'Không tìm thấy đánh giá nào như vậy', 'error' => 'Not Found'], 404);
         }
+
+        if(!isAuthor($review)) {
+            return response()->json(['message' => 'Không có quyền đánh giá sản phẩm', 'error' => 'Unauthorized'], 401);
+        }
+
 
         try {
             if ($files) {
@@ -66,7 +67,10 @@ class ReviewController extends Controller
             }
             $avgRate = round($review->product->reviews()->avg('rating'), 1);
             $review->product->update(['avg_rate' => $avgRate]);
-            $review->update($reviewData);
+            $review->update([
+                'content' => $reviewData['content'],
+                'rating' => $reviewData['rating'],
+            ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
@@ -74,7 +78,7 @@ class ReviewController extends Controller
                 'error' => $e->getMessage(),
             ]);
         }
-
-        return back();
+        return returnSuccess($review);
+//        return back();
     }
 }
