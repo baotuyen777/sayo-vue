@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Fe;
 
+use App\Enum\ErrorCodes;
+use App\Exceptions\ApiException;
 use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\ReviewRequest;
 use App\Models\Product;
@@ -10,11 +12,16 @@ use App\Services\Review\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ReviewController extends Controller
 {
+    /**
+     * @throws ApiException
+     */
     public function store(ReviewRequest $request)
     {
+        Log::debug('This is a debug message.');
         if (!Auth::check()) {
             return response()->json(['message' => 'Bạn cần đăng nhập để có thể đánh giá sản phẩm', 'error' => 'Unauthorized'], 401);
         }
@@ -24,7 +31,8 @@ class ReviewController extends Controller
         $files = $request->input('file_ids');
         $review = Review::whereProductId($reviewData['product_id'])->whereAuthorId($reviewData['author_id'])->first();
         if ($review) {
-            return returnErr('Bạn chỉ được đánh giá sản phẩm này 1 lần');
+            throw new ApiException(ErrorCodes::REQUEST_VALIDATION_ERROR, 'Bạn chỉ được đánh giá sản phẩm này 1 lần');
+//            return returnErr('Bạn chỉ được đánh giá sản phẩm này 1 lần');
         }
 
         try {

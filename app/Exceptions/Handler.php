@@ -6,6 +6,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 //use Throwable;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,8 +27,10 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
+
         $this->renderable(function (AuthenticationException $e, $request) {
             //
+            Log::error($e->getMessage());
             if ($request->is('api/*')) {
                 return response()->json(
                     [

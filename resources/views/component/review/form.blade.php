@@ -9,7 +9,7 @@
             class="form-ajax" method="POST" data-id="{{$id}}"
             enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="product_id " value="{{ $productId ?? data_get($obj, 'product_id') }}" >
+            <input type="hidden" name="product_id" value="{{ $productId ?? data_get($obj, 'product_id') }}" >
             <tr class="review-sp">
                 <td>
                     <p>Rating:

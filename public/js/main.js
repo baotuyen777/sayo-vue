@@ -1,5 +1,4 @@
 // 2. form ajax
-console.log(12312)
 jQuery('.form-ajax').on('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();
@@ -32,6 +31,7 @@ jQuery('.form-ajax').on('submit', function (event) {
     $(`.form-control`).removeClass('error');
     toggleLoading()
     $form.find('.btn-submit').attr('disabled', true);
+    console.log(1231);
     $.ajax({
         url: $form.attr('action'),
         data: formData,
@@ -52,16 +52,21 @@ jQuery('.form-ajax').on('submit', function (event) {
             toggleLoading()
         },
         error: (jqXHR) => {
-            if (grecaptcha) {
-                grecaptcha.reset();
-            }
+            // if (grecaptcha) {
+            //     grecaptcha.reset();
+            // }
             const errors = JSON.parse(jqXHR.responseText).errors;
-            Object.keys(errors).forEach(field => {
-                $(`.validate-${field}`).html(errors[field][0])
-                $(`.form-control-${field}`).addClass('error')
-            })
-            showNotify(JSON.parse(jqXHR.responseText).message, 'error')
-            console.log(errors)
+            if(errors){
+                Object.keys(errors).forEach(field => {
+                    $(`.validate-${field}`).html(errors[field][0])
+                    $(`.form-control-${field}`).addClass('error')
+                })
+                showNotify(JSON.parse(jqXHR.responseText).message, 'error')
+            }else{
+                showNotify(JSON.parse(jqXHR.responseText).message, 'error');
+            }
+            console.log(errors);
+            console.log(JSON.parse(jqXHR.responseText,111));
             toggleLoading()
             $form.find('.btn-submit').attr('disabled', false);
         }
@@ -100,6 +105,9 @@ for (const inputFile of inputFiles) {
                 }
                 toggleLoading();
             },
+            error: function (jqXHR){
+                showNotify(JSON.parse(jqXHR.responseText).message, 'error');
+            }
         });
     })
     // console.log(inputFile);

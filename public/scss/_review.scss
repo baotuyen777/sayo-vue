@@ -162,7 +162,7 @@
     bottom: 0;
     opacity: 0;
     visibility: hidden;
-    background: $black;
+    background: $black-transparent;
     transition: z-index 500ms, visibility 800ms, opacity 1000ms;
 }
 
