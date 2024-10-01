@@ -15,7 +15,7 @@ class AuthService
             if (!Auth::attempt($credentials)) {
                 return [
                     'status_code' => 500,
-                    'message' => 'Unauthorized'
+                    'message' => 'Sai tài khoản hoặc mật khẩu'
                 ];
 //                return response()->json([
 //                    'status_code' => 500,
@@ -35,7 +35,8 @@ class AuthService
                 'status_code' => 200,
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
-                'user' => $user
+                'user' => $user->toArray(),
+                'status'=> true
             ];
 //            return response()->json([
 //                'status_code' => 200,

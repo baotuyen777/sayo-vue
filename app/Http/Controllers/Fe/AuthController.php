@@ -10,7 +10,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
@@ -23,15 +22,17 @@ class AuthController extends Controller
     public function doLogin(Request $request)
     {
         $res = $this->authService->login($request);
-
         if ($res['status_code'] == 200) {
             if (session()->get('url_redirect')) {
-                return redirect()->away(session()->get('url_redirect'));
+//                return redirect()->away(session()->get('url_redirect'));
+                $res['redirectUrl'] = session()->get('url_redirect');
             }
-            return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
-        }
+            $res['redirectUrl'] = route('home');
 
-        return redirect()->route('login')->with('notify', 'Sai tài khoản hoặc mật khẩu')->with('notify_type', 'error');
+//            return redirect()->route('home')->with('notify', 'Đăng nhập thành công')->with('notify_type', 'success');
+        }
+        return $res;
+//        return redirect()->route('login')->with('notify', 'Sai tài khoản hoặc mật khẩu')->with('notify_type', 'error');
 
 
 //        return view('pages/login');

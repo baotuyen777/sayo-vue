@@ -40,7 +40,8 @@ jQuery('.form-ajax').on('submit', function (event) {
         type: isPut ? 'PUT' : 'POST',
         success: function (res) {
             if (res.status) {
-                showNotify();
+                console.log(res,223333)
+                showNotify(res.message);
                 if ($form.find(".btn-back")[0]) {
                     setTimeout(() => $form.find(".btn-back")[0].click(), 2000)
                 }
@@ -48,8 +49,11 @@ jQuery('.form-ajax').on('submit', function (event) {
                 if (res?.redirectUrl) {
                     window.location.href = res?.redirectUrl
                 }
+            }else {
+                showNotify(res.message,'danger');
             }
             toggleLoading()
+            $form.find('.btn-submit').attr('disabled', false);
         },
         error: (jqXHR) => {
             // if (grecaptcha) {

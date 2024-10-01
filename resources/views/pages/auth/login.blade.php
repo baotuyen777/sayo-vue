@@ -10,10 +10,10 @@
     <div id="login-page">
         <progress hidden=""></progress>
         <div class=" login-wrapper">
-            <div class="login-form">
+            <div class="login-form ">
                 <h1>Đăng Nhập</h1>
 
-                <form method="post" action="{{route('login')}}">
+                <form method="post" action="{{route('login')}}" @class('form-ajax')>
 
                     @include('component.form.text',['name'=> 'phone', 'label' => 'Số điện thoại', 'inputmode' =>'numeric', 'type' =>'tel'])
                     @include('component.form.text',['name'=> 'password', 'label' => 'Mật khẩu',  'type' =>'password'])
