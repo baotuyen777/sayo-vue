@@ -8,8 +8,8 @@
     <title>Document</title>
     <script>
         window.configValues = {
-            APP_URL: "{{ env('APP_URL') }}",
-            API_URL: "{{ env('API_URL') ?? 'http://localhost:8000/api/' }}",
+            APP_URL: "{{ env('PUBLIC_URL') }}",
+            API_URL: "{{ env('PUBLIC_URL') ?? 'http://localhost:8000/api/' }}",
             MEDIA_URL: "{{  asset('storage') }}",
             // Add more configuration keys as needed
         };

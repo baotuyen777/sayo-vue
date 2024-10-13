@@ -27,7 +27,7 @@
 
 <div id="dusktext"></div>
 
-<script src='{{ env('APP_URL')}}/js/main.js'></script>
+<script src='{{ env('PUBLIC_URL')}}/js/main.js'></script>
 
 @stack('js')
 {{--@if(env('APP_ENV')=='production')--}}

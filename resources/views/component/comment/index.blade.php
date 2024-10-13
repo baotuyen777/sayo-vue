@@ -38,7 +38,7 @@
 </div>
 
 @push('js')
-    <script src='{{ env('APP_URL')}}/js/comment.js'></script>
+    <script src='{{ env('PUBLIC_URL')}}/js/comment.js'></script>
 
 @endpush
 
