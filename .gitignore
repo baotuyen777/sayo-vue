@@ -26,3 +26,5 @@ yarn-error.log
 .user.ini
 *.log
 err.md
+*.zip
+_docker/_docker/data
