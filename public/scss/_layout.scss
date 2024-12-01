@@ -72,10 +72,10 @@ footer {
 .header__profile {
     display: flex;
     justify-content: space-between !important;
-    margin-top: -50px;
+    margin-top: -80px;
     padding-bottom: 20px;
     border-bottom: 1px solid $gray-light;
-    
+
     .group__infor{
         display: flex;
         .avatar {
@@ -133,7 +133,7 @@ footer {
     }
     .label-address {
         line-height: 30px;
-        background: $black-light;
+        background: $black-transparent;
         color: $white;
         padding: 0 10px;
         div:first-child {

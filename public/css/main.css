@@ -30,7 +30,7 @@ h4 {
   min-width: 100px;
 }
 .main-header .search-form-wrapper {
-  width: 100%;
+  flex: 2;
   padding: 10px;
 }
 .main-header .search-form {
@@ -1833,7 +1833,7 @@ footer {
 .header__profile {
   display: flex;
   justify-content: space-between !important;
-  margin-top: -50px;
+  margin-top: -80px;
   padding-bottom: 20px;
   border-bottom: 1px solid #cfcece;
 }
@@ -1887,7 +1887,7 @@ footer {
 }
 .detail-infor .label-address {
   line-height: 30px;
-  background: #222;
+  background: rgba(0, 0, 0, 0.5019607843);
   color: #ffffff;
   padding: 0 10px;
 }

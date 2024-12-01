@@ -79,7 +79,7 @@
                 </ul>
 
             </li>
-            <li><a href="{{route('hotgirl')}}">Hot girl</a></li>
+{{--            <li><a href="{{route('hotgirl')}}">Hot girl</a></li>--}}
         </ul>
     </div>
 </header>
