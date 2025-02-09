@@ -18,7 +18,7 @@
         <i class="sitemap"></i>
         <span>{{$category['name'] ?? 'Tất cả danh mục'}}</span>
         @if(isset($category['name']))
-            <a href="{{$urlClear}}"><i class="close clear"></i></a>
+            <a href="{{$urlClear}}" class="clear-link"><i class="close clear"></i></a>
         @endif
     </button>
     <div class="dropdown__content ">
@@ -40,5 +40,21 @@
         </div>
     </div>
 </div>
+<style>
+    .clear-link {
+        color: white;
+        transition: opacity 0.2s ease;
+    }
+
+    .clear-link:hover {
+        opacity: 0.8;
+    }
+
+    .clear-link .close.clear {
+        color: white;
+    }
+
+
+</style>
 
 

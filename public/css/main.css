@@ -124,7 +124,7 @@ h4 {
 }
 .menu-items .menu-user .menu-avatar {
   display: block;
-  background-image: url(http://sayo.vn/img/icon/default_user.png);
+  background-image: url(/img/icon/default_user.png);
   background-size: 100% 100%;
   border-radius: 100%;
   height: 48px;
@@ -1833,12 +1833,12 @@ footer {
 .header__profile {
   display: flex;
   justify-content: space-between !important;
-  margin-top: -80px;
   padding-bottom: 20px;
   border-bottom: 1px solid #cfcece;
 }
 .header__profile .group__infor {
   display: flex;
+  flex: 70%;
 }
 .header__profile .group__infor .avatar .border-avatar {
   background: #ffffff;
@@ -1865,36 +1865,37 @@ footer {
 .header__profile .group__infor .infor .icon-vertify-account.not-vertify {
   color: #9f9d9d;
 }
-.detail-infor {
+.header__profile .detail-infor {
+  flex: 40%;
   position: relative;
   top: 15px;
 }
-.detail-infor .label-chat {
+.header__profile .detail-infor .label-chat {
   white-space: nowrap;
   line-height: 30px;
 }
-.detail-infor .label-chat svg {
+.header__profile .detail-infor .label-chat svg {
   position: relative;
   top: 3px;
 }
-.detail-infor .label-time {
+.header__profile .detail-infor .label-time {
   white-space: nowrap;
   line-height: 33px;
 }
-.detail-infor .label-time svg {
+.header__profile .detail-infor .label-time svg {
   position: relative;
   top: 3px;
 }
-.detail-infor .label-address {
+.header__profile .detail-infor .label-address {
   line-height: 30px;
   background: rgba(0, 0, 0, 0.5019607843);
   color: #ffffff;
   padding: 0 10px;
 }
-.detail-infor .label-address div:first-child {
+.header__profile .detail-infor .label-address div:first-child {
   white-space: nowrap;
 }
-.detail-infor .label-address svg {
+.header__profile .detail-infor .label-address svg {
   position: relative;
   top: 3px;
 }

@@ -72,12 +72,12 @@ footer {
 .header__profile {
     display: flex;
     justify-content: space-between !important;
-    margin-top: -80px;
     padding-bottom: 20px;
     border-bottom: 1px solid $gray-light;
 
-    .group__infor{
+    .group__infor {
         display: flex;
+        flex: 70%;
         .avatar {
             .border-avatar {
                 background: $white;
@@ -96,6 +96,7 @@ footer {
 
         .infor {
             margin-left: 25px;
+
             h1 {
                 font-size: 30px;
             }
@@ -111,37 +112,38 @@ footer {
         }
     }
 
-}
-.detail-infor {
-    position: relative;
-    top: 15px;
-    .label-chat {
-        white-space: nowrap;
-        line-height: 30px;
-        svg {
-            position: relative;
-            top: 3px;
-        }
-    }
-    .label-time {
-        white-space: nowrap;
-        line-height: 33px;
-        svg {
-            position: relative;
-            top: 3px;
-        }
-    }
-    .label-address {
-        line-height: 30px;
-        background: $black-transparent;
-        color: $white;
-        padding: 0 10px;
-        div:first-child {
+    .detail-infor {
+        flex: 40%;
+        position: relative;
+        top: 15px;
+        .label-chat {
             white-space: nowrap;
+            line-height: 30px;
+            svg {
+                position: relative;
+                top: 3px;
+            }
         }
-        svg {
-            position: relative;
-            top: 3px;
+        .label-time {
+            white-space: nowrap;
+            line-height: 33px;
+            svg {
+                position: relative;
+                top: 3px;
+            }
+        }
+        .label-address {
+            line-height: 30px;
+            background: $black-transparent;
+            color: $white;
+            padding: 0 10px;
+            div:first-child {
+                white-space: nowrap;
+            }
+            svg {
+                position: relative;
+                top: 3px;
+            }
         }
     }
 }

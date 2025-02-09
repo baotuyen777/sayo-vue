@@ -110,7 +110,7 @@ function getCategories()
 //            "thu-cung"=>'Thú cưng',
 //            "do-an"=>'Đồ ăn',
 //            "dien-lanh"=>'Điện lạnh',
-//            "thoi-trang"=>'Thời trang',
+            "thoi-trang"=>'Thời trang',
 //            "van-phong"=>'Văn phòng',
 //            "cho-tang-mien-phi"=>'Cho tặng miễn phí',
             "khac" => 'Khác'

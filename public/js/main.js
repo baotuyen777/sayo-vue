@@ -3,7 +3,7 @@ jQuery('.form-ajax').on('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();
     if ($(this).find('.tinymce').html()) {
-        tinymce.triggerSave();
+        // tinymce.triggerSave();
     }
 
     const confirmText = $(this).data('confirm');
