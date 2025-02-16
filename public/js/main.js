@@ -56,9 +56,11 @@ jQuery('.form-ajax').on('submit', function (event) {
             $form.find('.btn-submit').attr('disabled', false);
         },
         error: (jqXHR) => {
-            // if (grecaptcha) {
-            //     grecaptcha.reset();
-            // }
+            // Reset Google reCAPTCHA
+            if (typeof grecaptcha !== 'undefined') {
+                grecaptcha.reset();
+            }
+            
             const errors = JSON.parse(jqXHR.responseText).errors;
             if(errors){
                 Object.keys(errors).forEach(field => {

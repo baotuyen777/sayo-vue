@@ -244,7 +244,7 @@ class Post extends Model
     private static function buildFilterQuery($request, $query)
     {
         if ($request->input('status') != 'all') {
-            $query->where('status', STATUS_ACTIVE);
+//            $query->where('status', STATUS_ACTIVE);
         }
 
         if ($request->input('author_id')) {

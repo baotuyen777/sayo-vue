@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function __construct(
-        private PostService $postService,
-        private UserService $userService,
+        private PostService    $postService,
+        private UserService    $userService,
         private ProductService $productService
     )
     {
@@ -43,7 +43,9 @@ class UserController extends Controller
             return view('pages.404');
         }
 
-        $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id, 'status' => STATUS_ACTIVE]);
+        $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id,
+//            'status' => STATUS_ACTIVE
+        ]);
         $products = $this->productService->getAllSimple($request, ['author_id' => $user->id, 'status' => STATUS_ACTIVE]);
         $ratings = PostComment::getAll();
         $likePage = Auth::check() ? UserLike::where('author_id', Auth::user()->id)->where('seller_id', $user->id)->first() : false;

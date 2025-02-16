@@ -34,7 +34,7 @@ class ProductController extends Controller
     {
         $extraParam = [
             'catCode' => $catCode,
-            'status' => STATUS_ACTIVE
+//            'status' => STATUS_ACTIVE
         ];
         $request->merge($extraParam);
         $res = $this->productsService->getAll($request);

@@ -26,7 +26,6 @@ class FileService
             'region' => config('filesystems.disks.s3.region'),
             'version' => 'latest',
         ]), config('filesystems.disks.s3.bucket'));
-
         $objs = [];
         if ($request->has('files')) {
             $files = $request->file('files');
@@ -42,7 +41,7 @@ class FileService
                     'url' => $filePath
                 ];
                 $file = Files::create($params);
-                $file->url_full = asset('storage/' . $file->url);
+                $file->url_full = $filesystem->publicUrl($file->url);
                 $objs[] = $file;
             }
         }
