@@ -116,7 +116,9 @@
         flex: 1;
     }
 }
-
+.align-items-center{
+    align-items: center;
+}
 
 .justify-content-center {
     justify-content: center;
@@ -170,6 +172,11 @@
 
 .gap-10 {
     gap: 15px;
+}
+@for $i from 1 through 10 {
+    .gap-#{$i} {
+        gap: #{$i}px;
+    }
 }
 
 .grid-2, .grid-3, .grid-4, .grid-5 {
