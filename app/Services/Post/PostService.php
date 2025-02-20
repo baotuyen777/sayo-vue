@@ -18,6 +18,21 @@ class PostService
 {
     private array $res = [];
 
+    function __construct()
+    {
+        $this->res = [
+            'provinces' => [],
+            'province' => null,
+            'districts' => [],
+            'district' => null,
+            'wards' => [],
+            'ward' => null,
+            'objs' => [],
+            'categories' => [],
+            'category' => null
+        ];
+    }
+
     public function store($request)
     {
         if (!isLoged()) {
@@ -100,19 +115,23 @@ class PostService
         return get_defined_vars();
     }
 
-    public function getAll($request)
+    public function getAll($request,$where = [])
     {
-        $this->res = [
-            'provinces' => [],
-            'province' => null,
-            'districts' => [],
-            'district' => null,
-            'wards' => [],
-            'ward' => null,
-            'objs' => [],
-            'categories' => [],
-            'category' => null
-        ];
+        $s = $request->input('s');
+        $currentPage = $request->input('current') ?? $request->input('page');
+        $pageSize = $request->input('page_size') ?? 10;
+
+//        $this->res = [
+//            'provinces' => [],
+//            'province' => null,
+//            'districts' => [],
+//            'district' => null,
+//            'wards' => [],
+//            'ward' => null,
+//            'objs' => [],
+//            'categories' => [],
+//            'category' => null
+//        ];
         $routeParams = request()->route()->parameters();
         $request->merge($routeParams);
 
@@ -136,8 +155,17 @@ class PostService
                 $this->res['ward'] = $this->res['wards']->firstWhere('code', $request->input('wardCode'));
             }
         }
-
-        $this->res['objs'] = Post::getAll($request);
+        $posts = Post::with('avatar');
+        if ($s) {
+            $posts->where('name', 'like', "%{$s}%");
+        }
+        foreach ($where as $k => $v) {
+            $posts->where($k, $v);
+        }
+        $objs = $posts->orderBy('created_at', 'desc')
+            ->paginate($pageSize, ['*'], 'page', $currentPage);
+//        $this->res['objs'] = Post::getAll($request);
+        $this->res['objs'] = $objs;
         return $this->res;
     }
 

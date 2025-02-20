@@ -7,6 +7,20 @@ use App\Models\Product;
 
 class ProductService
 {
+    function __construct()
+    {
+        $this->res = [
+            'provinces' => [],
+            'province' => null,
+            'districts' => [],
+            'district' => null,
+            'wards' => [],
+            'ward' => null,
+            'objs' => [],
+            'categories' => [],
+            'category' => null
+        ];
+    }
     function getAttrField($product = false, $filterNull = false)
     {
         $config = Product::$attr;

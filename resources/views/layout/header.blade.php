@@ -29,6 +29,7 @@
     @stack('css')
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1249489300078063"
             crossorigin="anonymous"></script>
+    @livewireStyles
 </head>
 <body>
 <header class="main-header">

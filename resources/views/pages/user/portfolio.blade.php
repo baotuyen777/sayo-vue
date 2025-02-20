@@ -132,6 +132,7 @@
 @section('content')
 
     <div class="list-data" id="products-tab">
+        @include('component.form.filter.index')
         <div class="d-flex-wrap grid-4 ">
             @foreach($products as $product)
                 @include('component.product.product_card',['obj' => $product])

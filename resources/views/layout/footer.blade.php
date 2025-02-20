@@ -33,7 +33,7 @@
 {{--@if(env('APP_ENV')=='production')--}}
 {{--    @include('layout.common.social')--}}
 {{--@endif--}}
-
+@livewireScripts
 </body>
 </html>
 

@@ -43,7 +43,7 @@ class UserController extends Controller
             return view('pages.404');
         }
 
-        $posts = $this->postService->getAllSimple($request, ['author_id' => $user->id,
+        $posts = $this->postService->getAll($request, ['author_id' => $user->id,
 //            'status' => STATUS_ACTIVE
         ]);
         $products = $this->productService->getAllSimple($request, ['author_id' => $user->id, 'status' => STATUS_ACTIVE]);
@@ -51,11 +51,13 @@ class UserController extends Controller
         $likePage = Auth::check() ? UserLike::where('author_id', Auth::user()->id)->where('seller_id', $user->id)->first() : false;
 
         return view('pages.user.portfolio', [
+            ...$posts,
             'posts' => $posts,
             'user' => $user,
             'products' => $products,
             'ratings' => $ratings,
-            'isLike' => !!$likePage
+            'isLike' => !!$likePage,
+            'categories' => []
         ]);
     }
 
