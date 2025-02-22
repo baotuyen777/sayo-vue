@@ -27,7 +27,7 @@
 
 <div id="dusktext"></div>
 
-<script src='{{ asset('js/main.js') }}'></script>
+<script src='{{ asset('js/main.js')}}'></script>
 
 @stack('js')
 {{--@if(env('APP_ENV')=='production')--}}

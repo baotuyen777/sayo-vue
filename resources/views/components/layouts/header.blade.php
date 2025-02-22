@@ -14,14 +14,14 @@
     <meta property="og:description"
           content="Sayo - Website mua bán rao vặt của người Việt với hàng ngàn món hời đang được rao bán mỗi ngày. Đăng tin mua bán UY TÍN, NHANH CHÓNG, AN TOÀN.">
     <link rel="icon" href="/favicon.ico" sizes="32x32"/>
-    <link rel="stylesheet" href="{{asset('css/main.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('')}}/css/main.css" type="text/css">
     {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
     {{--    <script src='https://icybernet.vn/wp-includes/js/jquery/jquery.min.js?ver=3.6.1' id='jquery-core-js'></script>--}}
-    <script src="{{env('PRODUCTION')?'https://code.jquery.com': asset('js/libs/')}}/jquery-1.12.4.min.js"
+    <script src="{{env('PRODUCTION')?'https://code.jquery.com': asset('').'/js/libs/'}}/jquery-1.12.4.min.js"
             integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
             crossorigin="anonymous"></script>
     <script type="text/javascript"
-            src="{{!env('PRODUCTION')?'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js': asset('js')}}"
+            src="{{!env('PRODUCTION')?'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js': asset('').'/js'}}"
             crossorigin="anonymous"></script>
     <script>
         var state = {};
@@ -37,7 +37,7 @@
         <nav class="main-nav">
             <div class="logo">
                 <a href="{{ route('home')}}">
-                    <img src="{{ asset('img/logo-white.png') }}" alt="sayo-logo"></a></div>
+                    <img src="{{ asset('') }}/img/logo-white.png" alt="sayo-logo"></a></div>
             <div class="search-form-wrapper">
                 <form class="search-form" action="{{route('archive')}}">
                     <input autocomplete="off" name="s" placeholder="Tìm kiếm sản phẩm - Dịch vụ trên Sayo"

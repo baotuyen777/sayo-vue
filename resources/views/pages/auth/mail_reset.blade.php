@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td style="text-align:center;">
-                        <a href="{{ env('PUBLIC_URL') }}" title="logo" target="_blank">
+                        <a href="{{ asset('') }}" title="logo" target="_blank">
                             <img width="200" style="background: orange" src="{{asset('img/logo-white.png')  }}" title="logo" alt="sayo-logo">
                         </a>
                     </td>
@@ -62,7 +62,7 @@
                 <tr>
                     <td style="text-align:center;">
                         <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">
-                            <a href="{{ env('PUBLIC_URL') }}"><strong>&copy;Sayo.vn</strong></a></p>
+                            <a href="{{ asset('') }}"><strong>&copy;Sayo.vn</strong></a></p>
                     </td>
                 </tr>
                 <tr>

@@ -68,34 +68,8 @@ Route::get('/xem-san-pham-{catCode?}/{code}.htm', [ProductController::class, 'sh
 Route::resource('product', ProductController::class);
 Route::resource('/review', ReviewController::class);
 
-Route::get('order/me', [OrdersController::class, 'me'])->name('order.me');
-Route::put('order-update/{id}', [OrdersController::class, 'updateSimple'])->name('order.updateSimple');
+use App\Livewire\PostComponent;
 
-Route::resource('order', OrdersController::class);
-Route::post('seller-order', [OrdersController::class, 'sellerStore'])->name('sellerStore');
-
-//Route::resource('news', NewsController::class);
-//Route::get('/post/edit/{code}.htm', [NewsController::class, 'edit'])->name('postEdit');
-//Route::post('/post/edit/{code}.htm', [NewsController::class, 'update'])->name('postUpdate');
-//Route::post('/post/update-simple/{code}.htm', [NewsController::class, 'updateSimple'])->name('postUpdateSimple');
-//Route::get('/dang-tin', [NewsController::class, 'create'])->name('publicPost');
-//Route::post('/dang-tin', [NewsController::class, 'store'])->name('storePost');
-Route::get('/tin-tuc/hotgirl', [NewsController::class, 'archive'])->name('hotgirl');
-Route::get('/tin-tuc/hotgirl/{code}.htm', [NewsController::class, 'show'])->name('newsView');
-Route::get('/news/crawl', [NewsController::class, 'crawl'])->name('newsCrawl');
-Route::get('/news/export', [NewsController::class, 'export'])->name('newsExport');
-
-
-
-Route::get('/get-districts/{provinceId?}', [PdwController::class, 'getDistricts'])->name('getDistricts');
-Route::get('/get-wards/{districtId?}', [PdwController::class, 'getWards'])->name('getWards');
-
-
-Route::get('/storage-link', function () {
-    Artisan::call('storage:link');
-    return view('pages/auth/login');
-});
-
-Route::view("/admin/{any}", "app")->where("any", ".*");
-
-Route::resource('user-like', UserLikeController::class);
+Route::get('/posts', PostComponent::class);
+//Route::get('/users', UserComponent::class);
+//Route::get('/products', ProductComponent::class);
