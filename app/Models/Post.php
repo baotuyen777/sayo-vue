@@ -141,12 +141,11 @@ class Post extends Model
         return new static;
     }
 
-    public static function getAll($request)
+    public static function getAll($where)
     {
-        $cacheKey = convertArr2Code($request->all());
-
+        $cacheKey = convertArr2Code($where);
         $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
-        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, $time, function () use ($request) {
+        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, $time, function () use ($where) {
             $query = Post::query()
                 ->with('avatar')
                 ->with('category')
@@ -155,13 +154,13 @@ class Post extends Model
                 ->with('province')
                 ->orderBy('status')->orderBy('created_at', 'desc');
 
-            if ($request) {
-                $query = self::buildFilterQuery($request, $query);
-                $query = self::buildFilterLocation($request, $query);
+            if ($where) {
+                $query = self::buildFilterQuery($where, $query);
+                $query = self::buildFilterLocation($where, $query);
             }
 
-            $currentPage = $request->input('current');
-            $pageSize = $request->input('page_size') ?? 24;
+            $currentPage = $where['current'] ?? 1;
+            $pageSize = $where['page_size'] ?? 24;
             return $query->paginate($pageSize, ['*'], 'page', $currentPage);
         });
 
@@ -185,7 +184,8 @@ class Post extends Model
             }
 
             $obj = $query->first();
-            if ($populateExtendField) {
+
+            if ($obj && $populateExtendField) {
                 $obj = self::populateExtendField($obj);
             }
 
@@ -197,11 +197,15 @@ class Post extends Model
 
     private static function populateExtendField($obj)
     {
-        $obj['province_name'] = Province::getAll()->get($obj->province_id)->name ?? '';
-        $obj['district_name'] = District::getAll()->get($obj->district_id)->name ?? '';
-        $obj['ward_name'] = Ward::getAll()->get($obj->ward_id)->name ?? '';
+        if (isset($obj->province_id)) {
+            $obj['province_name'] = Province::getAll()->get($obj->province_id)->name ?? '';
+            $obj['district_name'] = District::getAll()->get($obj->district_id)->name ?? '';
+            $obj['ward_name'] = Ward::getAll()->get($obj->ward_id)->name ?? '';
+        }
+        if (!empty($obj['files'])) {
 
-        $obj['file_ids'] = $obj['files']->pluck('id');
+            $obj['file_ids'] = $obj['files']->pluck('id');
+        }
         $obj['attr'] = self::getAttrField($obj, true);
 
         return $obj;
@@ -211,7 +215,7 @@ class Post extends Model
     {
         $config = Post::$attr;
 
-        $attrs = json_decode(str_replace('%22', '', $post->attr));
+        $attrs = json_decode(str_replace('%22', '', $post->attr ?? ''));
 
         $res = [];
         foreach ($config as $k => $item) {
@@ -241,54 +245,53 @@ class Post extends Model
         return $res;
     }
 
-    private static function buildFilterQuery($request, $query)
+    private static function buildFilterQuery($where, $query)
     {
-        if ($request->input('status') != 'all') {
+        if ($where['status'] ?? '' != 'all') {
 //            $query->where('status', STATUS_ACTIVE);
         }
 
-        if ($request->input('author_id')) {
-            $query->where('author_id', $request->input('author_id'));
+        if ($where['author_id'] ?? null) {
+            $query->where('author_id', $where['author_id']);
         }
 
-
-        if ($request->input('catCode')) {
-
-            $category = Category::getAll()->firstWhere('code', $request->input('catCode'));
+        $catCode = $where['catCode'] ?? null;
+        if ($catCode) {
+            $category = Category::getAll()->firstWhere('code', $catCode);
             if ($category) {
                 $query->where('category_id', $category->id);
             }
         }
 
-        $priceFrom = $request->input('price_from');
+        $priceFrom = $where['price_from'] ?? 0;
         if ($priceFrom) {
             $query->where('price', '>', $priceFrom);
         }
 
-        $priceTo = $request->input('price_to');
+        $priceTo = $where['price_to'] ?? null;
         if ($priceTo) {
             $query->where('price', '<', $priceTo);
         }
 
-        $s = $request->input('s');
+        $s = $where['s'] ?? '';
         if ($s) {
             $query->where('name', 'like', "%{$s}%");
         }
         return $query;
     }
 
-    public static function buildFilterLocation($request, $query)
+    public static function buildFilterLocation($where, $query)
     {
-        if ($request->input('provinceCode')) {
-            $province = Province::getAll()->firstWhere('code', $request->input('provinceCode'));
+        if ($where['provinceCode']) {
+            $province = Province::getAll()->firstWhere('code', $where['provinceCode']);
             $query->where('province_id', $province->id);
-            $districtCode = $request->input('districtCode');
+            $districtCode = $where['districtCode'] ?? '';
 
             $district = District::getAll()->firstWhere('code', $districtCode);
 
             if ($district) {
                 $query->where('district_id', $district->id);
-                $wardCode = $request->input('wardCode');
+                $wardCode = $where['wardCode'] ?? '';
 
                 $ward = Ward::getAll()->firstWhere('code', $wardCode);
                 if ($ward) {

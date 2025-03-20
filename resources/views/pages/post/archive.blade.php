@@ -1,6 +1,10 @@
 @extends('layout/index')
 
 @section('content')
+    @php
+//        dd($objs);
+    dd($category);
+    @endphp
     <main>
         @include('component.form.filter.index')
         <section>

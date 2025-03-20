@@ -1,19 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\Fe\HomeController;
-use \App\Http\Controllers\Fe\AuthController;
-use \App\Http\Controllers\Fe\PostController;
-use \App\Http\Controllers\Fe\ProductController;
-use \App\Http\Controllers\Fe\NewsController;
-use \App\Http\Controllers\Fe\UserController;
-use \App\Http\Controllers\Fe\PdwController;
+use App\Http\Controllers\Fe\AuthController;
 use App\Http\Controllers\Fe\CommentController;
-use App\Http\Controllers\Fe\ReviewController;
-use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Fe\HomeController;
 use App\Http\Controllers\Fe\PasswordResetController;
-use App\Http\Controllers\Fe\OrdersController;
-use App\Http\Controllers\Fe\UserLikeController;
+use App\Http\Controllers\Fe\PostController;
+use App\Http\Controllers\Fe\ProductController;
+use App\Http\Controllers\Fe\ReviewController;
+use App\Http\Controllers\Fe\UserController;
+use App\Livewire\post\PostComponent;
+use App\Livewire\post\PostDetail;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,17 +43,17 @@ Route::post('/change-password/{token}', [PasswordResetController::class, 'doRese
 Route::resource('user', UserController::class);
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
-Route::get('/post/crawl', [PostController::class, 'crawl'])->name('postCrawl');
+//Route::get('/post/crawl', [PostController::class, 'crawl'])->name('postCrawl');
 //Route::get('/post/me', [PostController::class, 'me'])->name('myPost');
-Route::get('/post/edit/{code}.htm', [PostController::class, 'edit'])->name('postEdit');
-Route::post('/post/edit/{code}.htm', [PostController::class, 'update'])->name('postUpdate');
-Route::put('/post/update-simple/{code}.htm', [PostController::class, 'updateSimple'])->name('postUpdateSimple');
+//Route::get('/post/edit/{code}.htm', [PostController::class, 'edit'])->name('postEdit');
+//Route::post('/post/edit/{code}.htm', [PostController::class, 'update'])->name('postUpdate');
+//Route::put('/post/update-simple/{code}.htm', [PostController::class, 'updateSimple'])->name('postUpdateSimple');
 Route::get('/get-attrs/{catCode?}', [PostController::class, 'getAttrs'])->name('getPostAttrs');
 Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
 Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');
-Route::get('/xem-tin-{catCode?}/{code}.htm', [PostController::class, 'show'])->where('catcode', '[A-Za-z0-9-]+')->name('postView');
-Route::resource('post', PostController::class);
+Route::get('/xem-tin-{catCode?}/{code?}.htm', [PostController::class, 'show'])->where('catCode', '[A-Za-z0-9-]+')->name('postView');
+//Route::resource('post', PostController::class);
 Route::resource('comment', CommentController::class);
 
 Route::get('/dang-san-pham', [ProductController::class, 'create'])->name('createProduct');
@@ -68,8 +65,9 @@ Route::get('/xem-san-pham-{catCode?}/{code}.htm', [ProductController::class, 'sh
 Route::resource('product', ProductController::class);
 Route::resource('/review', ReviewController::class);
 
-use App\Livewire\PostComponent;
 
+//livewire
 Route::get('/posts', PostComponent::class);
+Route::get('/post/{code}', PostDetail::class)->name('post.detail');
 //Route::get('/users', UserComponent::class);
 //Route::get('/products', ProductComponent::class);

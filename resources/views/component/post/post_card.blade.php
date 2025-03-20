@@ -1,5 +1,5 @@
 @php
-    $detailLink =  route('postView',['catCode'=>$obj['category']['code'],'code'=>$obj['code']]);
+    $detailLink =  route('postView',['catCode'=>$obj['category']['code'] ?? '','code'=>$obj['code'] ?? '']);
     $bg= $obj['avatar']['url'] ?? asset('img/sayo-default-vertical.webp');
 @endphp
 
@@ -8,7 +8,7 @@
         <div class="avatar" style="background: url({{$bg}})"></div>
     </a>
     <div class="product__caption">
-        <a href="{{$detailLink}}" class="card__title">{{$obj['name']}}</a>
+        <a href="{{$detailLink}}" class="card__title">{{$obj['name'] ?? ''}}</a>
         {{--        <div class="product__feedback">--}}
         {{--            <div>--}}
         {{--                <button type="button" aria-haspopup="true" aria-expanded="false">--}}
@@ -28,12 +28,12 @@
         {{--        <div class="card__extra-attr text-gray">--}}
         {{--            <div>20 m² - 2 PN</div>--}}
         {{--        </div>--}}
-        <div><span class="card__price">{{moneyFormat($obj['price'])}}</span></div>
+        <div><span class="card__price">{{moneyFormat($obj['price'] ?? 0)}}</span></div>
     </div>
     <div class="card__footer text-small text-gray">
         <img class="author-avatar" src="{{asset('/img/icon/default_user.png')}}"
              alt="{{$obj['author']['name'] ?? 'sayo'}}">
         <span>{{str_replace(['Thành phố ','Tỉnh '],'',$obj->province->name ?? '')
-}}- {{showHumanTime($obj->created_at)}}</span>
+}}- {{showHumanTime($obj->created_at ?? '')}}</span>
     </div>
 </div>

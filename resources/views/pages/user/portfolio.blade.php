@@ -90,10 +90,10 @@
                             <span>{{ $isLike ? 'Đã thích' : 'Thích trang' }}</span>
                         </span>
 
-                        <form action="{{ route('user-like.store') }}" method="post" id="formLikePage">
-                            @csrf
+{{--                        <form action="{{ route('user-like.store') }}" method="post" id="formLikePage">--}}
+{{--                            @csrf--}}
                             <input type="hidden" name="seller_id" value="{{ $user['id'] }}">
-                        </form>
+{{--                        </form>--}}
                     </div>
 
                 </div>
@@ -143,7 +143,7 @@
     <div class="list-data hide-tab" id="posts-tab">
         <div class="d-flex-wrap grid-4">
             @forelse($posts as $post)
-                @include('component.post.post_card',['obj' => $post])
+{{--                @include('component.post.post_card',['obj' => $post])--}}
             @empty
                 <div class="notice-empty">
                     <p>Chưa có tin vặt nào</p>
@@ -183,7 +183,9 @@
             </div>
         @endforeach
     </div>
-
+@php
+//dd($categories);
+    @endphp
     <div class="pagination">
         @if ($posts->onFirstPage())
             <span class="pagination__link pagination__link--prev pagination__link--disabled">Trang đầu</span>

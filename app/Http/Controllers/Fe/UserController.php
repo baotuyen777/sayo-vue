@@ -43,21 +43,23 @@ class UserController extends Controller
             return view('pages.404');
         }
 
+        $relationOptions = $this->postService->getRelationOptions();
         $posts = $this->postService->getAll($request, ['author_id' => $user->id,
 //            'status' => STATUS_ACTIVE
         ]);
+//        dd($relationOptions);
         $products = $this->productService->getAllSimple($request, ['author_id' => $user->id, 'status' => STATUS_ACTIVE]);
         $ratings = PostComment::getAll();
         $likePage = Auth::check() ? UserLike::where('author_id', Auth::user()->id)->where('seller_id', $user->id)->first() : false;
 
         return view('pages.user.portfolio', [
-            ...$posts,
+            ...$relationOptions,
             'posts' => $posts,
             'user' => $user,
             'products' => $products,
             'ratings' => $ratings,
             'isLike' => !!$likePage,
-            'categories' => []
+//            'categories' => []
         ]);
     }
 

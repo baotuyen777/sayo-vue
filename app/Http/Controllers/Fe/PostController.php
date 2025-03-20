@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     function __construct(
-        private readonly PostService      $postsService,
+        private readonly PostService      $postService,
         private readonly PostCrawlService $postCrawlService
     )
     {
@@ -35,7 +35,7 @@ class PostController extends Controller
         }
 
         $request->merge(['status' => 'all']);
-        $res = $this->postsService->getAll($request);
+        $res = $this->postService->getAll($request);
 
         return view('pages/post/list', $res);
     }
@@ -46,9 +46,13 @@ class PostController extends Controller
      */
     public function archive(Request $request)
     {
-        $res = $this->postsService->getAll($request);
+        $routeParams = request()->route()->parameters() ?? [];
+        $where = [...$request->all(), ...$routeParams];
+        $res = Post::getAll($where);
+
+        $relationOptions = $this->postService->getRelationOptions();
         $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');
-        return view('pages/post/archive', $res);
+        return view('pages/post/archive', [...$relationOptions, "objs" => $res]);
     }
 
     public function edit($code)
@@ -62,7 +66,7 @@ class PostController extends Controller
             return view('pages/404');
         }
 
-        $output = $this->postsService->getAttrOptions($obj);
+        $output = $this->postService->getAttrOptions($obj);
         $output['obj'] = $obj;
 
         return view('pages/post/detail', $output);
@@ -78,13 +82,13 @@ class PostController extends Controller
             return view('pages/404');
         }
 
-        $this->postsService->incrementViewNumber($code);
+        $this->postService->incrementViewNumber($code);
         return view('pages/post/view', ['obj' => $obj]);
     }
 
     public function store(PostRequest $request)
     {
-        return response()->json($this->postsService->store($request));
+        return response()->json($this->postService->store($request));
     }
 
     public function create()
@@ -94,8 +98,8 @@ class PostController extends Controller
         }
 
         $user = Auth::user();
-        $options = $this->postsService->getAttrOptions($user);
-        $obj = $this->postsService->populateSellerAddress($user);
+        $options = $this->postService->getAttrOptions($user);
+        $obj = $this->postService->populateSellerAddress($user);
         $options['obj'] = $obj;
 
         return view('pages/post/detail', array_merge(Post::$attr, $options));
@@ -122,12 +126,12 @@ class PostController extends Controller
 
     public function update(PostRequest $request, $code)
     {
-        return response()->json($this->postsService->update($request, $code));
+        return response()->json($this->postService->update($request, $code));
     }
 
     public function destroy($code): \Illuminate\Http\JsonResponse
     {
-        return response()->json($this->postsService->destroy($code));
+        return response()->json($this->postService->destroy($code));
     }
 
     public function crawl(Request $request)

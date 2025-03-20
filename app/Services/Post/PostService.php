@@ -44,9 +44,9 @@ class PostService
         $request->merge([
             'code' => time() . '-' . $userid,
             'author_id' => $userid,
-            'attr' => str_replace(['\"', '%22'], '', json_encode($request->input('attr'))),
+            'attr' => str_replace(['\"', '%22'], '', json_encode($request['attr'])),
         ]);
-        $files = $request->input('file_ids');
+        $files = $request['file_ids'];
         if ($files) {
             $request->merge(['avatar_id' => $files[0]]);
         }
@@ -65,10 +65,10 @@ class PostService
 
         if ($author) {
             $address = [
-                'province_id' => $request->input('province_id'),
-                'district_id' => $request->input('district_id'),
-                'ward_id' => $request->input('ward_id'),
-                'address' => $request->input('address')
+                'province_id' => $request['province_id'],
+                'district_id' => $request['district_id'],
+                'ward_id' => $request['ward_id'],
+                'address' => $request['address']
             ];
             $author->update($address);
         }
@@ -82,7 +82,7 @@ class PostService
         if (!isAdmin() && !isAuthor($obj)) {
             return RETURN_REQUIRED_AUTHOR;
         }
-        $files = $request->input('file_ids');
+        $files = $request['file_ids'];
 
         if ($files) {
             $obj->files()->sync($files);
@@ -115,11 +115,11 @@ class PostService
         return get_defined_vars();
     }
 
-    public function getAll($request,$where = [])
+    public function getAll($where = [])
     {
-        $s = $request->input('s');
-        $currentPage = $request->input('current') ?? $request->input('page');
-        $pageSize = $request->input('page_size') ?? 10;
+        $s = $where['s'] ?? '';
+        $currentPage = $where['current'] ?? $where['page'] ?? 1;
+        $pageSize = $where['page_size'] ?? 10;
 
 //        $this->res = [
 //            'provinces' => [],
@@ -132,14 +132,58 @@ class PostService
 //            'categories' => [],
 //            'category' => null
 //        ];
-        $routeParams = request()->route()->parameters();
-        $request->merge($routeParams);
+//        $routeParams = request()->route()->parameters() ?? [];
+//        $request = array_merge($request,$routeParams);
 
-        $catCode = $request->input('catCode')?? 'tat-ca';
+//        $catCode = $request['catCode'] ?? 'tat-ca';
+//        $this->res['categories'] = Category::getAll();
+//        $this->res['category'] = $this->res['categories']->firstWhere('code', $catCode);
+//        $provinceCode = $where['provinceCode'] ?? '';
+//
+//        $this->res['provinces'] = Province::getAll();
+//
+//        $province = $this->res['provinces']->firstWhere('code', $provinceCode);
+////        dd($provinceCode, $province);
+//        if ($provinceCode && $province) {
+//            $this->res['province'] = $province;
+//            $this->res['districts'] = District::getAll()->where('province_id', $province->id);
+//            $district = $this->res['districts']->firstWhere('code', $request['districtCode']);
+//            if ($district) {
+//                $this->res['district'] = $district;
+//                $this->res['wards'] = Ward::getAll()->where('district_id', $district->id);
+//                $this->res['ward'] = $this->res['wards']->firstWhere('code', $request['wardCode']);
+//            }
+//        }
+//        $posts = Post::with('avatar');
+//        if ($s) {
+//            $posts->where('name', 'like', "%{$s}%");
+//        }
+//        foreach ($where as $k => $v) {
+//            $posts->where($k, $v);
+//        }
+//        $objs = $posts->orderBy('created_at', 'desc')
+//            ->paginate($pageSize, ['*'], 'page', $currentPage);
+        $objs = Post::getAll($where);
+//        $this->res['objs'] = $objs;
+        return $objs;
+    }
+    function getRelationOptions(): array
+    {
+        $this->res = [
+            'provinces' => [],
+            'province' => null,
+            'districts' => [],
+            'district' => null,
+            'wards' => [],
+            'ward' => null,
+            'objs' => [],
+            'categories' => [],
+            'category' => null
+        ];
+        $catCode = $request['catCode'] ?? 'tat-ca';
         $this->res['categories'] = Category::getAll();
         $this->res['category'] = $this->res['categories']->firstWhere('code', $catCode);
-
-        $provinceCode = $request->input('provinceCode');
+        $provinceCode = $request['provinceCode'] ?? '';
 
         $this->res['provinces'] = Province::getAll();
 
@@ -148,32 +192,22 @@ class PostService
         if ($provinceCode && $province) {
             $this->res['province'] = $province;
             $this->res['districts'] = District::getAll()->where('province_id', $province->id);
-            $district = $this->res['districts']->firstWhere('code', $request->input('districtCode'));
+            $district = $this->res['districts']->firstWhere('code', $request['districtCode']);
             if ($district) {
                 $this->res['district'] = $district;
                 $this->res['wards'] = Ward::getAll()->where('district_id', $district->id);
-                $this->res['ward'] = $this->res['wards']->firstWhere('code', $request->input('wardCode'));
+                $this->res['ward'] = $this->res['wards']->firstWhere('code', $request['wardCode']);
             }
         }
-        $posts = Post::with('avatar');
-        if ($s) {
-            $posts->where('name', 'like', "%{$s}%");
-        }
-        foreach ($where as $k => $v) {
-            $posts->where($k, $v);
-        }
-        $objs = $posts->orderBy('created_at', 'desc')
-            ->paginate($pageSize, ['*'], 'page', $currentPage);
-//        $this->res['objs'] = Post::getAll($request);
-        $this->res['objs'] = $objs;
+
         return $this->res;
     }
 
     function getAllSimple($request, $where = [])
     {
-        $s = $request->input('s');
-        $currentPage = $request->input('current') ?? $request->input('page');
-        $pageSize = $request->input('page_size') ?? 10;
+        $s = $request['s'];
+        $currentPage = $request['current'] ?? $request['page'];
+        $pageSize = $request['page_size'] ?? 10;
 
         $posts = Post::with('avatar');
         if ($s) {
