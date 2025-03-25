@@ -20,7 +20,7 @@ class PostService
 
     function __construct()
     {
-        $this->res = [
+        $res = [
             'provinces' => [],
             'province' => null,
             'districts' => [],
@@ -121,7 +121,7 @@ class PostService
         $currentPage = $where['current'] ?? $where['page'] ?? 1;
         $pageSize = $where['page_size'] ?? 10;
 
-//        $this->res = [
+//        $res = [
 //            'provinces' => [],
 //            'province' => null,
 //            'districts' => [],
@@ -136,22 +136,22 @@ class PostService
 //        $request = array_merge($request,$routeParams);
 
 //        $catCode = $request['catCode'] ?? 'tat-ca';
-//        $this->res['categories'] = Category::getAll();
-//        $this->res['category'] = $this->res['categories']->firstWhere('code', $catCode);
+//        $res['categories'] = Category::getAll();
+//        $res['category'] = $res['categories']->firstWhere('code', $catCode);
 //        $provinceCode = $where['provinceCode'] ?? '';
 //
-//        $this->res['provinces'] = Province::getAll();
+//        $res['provinces'] = Province::getAll();
 //
-//        $province = $this->res['provinces']->firstWhere('code', $provinceCode);
+//        $province = $res['provinces']->firstWhere('code', $provinceCode);
 ////        dd($provinceCode, $province);
 //        if ($provinceCode && $province) {
-//            $this->res['province'] = $province;
-//            $this->res['districts'] = District::getAll()->where('province_id', $province->id);
-//            $district = $this->res['districts']->firstWhere('code', $request['districtCode']);
+//            $res['province'] = $province;
+//            $res['districts'] = District::getAll()->where('province_id', $province->id);
+//            $district = $res['districts']->firstWhere('code', $request['districtCode']);
 //            if ($district) {
-//                $this->res['district'] = $district;
-//                $this->res['wards'] = Ward::getAll()->where('district_id', $district->id);
-//                $this->res['ward'] = $this->res['wards']->firstWhere('code', $request['wardCode']);
+//                $res['district'] = $district;
+//                $res['wards'] = Ward::getAll()->where('district_id', $district->id);
+//                $res['ward'] = $res['wards']->firstWhere('code', $request['wardCode']);
 //            }
 //        }
 //        $posts = Post::with('avatar');
@@ -163,13 +163,12 @@ class PostService
 //        }
 //        $objs = $posts->orderBy('created_at', 'desc')
 //            ->paginate($pageSize, ['*'], 'page', $currentPage);
-        $objs = Post::getAll($where);
-//        $this->res['objs'] = $objs;
-        return $objs;
+        //        $res['objs'] = $objs;
+        return Post::getAll($where);
     }
-    function getRelationOptions(): array
+    function getRelationOptions($where): array
     {
-        $this->res = [
+        $res = [
             'provinces' => [],
             'province' => null,
             'districts' => [],
@@ -180,27 +179,29 @@ class PostService
             'categories' => [],
             'category' => null
         ];
-        $catCode = $request['catCode'] ?? 'tat-ca';
-        $this->res['categories'] = Category::getAll();
-        $this->res['category'] = $this->res['categories']->firstWhere('code', $catCode);
-        $provinceCode = $request['provinceCode'] ?? '';
+        $catCode = $where['catCode'] ?? 'tat-ca';
+        $res['categories'] = Category::getAll();
 
-        $this->res['provinces'] = Province::getAll();
+        $res['category'] = $res['categories']->firstWhere('code', $catCode);
+        $provinceCode = $where['provinceCode'] ?? '';
+        $res['provinces'] = Province::getAll();
 
-        $province = $this->res['provinces']->firstWhere('code', $provinceCode);
+        $province = $res['provinces']->firstWhere('code', $provinceCode);
 //        dd($provinceCode, $province);
+        $districtCode = $where['districtCode'] ?? '';
+        $wardCode = $where['wardCode'] ?? '';
         if ($provinceCode && $province) {
-            $this->res['province'] = $province;
-            $this->res['districts'] = District::getAll()->where('province_id', $province->id);
-            $district = $this->res['districts']->firstWhere('code', $request['districtCode']);
+            $res['province'] = $province;
+            $res['districts'] = District::getAll()->where('province_id', $province->id);
+            $district = $res['districts']->firstWhere('code',$districtCode );
             if ($district) {
-                $this->res['district'] = $district;
-                $this->res['wards'] = Ward::getAll()->where('district_id', $district->id);
-                $this->res['ward'] = $this->res['wards']->firstWhere('code', $request['wardCode']);
+                $res['district'] = $district;
+                $res['wards'] = Ward::getAll()->where('district_id', $district->id);
+                $res['ward'] = $res['wards']->firstWhere('code', $wardCode);
             }
         }
 
-        return $this->res;
+        return $res;
     }
 
     function getAllSimple($request, $where = [])

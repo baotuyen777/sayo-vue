@@ -48,11 +48,12 @@ class PostController extends Controller
     {
         $routeParams = request()->route()->parameters() ?? [];
         $where = [...$request->all(), ...$routeParams];
-        $res = Post::getAll($where);
 
-        $relationOptions = $this->postService->getRelationOptions();
-        $res['pageName'] = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');
-        return view('pages/post/archive', [...$relationOptions, "objs" => $res]);
+        $objs = Post::getAll($where);
+
+        $relationOptions = $this->postService->getRelationOptions($where);
+        $pageName = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');
+        return view('pages/post/archive', [...$relationOptions, "objs" => $objs, 'pageName'=> $pageName]);
     }
 
     public function edit($code)

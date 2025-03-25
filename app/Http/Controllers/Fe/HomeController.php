@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         $categories = getCategories();// Category::with('avatar')->get() ;
 
-        $posts = Post::getAll($request);
+        $posts = Post::getAll($request->all());
 
         return view('pages/home', ['categories' => $categories, 'posts' => $posts]);
     }

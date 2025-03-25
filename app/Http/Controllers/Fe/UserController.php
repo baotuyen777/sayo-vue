@@ -42,11 +42,13 @@ class UserController extends Controller
         if (!$user) {
             return view('pages.404');
         }
-
-        $relationOptions = $this->postService->getRelationOptions();
-        $posts = $this->postService->getAll($request, ['author_id' => $user->id,
+        $routeParams = request()->route()->parameters() ?? [];
+        $where = [...$request->all(), ...$routeParams, 'author_id' => $user->id,
 //            'status' => STATUS_ACTIVE
-        ]);
+        ];
+
+        $relationOptions = $this->postService->getRelationOptions($where);
+        $posts = $this->postService->getAll($where);
 //        dd($relationOptions);
         $products = $this->productService->getAllSimple($request, ['author_id' => $user->id, 'status' => STATUS_ACTIVE]);
         $ratings = PostComment::getAll();

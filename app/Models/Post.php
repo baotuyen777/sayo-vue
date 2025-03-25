@@ -158,7 +158,6 @@ class Post extends Model
                 $query = self::buildFilterQuery($where, $query);
                 $query = self::buildFilterLocation($where, $query);
             }
-
             $currentPage = $where['current'] ?? 1;
             $pageSize = $where['page_size'] ?? 24;
             return $query->paginate($pageSize, ['*'], 'page', $currentPage);
@@ -282,8 +281,9 @@ class Post extends Model
 
     public static function buildFilterLocation($where, $query)
     {
-        if ($where['provinceCode']) {
-            $province = Province::getAll()->firstWhere('code', $where['provinceCode']);
+        $provinceCode = $where['provinceCode'] ?? '';
+        if ($provinceCode) {
+            $province = Province::getAll()->firstWhere('code', $provinceCode);
             $query->where('province_id', $province->id);
             $districtCode = $where['districtCode'] ?? '';
 

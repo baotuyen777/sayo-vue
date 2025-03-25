@@ -3,7 +3,6 @@
 @section('content')
     @php
 //        dd($objs);
-    dd($category);
     @endphp
     <main>
         @include('component.form.filter.index')
@@ -12,9 +11,13 @@
                 <div class="card">
                     <h2>{{$category['name'] ?? 'Tất cả danh mục'}}</h2>
                     <div class="d-flex-wrap grid-6">
-                        @foreach($objs as $obj)
-                            @include('component.post.post_card',['obj'=> $obj])
-                        @endforeach
+                        @if($objs->isEmpty())
+                            <p>Không có dữ liệu.</p>
+                        @else
+                            @foreach($objs as $obj)
+                                @include('component.post.post_card',['obj'=> $obj])
+                            @endforeach
+                        @endif
                     </div>
                     @include('component.list.pagination')
                 </div>
