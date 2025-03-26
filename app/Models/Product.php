@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Pdw\District;
+use App\Models\Pdw\Province;
+use App\Models\Pdw\Ward;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -80,15 +83,29 @@ class Product extends Model
 
     public function avatar()
     {
-
         return $this->belongsTo(Files::class)
             ->select(['files.*'])
             ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
     }
 
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function ward()
+    {
+        return $this->belongsTo(Ward::class);
+    }
+
     public function files()
     {
-        return $this->belongsToMany(Files::class, 'products_files')
+        return $this->belongsToMany(Files::class, 'posts_files')
             ->select(['files.*']);
 //            ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
     }
@@ -98,15 +115,22 @@ class Product extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public static function getAll()
+    public function comments()
     {
-        $products = Product::where('status', '=', 2)
-            ->with('avatar')
-            ->with('category')
-            ->orderBy('created_at', 'desc')
-            ->paginate(24);
-        return $products;
+        return $this->hasMany(PostComment::class, 'item_id', 'id')
+            ->with('user:id,name', 'children')
+            ->whereNull('parent_id')->limit(6);
     }
+
+//    public static function getAll()
+//    {
+//        $products = Product::where('status', '=', 2)
+//            ->with('avatar')
+//            ->with('category')
+//            ->orderBy('created_at', 'desc')
+//            ->paginate(24);
+//        return $products;
+//    }
 
     public function reviews()
     {
@@ -172,6 +196,31 @@ class Product extends Model
 //        return $objs;
 //    }
 
+    public static function getAll($where)
+    {
+        $cacheKey = convertArr2Code($where);
+        $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
+        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, $time, function () use ($where) {
+            $query = Product::query()
+                ->with('avatar')
+                ->with('category')
+                ->with('province')
+                ->with('author')
+                ->with('province')
+                ->orderBy('status')->orderBy('created_at', 'desc');
+
+            if ($where) {
+                $query = self::buildFilterQuery($where, $query);
+                $query = self::buildFilterLocation($where, $query);
+            }
+            $currentPage = $where['current'] ?? 1;
+            $pageSize = $where['page_size'] ?? 24;
+            return $query->paginate($pageSize, ['*'], 'page', $currentPage);
+        });
+
+        return $objs;
+    }
+
     public static function getOne($code, $isFull = false, $populateExtendField = false)
     {
         $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
@@ -195,5 +244,64 @@ class Product extends Model
         });
 
         return $obj;
+    }
+
+    private static function buildFilterQuery($where, $query)
+    {
+        if ($where['status'] ?? '' != 'all') {
+//            $query->where('status', STATUS_ACTIVE);
+        }
+
+        if ($where['author_id'] ?? null) {
+            $query->where('author_id', $where['author_id']);
+        }
+
+        $catCode = $where['catCode'] ?? null;
+        if ($catCode) {
+            $category = Category::getAll()->firstWhere('code', $catCode);
+            if ($category) {
+                $query->where('category_id', $category->id);
+            }
+        }
+
+        $priceFrom = $where['price_from'] ?? 0;
+        if ($priceFrom) {
+            $query->where('price', '>', $priceFrom);
+        }
+
+        $priceTo = $where['price_to'] ?? null;
+        if ($priceTo) {
+            $query->where('price', '<', $priceTo);
+        }
+
+        $s = $where['s'] ?? '';
+        if ($s) {
+            $query->where('name', 'like', "%{$s}%");
+        }
+        return $query;
+    }
+
+    public static function buildFilterLocation($where, $query)
+    {
+        $provinceCode = $where['provinceCode'] ?? '';
+        if ($provinceCode) {
+            $province = Province::getAll()->firstWhere('code', $provinceCode);
+            $query->where('province_id', $province->id);
+            $districtCode = $where['districtCode'] ?? '';
+
+            $district = District::getAll()->firstWhere('code', $districtCode);
+
+            if ($district) {
+                $query->where('district_id', $district->id);
+                $wardCode = $where['wardCode'] ?? '';
+
+                $ward = Ward::getAll()->firstWhere('code', $wardCode);
+                if ($ward) {
+                    $query->where('ward_id', $ward->id);
+                }
+            }
+        }
+
+        return $query;
     }
 }

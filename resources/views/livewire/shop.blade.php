@@ -1,3 +1,6 @@
+<div>
+
+</div>
 @extends('layout.buyer')
 @section('top-header')
     <div class="header">
@@ -15,10 +18,10 @@
                     </div>
                     <div class="infor">
                         <h1>
-                            {{ $user->name ?? ''}}
+                            {{ $shop->name ?? ''}}
                             <svg viewBox="0 0 12 13" width="16" height="16" fill="currentColor"
                                  title="Tài khoản đã xác minh"
-                                 class="icon-vertify-account {{ $user->status??0 > 1 ? '' : 'not-vertify' }}">
+                                 class="icon-vertify-account {{ $shop->status??0 > 1 ? '' : 'not-vertify' }}">
                                 <g fill-rule="evenodd" transform="translate(-98 -917)">
                                     <path
                                         d="m106.853 922.354-3.5 3.5a.499.499 0 0 1-.706 0l-1.5-1.5a.5.5 0 1 1 .706-.708l1.147 1.147 3.147-3.147a.5.5 0 1 1 .706.708m3.078 2.295-.589-1.149.588-1.15a.633.633 0 0 0-.219-.82l-1.085-.7-.065-1.287a.627.627 0 0 0-.6-.603l-1.29-.066-.703-1.087a.636.636 0 0 0-.82-.217l-1.148.588-1.15-.588a.631.631 0 0 0-.82.22l-.701 1.085-1.289.065a.626.626 0 0 0-.6.6l-.066 1.29-1.088.702a.634.634 0 0 0-.216.82l.588 1.149-.588 1.15a.632.632 0 0 0 .219.819l1.085.701.065 1.286c.014.33.274.59.6.604l1.29.065.703 1.088c.177.27.53.362.82.216l1.148-.588 1.15.589a.629.629 0 0 0 .82-.22l.701-1.085 1.286-.064a.627.627 0 0 0 .604-.601l.065-1.29 1.088-.703a.633.633 0 0 0 .216-.819">
@@ -30,11 +33,11 @@
                         <div class="d-flex gap-10 label-address">
                             <div>
                                 <img src="{{asset('img/icon/icon_location.svg')}}" height="14">
-                                {{ getFullAddress($user??'')}}
+                                {{ getFullAddress($shop??'')}}
                             </div>
                         </div>
                         <div class="edit-profile">
-                            @if (isset($user['id']) && isset(Auth::user()->id) === $user['id'])
+                            @if (isset($shop['id']) && isset(Auth::user()->id) === $shop['id'])
                                 <a class="btn btn--primary " href="{{ route('profile') }}">Chỉnh sửa</a>
                             @endif
 
@@ -90,10 +93,10 @@
                             <span>{{ $isLike ? 'Đã thích' : 'Thích trang' }}</span>
                         </span>
 
-{{--                        <form action="{{ route('user-like.store') }}" method="post" id="formLikePage">--}}
-{{--                            @csrf--}}
-                            <input type="hidden" name="seller_id" value="{{ $user['id'] }}">
-{{--                        </form>--}}
+                        {{--                        <form action="{{ route('user-like.store') }}" method="post" id="formLikePage">--}}
+                        {{--                            @csrf--}}
+                        <input type="hidden" name="seller_id" value="{{ $shop['id'] }}">
+                        {{--                        </form>--}}
                     </div>
 
                 </div>
@@ -125,15 +128,15 @@
 @section('sidebar')
     <section @class('card')>
         <h2>Giới thiệu</h2>
-        <div class="card__body ">{{$user->bio??''}}
+        <div class="card__body ">{{$shop->bio??''}}
         </div>
         <h2>Danh mục</h2>
         <ul>
-            @foreach($categories as $category)
-                <li>
-{{--                    <a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a>--}}
-                </li>
-            @endforeach
+{{--            @foreach($categories as $category)--}}
+{{--                <li>--}}
+{{--                    --}}{{--                    <a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a>--}}
+{{--                </li>--}}
+{{--            @endforeach--}}
         </ul>
     </section>
 @endsection
@@ -151,7 +154,7 @@
     <div class="list-data hide-tab" id="posts-tab">
         <div class="d-flex-wrap grid-4">
             @forelse($posts as $post)
-{{--                @include('component.post.post_card',['obj' => $post])--}}
+                {{--                @include('component.post.post_card',['obj' => $post])--}}
             @empty
                 <div class="notice-empty">
                     <p>Chưa có tin vặt nào</p>
@@ -191,8 +194,8 @@
             </div>
         @endforeach
     </div>
-@php
-//dd($categories);
+    @php
+        //dd($categories);
     @endphp
     <div class="pagination">
         @if ($posts->onFirstPage())

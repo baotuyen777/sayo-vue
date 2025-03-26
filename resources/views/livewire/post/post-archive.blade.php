@@ -1,4 +1,18 @@
 <main>
+    @section('sidebar')
+        <div class="card">
+            <h3>Danh mục</h3>
+            <ul class="category-list">
+                @foreach($categories as $category)
+                    <li>
+                        <a href="{{route('archive',['catCode'=>$category->code])}}">
+                            {{ $category->name }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endsection
     @include('component.form.filter.index')
     <section>
         <div class="container">

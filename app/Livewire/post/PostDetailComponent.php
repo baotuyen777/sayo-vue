@@ -6,7 +6,7 @@ use App\Models\Post;
 use App\Services\Post\PostService;
 use Livewire\Component;
 
-class PostDetail extends Component
+class PostDetailComponent extends Component
 {
     public $code;
     private PostService $postsService;

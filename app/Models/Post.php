@@ -141,7 +141,7 @@ class Post extends Model
         return new static;
     }
 
-    public static function getAll($where)
+    public static function getAll($where=[])
     {
         $cacheKey = convertArr2Code($where);
         $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
@@ -158,7 +158,7 @@ class Post extends Model
                 $query = self::buildFilterQuery($where, $query);
                 $query = self::buildFilterLocation($where, $query);
             }
-            $currentPage = $where['current'] ?? 1;
+            $currentPage = $where['page'] ?? 1;
             $pageSize = $where['page_size'] ?? 24;
             return $query->paginate($pageSize, ['*'], 'page', $currentPage);
         });

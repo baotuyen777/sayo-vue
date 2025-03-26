@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <meta charset="utf-8">
     <link rel="canonical" href="<?php echo asset('') ?>">
-    <title>Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt</title>
+    <title>{{$title ?? 'Sayo - Website Mua Bán, Rao Vặt Trực Tuyến Hàng Đầu Của Người Việt}}</title>
     <meta property="og:image" content="https://sayo.vn/img/sayo-default-vertical.webp">
     <meta property="og:url" content="https://sayo.vn">
     <meta property="og:type" content="website">

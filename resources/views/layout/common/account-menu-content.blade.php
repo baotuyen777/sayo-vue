@@ -7,7 +7,7 @@
                     href="{{ route('register') }}">Đăng ký</a></h3>
         @endguest
         @auth
-            <h3><a href="{{route('user.show',['user'=>Auth()->user()->username])}}">{{ Auth::user()->name }}</a></h3>
+            <h3><a href="{{route('shop',['code'=>Auth()->user()->username])}}">{{ Auth::user()->name }}</a></h3>
         @endauth
     </div>
     @auth

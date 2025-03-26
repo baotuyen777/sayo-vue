@@ -26,7 +26,15 @@
 
     {{--        </div>--}}
     <div class="main">
-        @yield('content')
+        <div class="d-flex">
+            <aside @class('flex-25')>
+                @yield('sidebar')
+            </aside>
+            <div style="flex: 1;" @class('flex-1')>
+                @yield('content')
+            </div>
+        </div>
+
     </div>
     {{--    </div>--}}
 
