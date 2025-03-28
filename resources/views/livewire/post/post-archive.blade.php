@@ -1,12 +1,15 @@
 <main>
+    @php
+    dd($category);
+    @endphp
     @section('sidebar')
         <div class="card">
             <h3>Danh mục</h3>
             <ul class="category-list">
-                @foreach($categories as $category)
+                @foreach(getCategories($category['code']) as $category)
                     <li>
-                        <a href="{{route('archive',['catCode'=>$category->code])}}">
-                            {{ $category->name }}
+                        <a href="{{route('archive',['catCode'=>$category["code"]])}}">
+                            {{ $category['name'] }}
                         </a>
                     </li>
                 @endforeach

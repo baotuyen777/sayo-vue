@@ -48,6 +48,7 @@ class PostArchiveComponent extends Component
 
         $relationOptions = $this->postsService->getRelationOptions($where);
         $pageName = 'Mua bán ' . strtolower($res['category']->name ?? 'tất cả danh mục');
+//        dd($relationOptions['category']);
         return view('livewire.post.post-archive', [...$relationOptions, "objs" => $objs, 'pageName'=> $pageName]);
     }
 }

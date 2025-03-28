@@ -98,23 +98,109 @@ function vn2Province($str)
 }
 
 
-function getCategories()
+function getCategories($parentCode='')
 {
-    return
+    $categories = [
         [
-            "bds" => 'Bất động sản',
-//            "do-dien-tu"=>'Đồ điện tử',
-            "do-gia-dung" => 'Đồ gia dụng',
-            "dich-vu" => 'Dịch vụ',
-//            "me-va-be"=>'Mẹ và bé',
-//            "thu-cung"=>'Thú cưng',
-//            "do-an"=>'Đồ ăn',
-//            "dien-lanh"=>'Điện lạnh',
-            "thoi-trang"=>'Thời trang',
-//            "van-phong"=>'Văn phòng',
-//            "cho-tang-mien-phi"=>'Cho tặng miễn phí',
-            "khac" => 'Khác'
-        ];
+            "code" => "bds",
+            "name" => "Bất động sản",
+            "children" => [
+                ["code" => "nha-dat", "name" => "Nhà đất"],
+                ["code" => "chung-cu", "name" => "Chung cư"]
+            ]
+        ],
+        [
+            "code" => "do-dien-tu",
+            "name" => "Đồ điện tử",
+            "children" => [
+                ["code" => "dien-thoai", "name" => "Điện thoại"],
+                ["code" => "may-tinh", "name" => "Máy tính"]
+            ]
+        ],
+        [
+            "code" => "do-gia-dung",
+            "name" => "Đồ gia dụng",
+            "children" => [
+                ["code" => "noi-com", "name" => "Nồi cơm điện"],
+                ["code" => "quat", "name" => "Quạt điện"]
+            ]
+        ],
+        [
+            "code" => "dich-vu",
+            "name" => "Dịch vụ",
+            "children" => [
+                ["code" => "sua-chua", "name" => "Sửa chữa"],
+                ["code" => "van-chuyen", "name" => "Vận chuyển"]
+            ]
+        ],
+        [
+            "code" => "me-va-be",
+            "name" => "Mẹ và bé",
+            "children" => [
+                ["code" => "do-choi", "name" => "Đồ chơi"],
+                ["code" => "quan-ao", "name" => "Quần áo trẻ em"]
+            ]
+        ],
+        [
+            "code" => "thu-cung",
+            "name" => "Thú cưng",
+            "children" => [
+                ["code" => "cho", "name" => "Chó"],
+                ["code" => "meo", "name" => "Mèo"]
+            ]
+        ],
+        [
+            "code" => "do-an",
+            "name" => "Đồ ăn",
+            "children" => [
+                ["code" => "trai-cay", "name" => "Trái cây"],
+                ["code" => "thuc-pham", "name" => "Thực phẩm"]
+            ]
+        ],
+        [
+            "code" => "dien-lanh",
+            "name" => "Điện lạnh",
+            "children" => [
+                ["code" => "may-lanh", "name" => "Máy lạnh"],
+                ["code" => "tu-lanh", "name" => "Tủ lạnh"]
+            ]
+        ],
+        [
+            "code" => "thoi-trang",
+            "name" => "Thời trang",
+            "children" => [
+                ["code" => "quan-ao", "name" => "Quần áo"],
+                ["code" => "giay-dep", "name" => "Giày dép"]
+            ]
+        ],
+        [
+            "code" => "van-phong",
+            "name" => "Văn phòng",
+            "children" => [
+                ["code" => "may-in", "name" => "Máy in"],
+                ["code" => "ban-ghe", "name" => "Bàn ghế"]
+            ]
+        ],
+        [
+            "code" => "cho-tang-mien-phi",
+            "name" => "Cho tặng miễn phí",
+            "children" => [
+                ["code" => "sach", "name" => "Sách"],
+                ["code" => "do-gia-dung-cu", "name" => "Đồ gia dụng cũ"]
+            ]
+        ],
+        [
+            "code" => "khac",
+            "name" => "Khác",
+            "children" => []
+        ]
+    ];
+    if ($parentCode) {
+        $findParent = array_filter($categories, fn($category) => $category['code'] === $parentCode);
+        return empty($findParent) ? [] : $findParent['childrent'];
+    }
+
+    return  $categories;
 }
 
 function getCategoryCode($catId): string

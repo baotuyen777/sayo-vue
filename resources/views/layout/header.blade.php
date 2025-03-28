@@ -74,8 +74,8 @@
             <li class="active">
                 <a href="{{route('archive')}}"> DANH MỤC</a>
                 <ul class="sub-menu">
-                    @foreach(getCategories() as $code=>$name)
-                        <li><a href="{{route('archive',['catCode'=>$code])}}">{{$name}}</a></li>
+                    @foreach(getCategories() as $category)
+                        <li><a href="{{route('archive',['catCode'=>$category['code']])}}">{{$category['name']}}</a></li>
                     @endforeach
                 </ul>
 
