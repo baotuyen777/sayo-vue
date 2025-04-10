@@ -1,8 +1,7 @@
 <div>
 
-</div>
-@extends('layout.buyer')
-@section('top-header')
+{{--@extends('layout.buyer')--}}
+{{--@section('top-header')--}}
     <div class="header">
         <div class="container">
             <div class="header__backdrop">
@@ -101,7 +100,7 @@
 
                 </div>
             </div>
-            @if (Request::routeIs('user.show'))
+{{--            @if (Request::routeIs('user.show'))--}}
                 <section class="portfolio__tab">
                     @php
                         $tabs = [
@@ -120,11 +119,11 @@
                         </div>
                     @endforeach
                 </section>
-            @endif
+{{--            @endif--}}
 
         </div>
     </div>
-@endsection
+{{--@endsection--}}
 @section('sidebar')
     <section @class('card')>
         <h2>Giới thiệu</h2>
@@ -140,7 +139,7 @@
         </ul>
     </section>
 @endsection
-@section('content')
+{{--@section('content')--}}
 
     <div class="list-data" id="products-tab">
         @include('component.form.filter.index')
@@ -218,4 +217,6 @@
             <span class="pagination__link pagination__link--next pagination__link--disabled">Next</span>
         @endif
     </div>
-@endsection
+{{--@endsection--}}
+
+</div>

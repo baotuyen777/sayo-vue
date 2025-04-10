@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Fe\PdwController;
 use App\Http\Controllers\Fe\AuthController;
 use App\Http\Controllers\Fe\CommentController;
 use App\Http\Controllers\Fe\HomeController;
@@ -11,6 +12,10 @@ use App\Http\Controllers\Fe\UserController;
 use App\Livewire\post\PostArchiveComponent;
 use App\Livewire\post\PostDetailComponent;
 use App\Livewire\Shop;
+use App\Livewire\user\UserIndexComponent;
+use App\Livewire\user\UserShowComponent;
+use App\Livewire\user\UserEditComponent;
+use App\Livewire\user\UserProfileComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,17 +45,20 @@ Route::post('/forgot-password', [PasswordResetController::class, 'doForgotPasswo
 Route::get('/reset-password/{token}', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
 Route::post('/change-password/{token}', [PasswordResetController::class, 'doResetPassword'])->name('password.doReset');
 //
-Route::resource('user', UserController::class);
-//Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+// User Livewire Components
+Route::get('/users', UserIndexComponent::class)->name('user.index');
+Route::get('/user/{userName}', UserShowComponent::class)->name('user.show');
+Route::get('/user/{username}/edit', UserEditComponent::class)->name('user.edit');
+Route::get('/profile', UserProfileComponent::class)->name('profile');
 //
 ////Route::get('/post/crawl', [PostController::class, 'crawl'])->name('postCrawl');
 ////Route::get('/post/me', [PostController::class, 'me'])->name('myPost');
 ////Route::get('/post/edit/{code}.htm', [PostController::class, 'edit'])->name('postEdit');
 ////Route::post('/post/edit/{code}.htm', [PostController::class, 'update'])->name('postUpdate');
 ////Route::put('/post/update-simple/{code}.htm', [PostController::class, 'updateSimple'])->name('postUpdateSimple');
-//Route::get('/get-attrs/{catCode?}', [PostController::class, 'getAttrs'])->name('getPostAttrs');
+Route::get('/get-attrs/{catCode?}', [PostController::class, 'getAttrs'])->name('getPostAttrs');
 Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
-//Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
+Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
 //Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');
 //Route::get('/xem-tin-{catCode?}/{code?}.htm', [PostController::class, 'show'])->where('catCode', '[A-Za-z0-9-]+')->name('postView');
 ////Route::resource('post', PostController::class);
@@ -64,6 +72,9 @@ Route::resource('comment', CommentController::class);
 //Route::get('/xem-san-pham-{catCode?}/{code}.htm', [ProductController::class, 'show'])->where('catCode', '[A-Za-z0-9-]+')->name('productView');
 //Route::resource('product', ProductController::class);
 //Route::resource('/review', ReviewController::class);
+
+Route::get('getDistricts/{provinceId?}', [PdwController::class,'getDistricts'])->name('getDistricts');
+Route::get('getWards/{districtId?}', [PdwController::class,'getWards'])->name('getWards');
 
 
 //livewire
