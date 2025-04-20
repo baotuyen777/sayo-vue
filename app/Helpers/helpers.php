@@ -275,6 +275,13 @@ function isAuthor($obj): bool
 
 function convertArr2Code($arr)
 {
+    if (empty($arr)) {
+        \Log::info('convertArr2Code: empty array');
+        return 'empty';
+    }
+    
+    \Log::info('convertArr2Code input: ' . json_encode($arr));
+    
     $items = [];
     foreach ($arr as $k => $v) {
         if (!$v) {
@@ -282,7 +289,11 @@ function convertArr2Code($arr)
         }
         $items[] = "{$k}_{$v}";
     }
-    return implode('_', $items);
+    
+    $result = implode('_', $items) ?: 'empty';
+    \Log::info('convertArr2Code output: ' . $result);
+    
+    return $result;
 }
 
 function getFullAddress($obj): string

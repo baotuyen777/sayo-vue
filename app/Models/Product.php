@@ -105,7 +105,7 @@ class Product extends Model
 
     public function files()
     {
-        return $this->belongsToMany(Files::class, 'posts_files')
+        return $this->belongsToMany(Files::class, 'products_files')
             ->select(['files.*']);
 //            ->selectRaw('CONCAT("' . asset('storage') . '/", files.url) as url');
     }
@@ -198,9 +198,9 @@ class Product extends Model
 
     public static function getAll($where)
     {
-        $cacheKey = convertArr2Code($where);
-        $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
-        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, $time, function () use ($where) {
+//        $cacheKey = convertArr2Code($where);
+//        $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
+//        $objs = Cache::remember(self::CACHE_KEY . $cacheKey, $time, function () use ($where) {
             $query = Product::query()
                 ->with('avatar')
                 ->with('category')
@@ -215,10 +215,32 @@ class Product extends Model
             }
             $currentPage = $where['current'] ?? 1;
             $pageSize = $where['page_size'] ?? 24;
-            return $query->paginate($pageSize, ['*'], 'page', $currentPage);
-        });
-
+//            return $query->get();
+//        $objs= $query->get();
+//        });
+$objs= $query->get();
+//dd($objs);
         return $objs;
+    }
+
+    public static function getPaginate($where, $pageSize = 24)
+    {
+        $query = Product::query()
+            ->with('avatar')
+            ->with('category')
+            ->with('province')
+            ->with('author')
+            ->with('province')
+            ->orderBy('status')->orderBy('created_at', 'desc');
+
+        if ($where) {
+            $query = self::buildFilterQuery($where, $query);
+            $query = self::buildFilterLocation($where, $query);
+        }
+        $currentPage = $where['current'] ?? 1;
+        $pageSize = $where['page_size'] ?? $pageSize;
+        
+        return $query->paginate($pageSize);
     }
 
     public static function getOne($code, $isFull = false, $populateExtendField = false)
@@ -249,11 +271,11 @@ class Product extends Model
     private static function buildFilterQuery($where, $query)
     {
         if ($where['status'] ?? '' != 'all') {
-//            $query->where('status', STATUS_ACTIVE);
+            $query->where('status', STATUS_ACTIVE);
         }
 
         if ($where['author_id'] ?? null) {
-            $query->where('author_id', $where['author_id']);
+            $query->where('author_id', 1);
         }
 
         $catCode = $where['catCode'] ?? null;

@@ -14,7 +14,7 @@ use Livewire\Component;
 class UserShowComponent extends Component
 {
     public $user;
-    
+
     public function mount(
         PostService $postService,
         UserService $userService,
@@ -24,7 +24,7 @@ class UserShowComponent extends Component
         $this->postService = $postService;
         $this->userService = $userService;
         $this->productService = $productService;
-        
+
         $this->user = User::getOne($userName);
         if (!$this->user) {
             abort(404);
@@ -38,7 +38,8 @@ class UserShowComponent extends Component
 
         $relationOptions = $this->postService->getRelationOptions($where);
         $posts = $this->postService->getAll($where);
-        $products = $this->productService->getAllSimple(request(), ['author_id' => $this->user->id, 'status' => STATUS_ACTIVE]);
+        $products = $this->productService->getAll(request(), ['author_id' => $this->user->id]);
+//        dd($products);
         $ratings = PostComment::getAll();
         $likePage = Auth::check() ? UserLike::where('author_id', Auth::user()->id)->where('seller_id', $this->user->id)->first() : false;
 
@@ -50,4 +51,4 @@ class UserShowComponent extends Component
             'isLike' => !!$likePage,
         ]);
     }
-} 
+}

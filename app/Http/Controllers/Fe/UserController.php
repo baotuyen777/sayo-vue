@@ -89,6 +89,35 @@ class UserController extends Controller
 
     public function update(Request $request, $username)
     {
+        // If only bio is being updated
+        if ($request->has('bio') && count($request->all()) === 1) {
+            try {
+                $user = User::where('username', $username)->first();
+                
+                // Check authorization
+                if (!Auth::check() || Auth::id() != $user->id) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Unauthorized'
+                    ], 403);
+                }
+                
+                $user->bio = $request->bio;
+                $user->save();
+                
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Bio updated successfully'
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to update bio: ' . $e->getMessage()
+                ], 500);
+            }
+        }
+        
+        // Otherwise, use the service for full user update
         $data = $this->userService->update($request, $username);
         return response()->json($data);
     }

@@ -1,13 +1,11 @@
 <div>
-
-{{--@extends('layout.buyer')--}}
-{{--@section('top-header')--}}
     <div class="header">
         <div class="container">
             <div class="header__backdrop">
                 <img src="{{ asset('img/banner/9555d3ff737c0f48c390ff5426c382f8-2840158350697184195.png') }}"
                      alt="user-backdrop">
             </div>
+            <meta name="csrf-token" content="{{ csrf_token() }}">
             <div class="header__profile">
                 <div class="group__infor">
                     <div class="avatar">
@@ -45,37 +43,6 @@
                     </div>
                 </div>
                 <div class="detail-infor">
-                    {{--                                    <div class="d-flex gap-10 label-chat">--}}
-                    {{--                                        <div class="mr-1">--}}
-                    {{--                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">--}}
-                    {{--                                                <path fill-rule="evenodd"--}}
-                    {{--                                                    d="M3.644 4.392a.15.15 0 01.106-.044h12a.15.15 0 01.15.15v8.25a.15.15 0 01-.15.15H6.712a.6.6 0 00-.377.134L3.6 15.242V4.498a.15.15 0 01.044-.106zM6.9 14.118l-3.523 2.847a.6.6 0 01-.977-.467v-12a1.35 1.35 0 011.35-1.35h12a1.35 1.35 0 011.35 1.35v3.15h3.15a1.35 1.35 0 011.35 1.35v12a.6.6 0 01-.977.467l-3.548-2.867H8.25a1.35 1.35 0 01-1.35-1.35v-3.13zm10.2-5.27h3.15a.15.15 0 01.15.15v10.744l-2.735-2.21a.6.6 0 00-.378-.134H8.25a.15.15 0 01-.15-.15v-3.15h7.65a1.35 1.35 0 001.35-1.35v-3.9zM6.8 7.23c0-.276.192-.5.428-.5h5.143c.237 0 .429.224.429.5 0 .277-.192.5-.429.5H7.228c-.236 0-.428-.223-.428-.5zm.428 2.5c-.236 0-.428.224-.428.5 0 .277.192.5.428.5h5.143c.237 0 .429-.223.429-.5 0-.276-.192-.5-.429-.5H7.228z"--}}
-                    {{--                                                    clip-rule="evenodd">--}}
-                    {{--                                                </path>--}}
-                    {{--                                            </svg>--}}
-                    {{--                                            <span>Phản hồi chat:</span>--}}
-                    {{--                                        </div>--}}
-                    {{--                                        <div>72% (Trong 18 hours)</div>--}}
-                    {{--                                    </div>--}}
-                    {{--                                    <div class="d-flex gap-10 label-time">--}}
-                    {{--                                        <div class="mr-1">--}}
-                    {{--                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" aria-hidden="true" fill="currentColor">--}}
-                    {{--                                                <path fill-rule="evenodd"--}}
-                    {{--                                                    d="M4.5 5.377a1.55 1.55 0 00-1.55 1.55v13.5c0 .856.694 1.55 1.55 1.55h15a1.55 1.55 0 001.55-1.55v-13.5a1.55 1.55 0 00-1.55-1.55h-15zm-2.95 1.55a2.95 2.95 0 012.95-2.95h15a2.95 2.95 0 012.95 2.95v13.5a2.95 2.95 0 01-2.95 2.95h-15a2.95 2.95 0 01-2.95-2.95v-13.5z"--}}
-                    {{--                                                    clip-rule="evenodd">--}}
-                    {{--                                                </path>--}}
-                    {{--                                                <path--}}
-                    {{--                                                    d="M13.875 12.926a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25zM17.625 12.926a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25zM13.875 16.676a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25zM17.625 16.676a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25zM6.375 16.676a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25zM10.125 16.676a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25zM6.375 20.426a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25zM10.125 20.426a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25zM13.875 20.426a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z">--}}
-                    {{--                                                </path>--}}
-                    {{--                                                <path fill-rule="evenodd"--}}
-                    {{--                                                    d="M6 2.477a.7.7 0 01.7.7v1.5a.7.7 0 11-1.4 0v-1.5a.7.7 0 01.7-.7zm12 0a.7.7 0 01.7.7v1.5a.7.7 0 11-1.4 0v-1.5a.7.7 0 01.7-.7zM2.25 7.727h19.5v1.4H2.25v-1.4z"--}}
-                    {{--                                                    clip-rule="evenodd">--}}
-                    {{--                                                </path>--}}
-                    {{--                                            </svg>--}}
-                    {{--                                            <span>Đã tham gia:</span>--}}
-                    {{--                                        </div>--}}
-                    {{--                                        <div>{{ showHumanTime($user->created_at ?? '') }}</div>--}}
-                    {{--                                    </div>--}}
                     <p class="d-flex gap-10">
                         <a href="#">Người theo dõi: <b>1</b></a>
                         <a href="#">Đang theo dõi: <b>0</b></a>
@@ -92,131 +59,256 @@
                             <span>{{ $isLike ? 'Đã thích' : 'Thích trang' }}</span>
                         </span>
 
-                        {{--                        <form action="{{ route('user-like.store') }}" method="post" id="formLikePage">--}}
-                        {{--                            @csrf--}}
                         <input type="hidden" name="seller_id" value="{{ $shop['id'] }}">
-                        {{--                        </form>--}}
                     </div>
 
                 </div>
             </div>
-{{--            @if (Request::routeIs('user.show'))--}}
-                <section class="portfolio__tab">
-                    @php
-                        $tabs = [
-                            'products' => 'Sản phẩm',
-                            'posts' => 'Tin vặt',
-                            'reviews' => 'Đánh giá'
-                        ];
-                    @endphp
-
-                    @foreach($tabs as $key => $label)
-                        <div
-                            class="children_menu {{ $key === 'products' ? 'activelink' : '' }}"
-                            title="{{ ucfirst($key) }}"
-                            data-tab="{{ $key }}-tab">
-                            <span>{{ $label }}</span>
-                        </div>
-                    @endforeach
-                </section>
-{{--            @endif--}}
-
         </div>
     </div>
-{{--@endsection--}}
-@section('sidebar')
-    <section @class('card')>
-        <h2>Giới thiệu</h2>
-        <div class="card__body ">{{$shop->bio??''}}
-        </div>
-        <h2>Danh mục</h2>
-        <ul>
-{{--            @foreach($categories as $category)--}}
-{{--                <li>--}}
-{{--                    --}}{{--                    <a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a>--}}
-{{--                </li>--}}
-{{--            @endforeach--}}
-        </ul>
-    </section>
-@endsection
-{{--@section('content')--}}
 
-    <div class="list-data" id="products-tab">
-        @include('component.form.filter.index')
-        <div class="d-flex-wrap grid-4 ">
-            @foreach($products as $product)
-                @include('component.product.product_card',['obj' => $product])
+    <div class="sidebar-content">
+        <section @class('card')>
+            <h2>Giới thiệu</h2>
+            <div class="card__body">
+                @if (isset($shop['id']) && isset(Auth::user()->id) && Auth::user()->id === $shop['id'])
+                    <div class="bio-form">
+                        @if ($successMessage)
+                            <div class="alert alert-success">
+                                {{ $successMessage }}
+                            </div>
+                        @endif
+                        
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        
+                        <textarea wire:model="bio" class="bio-editor"></textarea>
+                        <div class="bio-actions">
+                            <button type="button" wire:click="updateBio" class="btn btn-sm btn--primary">Lưu</button>
+                        </div>
+                    </div>
+                @else
+                    {{$shop->bio??''}}
+                @endif
+            </div>
+            <h2>Danh mục</h2>
+            <ul class="shop-categories">
+                @forelse($shopCategories as $category)
+                    <li>
+                        <a href="{{ route('archive', ['catCode' => $category->code, 'author_id' => $shop['id']]) }}">
+                            {{ $category->name }}
+                        </a>
+                    </li>
+                @empty
+                    <li class="no-categories">Shop chưa có danh mục sản phẩm nào</li>
+                @endforelse
+            </ul>
+        </section>
+    </div>
+
+    <div class="main-content">
+        <section class="portfolio__tab">
+            @php
+                $tabs = [
+                    'products' => 'Sản phẩm',
+                    'posts' => 'Tin vặt',
+                    'reviews' => 'Đánh giá'
+                ];
+            @endphp
+
+            @foreach($tabs as $key => $label)
+                <div
+                    class="children_menu {{ $key === 'products' ? 'activelink' : '' }}"
+                    title="{{ ucfirst($key) }}"
+                    data-tab="{{ $key }}-tab">
+                    <span>{{ $label }}</span>
+                </div>
+            @endforeach
+        </section>
+        
+        <div class="list-data" id="products-tab">
+            @include('component.form.filter.index')
+            <div class="d-flex-wrap grid-4 ">
+                @foreach($products as $product)
+                    @include('component.product.product_card',['obj' => $product])
+                @endforeach
+            </div>
+            @if(method_exists($products, 'links'))
+            <div class="pagination">
+                @if ($products->onFirstPage())
+                    <span class="pagination__link pagination__link--prev pagination__link--disabled">Trang đầu</span>
+                @else
+                    <a href="{{ $products->previousPageUrl() }}" class="pagination__link pagination__link--prev">Trang trước</a>
+                @endif
+
+                @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                    @if ($page == $products->currentPage())
+                        <span class="pagination__link pagination__link--active">{{ $page }}</span>
+                    @else
+                        <a href="{{ $url }}" class="pagination__link">{{ $page }}</a>
+                    @endif
+                @endforeach
+
+                @if ($products->hasMorePages())
+                    <a href="{{ $products->nextPageUrl() }}" class="pagination__link pagination__link--next">Trang sau</a>
+                @else
+                    <span class="pagination__link pagination__link--next pagination__link--disabled">Trang sau</span>
+                @endif
+            </div>
+            @endif
+        </div>
+
+        <div class="list-data hide-tab" id="posts-tab">
+            <div class="d-flex-wrap grid-4">
+                @forelse($posts as $post)
+                                    @include('component.post.post_card',['obj' => $post])
+                @empty
+                    <div class="notice-empty">
+                        <p>Chưa có tin vặt nào</p>
+                    </div>
+                @endforelse
+            </div>
+            <div class="pagination">
+                @if ($posts->onFirstPage())
+                    <span class="pagination__link pagination__link--prev pagination__link--disabled">Trang đầu</span>
+                @else
+                    <a href="{{ $posts->previousPageUrl() }}" class="pagination__link pagination__link--prev">Trang cuối</a>
+                @endif
+
+                @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
+                    @if ($page == $posts->currentPage())
+                        <span class="pagination__link pagination__link--active">{{ $page }}</span>
+                    @else
+                        <a href="{{ $url }}" class="pagination__link">{{ $page }}</a>
+                    @endif
+                @endforeach
+
+                @if ($posts->hasMorePages())
+                    <a href="{{ $posts->nextPageUrl() }}" class="pagination__link pagination__link--next">Next</a>
+                @else
+                    <span class="pagination__link pagination__link--next pagination__link--disabled">Next</span>
+                @endif
+            </div>
+        </div>
+
+        <div class="d-flex-wrap grid-2 list-data hide-tab" id="reviews-tab">
+            @foreach($ratings as $rating)
+                <div class="comment-show">
+                    <a class="comment__avatar" href="#">
+                        <img class="img-circle img-sm"
+                             src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                             alt="Profile Picture">
+                    </a>
+                    <div class="media-body">
+                        <div class="comment__content">
+                            <div>
+                                {{ $rating->user->name }}
+                                <span class="text-muted text-sm">{{ $rating->remaining_days }}</span>
+                            </div>
+                            <div>
+                                {{ $rating->content }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
         </div>
     </div>
 
-    <div class="list-data hide-tab" id="posts-tab">
-        <div class="d-flex-wrap grid-4">
-            @forelse($posts as $post)
-                {{--                @include('component.post.post_card',['obj' => $post])--}}
-            @empty
-                <div class="notice-empty">
-                    <p>Chưa có tin vặt nào</p>
-                </div>
-            @endforelse
-        </div>
-    </div>
+    <style>
+        .bio-editor {
+            width: 100%;
+            min-height: 100px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+        
+        .bio-actions {
+            text-align: right;
+        }
+        
+        .btn-sm {
+            padding: 4px 10px;
+            font-size: 14px;
+        }
+        
+        .alert {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        
+        .alert-success {
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            color: #3c763d;
+        }
+        
+        .alert-danger {
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            color: #a94442;
+        }
 
-    <div class="d-flex-wrap grid-2 list-data hide-tab" id="reviews-tab">
-        @foreach($ratings as $rating)
-            <div class="comment-show">
-                <a class="comment__avatar" href="#">
-                    <img class="img-circle img-sm"
-                         src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                         alt="Profile Picture">
-                </a>
-                <div class="media-body">
-                    <div class="comment__content">
-                        <div>
-                            {{ $rating->user->name }}
-                            <span class="text-muted text-sm">{{ $rating->remaining_days }}</span>
-                        </div>
-                        <div>
-                            {{ $rating->content }}
-                        </div>
-                    </div>
-                    {{--        <div class="comment__action">--}}
-                    {{--            <em class="btn--reply" data-target="reply-form-{{$comment->id}}">Phản hồi</em>--}}
-                    {{--            <span class="text-muted text-sm">{{ $comment->remaining_days }}</span>--}}
-                    {{--        </div>--}}
-                    {{--        @include('component.comment.reply',['id'=> $comment->id, 'parent_id' => $comment->id, 'item_id' => $obj->id])--}}
+        .sidebar-content {
+            float: left;
+            width: 25%;
+            padding-right: 20px;
+        }
 
-                    {{-- @foreach($comment->children as $child)
-                        @include('component.comment.comment',['comment'=> $child])
-                    @endforeach --}}
-                </div>
-            </div>
-        @endforeach
-    </div>
-    @php
-        //dd($categories);
-    @endphp
-    <div class="pagination">
-        @if ($posts->onFirstPage())
-            <span class="pagination__link pagination__link--prev pagination__link--disabled">Trang đầu</span>
-        @else
-            <a href="{{ $posts->previousPageUrl() }}" class="pagination__link pagination__link--prev">Trang cuối</a>
-        @endif
+        .main-content {
+            float: left;
+            width: 75%;
+            min-height: 500px;
+        }
+        
+        .shop-categories {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .shop-categories li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .shop-categories li:last-child {
+            border-bottom: none;
+        }
+        
+        .shop-categories a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s ease;
+        }
+        
+        .shop-categories a:hover {
+            color: #007bff;
+        }
+        
+        .shop-categories .no-categories {
+            color: #999;
+            font-style: italic;
+        }
 
-        @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
-            @if ($page == $posts->currentPage())
-                <span class="pagination__link pagination__link--active">{{ $page }}</span>
-            @else
-                <a href="{{ $url }}" class="pagination__link">{{ $page }}</a>
-            @endif
-        @endforeach
-
-        @if ($posts->hasMorePages())
-            <a href="{{ $posts->nextPageUrl() }}" class="pagination__link pagination__link--next">Next</a>
-        @else
-            <span class="pagination__link pagination__link--next pagination__link--disabled">Next</span>
-        @endif
-    </div>
-{{--@endsection--}}
-
+        @media (max-width: 768px) {
+            .sidebar-content, .main-content {
+                float: none;
+                width: 100%;
+                padding-right: 0;
+            }
+            
+            .main-content {
+                min-height: 400px;
+            }
+        }
+    </style>
 </div>

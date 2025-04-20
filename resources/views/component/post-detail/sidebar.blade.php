@@ -5,7 +5,7 @@
         {{--        </div>--}}
         <div class="seller-profile ">
             <a class="SellerProfile_sellerWrapper__GlDwe" target="_blank" rel="nofollow"
-               href="{{route('user.show',['user'=>$obj->author->username])}}">
+               href="{{route('shop',['code'=>$obj->author->username])}}">
                 <div
                     class="img-thumbnail img-circle Avatar_imageWrapper__6tGNZ Avatar_defaultSize__a_WTh"></div>
                 <div class="SellerProfile_nameBounder__btDeS" role="button" tabindex="0">

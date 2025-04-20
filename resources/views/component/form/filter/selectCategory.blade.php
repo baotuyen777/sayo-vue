@@ -16,8 +16,8 @@
 <div class="dropdown">
     <button class="btn dropdown__button" type="button">
         <i class="sitemap"></i>
-        <span>{{$category['name'] ?? 'Tất cả danh mục'}}</span>
-        @if(isset($category['name']))
+        <span>{{$category->name ?? 'Tất cả danh mục'}}</span>
+        @if(isset($category->name))
             <a href="{{$urlClear}}" class="clear-link"><i class="close clear"></i></a>
         @endif
     </button>
@@ -31,9 +31,9 @@
                 <li><a href="{{$urlClear}}"
                        data-id="0"><i class="sitemap"></i><span>{{$first?? 'Tất cả'}}</span></a></li>
                 @foreach($options as $i=>$option)
-                    <li><a href="{{route($route ?? 'archive',array_merge($urlParams,['catCode'=>$option['code']]))}}"
-                           data-id="{{$option['id'] ?? $i}}"><i
-                                class="{{$option['code']}}"></i><span>{{$option['name'] ?? $option}}</span>
+                    <li><a href="{{route($route ?? 'archive',array_merge($urlParams,['catCode'=> (is_array($option) ? $option['code'] : $option->code) ]))}}"
+                           data-id="{{ is_array($option) ? ($option['id'] ?? $i) : ($option->id ?? $i) }}"><i
+                                class="{{ is_array($option) ? ($option['code'] ?? '') : ($option->code ?? '') }}"></i><span>{{ is_array($option) ? ($option['name'] ?? $option) : ($option->name ?? $option) }}</span>
                         </a></li>
                 @endforeach
             </ul>

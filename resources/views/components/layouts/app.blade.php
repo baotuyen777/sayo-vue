@@ -3,9 +3,9 @@
 <main>
     @include('layout.common.breadcrumb')
     <div @class('d-flex container gap-5')>
-        <aside @class('sidebar flex-20 ')>
+        <!-- <aside @class('sidebar flex-20 ')>
             @yield('sidebar')
-        </aside>
+        </aside> -->
         <div @class('flex-1')>
             {{ $slot }}
         </div>
