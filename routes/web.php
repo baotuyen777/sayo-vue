@@ -12,6 +12,7 @@ use App\Http\Controllers\Fe\ReviewController;
 use App\Http\Controllers\Fe\UserController;
 use App\Livewire\post\PostArchiveComponent;
 use App\Livewire\post\PostDetailComponent;
+use App\Livewire\product\ProductDetailComponent;
 use App\Livewire\Shop;
 use App\Livewire\user\UserIndexComponent;
 use App\Livewire\user\UserShowComponent;
@@ -70,7 +71,7 @@ Route::resource('comment', CommentController::class);
 //Route::get('/product/edit/{code}.htm', [ProductController::class, 'edit'])->name('productEdit');
 //Route::post('/product/edit/{code}.htm', [ProductController::class, 'update'])->name('productUpdate');
 //Route::put('/product/update-simple/{code}.htm', [ProductController::class, 'updateSimple'])->name('productUpdateSimple');
-Route::get('/xem-san-pham-{catCode?}/{code}.htm', [ProductController::class, 'show'])->where('catCode', '[A-Za-z0-9-]+')->name('productView');
+//Route::get('/xem-san-pham-{catCode?}/{code}.htm', [ProductController::class, 'show'])->where('catCode', '[A-Za-z0-9-]+')->name('productView');
 //Route::resource('product', ProductController::class);
 //Route::resource('/review', ReviewController::class);
 
@@ -87,6 +88,7 @@ Route::post('/user/{username}/update', [UserController::class, 'update'])->name(
 Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', PostArchiveComponent::class)->name('archive');
 //Route::get('/post/{code}', PostDetail::class)->name('post.detail');
 Route::get('/xem-tin-{catCode?}/{code?}.htm', PostDetailComponent::class)->where('catCode', '[A-Za-z0-9-]+')->name('postView');
+Route::get('/xem-san-pham-{catCode?}/{code}.htm', ProductDetailComponent::class)->where('catCode', '[A-Za-z0-9-]+')->name('productView');
 Route::get('shop/{code}', Shop::class)->name('shop');
 //Route::get('/users', UserComponent::class);
 //Route::get('/products', ProductComponent::class);

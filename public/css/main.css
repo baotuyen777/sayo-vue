@@ -2012,6 +2012,7 @@ footer {
   top: 0;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
+  background: #ffffff;
 }
 .portfolio__tab .children_menu {
   cursor: pointer;

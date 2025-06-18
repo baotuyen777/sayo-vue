@@ -217,9 +217,9 @@ $('.clear').click(function () {
     $(this).parents('form').submit();
 })
 
-$('body').find('a').click(function (e) {
-    toggleLoading();
-})
+// $('body').find('a').click(function (e) {
+//     toggleLoading();
+// })
 
 function toggleLoading() {
     $('.overlay').toggle();

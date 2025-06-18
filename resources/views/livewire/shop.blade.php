@@ -68,44 +68,95 @@
     </div>
 
     <div class="sidebar-content">
-        <section @class('card')>
-            <h2>Giới thiệu</h2>
-            <div class="card__body">
-                @if (isset($shop['id']) && isset(Auth::user()->id) && Auth::user()->id === $shop['id'])
-                    <div class="bio-form">
-                        @if ($successMessage)
-                            <div class="alert alert-success">
-                                {{ $successMessage }}
-                            </div>
-                        @endif
-                        
-                        @if (session()->has('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
-                        
-                        <textarea wire:model="bio" class="bio-editor"></textarea>
-                        <div class="bio-actions">
-                            <button type="button" wire:click="updateBio" class="btn btn-sm btn--primary">Lưu</button>
+        <section >
+            <div class="filter-block card">
+                <h3><i class="fas fa-list-ul"></i> Danh mục</h3>
+                <ul class="shop-categories">
+                    @forelse($shopCategories as $category)
+                        <li wire:key="category-{{ $category->id }}">
+                            <a href="#" wire:click.prevent="filterByCategory({{ $category->id }}, '{{ $category->code }}')" class="{{ $cat == $category->code ? 'active-category' : '' }}">
+                                {{ $category->name }}
+                            </a>
+                        </li>
+                    @empty
+                        <li class="no-categories">Shop chưa có danh mục sản phẩm nào</li>
+                    @endforelse
+                    @if($cat)
+                        <li wire:key="clear-filter">
+                            <a href="#" wire:click.prevent="clearCategoryFilter" class="clear-filter">
+                                Xem tất cả
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </div>
+            
+            <div class="filter-block card">
+                <h3><i class="fas fa-tags"></i> Giá</h3>
+                <div class="price-filter">
+                    @if($priceFrom || $priceTo)
+                        <div class="price-range-display">
+                            @if($priceFrom && $priceTo)
+                                <span>Từ {{ number_format($priceFrom, 0, ',', '.') }}₫ đến {{ number_format($priceTo, 0, ',', '.') }}₫</span>
+                            @elseif($priceFrom)
+                                <span>Từ {{ number_format($priceFrom, 0, ',', '.') }}₫</span>
+                            @elseif($priceTo)
+                                <span>Đến {{ number_format($priceTo, 0, ',', '.') }}₫</span>
+                            @endif
+                        </div>
+                    @endif
+                    <div class="price-slider-container">
+                        <div class="price-slider">
+                            <input type="range" 
+                                   wire:model.defer="priceFrom" 
+                                   min="0" 
+                                   max="10000000" 
+                                   step="100000"
+                                   class="price-range-slider"
+                                   id="priceFrom"
+                                   value="{{ $priceFrom ?? 0 }}">
+                            <input type="range" 
+                                   wire:model.defer="priceTo" 
+                                   min="0" 
+                                   max="10000000" 
+                                   step="100000"
+                                   class="price-range-slider"
+                                   id="priceTo"
+                                   value="{{ $priceTo ?? 10000000 }}">
+                        </div>
+                        <div class="price-slider-values">
+                            <span>{{ $priceFrom ? number_format($priceFrom, 0, ',', '.') . '₫' : '0₫' }}</span>
+                            <span>{{ $priceTo ? number_format($priceTo, 0, ',', '.') . '₫' : '10.000.000₫' }}</span>
                         </div>
                     </div>
-                @else
-                    {{$shop->bio??''}}
-                @endif
+                    <div class="price-actions">
+                        <button wire:click="updatePriceFilter" class="btn btn-sm btn--primary price-apply-btn">Áp dụng</button>
+                        @if($priceFrom || $priceTo)
+                            <button wire:click="clearPriceFilter" class="btn btn-sm btn--link clear-filter">Xóa</button>
+                        @endif
+                    </div>
+                </div>
             </div>
-            <h2>Danh mục</h2>
-            <ul class="shop-categories">
-                @forelse($shopCategories as $category)
-                    <li>
-                        <a href="{{ route('archive', ['catCode' => $category->code, 'author_id' => $shop['id']]) }}">
-                            {{ $category->name }}
-                        </a>
-                    </li>
-                @empty
-                    <li class="no-categories">Shop chưa có danh mục sản phẩm nào</li>
-                @endforelse
-            </ul>
+            
+            <div class="filter-block card">
+                <h3><i class="fas fa-search"></i> Tìm kiếm</h3>
+                <div class="keyword-search">
+                    @if($keyword)
+                        <div class="keyword-display">
+                            <span>Tìm kiếm: "{{ $keyword }}"</span>
+                        </div>
+                    @endif
+                    <div class="keyword-input-container">
+                        <input type="text" wire:model.defer="keyword" placeholder="Nhập từ khóa..." class="keyword-input">
+                    </div>
+                    <div class="keyword-actions">
+                        <button wire:click="updateKeywordSearch" class="btn btn-sm btn--primary keyword-search-btn">Tìm kiếm</button>
+                        @if($keyword)
+                            <button wire:click="clearKeywordSearch" class="btn btn-sm btn--link clear-filter">Xóa</button>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 
@@ -129,39 +180,58 @@
             @endforeach
         </section>
         
-        <div class="list-data" id="products-tab">
-            @include('component.form.filter.index')
-            <div class="d-flex-wrap grid-4 ">
-                @foreach($products as $product)
-                    @include('component.product.product_card',['obj' => $product])
-                @endforeach
+        {{-- Sort Bar --}}
+        <div class="sort-bar">
+            <span class="sort-label">Sắp xếp theo</span>
+            <button class="sort-btn {{ $sortBy === 'popular' ? 'active' : '' }}" wire:click="setSort('popular')">Phổ Biến</button>
+            <button class="sort-btn {{ $sortBy === 'newest' ? 'active' : '' }}" wire:click="setSort('newest')">Mới Nhất</button>
+            <button class="sort-btn {{ $sortBy === 'bestseller' ? 'active' : '' }}" wire:click="setSort('bestseller')">Bán Chạy</button>
+            <div class="sort-dropdown">
+                <button class="sort-btn {{ $sortBy === 'price' ? 'active' : '' }}" id="sortPriceBtn">
+                    Giá <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="sort-dropdown-content">
+                    <a href="#" wire:click.prevent="setSort('price', 'asc')">Thấp đến cao</a>
+                    <a href="#" wire:click.prevent="setSort('price', 'desc')">Cao đến thấp</a>
+                </div>
+            </div>
+            <div class="sort-dropdown">
+                <button class="sort-btn {{ $sortBy === 'name' ? 'active' : '' }}" id="sortNameBtn">
+                    Tên <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="sort-dropdown-content">
+                    <a href="#" wire:click.prevent="setSort('name', 'asc')">A - Z</a>
+                    <a href="#" wire:click.prevent="setSort('name', 'desc')">Z - A</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-data" id="products-tab" wire:loading.class="is-loading">
+            <div class="loading-overlay" wire:loading>
+                <div class="spinner"></div>
+            </div>
+            <div class="d-flex-wrap grid-4 " wire:key="products-grid">
+                @if(count($products) > 0)
+                    @foreach($products as $product)
+                        @include('component.product.product_card',['obj' => $product])
+                    @endforeach
+                @else
+                    <div class="notice-empty">
+                        <p>Không tìm thấy sản phẩm nào</p>
+                    </div>
+                @endif
             </div>
             @if(method_exists($products, 'links'))
             <div class="pagination">
-                @if ($products->onFirstPage())
-                    <span class="pagination__link pagination__link--prev pagination__link--disabled">Trang đầu</span>
-                @else
-                    <a href="{{ $products->previousPageUrl() }}" class="pagination__link pagination__link--prev">Trang trước</a>
-                @endif
-
-                @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
-                    @if ($page == $products->currentPage())
-                        <span class="pagination__link pagination__link--active">{{ $page }}</span>
-                    @else
-                        <a href="{{ $url }}" class="pagination__link">{{ $page }}</a>
-                    @endif
-                @endforeach
-
-                @if ($products->hasMorePages())
-                    <a href="{{ $products->nextPageUrl() }}" class="pagination__link pagination__link--next">Trang sau</a>
-                @else
-                    <span class="pagination__link pagination__link--next pagination__link--disabled">Trang sau</span>
-                @endif
+                {{ $products->appends(['cat' => $cat, 'priceFrom' => $priceFrom, 'priceTo' => $priceTo, 'keyword' => $keyword])->links() }}
             </div>
             @endif
         </div>
 
-        <div class="list-data hide-tab" id="posts-tab">
+        <div class="list-data hide-tab" id="posts-tab" wire:loading.class="is-loading">
+            <div class="loading-overlay" wire:loading>
+                <div class="spinner"></div>
+            </div>
             <div class="d-flex-wrap grid-4">
                 @forelse($posts as $post)
                                     @include('component.post.post_card',['obj' => $post])
@@ -172,25 +242,7 @@
                 @endforelse
             </div>
             <div class="pagination">
-                @if ($posts->onFirstPage())
-                    <span class="pagination__link pagination__link--prev pagination__link--disabled">Trang đầu</span>
-                @else
-                    <a href="{{ $posts->previousPageUrl() }}" class="pagination__link pagination__link--prev">Trang cuối</a>
-                @endif
-
-                @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
-                    @if ($page == $posts->currentPage())
-                        <span class="pagination__link pagination__link--active">{{ $page }}</span>
-                    @else
-                        <a href="{{ $url }}" class="pagination__link">{{ $page }}</a>
-                    @endif
-                @endforeach
-
-                @if ($posts->hasMorePages())
-                    <a href="{{ $posts->nextPageUrl() }}" class="pagination__link pagination__link--next">Next</a>
-                @else
-                    <span class="pagination__link pagination__link--next pagination__link--disabled">Next</span>
-                @endif
+                {{ $posts->links() }}
             </div>
         </div>
 
@@ -268,6 +320,29 @@
             min-height: 500px;
         }
         
+        .filter-block {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .filter-block:last-child {
+            border-bottom: none;
+        }
+
+        .filter-block h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-block h3 i {
+            font-size: 17px;
+        }
+
         .shop-categories {
             list-style: none;
             padding: 0;
@@ -288,6 +363,7 @@
             text-decoration: none;
             display: block;
             transition: color 0.2s ease;
+            padding: 4px 0;
         }
         
         .shop-categories a:hover {
@@ -297,6 +373,139 @@
         .shop-categories .no-categories {
             color: #999;
             font-style: italic;
+        }
+        
+        .shop-categories a.active-category {
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        .shop-categories a.clear-filter {
+            color: #dc3545;
+            font-size: 0.9em;
+        }
+        
+        .shop-categories a.clear-filter:hover {
+            color: #c82333;
+            text-decoration: underline;
+        }
+
+        .price-filter {
+            margin-bottom: 0;
+        }
+        
+        .price-range-display {
+            background-color: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #007bff;
+        }
+        
+        .price-slider-container {
+            padding: 20px 10px;
+            margin-bottom: 15px;
+        }
+        
+        .price-slider {
+            position: relative;
+            width: 100%;
+            height: 5px;
+            background: #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .price-range-slider {
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: none;
+            pointer-events: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        
+        .price-range-slider::-webkit-slider-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+            margin-top: -8px;
+            pointer-events: auto;
+            -webkit-appearance: none;
+        }
+        
+        .price-range-slider::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+            pointer-events: auto;
+            -moz-appearance: none;
+        }
+        
+        .price-slider-values {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .price-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .keyword-search {
+            margin-bottom: 0;
+        }
+        
+        .keyword-display {
+            background-color: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #007bff;
+        }
+        
+        .keyword-input-container {
+            margin-bottom: 15px;
+        }
+        
+        .keyword-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .keyword-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .btn--link {
+            background: none;
+            border: none;
+            color: #dc3545;
+            padding: 0;
+            font-size: 14px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .btn--link:hover {
+            color: #c82333;
         }
 
         @media (max-width: 768px) {
@@ -310,5 +519,160 @@
                 min-height: 400px;
             }
         }
+        
+        .is-loading {
+            position: relative;
+            min-height: 200px;
+            opacity: 0.6;
+        }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .sort-bar {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            padding: 18px 24px 18px 24px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+            gap: 10px;
+        }
+        .sort-label {
+            font-weight: 500;
+            color: #888;
+            margin-right: 10px;
+        }
+        .sort-btn {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 7px 18px;
+            margin-right: 8px;
+            font-size: 15px;
+            color: #333;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+        .sort-btn.active, .sort-btn:hover {
+            background: #ff7337;
+            color: #fff;
+            border-color: #ff7337;
+        }
+        .sort-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .sort-dropdown-content {
+            display: none;
+            position: absolute;
+            background: #fff;
+            min-width: 140px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            z-index: 10;
+            border-radius: 4px;
+            overflow: hidden;
+            top: 100%;
+            left: 0;
+        }
+        .sort-dropdown:hover .sort-dropdown-content {
+            display: block;
+        }
+        .sort-dropdown-content a {
+            color: #333;
+            padding: 10px 18px;
+            text-decoration: none;
+            display: block;
+            font-size: 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .sort-dropdown-content a:hover {
+            background: #ff7337;
+            color: #fff;
+        }
+        .sort-btn i {
+            margin-left: 6px;
+            font-size: 13px;
+        }
     </style>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.children_menu');
+            const tabContents = document.querySelectorAll('.list-data');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove activelink class from all tabs
+                    tabs.forEach(t => t.classList.remove('activelink'));
+                    
+                    // Add activelink class to clicked tab
+                    this.classList.add('activelink');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => {
+                        content.classList.add('hide-tab');
+                    });
+                    
+                    // Show the selected tab content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.remove('hide-tab');
+                });
+            });
+
+            const priceFrom = document.getElementById('priceFrom');
+            const priceTo = document.getElementById('priceTo');
+
+            function updatePriceRange() {
+                const from = parseInt(priceFrom.value);
+                const to = parseInt(priceTo.value);
+
+                if (from > to) {
+                    const temp = from;
+                    priceFrom.value = to;
+                    priceTo.value = temp;
+                }
+
+                // Update the displayed values
+                const fromDisplay = document.querySelector('.price-slider-values span:first-child');
+                const toDisplay = document.querySelector('.price-slider-values span:last-child');
+                
+                fromDisplay.textContent = from ? from.toLocaleString('vi-VN') + '₫' : '0₫';
+                toDisplay.textContent = to ? to.toLocaleString('vi-VN') + '₫' : '10.000.000₫';
+            }
+
+            // Set initial values if not set
+            if (!priceFrom.value) priceFrom.value = 0;
+            if (!priceTo.value) priceTo.value = 10000000;
+
+            priceFrom.addEventListener('input', updatePriceRange);
+            priceTo.addEventListener('input', updatePriceRange);
+        });
+    </script>
 </div>

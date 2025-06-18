@@ -71,7 +71,7 @@
 
 
                     <div class="d-flex justify-content-center gap-10">
-                        <a class="btn btn-back" href="{{route('user.show',['user'=>Auth()->user()->username])}}">
+                        <a class="btn btn-back" href="{{route('shop',['code'=>Auth()->user()->username])}}">
                             Về danh sách</a>
                         <button class="btn--primary btn-submit">
                             {{isset($obj['id']) ? 'Lưu thay đổi' : 'ĐĂNG TIN' }}

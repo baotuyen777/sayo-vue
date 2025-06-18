@@ -33,6 +33,12 @@ return new class extends Migration {
             $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
 
+            $table->unsignedBigInteger('province_id')->nullable();
+            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('set null');
+
+            $table->unsignedBigInteger('ward_id')->nullable();
+            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('set null');
+
             $table->timestamps();
         });
     }

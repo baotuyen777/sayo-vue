@@ -12,6 +12,7 @@ main {
     justify-content: space-between;
 }
 
+
 .sidebar {
     position: relative;
     margin-right: 10px;
@@ -221,6 +222,7 @@ footer {
     top: 0;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
+    background: $white;
     .children_menu {
         cursor: pointer;
         -webkit-user-select: none;

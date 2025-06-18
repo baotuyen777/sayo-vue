@@ -34,6 +34,7 @@
 {{--    @include('layout.common.social')--}}
 {{--@endif--}}
 @livewireScripts
+
 </body>
 </html>
 

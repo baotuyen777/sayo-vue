@@ -5,7 +5,7 @@
     @endphp
     <div class="form-review separate">
         <form
-            action="{{$isUpdate ? route('review.update',['review'=> $id]) : route('review.store') }}"
+{{--            action="{{$isUpdate ? route('review.update',['review'=> $id]) : route('review.store') }}"--}}
             class="form-ajax" method="POST" data-id="{{$id}}"
             enctype="multipart/form-data">
             @csrf

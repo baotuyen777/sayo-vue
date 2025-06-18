@@ -1,5 +1,6 @@
 @php
     $detailLink =  route('productView',['catCode'=>$obj['category']['code'],'code'=>$obj['code']]);
+
     $bg= $obj['avatar']['url'] ?? asset('img/sayo-default-vertical.webp');
 @endphp
 
