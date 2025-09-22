@@ -1,8 +1,11 @@
     <div class="form-textarea1 form-control1 form-control-{{$name}}">
 {{--        <div class="focus-capture"></div>--}}
         <textarea class="required sodjbf4 tinymce" inputmode="text"
-                  id="field-{{$name}}" name="{{$name}}" placeholder="{{$placeholder}}">{{$obj[$name] ?? ''}}</textarea>
+                  id="field-{{$name}}" name="{{$name}}" wire:model="obj.{{$name}}" placeholder="{{$placeholder}}">{{$obj[$name] ?? ''}}</textarea>
         <label for="field-{{$name}}">Mô tả chi tiết</label>
+        @error('obj.'.$name)
+        <p class="error-message">{{ $message }}</p>
+        @enderror
         <p class="validate validate-{{$name}}"></p>
     </div>
 

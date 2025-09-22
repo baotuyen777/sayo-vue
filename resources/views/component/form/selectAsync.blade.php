@@ -3,7 +3,7 @@
         <input class="minput" placeholder="{{$placeholder ??''}}" value="{{$valueLabel ?? ''}}"
                inputmode="{{$inputmode ?? 'text'}}" maxlength="{{$maxleng ?? '' }}">
         <label class="selection__label" for="{{$name}}">{{$label}}</label>
-        <input class="input" type="hidden" name="{{$name}}" value="{{ $obj[$name] ?? old($name) }}">
+        <input class="input" type="hidden" name="{{$name}}" wire:model="obj.{{$name}}" value="{{ $obj[$name] ?? old($name) }}">
         <ul class="selection__list">
             @foreach($options as $option)
                 <li data-id="{{$option['id']}}">{{$option['name']}}</li>
@@ -36,7 +36,7 @@
                 </svg>
             </button>
         @endif
-        @error($name)
+        @error('obj.'.$name)
         <p>{{ $message }}</p>
         @enderror
         <p class="validate validate-{{$name}}"></p>

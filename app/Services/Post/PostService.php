@@ -33,25 +33,27 @@ class PostService
         ];
     }
 
-    public function store($request)
+    public function store($param)
     {
         if (!isLoged()) {
             return redirect()->route('login');
         }
 
         $userid = Auth::id();
-
-        $request->merge([
-            'code' => time() . '-' . $userid,
+        $param= [...$param,'code' => time() . '-' . $userid,
             'author_id' => $userid,
-            'attr' => str_replace(['\"', '%22'], '', json_encode($request['attr'])),
-        ]);
-        $files = $request['file_ids'];
+            'attr' => str_replace(['\"', '%22'], '', json_encode($param['attr'] ?? '')),];
+//        $request->merge([
+//            'code' => time() . '-' . $userid,
+//            'author_id' => $userid,
+//            'attr' => str_replace(['\"', '%22'], '', json_encode($request['attr'])),
+//        ]);
+        $files = $param['file_ids'] ?? [];
         if ($files) {
-            $request->merge(['avatar_id' => $files[0]]);
+            $param['avatar_id'] = $files[0];
         }
 
-        $obj = Post::query()->create($request->all());
+        $obj = Post::query()->create($param);
         if ($obj && $files) {
             $obj->files()->sync($files);
         }
@@ -65,10 +67,10 @@ class PostService
 
         if ($author) {
             $address = [
-                'province_id' => $request['province_id'],
-                'district_id' => $request['district_id'],
-                'ward_id' => $request['ward_id'],
-                'address' => $request['address']
+                'province_id' => $param['province_id'],
+                'district_id' => $param['district_id'],
+                'ward_id' => $param['ward_id'],
+                'address' => $param['address']
             ];
             $author->update($address);
         }
@@ -107,7 +109,7 @@ class PostService
         $wards = $post ? Ward::whereDistrictId($post->district_id)->get()->keyBy('id') : [];
 
         $categoryFields = Post::$categoryFields;
-        $catCode = getCategoryCode($post->category_id);
+        $catCode = getCategoryCode($post->category_id ?? '');
 
         $fields = $categoryFields[$catCode] ?? [];
         $attrs = Post::$attr;
@@ -166,6 +168,7 @@ class PostService
         //        $res['objs'] = $objs;
         return Post::getAll($where);
     }
+
     function getRelationOptions($where): array
     {
         $res = [
@@ -193,7 +196,7 @@ class PostService
         if ($provinceCode && $province) {
             $res['province'] = $province;
             $res['districts'] = District::getAll()->where('province_id', $province->id);
-            $district = $res['districts']->firstWhere('code',$districtCode );
+            $district = $res['districts']->firstWhere('code', $districtCode);
             if ($district) {
                 $res['district'] = $district;
                 $res['wards'] = Ward::getAll()->where('district_id', $district->id);
@@ -272,9 +275,9 @@ class PostService
 
     public function populateSellerAddress($user, $obj = [])
     {
-        $province = Province::getAll()->get($user->province_id);
+        $province = isset($user->province_id) ? Province::getAll()->get($user->province_id) : [];
         $district = District::getAll()->get($user->district_id);
-        $ward = Ward::getAll()->get($user->ward_id);
+        $ward = isset($user->ward_id) ? Ward::getAll()->get($user->ward_id) : [];
         return array_merge([
             'province_name' => $province->name ?? '',
             'province_id' => $province->id ?? '',

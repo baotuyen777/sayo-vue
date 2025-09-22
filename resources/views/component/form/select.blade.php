@@ -12,7 +12,7 @@
 @endphp
 
 <div class="form-control form-control-{{$name}}  @error($name) error @enderror">
-    <select class="select mselect isDropdown hasValue required" name="{{$name}}">
+    <select class="select mselect isDropdown hasValue required" name="{{$name}}" wire:model="obj.{{$name}}">
         <option value=""></option>
 
         @foreach($options as $k => $option)
@@ -39,7 +39,7 @@
     </svg>
 
     <p class="helptext "></p>
-    @error($name)
+    @error('obj.'.$name)
     <p class="mocked-styled-10 ">{{ $message }}</p>
     <p>{{ $message }}</p>
     @enderror

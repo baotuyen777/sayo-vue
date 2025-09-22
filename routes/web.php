@@ -1,23 +1,25 @@
 <?php
 
-use App\Http\Controllers\Fe\OrdersController;
-use App\Http\Controllers\Fe\PdwController;
 use App\Http\Controllers\Fe\AuthController;
 use App\Http\Controllers\Fe\CommentController;
 use App\Http\Controllers\Fe\HomeController;
+use App\Http\Controllers\Fe\OrdersController;
+use App\Livewire\order\OrderCreateComponent;
+use App\Livewire\order\OrderListComponent;
+use App\Livewire\order\OrderShowComponent;
 use App\Http\Controllers\Fe\PasswordResetController;
+use App\Http\Controllers\Fe\PdwController;
 use App\Http\Controllers\Fe\PostController;
-use App\Http\Controllers\Fe\ProductController;
-use App\Http\Controllers\Fe\ReviewController;
 use App\Http\Controllers\Fe\UserController;
 use App\Livewire\post\PostArchiveComponent;
 use App\Livewire\post\PostDetailComponent;
+use App\Livewire\post\PostFormComponent;
 use App\Livewire\product\ProductDetailComponent;
 use App\Livewire\Shop;
-use App\Livewire\user\UserIndexComponent;
-use App\Livewire\user\UserShowComponent;
 use App\Livewire\user\UserEditComponent;
+use App\Livewire\user\UserIndexComponent;
 use App\Livewire\user\UserProfileComponent;
+use App\Livewire\user\UserShowComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,8 +61,7 @@ Route::get('/profile', UserProfileComponent::class)->name('profile');
 ////Route::post('/post/edit/{code}.htm', [PostController::class, 'update'])->name('postUpdate');
 ////Route::put('/post/update-simple/{code}.htm', [PostController::class, 'updateSimple'])->name('postUpdateSimple');
 Route::get('/get-attrs/{catCode?}', [PostController::class, 'getAttrs'])->name('getPostAttrs');
-Route::get('/dang-tin', [PostController::class, 'create'])->name('publicPost');
-Route::post('/dang-tin', [PostController::class, 'store'])->name('storePost');
+Route::get('/dang-tin/{code?}', PostFormComponent::class)->middleware('auth')->name('publicPost');
 //Route::get('/mua-ban/{catCode?}/{provinceCode?}/{districtCode?}/{wardCode?}', [PostController::class, 'archive'])->name('archive');
 //Route::get('/xem-tin-{catCode?}/{code?}.htm', [PostController::class, 'show'])->where('catCode', '[A-Za-z0-9-]+')->name('postView');
 ////Route::resource('post', PostController::class);
@@ -78,7 +79,16 @@ Route::resource('comment', CommentController::class);
 Route::get('getDistricts/{provinceId?}', [PdwController::class,'getDistricts'])->name('getDistricts');
 Route::get('getWards/{districtId?}', [PdwController::class,'getWards'])->name('getWards');
 
-Route::resource('order', OrdersController::class);
+//Route::get('/order', \App\Livewire\order\OrderListComponent::class)->name('order.list');
+Route::get('/order/me', \App\Livewire\order\MyOrderComponent::class)->name('order.me');
+
+// Order routes using Livewire components
+Route::get('/order', OrderListComponent::class)->name('order.index');
+Route::get('/order/create', OrderCreateComponent::class)->middleware('auth')->name('order.create');
+Route::get('/order/{code}', OrderShowComponent::class)->name('order.show');
+
+// Legacy route for seller store (kept for compatibility)
+Route::post('/sellerStore', [OrdersController::class, 'sellerStore'])->name('sellerStore');
 
 // Bio update route
 Route::post('/user/{username}/update', [UserController::class, 'update'])->name('user.update');

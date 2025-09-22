@@ -11,10 +11,10 @@
         @endauth
     </div>
     @auth
-{{--        <a href="{{route('order.me')}}">--}}
-{{--            <img src="{{asset('img/icon/icon_bag.svg')}}" alt="Lịch sử mua hàng">--}}
-{{--            <span>Lịch sử mua hàng</span>--}}
-{{--        </a>--}}
+        <a href="{{route('order.me')}}">
+            <img src="{{asset('img/icon/icon_bag.svg')}}" alt="Lịch sử mua hàng">
+            <span>Lịch sử mua hàng</span>
+        </a>
         @if(isAdmin())
             {{--            <a href="{{route('user.show',['user'=>Auth()->user()->username])}}">--}}
 {{--            <a href="{{route('post.index')}}">--}}

@@ -170,7 +170,7 @@ class Post extends Model
     {
         $time = config('app.enable_cache') ? 30 * 60 * 24 : 0;
         $obj = Cache::remember(self::CACHE_KEY . $code, $time, function () use ($code, $isFull, $populateExtendField) {
-            $query = Post::select('*')->where('code', $code);
+            $query = Product::select('*')->where('code', $code);
             if ($isFull) {
                 $query->with('avatar')
                     ->with('files')

@@ -15,6 +15,7 @@
           content="Sayo - Website mua bán rao vặt của người Việt với hàng ngàn món hời đang được rao bán mỗi ngày. Đăng tin mua bán UY TÍN, NHANH CHÓNG, AN TOÀN.">
     <link rel="icon" href="/favicon.ico" sizes="32x32"/>
     <link rel="stylesheet" href="{{asset('')}}/css/main.css" type="text/css">
+    <link rel="stylesheet" href="{{asset('')}}/css/raw.css" type="text/css">
     {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
     {{--    <script src='https://icybernet.vn/wp-includes/js/jquery/jquery.min.js?ver=3.6.1' id='jquery-core-js'></script>--}}
     <script src="{{env('PRODUCTION')?'https://code.jquery.com': asset('').'/js/libs/'}}/jquery-1.12.4.min.js"

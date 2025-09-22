@@ -15,6 +15,8 @@ if($obj->address){
                         </div>
                         <button type="button" class="btn--oval">Lưu tin
                             <img height="20" src="{{asset('/img/icon/heart.svg')}}" alt="like"></button>
+                        <button wire:click="createOrder" class="btn btn--primary">Đặt hàng
+                            <img height="20" src="{{asset('/img/icon/cart.svg')}}" alt="cart"></button>
                     </div>
 
                     <div class="post-detail__content">{!! $obj['content'] !!}</div>
@@ -56,6 +58,28 @@ if($obj->address){
                 </div>
             </div>
         </div>
+
+        <!-- Order Modal -->
+        @if($showOrderModal)
+        <div class="order-modal-overlay">
+            <div class="order-modal-content">
+                <div class="order-modal-header">
+                    <h3 class="{{ $orderSuccess ? 'text-success' : 'text-danger' }}">
+                        {{ $orderSuccess ? 'Thành công!' : 'Thông báo' }}
+                    </h3>
+                </div>
+                <div class="order-modal-body">
+                    <p>{{ $orderMessage }}</p>
+                </div>
+                <div class="order-modal-footer">
+                    @if($orderSuccess)
+                        <a href="{{ route('order.me') }}" class="btn btn--primary">Xem đơn hàng</a>
+                    @endif
+                    <button wire:click="closeOrderModal" class="btn btn--gray">Đóng</button>
+                </div>
+            </div>
+        </div>
+        @endif
     </main>
 @push('js')
     <script src='{{ asset('js/slider.js')}}'></script>

@@ -213,7 +213,6 @@
 
 }
 .btn {
-    display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
@@ -230,7 +229,6 @@
     &:hover {
         background: $gray-light;
         color: $white;
-
     }
 
     i {
@@ -361,7 +359,11 @@
         }
     }
 }
-
+.btn-group{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
 .btn-sm, .btn-group-sm > .btn, .btn-icon.btn-sm {
     padding: 5px 10px !important;
 }

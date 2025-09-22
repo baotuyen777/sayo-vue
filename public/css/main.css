@@ -1,4 +1,13 @@
 @charset "UTF-8";
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 10px;
+}
+
 h1 {
   font-size: 16px;
   font-weight: 700;
@@ -7,7 +16,11 @@ h1 {
 }
 
 h4 {
-  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+h5 {
+  font-size: 1.2rem;
 }
 
 .main-header {
@@ -50,7 +63,7 @@ h4 {
   width: calc(100% - 40px);
 }
 .main-header .search-form button {
-  height: 28px;
+  height: 35px;
 }
 .main-header .nav-quick-button {
   display: flex;
@@ -793,6 +806,8 @@ h4 {
 }
 .row > div {
   float: left;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .col-md-4, .col-md-8 {
@@ -886,12 +901,69 @@ h4 {
   border-radius: 50%;
 }
 
+/* Additional utility classes */
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.badge-warning {
+  color: #fff;
+  background-color: #ffc107;
+}
+
+.badge-info {
+  color: #fff;
+  background-color: #17a2b8;
+}
+
+.badge-success {
+  color: #fff;
+  background-color: #28a745;
+}
+
+.btn--success {
+  background-color: #28a745;
+  color: white;
+  border: 1px solid #28a745;
+}
+
+.btn--success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.me-2 {
+  margin-right: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.py-5 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
 @media (max-width: 991px) {
   .grid-2 > div {
     width: 30%;
   }
-  .grid-3 > div {
+  .grid-3 > * {
     width: 50%;
+    flex: 1 0 45%;
   }
   .grid-6 > div {
     flex: 1 0 calc(30% - 20px);
@@ -1132,7 +1204,6 @@ h4 {
 }
 
 .btn {
-  display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
@@ -1248,6 +1319,12 @@ h4 {
 }
 .btn--gray:active svg {
   fill: #ffffff;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .btn-sm, .btn-group-sm > .btn, .btn-icon.btn-sm {

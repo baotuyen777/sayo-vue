@@ -90,7 +90,7 @@
                     @endif
                 </ul>
             </div>
-            
+
             <div class="filter-block card">
                 <h3><i class="fas fa-tags"></i> Giá</h3>
                 <div class="price-filter">
@@ -107,18 +107,18 @@
                     @endif
                     <div class="price-slider-container">
                         <div class="price-slider">
-                            <input type="range" 
-                                   wire:model.defer="priceFrom" 
-                                   min="0" 
-                                   max="10000000" 
+                            <input type="range"
+                                   wire:model.defer="priceFrom"
+                                   min="0"
+                                   max="10000000"
                                    step="100000"
                                    class="price-range-slider"
                                    id="priceFrom"
                                    value="{{ $priceFrom ?? 0 }}">
-                            <input type="range" 
-                                   wire:model.defer="priceTo" 
-                                   min="0" 
-                                   max="10000000" 
+                            <input type="range"
+                                   wire:model.defer="priceTo"
+                                   min="0"
+                                   max="10000000"
                                    step="100000"
                                    class="price-range-slider"
                                    id="priceTo"
@@ -137,7 +137,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="filter-block card">
                 <h3><i class="fas fa-search"></i> Tìm kiếm</h3>
                 <div class="keyword-search">
@@ -179,7 +179,7 @@
                 </div>
             @endforeach
         </section>
-        
+
         {{-- Sort Bar --}}
         <div class="sort-bar">
             <span class="sort-label">Sắp xếp theo</span>
@@ -280,28 +280,28 @@
             resize: vertical;
             margin-bottom: 10px;
         }
-        
+
         .bio-actions {
             text-align: right;
         }
-        
+
         .btn-sm {
             padding: 4px 10px;
             font-size: 14px;
         }
-        
+
         .alert {
             padding: 10px;
             margin-bottom: 15px;
             border-radius: 4px;
         }
-        
+
         .alert-success {
             background-color: #dff0d8;
             border-color: #d6e9c6;
             color: #3c763d;
         }
-        
+
         .alert-danger {
             background-color: #f2dede;
             border-color: #ebccd1;
@@ -319,7 +319,7 @@
             width: 75%;
             min-height: 500px;
         }
-        
+
         .filter-block {
             padding: 20px;
             border-bottom: 1px solid #eee;
@@ -348,16 +348,16 @@
             padding: 0;
             margin: 0;
         }
-        
+
         .shop-categories li {
             padding: 8px 0;
             border-bottom: 1px solid #f0f0f0;
         }
-        
+
         .shop-categories li:last-child {
             border-bottom: none;
         }
-        
+
         .shop-categories a {
             color: #333;
             text-decoration: none;
@@ -365,26 +365,26 @@
             transition: color 0.2s ease;
             padding: 4px 0;
         }
-        
+
         .shop-categories a:hover {
             color: #007bff;
         }
-        
+
         .shop-categories .no-categories {
             color: #999;
             font-style: italic;
         }
-        
+
         .shop-categories a.active-category {
             color: #007bff;
             font-weight: bold;
         }
-        
+
         .shop-categories a.clear-filter {
             color: #dc3545;
             font-size: 0.9em;
         }
-        
+
         .shop-categories a.clear-filter:hover {
             color: #c82333;
             text-decoration: underline;
@@ -393,7 +393,7 @@
         .price-filter {
             margin-bottom: 0;
         }
-        
+
         .price-range-display {
             background-color: #f8f9fa;
             padding: 8px 12px;
@@ -402,12 +402,12 @@
             font-size: 14px;
             color: #007bff;
         }
-        
+
         .price-slider-container {
             padding: 20px 10px;
             margin-bottom: 15px;
         }
-        
+
         .price-slider {
             position: relative;
             width: 100%;
@@ -416,7 +416,7 @@
             border-radius: 5px;
             margin: 20px 0;
         }
-        
+
         .price-range-slider {
             position: absolute;
             width: 100%;
@@ -426,7 +426,7 @@
             -webkit-appearance: none;
             -moz-appearance: none;
         }
-        
+
         .price-range-slider::-webkit-slider-thumb {
             height: 20px;
             width: 20px;
@@ -437,7 +437,7 @@
             pointer-events: auto;
             -webkit-appearance: none;
         }
-        
+
         .price-range-slider::-moz-range-thumb {
             height: 20px;
             width: 20px;
@@ -447,7 +447,7 @@
             pointer-events: auto;
             -moz-appearance: none;
         }
-        
+
         .price-slider-values {
             display: flex;
             justify-content: space-between;
@@ -455,18 +455,18 @@
             font-size: 14px;
             color: #666;
         }
-        
+
         .price-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 15px;
         }
-        
+
         .keyword-search {
             margin-bottom: 0;
         }
-        
+
         .keyword-display {
             background-color: #f8f9fa;
             padding: 8px 12px;
@@ -475,11 +475,11 @@
             font-size: 14px;
             color: #007bff;
         }
-        
+
         .keyword-input-container {
             margin-bottom: 15px;
         }
-        
+
         .keyword-input {
             width: 100%;
             padding: 8px 12px;
@@ -487,13 +487,13 @@
             border-radius: 4px;
             font-size: 14px;
         }
-        
+
         .keyword-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .btn--link {
             background: none;
             border: none;
@@ -503,7 +503,7 @@
             text-decoration: underline;
             cursor: pointer;
         }
-        
+
         .btn--link:hover {
             color: #c82333;
         }
@@ -514,18 +514,18 @@
                 width: 100%;
                 padding-right: 0;
             }
-            
+
             .main-content {
                 min-height: 400px;
             }
         }
-        
+
         .is-loading {
             position: relative;
             min-height: 200px;
             opacity: 0.6;
         }
-        
+
         .loading-overlay {
             position: absolute;
             top: 0;
@@ -538,7 +538,7 @@
             align-items: center;
             z-index: 10;
         }
-        
+
         .spinner {
             width: 40px;
             height: 40px;
@@ -547,7 +547,7 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -619,27 +619,27 @@
             font-size: 13px;
         }
     </style>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tabs = document.querySelectorAll('.children_menu');
             const tabContents = document.querySelectorAll('.list-data');
-            
+
             tabs.forEach(tab => {
                 tab.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
+
                     // Remove activelink class from all tabs
                     tabs.forEach(t => t.classList.remove('activelink'));
-                    
+
                     // Add activelink class to clicked tab
                     this.classList.add('activelink');
-                    
+
                     // Hide all tab contents
                     tabContents.forEach(content => {
                         content.classList.add('hide-tab');
                     });
-                    
+
                     // Show the selected tab content
                     const tabId = this.getAttribute('data-tab');
                     document.getElementById(tabId).classList.remove('hide-tab');
@@ -662,7 +662,7 @@
                 // Update the displayed values
                 const fromDisplay = document.querySelector('.price-slider-values span:first-child');
                 const toDisplay = document.querySelector('.price-slider-values span:last-child');
-                
+
                 fromDisplay.textContent = from ? from.toLocaleString('vi-VN') + '₫' : '0₫';
                 toDisplay.textContent = to ? to.toLocaleString('vi-VN') + '₫' : '10.000.000₫';
             }

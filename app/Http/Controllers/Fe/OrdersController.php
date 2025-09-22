@@ -85,7 +85,7 @@ class OrdersController extends Controller
 
         $obj = $this->orderSevice->store($request);
         if ($obj) {
-            return returnSuccess($obj, route('order.show', ['order' => $obj->code]));
+            return returnSuccess($obj, route('order.show', ['code' => $obj->code]));
         }
 
         return RETURN_SOMETHING_WENT_WRONG;

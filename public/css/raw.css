@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+    .order-detail-card {
+      padding: 1rem 0.5rem;
+    }
+    .order-detail-card h2 {
+      font-size: 1.3rem;
+    }
+    .order-section {
+      margin-bottom: 1rem;
+    }
+  }
